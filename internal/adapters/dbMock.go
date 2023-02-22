@@ -5,7 +5,7 @@ import (
 )
 
 type mockDB struct {
-	db map[string]string
+	db map[string]string //  !!! sync + ctx
 }
 
 func NewMockDB() mockDB {

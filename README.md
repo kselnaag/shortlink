@@ -16,16 +16,17 @@ This is a test project to generate the short link from the long link you already
 - redirect from the short link to the long link destination
 - get simple UI as HTML page
 - get all link pairs we already have
-- check the short link pair
+- check if the long link HTTP valid
 
 ## **📊Analysis**
-We choose Monolith as system arch pattern and Simple Domain Model as software arch pattern. Let us look at some architect points:
-<img style="margin-top: 0px; margin-right: 100px;" align="right" width="30%" alt="#ArchPic" src="./asset/arch.png"/>
+We choose Monolith as system arch pattern and Rich Domain Model as software arch pattern. Let us look at some architect points:
+<img style="margin-top: 0px; margin-right: 100px;" align="right" width="29%" alt="#ArchPic" src="./asset/arch.png"/>
 
 - `Domain Adapters`
   - HTTP transport
   - SQL database
-  - JSON logging
+  - JSON logger
+  - file + env config
 - `Use Cases`
   - send html UI
   - redirect from short link to long link 
@@ -37,10 +38,8 @@ We choose Monolith as system arch pattern and Simple Domain Model as software ar
   - compute short link from long link
   - unite short link and long link
   - check if pair is valid
-  - check if link is valid
 - `Domain Models`
-  - link pair (struct)
-  - environment (struct)
+  - link pair
   - interfaces
 
 ## **💡Solution notes**
