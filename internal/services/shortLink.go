@@ -12,35 +12,36 @@ type IServShortLink interface {
 	GetAllLinkPairs() []models.LinkPair
 	GetLinkLongFromLinkShort(linkshort string) models.LinkPair
 	SetLinkPairFromLinkLong(linklong string) bool
+	IsLinkLongHttpValid(linklong string) bool
 }
 
 type ServShortLink struct {
-	db         *ports.Idb
-	httpClient *IHttpClient
-	ctx        *context.Context
-	// log        *Ilog
-	// httpServer *IHttpServer
+	ctx  *context.Context
+	db   ports.Idb
+	hcli ports.IHttpClient
 }
 
-/* func NewServiceSL(ctx, db, cli, serv, log) {
-	return ServiceSL{
-		db
+func NewServShortLink(ctx *context.Context, db ports.Idb, hcli ports.IHttpClient) ServShortLink {
+	return ServShortLink{
+		ctx:  ctx,
+		db:   db,
+		hcli: hcli,
 	}
-} */
+}
 
 func (ssl *ServShortLink) GetAllLinkPairs() []models.LinkPair {
-	result := make([]models.LinkPair, 0, 8)
-	allpairs := (*ssl.db).LoadAllLinkPairs()
+	res := make([]models.LinkPair, 0, 8)
+	allpairs := ssl.db.LoadAllLinkPairs()
 	for _, el := range allpairs {
 		if el.IsValid() {
-			result = append(result, el)
+			res = append(res, el)
 		}
 	}
-	return result
+	return res
 }
 
 func (ssl *ServShortLink) GetLinkLongFromLinkShort(linkshort string) models.LinkPair {
-	lp := (*ssl.db).LoadLinkPair(linkshort)
+	lp := ssl.db.LoadLinkPair(linkshort)
 	if lp.IsValid() {
 		return lp
 	}
@@ -48,34 +49,36 @@ func (ssl *ServShortLink) GetLinkLongFromLinkShort(linkshort string) models.Link
 }
 
 func (ssl *ServShortLink) SetLinkPairFromLinkLong(linklong string) bool {
-	// make pair
-	// search in db
-	// check http valid
-	// save in db
-
-	newLP := models.NewLinkPair(linklong)
-	res := newLP.IsValid()
-
-	dbsearchedLP := ssl.GetLinkLongFromLinkShort(newLP.Short)
-	res = dbsearchedLP.IsValid()
-
-	res = (*ssl.HttpClient).IsLinkLongHttpValid(newLP.Long)
-
-	res = (*ssl.db).SaveLinkPair(newLP)
-
-	return res
-}
-
-func (ssl *ServShortLink) isLinkLongHttpValid(linklong string) bool {
-	// HTTP !
+	newLP := models.NewLinkPair(linklong) // make pair
+	if !newLP.IsValid() {
+		return false
+	}
+	if !ssl.IsLinkLongHttpValid(newLP.Long) { // check http valid
+		return false
+	}
+	dbsearchedLP := ssl.GetLinkLongFromLinkShort(newLP.Short) // search in db
+	if dbsearchedLP.IsValid() {
+		return true
+	}
+	if !ssl.db.SaveLinkPair(newLP) { // save in db
+		return false
+	}
 	return true
 }
 
-/*
-redirect from short link to long link
-send html UI
+func (ssl *ServShortLink) IsLinkLongHttpValid(linklong string) bool {
+	resp, err := ssl.hcli.Get(linklong)
+	if err != nil {
+		return false
+	}
+	if resp == "200 OK" {
+		return true
+	}
+	return false
+}
 
--check if long link is valid
+/*
++check if long link is valid
 +get the short link if you have a long link
 +get the long link if you have a short link
 +get ALL link pairs presented in db

@@ -15,12 +15,12 @@ func (lp LinkPair) IsValid() bool {
 	isLLvalid := isLinkValid(lp.Long)
 	isLSvalid := isLinkValid(lp.Short)
 	isHASHvalid := (calcLinkShort(lp.Long) == lp.Short)
-	return isLLvalid && isLSvalid && isHASHvalid
+	return (isLLvalid && isLSvalid && isHASHvalid)
 }
 
-func NewLinkPair(linkl string) LinkPair {
+func NewLinkPair(linklong string) LinkPair {
 	res := LinkPair{}
-	link := formatLink(linkl)
+	link := formatLink(linklong)
 	if !isLinkValid(link) {
 		return res
 	}

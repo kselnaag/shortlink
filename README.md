@@ -20,7 +20,7 @@ This is a test project to generate the short link from the long link you already
 
 ## **📊Analysis**
 We choose Monolith as system arch pattern and Rich Domain Model as software arch pattern. Let us look at some architect points:
-<img style="margin-top: 0px; margin-right: 100px;" align="right" width="29%" alt="#ArchPic" src="./asset/arch.png"/>
+<img style="margin-top: 0px; margin-right: 100px;" align="right" width="28%" alt="#ArchPic" src="./asset/arch.png"/>
 
 - `Domain Adapters`
   - HTTP transport
@@ -40,18 +40,17 @@ We choose Monolith as system arch pattern and Rich Domain Model as software arch
   - check if pair is valid
 - `Domain Models`
   - link pair
-  - interfaces
 
 ## **💡Solution notes**
 <img style="margin-right: 100px; transform: rotate(-03.7deg);" align="right" width="14%" alt="#Prod" src="./asset/production.png"/>
 
 - DDD aproach
 - standard go project layout (more or less)
-- github CI/CD (dev) + podman-compose (tests) + minikube (prod 😊)
+- github CI/CD (dev) + podman-compose (tests) + minikube (prod 🙃)
 - tarantool migrations and TTL records included
 - tests (with mocks and thunderclient) included
 
-## **🛠️Libs and deploy tools**
+## **🛠️Libs and tools**
 <img style="margin-right: 0px;" align="right" width="30%" alt="#CICD" src="./asset/cicd.png"/>
 
 - libs

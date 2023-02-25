@@ -1,37 +1,47 @@
 package adapters
 
 import (
-	mod "shortlink/internal/models"
+	"context"
+	"shortlink/internal/models"
+	"shortlink/internal/ports"
+	"sync"
 )
 
-type mockDB struct {
-	db map[string]string //  !!! sync + ctx
+var _ ports.Idb = (*MockDB)(nil)
+
+type MockDB struct {
+	ctx *context.Context
+	db  sync.Map
 }
 
-func NewMockDB() mockDB {
-	return mockDB{
-		db: make(map[string]string),
+func NewMockDB(ctx *context.Context) MockDB {
+	return MockDB{
+		db:  sync.Map{},
+		ctx: ctx,
 	}
 }
 
-func (mock *mockDB) SaveLinkPair(lp mod.LinkPair) bool {
-	mock.db[lp.Short] = lp.Long
+func (m *MockDB) SaveLinkPair(lp models.LinkPair) bool {
+	m.db.Store(lp.Short, lp.Long)
 	return true
 }
 
-func (mock *mockDB) LoadLinkPair(ls string) []mod.LinkPair {
-	result := make([]mod.LinkPair, 0, 1)
-	ll, ok := mock.db[ls]
+func (m *MockDB) LoadLinkPair(linkshort string) models.LinkPair {
+	res := models.LinkPair{}
+	linklong, ok := m.db.Load(linkshort)
 	if !ok {
-		return result
+		return res
 	}
-	return append(result, mod.LinkPair{Short: ls, Long: ll})
+	res.Short = linkshort
+	res.Long = linklong.(string)
+	return res
 }
 
-func (mock *mockDB) LoadAllLikPairs() []mod.LinkPair {
-	result := make([]mod.LinkPair, 0, 8)
-	for key, val := range mock.db {
-		result = append(result, mod.LinkPair{Short: key, Long: val})
-	}
-	return result
+func (m *MockDB) LoadAllLinkPairs() []models.LinkPair {
+	res := make([]models.LinkPair, 0, 8)
+	m.db.Range(func(key, value any) bool {
+		res = append(res, models.LinkPair{Short: key.(string), Long: value.(string)})
+		return true
+	})
+	return res
 }
