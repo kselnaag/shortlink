@@ -20,7 +20,7 @@ This is a test project to generate the short link from the long link you already
 
 ## **📊Analysis**
 We choose Monolith as system arch pattern and Rich Domain Model as software arch pattern. Let us look at some architect points:
-<img style="margin-top: 0px; margin-right: 100px;" align="right" width="28%" alt="#ArchPic" src="./asset/arch.png"/>
+<img style="margin-top: 0px; margin-right: 100px;" align="right" width="29%" alt="#ArchPic" src="./asset/arch.png"/>
 
 - `Domain Adapters`
   - HTTP transport
@@ -28,10 +28,11 @@ We choose Monolith as system arch pattern and Rich Domain Model as software arch
   - JSON logger
   - file + env config
 - `Use Cases`
-  - send html UI
+  - get healthcheck
+  - get html UI
   - redirect from short link to long link 
-  - get the short link if you have a long link
-  - get the long link if you have a short link
+  - search the short link if you have a long link
+  - search the long link if you have a short link
   - get ALL link pairs presented in db
   - check if long link HTTP available
 - `Domain Rules`

@@ -7,26 +7,31 @@ import (
 )
 
 type LinkPair struct {
-	Short string
-	Long  string
+	short string
+	long  string
 }
 
 func (lp LinkPair) IsValid() bool {
-	isLLvalid := isLinkValid(lp.Long)
-	isLSvalid := isLinkValid(lp.Short)
-	isHASHvalid := (calcLinkShort(lp.Long) == lp.Short)
+	isLLvalid := isLinkValid(lp.long)
+	isLSvalid := isLinkValid(lp.short)
+	isHASHvalid := (calcLinkShort(lp.long) == lp.short)
 	return (isLLvalid && isLSvalid && isHASHvalid)
 }
 
+func (lp LinkPair) Short() string {
+	return lp.short
+}
+
+func (lp LinkPair) Long() string {
+	return lp.long
+}
+
 func NewLinkPair(linklong string) LinkPair {
-	res := LinkPair{}
 	link := formatLink(linklong)
 	if !isLinkValid(link) {
-		return res
+		return LinkPair{}
 	}
-	res.Long = link
-	res.Short = calcLinkShort(link)
-	return res
+	return LinkPair{short: calcLinkShort(link), long: link}
 }
 
 func formatLink(link string) string {

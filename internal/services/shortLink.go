@@ -53,10 +53,10 @@ func (ssl *ServShortLink) SetLinkPairFromLinkLong(linklong string) bool {
 	if !newLP.IsValid() {
 		return false
 	}
-	if !ssl.IsLinkLongHttpValid(newLP.Long) { // check http valid
+	if !ssl.IsLinkLongHttpValid(newLP.Long()) { // check http valid
 		return false
 	}
-	dbsearchedLP := ssl.GetLinkLongFromLinkShort(newLP.Short) // search in db
+	dbsearchedLP := ssl.GetLinkLongFromLinkShort(newLP.Short()) // search in db
 	if dbsearchedLP.IsValid() {
 		return true
 	}
