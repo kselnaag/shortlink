@@ -1,6 +1,8 @@
 package ports
 
-import "net/http"
+import (
+	"net/http"
+)
 
 type IHttpClient interface {
 	Get(ink string) (string, error)

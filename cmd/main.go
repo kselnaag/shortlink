@@ -26,9 +26,9 @@ type Config struct {
 
 func loadCfg() Config {
 	var config = Config{ // default env
-		HTTP_IP:   "127.0.0.1",
+		HTTP_IP:   "localhost",
 		HTTP_PORT: ":8080",
-		DB_IP:     "127.0.0.1",
+		DB_IP:     "localhost",
 		DB_PORT:   ":1313",
 	}
 	exec, err := os.Executable() // LoadExecutablePath
@@ -65,22 +65,21 @@ func IpFromInterfaces() (string, error) {
 func main() {
 	ctx, cancel := context.WithCancel(context.Background())
 	defer cancel()
-	// log := adapters.NewLogZero(&ctx)
+	// log := adapters.NewLogZero()
 	// cfg := loadCfg(&log)
-	db := adapters.NewMockDB(&ctx)
-	hcli := adapters.NewHttpNetClient(&ctx)
-	srvsl := services.NewServShortLink(&ctx, &db, &hcli)
-	hserv := adapters.NewHttpNetServer(&ctx, &srvsl)
+	db := adapters.NewMockDB()
+	hcli := adapters.NewHttpNetClient()
+	svcsl := services.NewServShortLink(&db, &hcli)
+	hserv := adapters.NewHttpNetServer(&svcsl)
 	server := hserv.Handle().Run(":8080")
 	if ip, err := IpFromInterfaces(); err != nil {
-		fmt.Printf("ShortLink server start problems: %s\n", err.Error())
-		os.Exit(1)
+		fmt.Printf("ShortLink server started at localhost%s\n%s\n", ":8080", err.Error())
 	} else {
-		fmt.Printf("ShortLink server started at %s:8080\n", ip)
+		fmt.Printf("ShortLink server started at %s%s\n", ip, ":8080")
 	}
 
 	sig := make(chan os.Signal, 1)
-	signal.Notify(sig, syscall.SIGINT, syscall.SIGTERM)
+	signal.Notify(sig, syscall.SIGINT, syscall.SIGTERM, syscall.SIGHUP, syscall.SIGQUIT)
 SIGCYC:
 	for {
 		select {
@@ -90,6 +89,7 @@ SIGCYC:
 			break SIGCYC
 		}
 	}
+
 	ctxSHD, cancelSHD := context.WithTimeout(context.Background(), 5*time.Second)
 	defer cancelSHD()
 	if err := server.Shutdown(ctxSHD); err != nil {

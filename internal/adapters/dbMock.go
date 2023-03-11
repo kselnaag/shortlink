@@ -1,7 +1,6 @@
 package adapters
 
 import (
-	"context"
 	"shortlink/internal/models"
 	"shortlink/internal/ports"
 	"sync"
@@ -10,14 +9,12 @@ import (
 var _ ports.Idb = (*MockDB)(nil)
 
 type MockDB struct {
-	ctx *context.Context
-	db  sync.Map
+	db sync.Map
 }
 
-func NewMockDB(ctx *context.Context) MockDB {
+func NewMockDB() MockDB {
 	return MockDB{
-		db:  sync.Map{},
-		ctx: ctx,
+		db: sync.Map{},
 	}
 }
 

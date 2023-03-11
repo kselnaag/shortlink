@@ -1,7 +1,6 @@
 package adapters
 
 import (
-	"context"
 	"shortlink/internal/ports"
 	"sync"
 )
@@ -9,15 +8,13 @@ import (
 var _ ports.IHttpClient = (*HttpMockClient)(nil)
 
 type HttpMockClient struct {
-	ctx  *context.Context
 	mock sync.Map
 }
 
-func NewHttpMockClient(ctx *context.Context) HttpMockClient {
+func NewHttpMockClient() HttpMockClient {
 	mock := sync.Map{}
 	mock.Store("http://lib.ru", struct{}{})
 	return HttpMockClient{
-		ctx:  ctx,
 		mock: mock,
 	}
 }

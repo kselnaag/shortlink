@@ -1,11 +1,14 @@
 package adapters
 
 import (
-	"context"
+	"encoding/json"
 	"fmt"
+	"io"
 	"net/http"
+	"os"
 	"shortlink/internal/ports"
-	"shortlink/internal/services"
+	"strings"
+	"syscall"
 
 	"github.com/gin-gonic/gin"
 )
@@ -13,43 +16,109 @@ import (
 var _ ports.IHttpServer = (*HttpNetServer)(nil)
 
 type HttpNetServer struct {
-	ctx    *context.Context
-	servSL services.IServShortLink
+	servSL ports.IServShortLink
 	hsrv   *gin.Engine
 }
 
-func NewHttpNetServer(ctx *context.Context, servSL services.IServShortLink) HttpNetServer {
+func NewHttpNetServer(servSL ports.IServShortLink) HttpNetServer {
 	return HttpNetServer{
-		ctx:    ctx,
 		servSL: servSL,
 		hsrv:   gin.Default(),
 	}
 }
 
 func (hns *HttpNetServer) Handle() ports.IHttpServer {
-	hns.hsrv.GET("/", func(c *gin.Context) { // send UI
-		c.String(http.StatusOK, "Hello UI\n")
+	type Message struct {
+		IsResp bool
+		Mode   string
+		Body   string
+	}
+	hns.hsrv.GET("/check/ping", func(c *gin.Context) { // checks
+		c.JSON(http.StatusOK, Message{true, "check", "pong"})
 	})
-	hns.hsrv.GET("/ping", func(c *gin.Context) { // healthcheck
-		c.String(http.StatusOK, "pong\n")
+	hns.hsrv.GET("/check/abs", func(c *gin.Context) {
+		c.JSON(http.StatusNotFound, Message{true, "check", "404 Not Found"})
+	})
+	hns.hsrv.GET("/check/panic", func(c *gin.Context) {
+		panic(`{IsResp:true, Mode:check, Body:panic}`)
+	})
+	hns.hsrv.GET("/check/close", func(c *gin.Context) {
+		hns.appClose()
+		c.JSON(http.StatusOK, Message{true, "check", "close"})
+	})
+	//
+	hns.hsrv.POST("/long", func(c *gin.Context) { // link short from link long
+		body, _ := io.ReadAll(c.Request.Body)
+		req := Message{}
+		if err := json.Unmarshal(body, &req); (err != nil) || (req.IsResp) || (len(req.Body) == 0) {
+			c.JSON(http.StatusBadRequest, Message{true, "app", req.Body})
+			return
+		}
+		lp := hns.servSL.GetLinkShortFromLinkLong(req.Body)
+		if !lp.IsValid() {
+			c.JSON(http.StatusNotFound, Message{true, "app", req.Body})
+			return
+		}
+		c.JSON(http.StatusOK, Message{true, "app", lp.Short()})
+	})
+	hns.hsrv.POST("/short", func(c *gin.Context) { // link long from link short
+		body, _ := io.ReadAll(c.Request.Body)
+		req := Message{}
+		if err := json.Unmarshal(body, &req); (err != nil) || (req.IsResp) || (len(req.Body) != 6) {
+			c.JSON(http.StatusBadRequest, Message{true, "app", req.Body})
+			return
+		}
+		lp := hns.servSL.GetLinkLongFromLinkShort(req.Body)
+		if !lp.IsValid() {
+			c.JSON(http.StatusNotFound, Message{true, "app", req.Body})
+			return
+		}
+		c.JSON(http.StatusOK, Message{true, "app", lp.Long()})
+	})
+	hns.hsrv.POST("/", func(c *gin.Context) { // save link pair
+		body, _ := io.ReadAll(c.Request.Body)
+		req := Message{}
+		if err := json.Unmarshal(body, &req); (err != nil) || (req.IsResp) || (len(req.Body) == 0) {
+			c.JSON(http.StatusBadRequest, Message{true, "app", req.Body})
+			return
+		}
+		lp := hns.servSL.SetLinkPairFromLinkLong(req.Body)
+		if !lp.IsValid() {
+			c.JSON(http.StatusInternalServerError, Message{true, "app", req.Body})
+			return
+		}
+		c.JSON(http.StatusOK, Message{true, "app", lp.Short()})
+	})
+	hns.hsrv.GET("/allpairs", func(c *gin.Context) { // all pairs
+		strarr := []string{}
+		pairs := hns.servSL.GetAllLinkPairs()
+		for _, el := range pairs {
+			strarr = append(strarr, el.Short()+": "+el.Long())
+		}
+		c.JSON(http.StatusOK, Message{true, "app", strings.Join(strarr, "\n")})
 	})
 	hns.hsrv.GET("/:hash", func(c *gin.Context) { // redirect
 		hash := c.Param("hash")
-		//c.String(http.StatusOK, "HASH: %s\n", hash)
-		// c.Redirect(http.StatusMovedPermanently, "http://www.google.com/")
-		c.String(http.StatusOK, "HASH: %s\n", hash)
+		if len(hash) != 6 {
+			c.JSON(http.StatusBadRequest, Message{true, "app", hash})
+			return
+		}
+		lp := hns.servSL.GetLinkLongFromLinkShort(hash)
+		if !lp.IsValid() {
+			c.JSON(http.StatusBadRequest, Message{true, "app", hash})
+			return
+		}
+		c.Redirect(http.StatusMovedPermanently, lp.Long())
 	})
-	hns.hsrv.GET("/allpairs", func(c *gin.Context) { // send all pairs
-		c.String(http.StatusOK, "allpairs\n")
-	})
-	hns.hsrv.POST("/linkshort", func(c *gin.Context) { // link short from link long
-		c.String(http.StatusOK, "link short\n")
-	})
-	hns.hsrv.POST("/linklong", func(c *gin.Context) { // link long from link short
-		c.String(http.StatusOK, "link long\n")
+	hns.hsrv.GET("/", func(c *gin.Context) { //  app send UI
+		//
+		//
+		//
+		//
+		c.JSON(http.StatusOK, Message{true, "app", "httpUI"})
 	})
 	return hns
-}
+} // curl -i -X POST localhost:8080/short -H 'Content-Type: application/json' -H 'Accept: application/json' -d '{"IsResp":false,"Mode":"client","Body":"5clp60"}'
 
 func (hns *HttpNetServer) Run(port string) *http.Server {
 	srv := &http.Server{
@@ -58,10 +127,18 @@ func (hns *HttpNetServer) Run(port string) *http.Server {
 	}
 	go func() {
 		if err := srv.ListenAndServe(); err != nil && err != http.ErrServerClosed {
-			fmt.Printf("listen: %s\n", err)
+			fmt.Printf("server error: %s\n", err.Error())
 		}
 	}()
 	return srv
+}
+
+func (hns *HttpNetServer) appClose() {
+	if proc, err := os.FindProcess(syscall.Getpid()); err != nil {
+		panic("pid not found: " + err.Error())
+	} else {
+		proc.Signal(syscall.SIGINT)
+	}
 }
 
 /*

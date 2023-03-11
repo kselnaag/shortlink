@@ -49,6 +49,5 @@ func TestModels(t *testing.T) {
 		assert.True(lp6.IsValid())
 		assert.Equal("Hello, world !", lp6.Long())
 		assert.Equal("lf4w7t", lp6.Short())
-
 	})
 }

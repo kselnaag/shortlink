@@ -1,29 +1,19 @@
 package services
 
 import (
-	"context"
 	"shortlink/internal/models"
 	"shortlink/internal/ports"
 )
 
-var _ IServShortLink = (*ServShortLink)(nil)
-
-type IServShortLink interface {
-	GetAllLinkPairs() []models.LinkPair
-	GetLinkLongFromLinkShort(linkshort string) models.LinkPair
-	SetLinkPairFromLinkLong(linklong string) bool
-	IsLinkLongHttpValid(linklong string) bool
-}
+var _ ports.IServShortLink = (*ServShortLink)(nil)
 
 type ServShortLink struct {
-	ctx  *context.Context
 	db   ports.Idb
 	hcli ports.IHttpClient
 }
 
-func NewServShortLink(ctx *context.Context, db ports.Idb, hcli ports.IHttpClient) ServShortLink {
+func NewServShortLink(db ports.Idb, hcli ports.IHttpClient) ServShortLink {
 	return ServShortLink{
-		ctx:  ctx,
 		db:   db,
 		hcli: hcli,
 	}
@@ -48,22 +38,32 @@ func (ssl *ServShortLink) GetLinkLongFromLinkShort(linkshort string) models.Link
 	return models.LinkPair{}
 }
 
-func (ssl *ServShortLink) SetLinkPairFromLinkLong(linklong string) bool {
+func (ssl *ServShortLink) GetLinkShortFromLinkLong(linklong string) models.LinkPair {
+	newLP := models.NewLinkPair(linklong)
+	lp := ssl.db.LoadLinkPair(newLP.Short())
+	if lp.IsValid() {
+		return lp
+	}
+	return models.LinkPair{}
+}
+
+func (ssl *ServShortLink) SetLinkPairFromLinkLong(linklong string) models.LinkPair {
+	empty := models.LinkPair{}
 	newLP := models.NewLinkPair(linklong) // make pair
 	if !newLP.IsValid() {
-		return false
+		return empty
 	}
 	if !ssl.IsLinkLongHttpValid(newLP.Long()) { // check http valid
-		return false
+		return empty
 	}
 	dbsearchedLP := ssl.GetLinkLongFromLinkShort(newLP.Short()) // search in db
 	if dbsearchedLP.IsValid() {
-		return true
+		return newLP
 	}
 	if !ssl.db.SaveLinkPair(newLP) { // save in db
-		return false
+		return empty
 	}
-	return true
+	return newLP
 }
 
 func (ssl *ServShortLink) IsLinkLongHttpValid(linklong string) bool {

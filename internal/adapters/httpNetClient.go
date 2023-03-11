@@ -1,7 +1,6 @@
 package adapters
 
 import (
-	"context"
 	"net/http"
 	"shortlink/internal/ports"
 	"time"
@@ -10,18 +9,16 @@ import (
 var _ ports.IHttpClient = (*HttpNetClient)(nil)
 
 type HttpNetClient struct {
-	ctx  *context.Context
 	hcli *http.Client
 }
 
-func NewHttpNetClient(ctx *context.Context) HttpNetClient {
+func NewHttpNetClient() HttpNetClient {
 	transport := &http.Transport{
 		MaxIdleConns:       10,
 		IdleConnTimeout:    10 * time.Second,
 		DisableCompression: true,
 	}
 	return HttpNetClient{
-		ctx:  ctx,
 		hcli: &http.Client{Transport: transport},
 	}
 }
