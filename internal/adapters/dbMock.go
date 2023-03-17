@@ -6,24 +6,27 @@ import (
 	"sync"
 )
 
-var _ ports.Idb = (*MockDB)(nil)
+var _ ports.Idb = (*DBMock)(nil)
 
-type MockDB struct {
+type DBMock struct {
 	db sync.Map
 }
 
-func NewMockDB() MockDB {
-	return MockDB{
-		db: sync.Map{},
+func NewDBMock() DBMock {
+	dbmock := sync.Map{}
+	dbmock.Store("5clp60", "http://lib.ru")
+	dbmock.Store("dhiu79", "http://google.ru")
+	return DBMock{
+		db: dbmock,
 	}
 }
 
-func (m *MockDB) SaveLinkPair(lp models.LinkPair) bool {
+func (m *DBMock) SaveLinkPair(lp models.LinkPair) bool {
 	m.db.Store(lp.Short(), lp.Long())
 	return true
 }
 
-func (m *MockDB) LoadLinkPair(linkshort string) models.LinkPair {
+func (m *DBMock) LoadLinkPair(linkshort string) models.LinkPair {
 	linklong, ok := m.db.Load(linkshort)
 	if !ok {
 		return models.LinkPair{}
@@ -31,7 +34,7 @@ func (m *MockDB) LoadLinkPair(linkshort string) models.LinkPair {
 	return models.NewLinkPair(linklong.(string))
 }
 
-func (m *MockDB) LoadAllLinkPairs() []models.LinkPair {
+func (m *DBMock) LoadAllLinkPairs() []models.LinkPair {
 	res := make([]models.LinkPair, 0, 8)
 	m.db.Range(func(key, value any) bool {
 		res = append(res, models.NewLinkPair(value.(string)))

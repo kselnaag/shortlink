@@ -18,25 +18,27 @@ func TestServices(t *testing.T) {
 	}()
 
 	t.Run("ServShortLink", func(t *testing.T) {
-		db := adapters.NewMockDB()
+		db := adapters.NewDBMock()
 		hcli := adapters.NewHttpMockClient()
 		nssl := services.NewServShortLink(&db, &hcli)
 
-		// models.LinkPair{Short: "5clp60", Long: "http://lib.ru"}, models.LinkPair{Short: "8as3rb", Long: "http://lib.ru/abs"}
-		assert.Equal([]models.LinkPair{}, nssl.GetAllLinkPairs())
+		// models.LinkPair{Short: "5clp60", Long: "http://lib.ru"}, models.LinkPair{Short: "8as3rb", Long: "http://lib.ru/abs"}, ("dhiu79", "http://google.ru")
+		assert.Equal([]models.LinkPair{models.NewLinkPair("http://lib.ru"), models.NewLinkPair("http://google.ru")},
+			nssl.GetAllLinkPairs())
 
-		assert.True(nssl.IsLinkLongHttpValid("http://lib.ru"))
+		assert.True(nssl.IsLinkLongHttpValid("http://lib.ru/PROZA/"))
 		assert.False(nssl.IsLinkLongHttpValid("http://lib.ru/abs"))
 
-		assert.True(nssl.SetLinkPairFromLinkLong("http://lib.ru").IsValid())
+		assert.True(nssl.SetLinkPairFromLinkLong("http://lib.ru/PROZA/").IsValid())
 		assert.False(nssl.SetLinkPairFromLinkLong("http://lib.ru/abs").IsValid())
 
-		lp := nssl.GetLinkLongFromLinkShort("5clp60")
+		lp := nssl.GetLinkLongFromLinkShort("8b4s29")
 		assert.True(lp.IsValid())
-		assert.Equal("http://lib.ru", lp.Long())
+		assert.Equal("http://lib.ru/PROZA/", lp.Long())
 		assert.False(nssl.GetLinkLongFromLinkShort("8as3rb").IsValid())
 
-		assert.Equal([]models.LinkPair{models.NewLinkPair("http://lib.ru")}, nssl.GetAllLinkPairs())
+		assert.Equal([]models.LinkPair{models.NewLinkPair("http://lib.ru"), models.NewLinkPair("http://lib.ru/PROZA/"), models.NewLinkPair("http://google.ru")},
+			nssl.GetAllLinkPairs())
 	})
 
 }

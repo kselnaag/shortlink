@@ -43,11 +43,11 @@ We choose Monolith as system arch pattern and Rich Domain Model as software arch
   - link pair
 
 ## **💡Solution notes**
-<img style="margin-right: 100px; transform: rotate(-03.7deg);" align="right" width="14%" alt="#Prod" src="./asset/production.png"/>
+<img style="margin-right: 100px; transform: rotate(03.7deg);" align="right" width="14%" alt="#Prod" src="./asset/production.png"/>
 
 - DDD aproach
 - standard go project layout (more or less)
-- github CI/CD (dev) + podman-compose (tests) + minikube (prod 🙃)
+- pre-commit hooks and github actions (CI) + podman-compose (tests) + minikube (prod 🙃)
 - tarantool migrations and TTL records included
 - tests (with mocks and thunderclient) included
 
@@ -55,24 +55,27 @@ We choose Monolith as system arch pattern and Rich Domain Model as software arch
 <img style="margin-right: 0px;" align="right" width="30%" alt="#CICD" src="./asset/cicd.png"/>
 
 - libs
-- podman
+- podman + podman compose
 - minikube
 - d
 
 ## **⚙️HowTo**
 
-- run with `make run`
-- test with `go test -v ./...` (github scrutinizer doesn't like `make test` for some reason)
+- check if `podman` and `podman-compose` has been installed
+- clone the project
+- run everything with `./script/run.sh`
+- go to `localhost:8080` in your browser and try it
 
-## A picture is worth a thousand words
+## **🦋A picture**
 
 ----
 ### **🔗LINKS**
-| [tarantool](https://github.com/tarantool/tarantool "https://github.com/tarantool/tarantool")
-| [tarantool docs](https://www.tarantool.io/ru/doc/latest/overview/ "https://www.tarantool.io/ru/doc/latest/overview/")
-| [tarantool container repo](https://hub.docker.com/r/tarantool/tarantool "https://hub.docker.com/r/tarantool/tarantool")
-| 
-
+| [gin](https://github.com/gin-gonic/gin "https://github.com/gin-gonic/gin")
+| [gin docs](https://gin-gonic.com/docs/ "https://gin-gonic.com/docs/")
 | [fiber](https://github.com/gofiber/fiber "https://github.com/gofiber/fiber")
 | [fiber docs](https://docs.gofiber.io "https://docs.gofiber.io")
+|
+
+| [tarantool](https://github.com/tarantool/tarantool "https://github.com/tarantool/tarantool")
+| [tarantool docs](https://www.tarantool.io/ru/doc/ "https://www.tarantool.io/ru/doc")
 | 

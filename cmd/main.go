@@ -17,15 +17,15 @@ import (
 	"github.com/joho/godotenv"
 )
 
-type Config struct {
+type CfgEnv struct {
 	HTTP_IP   string `env:"HTTP_IP"`
 	HTTP_PORT string `env:"HTTP_PORT"`
 	DB_IP     string `env:"DB_IP"`
 	DB_PORT   string `env:"DB_PORT"`
 }
 
-func loadCfg() Config {
-	var config = Config{ // default env
+func NewCfgEnv() CfgEnv {
+	var config = CfgEnv{ // default env
 		HTTP_IP:   "localhost",
 		HTTP_PORT: ":8080",
 		DB_IP:     "localhost",
@@ -63,32 +63,24 @@ func IpFromInterfaces() (string, error) {
 }
 
 func main() {
-	ctx, cancel := context.WithCancel(context.Background())
-	defer cancel()
 	// log := adapters.NewLogZero()
-	// cfg := loadCfg(&log)
-	db := adapters.NewMockDB()
+	// cfg := adapters.NewCfgEnv(&log)
+	db := adapters.NewDBMock()
 	hcli := adapters.NewHttpNetClient()
 	svcsl := services.NewServShortLink(&db, &hcli)
 	hserv := adapters.NewHttpNetServer(&svcsl)
 	server := hserv.Handle().Run(":8080")
-	if ip, err := IpFromInterfaces(); err != nil {
-		fmt.Printf("ShortLink server started at localhost%s\n%s\n", ":8080", err.Error())
+
+	ip, errip := IpFromInterfaces()
+	if errip != nil {
+		fmt.Printf("ShortLink server started (localhost%s)\n%s\n", ":8080", errip.Error())
 	} else {
-		fmt.Printf("ShortLink server started at %s%s\n", ip, ":8080")
+		fmt.Printf("ShortLink server started (%s%s)\n", ip, ":8080")
 	}
 
 	sig := make(chan os.Signal, 1)
 	signal.Notify(sig, syscall.SIGINT, syscall.SIGTERM, syscall.SIGHUP, syscall.SIGQUIT)
-SIGCYC:
-	for {
-		select {
-		case <-ctx.Done():
-			break SIGCYC
-		case <-sig:
-			break SIGCYC
-		}
-	}
+	<-sig
 
 	ctxSHD, cancelSHD := context.WithTimeout(context.Background(), 5*time.Second)
 	defer cancelSHD()
@@ -97,5 +89,5 @@ SIGCYC:
 	}
 	// shutdown all other systems here
 
-	fmt.Printf("\nShortLink server closed\n")
+	fmt.Printf("\nShortLink server closed (%s%s)\n", ip, ":8080")
 }

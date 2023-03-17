@@ -3,6 +3,7 @@ package services
 import (
 	"shortlink/internal/models"
 	"shortlink/internal/ports"
+	"sort"
 )
 
 var _ ports.IServShortLink = (*ServShortLink)(nil)
@@ -27,6 +28,12 @@ func (ssl *ServShortLink) GetAllLinkPairs() []models.LinkPair {
 			res = append(res, el)
 		}
 	}
+	sort.SliceStable(res, func(i, j int) bool {
+		if res[i].Short() < res[j].Short() {
+			return true
+		}
+		return false
+	})
 	return res
 }
 

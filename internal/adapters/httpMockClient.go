@@ -8,19 +8,21 @@ import (
 var _ ports.IHttpClient = (*HttpMockClient)(nil)
 
 type HttpMockClient struct {
-	mock sync.Map
+	hcli sync.Map
 }
 
 func NewHttpMockClient() HttpMockClient {
-	mock := sync.Map{}
-	mock.Store("http://lib.ru", struct{}{})
+	mockhcli := sync.Map{}
+	mockhcli.Store("http://lib.ru", struct{}{})
+	mockhcli.Store("http://lib.ru/PROZA/", struct{}{})
+	mockhcli.Store("http://google.ru", struct{}{})
 	return HttpMockClient{
-		mock: mock,
+		hcli: mockhcli,
 	}
 }
 
-func (h HttpMockClient) Get(link string) (string, error) {
-	_, ok := h.mock.Load(link)
+func (h *HttpMockClient) Get(link string) (string, error) {
+	_, ok := h.hcli.Load(link)
 	if !ok {
 		return "404 Not Found", nil
 	}

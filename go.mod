@@ -4,13 +4,16 @@ go 1.20
 
 replace (
 	shortlink/internal/adapters => ./internal/adapters
+	shortlink/internal/models => ./internal/models
 	shortlink/internal/ports => ./internal/ports
 	shortlink/internal/services => ./internal/services
-	shortlink/internal/models => ./internal/models
+	shortlink/web => ./web
 )
 
 require (
 	github.com/caarlos0/env/v7 v7.0.0
+	github.com/gin-contrib/static v0.0.1
+	github.com/gin-gonic/gin v1.9.0
 	github.com/joho/godotenv v1.5.1
 	github.com/stretchr/testify v1.8.2
 )
@@ -20,7 +23,6 @@ require (
 	github.com/chenzhuoyu/base64x v0.0.0-20221115062448-fe3a3abad311 // indirect
 	github.com/davecgh/go-spew v1.1.1 // indirect
 	github.com/gin-contrib/sse v0.1.0 // indirect
-	github.com/gin-gonic/gin v1.9.0 // indirect
 	github.com/go-playground/locales v0.14.1 // indirect
 	github.com/go-playground/universal-translator v0.18.1 // indirect
 	github.com/go-playground/validator/v10 v10.11.2 // indirect
