@@ -9,7 +9,7 @@ import (
 var _ ports.Idb = (*DBMock)(nil)
 
 type DBMock struct {
-	db sync.Map
+	db *sync.Map
 }
 
 func NewDBMock() DBMock {
@@ -17,7 +17,7 @@ func NewDBMock() DBMock {
 	dbmock.Store("5clp60", "http://lib.ru")
 	dbmock.Store("dhiu79", "http://google.ru")
 	return DBMock{
-		db: dbmock,
+		db: &dbmock,
 	}
 }
 

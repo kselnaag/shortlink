@@ -29,10 +29,7 @@ func (ssl *ServShortLink) GetAllLinkPairs() []models.LinkPair {
 		}
 	}
 	sort.SliceStable(res, func(i, j int) bool {
-		if res[i].Short() < res[j].Short() {
-			return true
-		}
-		return false
+		return res[i].Short() < res[j].Short()
 	})
 	return res
 }

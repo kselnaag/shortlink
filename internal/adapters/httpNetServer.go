@@ -167,7 +167,9 @@ func (hns *HttpNetServer) appClose() {
 	if proc, err := os.FindProcess(syscall.Getpid()); err != nil {
 		panic("pid not found: " + err.Error())
 	} else {
-		proc.Signal(syscall.SIGINT)
+		if err := proc.Signal(syscall.SIGINT); err != nil {
+			panic("signar not sent: " + err.Error())
+		}
 	}
 }
 
@@ -197,8 +199,5 @@ func NewEmbedFolder(fsEmbed embed.FS, targetPath string) static.ServeFileSystem 
 func (e embedFileSystem) Exists(prefix string, path string) bool {
 	trimed := strings.TrimPrefix(path, prefix)
 	_, err := e.Open(trimed)
-	if err != nil {
-		return false
-	}
-	return true
+	return err == nil
 }

@@ -8,7 +8,7 @@ import (
 var _ ports.IHttpClient = (*HttpMockClient)(nil)
 
 type HttpMockClient struct {
-	hcli sync.Map
+	hcli *sync.Map
 }
 
 func NewHttpMockClient() HttpMockClient {
@@ -17,7 +17,7 @@ func NewHttpMockClient() HttpMockClient {
 	mockhcli.Store("http://lib.ru/PROZA/", struct{}{})
 	mockhcli.Store("http://google.ru", struct{}{})
 	return HttpMockClient{
-		hcli: mockhcli,
+		hcli: &mockhcli,
 	}
 }
 
