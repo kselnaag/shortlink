@@ -1,4 +1,4 @@
-name: shortlinkcommit
+name: shortlink-commit
 
 on:
   push:
@@ -16,7 +16,7 @@ jobs:
     - name: Set up Go
       uses: actions/setup-go@v3
       with:
-        go-version: 1.19
+          go-version: 1.19
 
     - name: StyleChecker
       run: go fmt ./...
@@ -31,3 +31,11 @@ jobs:
 
     - name: Build
       run: go build -o ./bin/shortlink ./cmd/main.go
+
+    - name: StartServer
+      run: ./bin/shortlink
+
+    - name: URL Health Check
+      uses: Jtalk/url-health-check-action@v3.1
+      with:
+          url: http://localhost:8080/ping
