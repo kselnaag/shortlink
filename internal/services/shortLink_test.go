@@ -18,9 +18,10 @@ func TestServices(t *testing.T) {
 	}()
 
 	t.Run("ServShortLink", func(t *testing.T) {
+		log := adapters.NewLogZero("localhost:8080", "testSL")
 		db := adapters.NewDBMock()
 		hcli := adapters.NewHttpMockClient()
-		nssl := services.NewServShortLink(&db, &hcli)
+		nssl := services.NewServShortLink(&db, &hcli, &log)
 
 		// models.LinkPair{Short: "5clp60", Long: "http://lib.ru"}, models.LinkPair{Short: "8as3rb", Long: "http://lib.ru/abs"}, ("dhiu79", "http://google.ru")
 		assert.Equal([]models.LinkPair{models.NewLinkPair("http://lib.ru"), models.NewLinkPair("http://google.ru")},

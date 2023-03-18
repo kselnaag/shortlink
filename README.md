@@ -45,11 +45,11 @@ We choose Monolith as system arch pattern and Rich Domain Model as software arch
 ## **💡Solution notes**
 <img style="margin-right: 100px; transform: rotate(03.7deg);" align="right" width="14%" alt="#Prod" src="./asset/production.png"/>
 
-- DDD aproach
+- Clean arch + DDD aproach
 - standard go project layout (more or less)
 - pre-commit hooks and github actions (CI) + podman-compose (tests) + minikube (prod 🙃)
-- tarantool migrations and TTL records included
 - tests (with mocks and thunderclient) included
+- tarantool migrations and TTL records included
 
 ## **🛠️Libs and tools**
 <img style="margin-right: 0px;" align="right" width="30%" alt="#CICD" src="./asset/cicd.png"/>
@@ -74,8 +74,11 @@ We choose Monolith as system arch pattern and Rich Domain Model as software arch
 | [gin docs](https://gin-gonic.com/docs/ "https://gin-gonic.com/docs/")
 | [fiber](https://github.com/gofiber/fiber "https://github.com/gofiber/fiber")
 | [fiber docs](https://docs.gofiber.io "https://docs.gofiber.io")
-|
-
-| [tarantool](https://github.com/tarantool/tarantool "https://github.com/tarantool/tarantool")
+|----------| [tarantool](https://github.com/tarantool/tarantool "https://github.com/tarantool/tarantool")
 | [tarantool docs](https://www.tarantool.io/ru/doc/ "https://www.tarantool.io/ru/doc")
+| 
+
+| [zerolog](https://github.com/rs/zerolog "https://github.com/rs/zerolog")
+| [godotenv](github.com/joho/godotenv "github.com/joho/godotenv")
+| [env](https://github.com/caarlos0/env "https://github.com/caarlos0/env")
 | 

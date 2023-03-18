@@ -11,12 +11,14 @@ var _ ports.IServShortLink = (*ServShortLink)(nil)
 type ServShortLink struct {
 	db   ports.Idb
 	hcli ports.IHttpClient
+	log  ports.ILog
 }
 
-func NewServShortLink(db ports.Idb, hcli ports.IHttpClient) ServShortLink {
+func NewServShortLink(db ports.Idb, hcli ports.IHttpClient, log ports.ILog) ServShortLink {
 	return ServShortLink{
 		db:   db,
 		hcli: hcli,
+		log:  log,
 	}
 }
 
@@ -39,6 +41,7 @@ func (ssl *ServShortLink) GetLinkLongFromLinkShort(linkshort string) models.Link
 	if lp.IsValid() {
 		return lp
 	}
+	ssl.log.LogWarn("GetLinkLongFromLinkShort(): Link pair is not valid")
 	return models.LinkPair{}
 }
 
@@ -48,6 +51,7 @@ func (ssl *ServShortLink) GetLinkShortFromLinkLong(linklong string) models.LinkP
 	if lp.IsValid() {
 		return lp
 	}
+	ssl.log.LogWarn("GetLinkShortFromLinkLong(): Link pair is not valid")
 	return models.LinkPair{}
 }
 
@@ -55,9 +59,11 @@ func (ssl *ServShortLink) SetLinkPairFromLinkLong(linklong string) models.LinkPa
 	empty := models.LinkPair{}
 	newLP := models.NewLinkPair(linklong) // make pair
 	if !newLP.IsValid() {
+		ssl.log.LogWarn("SetLinkPairFromLinkLong(): Link pair is not valid")
 		return empty
 	}
 	if !ssl.IsLinkLongHttpValid(newLP.Long()) { // check http valid
+		ssl.log.LogWarn("SetLinkPairFromLinkLong(): Link Long is not HTTP valid")
 		return empty
 	}
 	dbsearchedLP := ssl.GetLinkLongFromLinkShort(newLP.Short()) // search in db
@@ -65,6 +71,7 @@ func (ssl *ServShortLink) SetLinkPairFromLinkLong(linklong string) models.LinkPa
 		return newLP
 	}
 	if !ssl.db.SaveLinkPair(newLP) { // save in db
+		ssl.log.LogWarn("SetLinkPairFromLinkLong(): Link pair is not saved in db")
 		return empty
 	}
 	return newLP

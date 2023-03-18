@@ -1,14 +1,55 @@
 package adapters
 
-import "shortlink/internal/ports"
+import (
+	"os"
+	"shortlink/internal/ports"
 
-var _ ports.Ilog = (*LogZero)(nil)
+	"github.com/rs/zerolog"
+)
+
+var _ ports.ILog = (*LogZero)(nil)
 
 type LogZero struct {
-	//
+	logger zerolog.Logger
 }
 
-func NewLogZero() LogZero {
-	//
-	return LogZero{}
+func NewLogZero(host string, service string) LogZero {
+	zerolog.TimestampFieldName = "T"
+	zerolog.LevelFieldName = "L"
+	zerolog.MessageFieldName = "M"
+	zerolog.ErrorFieldName = "E"
+	newlogger := zerolog.New(os.Stderr).Level(zerolog.TraceLevel).With().
+		Timestamp().Str("H", host).Str("S", service).
+		Logger()
+	return LogZero{
+		logger: newlogger,
+	}
+}
+
+func (l *LogZero) LogTrace(format string, v ...any) {
+	l.logger.Trace().Msgf(format, v...)
+}
+
+func (l *LogZero) LogDebug(format string, v ...any) {
+	l.logger.Debug().Msgf(format, v...)
+}
+
+func (l *LogZero) LogInfo(format string, v ...any) {
+	l.logger.Info().Msgf(format, v...)
+}
+
+func (l *LogZero) LogWarn(format string, v ...any) {
+	l.logger.Warn().Msgf(format, v...)
+}
+
+func (l *LogZero) LogError(err error, format string, v ...any) {
+	l.logger.Error().Err(err).Msgf(format, v...)
+}
+
+func (l *LogZero) LogFatal(format string, v ...any) {
+	l.logger.WithLevel(zerolog.FatalLevel).Stack().Msgf(format, v...)
+}
+
+func (l *LogZero) LogPanic(format string, v ...any) {
+	l.logger.WithLevel(zerolog.PanicLevel).Stack().Msgf(format, v...)
 }
