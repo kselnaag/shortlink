@@ -7,11 +7,11 @@
     <link rel="icon" type="image/png" href="/favicon.png">
 </head>
 <body>
-    <div style="display:inline-block;margin-left:25%">
+    <div style="display:inline-block;margin-left:20%">
         <h1>SHORTLINK 📏 Let us make your links shorter in easy way !</h1>
     </div>
     <hr />
-    <div style="display:inline-block;margin-left:35%">
+    <div style="display:inline-block;margin-left:30%">
         <p>Short link:  <input name="short" id="short" type="text" size="39"/></p>
         <p>Long link: 
             <input name="generate" id="generate" type="button" value="generate" onclick="generate()"/>   
@@ -43,6 +43,7 @@
         long = document.getElementById("long");
         async function generate() {
             if (long.value != "") {
+                short.value = ""
                 resp = await fetch('save', {
                     method: 'POST',
                     headers: {

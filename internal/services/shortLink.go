@@ -1,28 +1,29 @@
 package services
 
 import (
+	"net/http"
 	"shortlink/internal/models"
 	"shortlink/internal/ports"
 	"sort"
 )
 
-var _ ports.IServShortLink = (*ServShortLink)(nil)
+var _ ports.ISvcShortLink = (*SvcShortLink)(nil)
 
-type ServShortLink struct {
+type SvcShortLink struct {
 	db   ports.Idb
 	hcli ports.IHttpClient
 	log  ports.ILog
 }
 
-func NewServShortLink(db ports.Idb, hcli ports.IHttpClient, log ports.ILog) ServShortLink {
-	return ServShortLink{
+func NewSvcShortLink(db ports.Idb, hcli ports.IHttpClient, log ports.ILog) SvcShortLink {
+	return SvcShortLink{
 		db:   db,
 		hcli: hcli,
 		log:  log,
 	}
 }
 
-func (ssl *ServShortLink) GetAllLinkPairs() []models.LinkPair {
+func (ssl *SvcShortLink) GetAllLinkPairs() []models.LinkPair {
 	res := make([]models.LinkPair, 0, 8)
 	allpairs := ssl.db.LoadAllLinkPairs()
 	for _, el := range allpairs {
@@ -36,7 +37,7 @@ func (ssl *ServShortLink) GetAllLinkPairs() []models.LinkPair {
 	return res
 }
 
-func (ssl *ServShortLink) GetLinkLongFromLinkShort(linkshort string) models.LinkPair {
+func (ssl *SvcShortLink) GetLinkLongFromLinkShort(linkshort string) models.LinkPair {
 	lp := ssl.db.LoadLinkPair(linkshort)
 	if lp.IsValid() {
 		return lp
@@ -45,7 +46,7 @@ func (ssl *ServShortLink) GetLinkLongFromLinkShort(linkshort string) models.Link
 	return models.LinkPair{}
 }
 
-func (ssl *ServShortLink) GetLinkShortFromLinkLong(linklong string) models.LinkPair {
+func (ssl *SvcShortLink) GetLinkShortFromLinkLong(linklong string) models.LinkPair {
 	newLP := models.NewLinkPair(linklong)
 	lp := ssl.db.LoadLinkPair(newLP.Short())
 	if lp.IsValid() {
@@ -55,7 +56,7 @@ func (ssl *ServShortLink) GetLinkShortFromLinkLong(linklong string) models.LinkP
 	return models.LinkPair{}
 }
 
-func (ssl *ServShortLink) SetLinkPairFromLinkLong(linklong string) models.LinkPair {
+func (ssl *SvcShortLink) SetLinkPairFromLinkLong(linklong string) models.LinkPair {
 	empty := models.LinkPair{}
 	newLP := models.NewLinkPair(linklong) // make pair
 	if !newLP.IsValid() {
@@ -63,7 +64,7 @@ func (ssl *ServShortLink) SetLinkPairFromLinkLong(linklong string) models.LinkPa
 		return empty
 	}
 	if !ssl.IsLinkLongHttpValid(newLP.Long()) { // check http valid
-		ssl.log.LogWarn("SetLinkPairFromLinkLong(): Link Long is not HTTP valid")
+		//ssl.log.LogWarn("SetLinkPairFromLinkLong(): Link Long is not HTTP valid")
 		return empty
 	}
 	dbsearchedLP := ssl.GetLinkLongFromLinkShort(newLP.Short()) // search in db
@@ -77,14 +78,16 @@ func (ssl *ServShortLink) SetLinkPairFromLinkLong(linklong string) models.LinkPa
 	return newLP
 }
 
-func (ssl *ServShortLink) IsLinkLongHttpValid(linklong string) bool {
+func (ssl *SvcShortLink) IsLinkLongHttpValid(linklong string) bool {
 	resp, err := ssl.hcli.Get(linklong)
 	if err != nil {
+		ssl.log.LogError(err, "IsLinkLongHttpValid(): http client GET error")
 		return false
 	}
-	if resp == "200 OK" {
+	if resp == http.StatusOK {
 		return true
 	}
+	ssl.log.LogWarn("IsLinkLongHttpValid(): http client GET is not OK: %d", resp)
 	return false
 }
 

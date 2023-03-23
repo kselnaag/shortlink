@@ -11,6 +11,7 @@ import (
 )
 
 type CfgEnv struct {
+	APP_NAME  string `env:"APP_NAME"`
 	HTTP_IP   string
 	HTTP_PORT string `env:"HTTP_PORT"`
 	DB_IP     string `env:"DB_IP"`
@@ -19,6 +20,7 @@ type CfgEnv struct {
 
 func NewCfgEnv(cfgname string) CfgEnv {
 	cfg := CfgEnv{ // default env
+		APP_NAME:  "shortlink",
 		HTTP_IP:   "localhost",
 		HTTP_PORT: ":8080",
 		DB_IP:     "localhost",
@@ -39,7 +41,7 @@ func NewCfgEnv(cfgname string) CfgEnv {
 	}
 	filename := filepath.Join(filepath.Dir(exec), cfgname)
 	if err := godotenv.Load(filename); err == nil { // LoadConfFromFileToEnv
-		logCfg.LogInfo("Load config from file: %s", filename)
+		logCfg.LogInfo("Load config from file: ./%s", cfgname)
 	}
 	if err := env.Parse(&cfg); err != nil { // LoadConfFromEnvToStruct
 		logCfg.LogError(err, "Use default config, environment parsing failed")

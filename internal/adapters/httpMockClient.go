@@ -1,6 +1,7 @@
 package adapters
 
 import (
+	"net/http"
 	"shortlink/internal/ports"
 	"sync"
 )
@@ -21,10 +22,10 @@ func NewHttpMockClient() HttpMockClient {
 	}
 }
 
-func (h *HttpMockClient) Get(link string) (string, error) {
+func (h *HttpMockClient) Get(link string) (int, error) {
 	_, ok := h.hcli.Load(link)
 	if !ok {
-		return "404 Not Found", nil
+		return http.StatusNotFound, nil
 	}
-	return "200 OK", nil
+	return http.StatusOK, nil
 }

@@ -2,7 +2,7 @@ package ports
 
 import "shortlink/internal/models"
 
-type IServShortLink interface {
+type ISvcShortLink interface {
 	GetAllLinkPairs() []models.LinkPair
 	GetLinkLongFromLinkShort(linkshort string) models.LinkPair
 	GetLinkShortFromLinkLong(linklong string) models.LinkPair

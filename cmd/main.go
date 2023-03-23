@@ -1,35 +1,26 @@
 package main
 
 import (
-	"context"
 	"os"
 	"os/signal"
 	"shortlink/internal/adapters"
 	"shortlink/internal/services"
 	"syscall"
-	"time"
 )
 
 func main() {
+	//create and start all systems
 	cfg := adapters.NewCfgEnv("config.env")
-	log := adapters.NewLogZero(cfg.HTTP_IP+cfg.HTTP_PORT, "shortlink")
+	log := adapters.NewLogZero(cfg.HTTP_IP+cfg.HTTP_PORT, cfg.APP_NAME)
 	db := adapters.NewDBMock() // cfg.DB_IP, cfg.DB_PORT
 	hcli := adapters.NewHttpNetClient()
-	svcsl := services.NewServShortLink(&db, &hcli, &log)
-	hserv := adapters.NewHttpNetServer(&svcsl)
-	server := hserv.Handle().Run(cfg.HTTP_PORT)
-	log.LogInfo("shortlink server running")
-
+	svcsl := services.NewSvcShortLink(&db, &hcli, &log)
+	hsrv := adapters.NewHttpFastServer(&svcsl, &log)
+	hsrvShutdown := hsrv.Run(cfg.HTTP_PORT)
+	// interrupt exec
 	sig := make(chan os.Signal, 1)
 	signal.Notify(sig, syscall.SIGINT, syscall.SIGTERM, syscall.SIGHUP, syscall.SIGQUIT)
 	<-sig
-
-	ctxSHD, cancelSHD := context.WithTimeout(context.Background(), 5*time.Second)
-	defer cancelSHD()
-	if err := server.Shutdown(ctxSHD); err != nil {
-		log.LogError(err, "shortlink server gracefull shutdown error")
-	}
-	// shutdown all other systems here
-
-	log.LogInfo("shortLink server closed")
+	// gracefull shutdown
+	hsrvShutdown()
 }

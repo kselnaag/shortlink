@@ -16,7 +16,7 @@ func TestLogZero(t *testing.T) {
 	}()
 
 	t.Run("LogZero", func(t *testing.T) {
-		logger := adapters.NewLogZero("localhost:8080", "testSL")
+		logger := adapters.NewLogZero("localhost", "testSL")
 		logger.LogTrace("Hello, TRACE")
 		logger.LogDebug("Hello, DEBUG")
 		logger.LogInfo("Hello, INFO")

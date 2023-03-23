@@ -1,4 +1,10 @@
 <p align="left">
+	<img src="https://img.shields.io/github/languages/code-size/kselnaag/shortlink?style=plastic" title="src files size" alt="src files size">
+	<img src="https://img.shields.io/github/repo-size/kselnaag/shortlink?style=plastic" title="repo size" alt="repo size">
+	<a href="https://github.com/kselnaag/shortlink/blob/master/LICENSE" title="LICENSE"><img src="https://img.shields.io/github/license/kselnaag/shortlink?style=plastic" alt="license"></a>
+	<a href="https://github.com/kselnaag/shortlink/actions" title="Workflows"><img src="https://img.shields.io/github/actions/workflow/status/kselnaag/shortlink/go.yml?branch=master&style=plastic" alt="tests checks"></a>
+</p>
+<p align="left">
   <img src="https://img.shields.io/static/v1?label=test&message=Project&color=ffa757&style=plastic" alt="test Project">
 	<img src="https://img.shields.io/static/v1?label=build%20by&message=Go&color=ffa757&style=plastic" alt="build by Go">
 	<img src="https://img.shields.io/static/v1?label=make%20with&message=Fun&color=ffa757&style=plastic" alt="make with Fun">
@@ -47,7 +53,7 @@ We choose Monolith as system arch pattern and Rich Domain Model as software arch
 
 - Clean arch + DDD aproach
 - standard go project layout (more or less)
-- pre-commit hooks and github actions (CI) + podman-compose (tests) + minikube (prod 🙃)
+- pre-commit hooks and github actions (CI) + podman-compose (tests, CD) + minikube (prod 🙃)
 - tests (with mocks and thunderclient) included
 - tarantool migrations and TTL records included
 
@@ -72,13 +78,20 @@ We choose Monolith as system arch pattern and Rich Domain Model as software arch
 ### **🔗LINKS**
 | [gin](https://github.com/gin-gonic/gin "https://github.com/gin-gonic/gin")
 | [gin docs](https://gin-gonic.com/docs/ "https://gin-gonic.com/docs/")
-| [fiber](https://github.com/gofiber/fiber "https://github.com/gofiber/fiber")
-| [fiber docs](https://docs.gofiber.io "https://docs.gofiber.io")
-|----------| [tarantool](https://github.com/tarantool/tarantool "https://github.com/tarantool/tarantool")
+|             
+| [zerolog](https://github.com/rs/zerolog "https://github.com/rs/zerolog")
+|                    
+| [tarantool](https://hub.docker.com/r/tarantool/tarantool "https://hub.docker.com/r/tarantool/tarantool")
 | [tarantool docs](https://www.tarantool.io/ru/doc/ "https://www.tarantool.io/ru/doc")
 | 
 
-| [zerolog](https://github.com/rs/zerolog "https://github.com/rs/zerolog")
+| [fiber](https://github.com/gofiber/fiber "https://github.com/gofiber/fiber")
+| [fiber docs](https://docs.gofiber.io "https://docs.gofiber.io")
+|         
 | [godotenv](github.com/joho/godotenv "github.com/joho/godotenv")
 | [env](https://github.com/caarlos0/env "https://github.com/caarlos0/env")
-| 
+|        
+| [redis](https://hub.docker.com/_/redis "https://hub.docker.com/_/redis")
+| [redis docs](https://redis.io/docs/ "https://redis.io/docs/")
+|
+

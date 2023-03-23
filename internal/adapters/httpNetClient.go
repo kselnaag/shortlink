@@ -23,10 +23,10 @@ func NewHttpNetClient() HttpNetClient {
 	}
 }
 
-func (h HttpNetClient) Get(link string) (string, error) {
+func (h HttpNetClient) Get(link string) (int, error) {
 	resp, err := h.hcli.Get(link)
 	if err != nil {
-		return "", err
+		return 0, err
 	}
-	return resp.Status, nil
+	return resp.StatusCode, nil
 }
