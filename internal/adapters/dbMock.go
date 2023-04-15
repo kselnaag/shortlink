@@ -9,15 +9,17 @@ import (
 var _ ports.Idb = (*DBMock)(nil)
 
 type DBMock struct {
-	db *sync.Map
+	cfg *CfgEnv
+	db  *sync.Map
 }
 
-func NewDBMock() DBMock {
+func NewDBMock(cfg *CfgEnv) DBMock {
 	dbmock := sync.Map{}
 	dbmock.Store("5clp60", "http://lib.ru")
 	dbmock.Store("dhiu79", "http://google.ru")
 	return DBMock{
-		db: &dbmock,
+		cfg: cfg,
+		db:  &dbmock,
 	}
 }
 

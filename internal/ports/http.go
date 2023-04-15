@@ -5,5 +5,5 @@ type IHttpClient interface {
 }
 
 type IHttpServer interface {
-	Run(port string) func()
+	Run() func()
 }

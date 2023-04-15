@@ -28,11 +28,11 @@ func NewCfgEnv(cfgname string) CfgEnv {
 	}
 	logCfg := LogZero{}
 	if ip, err := IpFromInterfaces(); err != nil {
-		logCfg = NewLogZero("localhost", "shortlink")
+		logCfg = NewLogZero(&cfg)
 		logCfg.LogError(err, "Can not get IP interface")
 	} else {
 		cfg.HTTP_IP = ip
-		logCfg = NewLogZero(cfg.HTTP_IP, "shortlink")
+		logCfg = NewLogZero(&cfg)
 	}
 
 	exec, err := os.Executable() // LoadExecutablePath

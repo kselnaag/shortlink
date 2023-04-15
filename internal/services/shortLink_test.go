@@ -18,8 +18,15 @@ func TestServices(t *testing.T) {
 	}()
 
 	t.Run("ServShortLink", func(t *testing.T) {
-		log := adapters.NewLogZero("localhost", "testSL")
-		db := adapters.NewDBMock()
+		cfg := adapters.CfgEnv{
+			APP_NAME:  "testSL",
+			HTTP_IP:   "localhost",
+			HTTP_PORT: ":8080",
+			DB_IP:     "localhost",
+			DB_PORT:   ":1313",
+		}
+		log := adapters.NewLogZero(&cfg)
+		db := adapters.NewDBMock(&cfg)
 		hcli := adapters.NewHttpMockClient()
 		nssl := services.NewSvcShortLink(&db, &hcli, &log)
 

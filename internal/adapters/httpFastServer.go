@@ -25,9 +25,10 @@ type HttpFastServer struct {
 	hsrv   *fiber.App
 	fs     embed.FS
 	log    ports.ILog
+	cfg    *CfgEnv
 }
 
-func NewHttpFastServer(servSL ports.ISvcShortLink, log ports.ILog) HttpFastServer {
+func NewHttpFastServer(servSL ports.ISvcShortLink, log ports.ILog, cfg *CfgEnv) HttpFastServer {
 	fiberconf := fiber.Config{
 		Prefork:           false,
 		CaseSensitive:     true,
@@ -43,6 +44,7 @@ func NewHttpFastServer(servSL ports.ISvcShortLink, log ports.ILog) HttpFastServe
 		hsrv:   fiber.New(fiberconf),
 		fs:     web.StaticFS,
 		log:    log,
+		cfg:    cfg,
 	}
 }
 
@@ -155,10 +157,10 @@ func (hfs *HttpFastServer) appClose() {
 	}
 }
 
-func (hfs *HttpFastServer) Run(port string) func() {
+func (hfs *HttpFastServer) Run() func() {
 	hfs.handlers()
 	go func() {
-		if err := hfs.hsrv.Listen(port); err != nil {
+		if err := hfs.hsrv.Listen(hfs.cfg.HTTP_PORT); err != nil {
 			hfs.log.LogError(err, "Run(): fasthttp server process error")
 		}
 		hfs.log.LogInfo("fasthttp server closed")

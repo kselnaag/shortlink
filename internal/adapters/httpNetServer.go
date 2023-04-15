@@ -26,14 +26,16 @@ type HttpNetServer struct {
 	hsrv   *gin.Engine
 	fs     embed.FS
 	log    ports.ILog
+	cfg    *CfgEnv
 }
 
-func NewHttpNetServer(servSL ports.ISvcShortLink, log ports.ILog) HttpNetServer {
+func NewHttpNetServer(servSL ports.ISvcShortLink, log ports.ILog, cfg *CfgEnv) HttpNetServer {
 	return HttpNetServer{
 		servSL: servSL,
 		hsrv:   gin.Default(),
 		fs:     web.StaticFS,
 		log:    log,
+		cfg:    cfg,
 	}
 }
 
@@ -164,10 +166,10 @@ func (hns *HttpNetServer) appClose() {
 	}
 }
 
-func (hns *HttpNetServer) Run(port string) func() {
+func (hns *HttpNetServer) Run() func() {
 	hns.handlers()
 	srv := &http.Server{
-		Addr:    port,
+		Addr:    hns.cfg.HTTP_PORT,
 		Handler: hns.hsrv,
 	}
 	go func() {

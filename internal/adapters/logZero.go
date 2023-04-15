@@ -10,10 +10,13 @@ import (
 var _ ports.ILog = (*LogZero)(nil)
 
 type LogZero struct {
+	cfg    *CfgEnv
 	logger zerolog.Logger
 }
 
-func NewLogZero(host string, service string) LogZero {
+func NewLogZero(cfg *CfgEnv) LogZero {
+	host := cfg.HTTP_IP + cfg.HTTP_PORT
+	service := cfg.APP_NAME
 	zerolog.TimestampFieldName = "T"
 	zerolog.LevelFieldName = "L"
 	zerolog.MessageFieldName = "M"
@@ -22,6 +25,7 @@ func NewLogZero(host string, service string) LogZero {
 		Timestamp().Str("H", host).Str("S", service).
 		Logger()
 	return LogZero{
+		cfg:    cfg,
 		logger: newlogger,
 	}
 }
