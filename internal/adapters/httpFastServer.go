@@ -18,9 +18,9 @@ import (
 	"github.com/gofiber/fiber/v2/middleware/recover"
 )
 
-var _ ports.IHttpServer = (*HttpFastServer)(nil)
+var _ ports.IHTTPServer = (*HTTPFastServer)(nil)
 
-type HttpFastServer struct {
+type HTTPFastServer struct {
 	servSL ports.ISvcShortLink
 	hsrv   *fiber.App
 	fs     embed.FS
@@ -28,7 +28,7 @@ type HttpFastServer struct {
 	cfg    *CfgEnv
 }
 
-func NewHttpFastServer(servSL ports.ISvcShortLink, log ports.ILog, cfg *CfgEnv) HttpFastServer {
+func NewHTTPFastServer(servSL ports.ISvcShortLink, log ports.ILog, cfg *CfgEnv) HTTPFastServer {
 	fiberconf := fiber.Config{
 		Prefork:           false,
 		CaseSensitive:     true,
@@ -39,7 +39,7 @@ func NewHttpFastServer(servSL ports.ISvcShortLink, log ports.ILog, cfg *CfgEnv) 
 		ServerHeader:      "fiber",
 		AppName:           "shortlink",
 	}
-	return HttpFastServer{
+	return HTTPFastServer{
 		servSL: servSL,
 		hsrv:   fiber.New(fiberconf),
 		fs:     web.StaticFS,
@@ -48,7 +48,7 @@ func NewHttpFastServer(servSL ports.ISvcShortLink, log ports.ILog, cfg *CfgEnv) 
 	}
 }
 
-func (hfs *HttpFastServer) handlers() {
+func (hfs *HTTPFastServer) handlers() {
 	type Message struct {
 		IsResp bool
 		Mode   string
@@ -77,7 +77,7 @@ func (hfs *HttpFastServer) handlers() {
 	hfs.hsrv.Get("/check/panic", func(c *fiber.Ctx) error {
 		headers(c)
 		panic(`{IsResp:true, Mode:check, Body:panic}`)
-		//return c.Status(fiber.StatusInternalServerError).JSON(Message{true, "check", "panic"})
+		// return c.Status(fiber.StatusInternalServerError).JSON(Message{true, "check", "panic"})
 	})
 	hfs.hsrv.Get("/check/close", func(c *fiber.Ctx) error {
 		headers(c)
@@ -98,7 +98,7 @@ func (hfs *HttpFastServer) handlers() {
 		headers(c)
 		body := c.Body()
 		req := Message{}
-		if err := json.Unmarshal(body, &req); (err != nil) || (req.IsResp) || (len(req.Body) == 0) {
+		if err := json.Unmarshal(body, &req); (err != nil) || (req.IsResp) || (req.Body == "") {
 			return c.Status(fiber.StatusBadRequest).JSON(Message{true, "400", req.Body})
 		}
 		lp := hfs.servSL.GetLinkShortFromLinkLong(req.Body)
@@ -124,7 +124,7 @@ func (hfs *HttpFastServer) handlers() {
 		headers(c)
 		body := c.Body()
 		req := Message{}
-		if err := json.Unmarshal(body, &req); (err != nil) || (req.IsResp) || (len(req.Body) == 0) {
+		if err := json.Unmarshal(body, &req); (err != nil) || (req.IsResp) || (req.Body == "") {
 			return c.Status(fiber.StatusBadRequest).JSON(Message{true, "400", req.Body})
 		}
 		lp := hfs.servSL.SetLinkPairFromLinkLong(req.Body)
@@ -147,7 +147,7 @@ func (hfs *HttpFastServer) handlers() {
 	})
 }
 
-func (hfs *HttpFastServer) appClose() {
+func (hfs *HTTPFastServer) appClose() {
 	if proc, err := os.FindProcess(syscall.Getpid()); err != nil {
 		hfs.log.LogError(err, "appClose(): pid not found")
 	} else {
@@ -157,7 +157,7 @@ func (hfs *HttpFastServer) appClose() {
 	}
 }
 
-func (hfs *HttpFastServer) Run() func() {
+func (hfs *HTTPFastServer) Run() func() {
 	hfs.handlers()
 	go func() {
 		if err := hfs.hsrv.Listen(hfs.cfg.HTTP_PORT); err != nil {
@@ -168,7 +168,7 @@ func (hfs *HttpFastServer) Run() func() {
 	hfs.log.LogInfo("fasthttp server starting")
 	return func() {
 		if err := hfs.hsrv.ShutdownWithTimeout(5 * time.Second); err != nil {
-			hfs.log.LogError(err, "Run(): fasthttp server gracefull shutdown error")
+			hfs.log.LogError(err, "Run(): fasthttp server graceful shutdown error")
 		}
 	}
 }

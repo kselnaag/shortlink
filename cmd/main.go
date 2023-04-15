@@ -9,18 +9,18 @@ import (
 )
 
 func main() {
-	//create and start all systems
+	// create and start all systems
 	cfg := adapters.NewCfgEnv("config.env")
 	log := adapters.NewLogZero(&cfg)
 	db := adapters.NewDBMock(&cfg)
-	hcli := adapters.NewHttpNetClient()
+	hcli := adapters.NewHTTPNetClient()
 	svcsl := services.NewSvcShortLink(&db, &hcli, &log)
-	hsrv := adapters.NewHttpNetServer(&svcsl, &log, &cfg)
+	hsrv := adapters.NewHTTPNetServer(&svcsl, &log, &cfg)
 	hsrvShutdown := hsrv.Run()
-	// interrupt exec
+	// interrupt exec waiting for
 	sig := make(chan os.Signal, 1)
 	signal.Notify(sig, syscall.SIGINT, syscall.SIGTERM, syscall.SIGHUP, syscall.SIGQUIT)
 	<-sig
-	// gracefull shutdown
+	// graceful shutdown
 	hsrvShutdown()
 }

@@ -7,5 +7,5 @@ type ISvcShortLink interface {
 	GetLinkLongFromLinkShort(linkshort string) models.LinkPair
 	GetLinkShortFromLinkLong(linklong string) models.LinkPair
 	SetLinkPairFromLinkLong(linklong string) models.LinkPair
-	IsLinkLongHttpValid(linklong string) bool
+	IsLinkLongHTTPValid(linklong string) bool
 }

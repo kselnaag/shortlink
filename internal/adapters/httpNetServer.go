@@ -19,9 +19,9 @@ import (
 	"github.com/gin-gonic/gin"
 )
 
-var _ ports.IHttpServer = (*HttpNetServer)(nil)
+var _ ports.IHTTPServer = (*HTTPNetServer)(nil)
 
-type HttpNetServer struct {
+type HTTPNetServer struct {
 	servSL ports.ISvcShortLink
 	hsrv   *gin.Engine
 	fs     embed.FS
@@ -29,8 +29,8 @@ type HttpNetServer struct {
 	cfg    *CfgEnv
 }
 
-func NewHttpNetServer(servSL ports.ISvcShortLink, log ports.ILog, cfg *CfgEnv) HttpNetServer {
-	return HttpNetServer{
+func NewHTTPNetServer(servSL ports.ISvcShortLink, log ports.ILog, cfg *CfgEnv) HTTPNetServer {
+	return HTTPNetServer{
 		servSL: servSL,
 		hsrv:   gin.Default(),
 		fs:     web.StaticFS,
@@ -39,7 +39,7 @@ func NewHttpNetServer(servSL ports.ISvcShortLink, log ports.ILog, cfg *CfgEnv) H
 	}
 }
 
-func (hns *HttpNetServer) handlers() {
+func (hns *HTTPNetServer) handlers() {
 	type Message struct {
 		IsResp bool
 		Mode   string
@@ -62,7 +62,7 @@ func (hns *HttpNetServer) handlers() {
 	hns.hsrv.GET("/check/panic", func(c *gin.Context) {
 		headers(c)
 		panic(`{IsResp:true, Mode:check, Body:panic}`)
-		//c.JSON(http.StatusInternalServerError, Message{true, "check", "panic"})
+		// c.JSON(http.StatusInternalServerError, Message{true, "check", "panic"})
 	})
 	hns.hsrv.GET("/check/close", func(c *gin.Context) {
 		headers(c)
@@ -81,9 +81,9 @@ func (hns *HttpNetServer) handlers() {
 
 	hns.hsrv.POST("/long", func(c *gin.Context) { // link short from link long
 		headers(c)
-		body, _ := io.ReadAll(c.Request.Body)
+		body, readerr := io.ReadAll(c.Request.Body)
 		req := Message{}
-		if err := json.Unmarshal(body, &req); (err != nil) || (req.IsResp) || (len(req.Body) == 0) {
+		if err := json.Unmarshal(body, &req); (err != nil) || (readerr != nil) || (req.IsResp) || (req.Body == "") {
 			c.JSON(http.StatusBadRequest, Message{true, "400", req.Body})
 			return
 		}
@@ -96,9 +96,9 @@ func (hns *HttpNetServer) handlers() {
 	})
 	hns.hsrv.POST("/short", func(c *gin.Context) { // link long from link short
 		headers(c)
-		body, _ := io.ReadAll(c.Request.Body)
+		body, readerr := io.ReadAll(c.Request.Body)
 		req := Message{}
-		if err := json.Unmarshal(body, &req); (err != nil) || (req.IsResp) || (!isHash(req.Body)) {
+		if err := json.Unmarshal(body, &req); (err != nil) || (readerr != nil) || (req.IsResp) || (!isHash(req.Body)) {
 			c.JSON(http.StatusBadRequest, Message{true, "400", req.Body})
 			return
 		}
@@ -111,9 +111,9 @@ func (hns *HttpNetServer) handlers() {
 	})
 	hns.hsrv.POST("/save", func(c *gin.Context) { // save link pair
 		headers(c)
-		body, _ := io.ReadAll(c.Request.Body)
+		body, readerr := io.ReadAll(c.Request.Body)
 		req := Message{}
-		if err := json.Unmarshal(body, &req); (err != nil) || (req.IsResp) || (len(req.Body) == 0) {
+		if err := json.Unmarshal(body, &req); (err != nil) || (readerr != nil) || (req.IsResp) || (req.Body == "") {
 			c.JSON(http.StatusBadRequest, Message{true, "400", req.Body})
 			return
 		}
@@ -140,7 +140,7 @@ func (hns *HttpNetServer) handlers() {
 	})
 	/* hns.hsrv.GET("/favicon.png", func(c *gin.Context) {
 		c.FileFromFS("data/favicon.png", http.FS(hns.fs))
-	})*/
+	}) */
 	hns.hsrv.GET("/", func(c *gin.Context) {
 		headers(c)
 		c.Header("Content-Type", "text/html; charset=utf-8")
@@ -156,7 +156,7 @@ func (hns *HttpNetServer) handlers() {
 	// (5clp60)http://lib.ru (dhiu79)http://google.ru (8b4s29)http://lib.ru/PROZA/
 }
 
-func (hns *HttpNetServer) appClose() {
+func (hns *HTTPNetServer) appClose() {
 	if proc, err := os.FindProcess(syscall.Getpid()); err != nil {
 		hns.log.LogError(err, "appClose(): pid not found")
 	} else {
@@ -166,11 +166,12 @@ func (hns *HttpNetServer) appClose() {
 	}
 }
 
-func (hns *HttpNetServer) Run() func() {
+func (hns *HTTPNetServer) Run() func() {
 	hns.handlers()
 	srv := &http.Server{
-		Addr:    hns.cfg.HTTP_PORT,
-		Handler: hns.hsrv,
+		Addr:              hns.cfg.HTTP_PORT,
+		Handler:           hns.hsrv,
+		ReadHeaderTimeout: 10 * time.Second,
 	}
 	go func() {
 		err := srv.ListenAndServe()
@@ -186,7 +187,7 @@ func (hns *HttpNetServer) Run() func() {
 		ctxSHD, cancelSHD := context.WithTimeout(context.Background(), 5*time.Second)
 		defer cancelSHD()
 		if err := srv.Shutdown(ctxSHD); err != nil {
-			hns.log.LogError(err, "Run(): net/http server gracefull shutdown error")
+			hns.log.LogError(err, "Run(): net/http server graceful shutdown error")
 		}
 	}
 }
@@ -214,7 +215,7 @@ func NewEmbedFolder(fsEmbed embed.FS, targetPath string, log ports.ILog) static.
 	}
 }
 
-func (e embedFileSystem) Exists(prefix string, path string) bool {
+func (e embedFileSystem) Exists(prefix, path string) bool {
 	trimed := strings.TrimPrefix(path, prefix)
 	_, err := e.Open(trimed)
 	return err == nil

@@ -6,23 +6,23 @@ import (
 	"sync"
 )
 
-var _ ports.IHttpClient = (*HttpMockClient)(nil)
+var _ ports.IHTTPClient = (*HTTPMockClient)(nil)
 
-type HttpMockClient struct {
+type HTTPMockClient struct {
 	hcli *sync.Map
 }
 
-func NewHttpMockClient() HttpMockClient {
+func NewHTTPMockClient() HTTPMockClient {
 	mockhcli := sync.Map{}
 	mockhcli.Store("http://lib.ru", struct{}{})
 	mockhcli.Store("http://lib.ru/PROZA/", struct{}{})
 	mockhcli.Store("http://google.ru", struct{}{})
-	return HttpMockClient{
+	return HTTPMockClient{
 		hcli: &mockhcli,
 	}
 }
 
-func (h *HttpMockClient) Get(link string) (int, error) {
+func (h *HTTPMockClient) Get(link string) (int, error) {
 	_, ok := h.hcli.Load(link)
 	if !ok {
 		return http.StatusNotFound, nil

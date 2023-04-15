@@ -11,10 +11,10 @@ import (
 )
 
 func TestServices(t *testing.T) {
-	assert := assert.New(t)
+	asrt := assert.New(t)
 	defer func() {
 		err := recover()
-		assert.Nil(err)
+		asrt.Nil(err)
 	}()
 
 	t.Run("ServShortLink", func(t *testing.T) {
@@ -27,25 +27,25 @@ func TestServices(t *testing.T) {
 		}
 		log := adapters.NewLogZero(&cfg)
 		db := adapters.NewDBMock(&cfg)
-		hcli := adapters.NewHttpMockClient()
+		hcli := adapters.NewHTTPMockClient()
 		nssl := services.NewSvcShortLink(&db, &hcli, &log)
 
 		// models.LinkPair{Short: "5clp60", Long: "http://lib.ru"}, models.LinkPair{Short: "8as3rb", Long: "http://lib.ru/abs"}, ("dhiu79", "http://google.ru")
-		assert.Equal([]models.LinkPair{models.NewLinkPair("http://lib.ru"), models.NewLinkPair("http://google.ru")},
+		asrt.Equal([]models.LinkPair{models.NewLinkPair("http://lib.ru"), models.NewLinkPair("http://google.ru")},
 			nssl.GetAllLinkPairs())
 
-		assert.True(nssl.IsLinkLongHttpValid("http://lib.ru/PROZA/"))
-		assert.False(nssl.IsLinkLongHttpValid("http://lib.ru/abs"))
+		asrt.True(nssl.IsLinkLongHTTPValid("http://lib.ru/PROZA/"))
+		asrt.False(nssl.IsLinkLongHTTPValid("http://lib.ru/abs"))
 
-		assert.True(nssl.SetLinkPairFromLinkLong("http://lib.ru/PROZA/").IsValid())
-		assert.False(nssl.SetLinkPairFromLinkLong("http://lib.ru/abs").IsValid())
+		asrt.True(nssl.SetLinkPairFromLinkLong("http://lib.ru/PROZA/").IsValid())
+		asrt.False(nssl.SetLinkPairFromLinkLong("http://lib.ru/abs").IsValid())
 
 		lp := nssl.GetLinkLongFromLinkShort("8b4s29")
-		assert.True(lp.IsValid())
-		assert.Equal("http://lib.ru/PROZA/", lp.Long())
-		assert.False(nssl.GetLinkLongFromLinkShort("8as3rb").IsValid())
+		asrt.True(lp.IsValid())
+		asrt.Equal("http://lib.ru/PROZA/", lp.Long())
+		asrt.False(nssl.GetLinkLongFromLinkShort("8as3rb").IsValid())
 
-		assert.Equal([]models.LinkPair{models.NewLinkPair("http://lib.ru"), models.NewLinkPair("http://lib.ru/PROZA/"), models.NewLinkPair("http://google.ru")},
+		asrt.Equal([]models.LinkPair{models.NewLinkPair("http://lib.ru"), models.NewLinkPair("http://lib.ru/PROZA/"), models.NewLinkPair("http://google.ru")},
 			nssl.GetAllLinkPairs())
 	})
 

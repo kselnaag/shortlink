@@ -7,14 +7,14 @@ import (
 	"github.com/valyala/fasthttp"
 )
 
-var _ ports.IHttpClient = (*HttpFastClient)(nil)
+var _ ports.IHTTPClient = (*HTTPFastClient)(nil)
 
-type HttpFastClient struct {
+type HTTPFastClient struct {
 	hcli *fasthttp.Client
 }
 
-func NewHttpFastClient() HttpFastClient {
-	return HttpFastClient{
+func NewHttpFastClient() HTTPFastClient {
+	return HTTPFastClient{
 		hcli: &fasthttp.Client{
 			ReadTimeout:         10 * time.Second,
 			WriteTimeout:        10 * time.Second,
@@ -24,7 +24,7 @@ func NewHttpFastClient() HttpFastClient {
 	}
 }
 
-func (h HttpFastClient) Get(link string) (int, error) {
+func (h HTTPFastClient) Get(link string) (int, error) {
 	code, _, err := h.hcli.Get(nil, link)
 	if err != nil {
 		return 0, err

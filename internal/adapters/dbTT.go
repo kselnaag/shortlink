@@ -6,5 +6,5 @@ package adapters
 
 type DBTT struct {
 	// db *sync.Map
-	//amath.HashPirson[uint16]([]byte{})
+	// amath.HashPirson[uint16]([]byte{})
 }

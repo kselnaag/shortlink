@@ -12,11 +12,11 @@ var _ ports.ISvcShortLink = (*SvcShortLink)(nil)
 
 type SvcShortLink struct {
 	db   ports.Idb
-	hcli ports.IHttpClient
+	hcli ports.IHTTPClient
 	log  ports.ILog
 }
 
-func NewSvcShortLink(db ports.Idb, hcli ports.IHttpClient, log ports.ILog) SvcShortLink {
+func NewSvcShortLink(db ports.Idb, hcli ports.IHTTPClient, log ports.ILog) SvcShortLink {
 	return SvcShortLink{
 		db:   db,
 		hcli: hcli,
@@ -64,8 +64,8 @@ func (ssl *SvcShortLink) SetLinkPairFromLinkLong(linklong string) models.LinkPai
 		ssl.log.LogWarn("SetLinkPairFromLinkLong(): Link pair is not valid")
 		return empty
 	}
-	if !ssl.IsLinkLongHttpValid(newLP.Long()) { // check http valid
-		//ssl.log.LogWarn("SetLinkPairFromLinkLong(): Link Long is not HTTP valid")
+	if !ssl.IsLinkLongHTTPValid(newLP.Long()) { // check http valid
+		ssl.log.LogWarn("SetLinkPairFromLinkLong(): Link Long is not HTTP valid")
 		return empty
 	}
 	dbsearchedLP := ssl.GetLinkLongFromLinkShort(newLP.Short()) // search in db
@@ -79,7 +79,7 @@ func (ssl *SvcShortLink) SetLinkPairFromLinkLong(linklong string) models.LinkPai
 	return newLP
 }
 
-func (ssl *SvcShortLink) IsLinkLongHttpValid(linklong string) bool {
+func (ssl *SvcShortLink) IsLinkLongHTTPValid(linklong string) bool {
 	resp, err := ssl.hcli.Get(linklong)
 	if err != nil {
 		ssl.log.LogError(err, "IsLinkLongHttpValid(): http client GET error")

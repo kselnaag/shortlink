@@ -17,7 +17,7 @@ echo -e "\n>>_Build_<<"
 go build -o ./bin/shortlink ./cmd/main.go
 if [[ $? -gt 0 ]]; then exit 1; fi
 
-echo -e "\n>>_ServerStart_<<"
+echo -e "\n>>_ExecStart_<<"
 ./bin/shortlink 1>/dev/null &
 SERVERPID=$!
 if [[ $? -gt 0 ]]; then exit 1; fi
@@ -27,7 +27,7 @@ echo -e "\n>>_HealthCheck_<<"
 RESPCODE=`curl -i http://localhost:8080/check/ping 2>/dev/null | head -n 1 | cut -d$' ' -f2`
 if [ "$RESPCODE" != "200" ]; then exit 1; fi
 
-echo -e "\n>>_CloseServer_<<\n"
+echo -e "\n>>_ExecClose_<<\n"
 kill $SERVERPID
 if [[ $? -gt 0 ]]; then exit 1; fi
 

@@ -1,9 +1,9 @@
 package ports
 
-type IHttpClient interface {
+type IHTTPClient interface {
 	Get(ink string) (int, error)
 }
 
-type IHttpServer interface {
+type IHTTPServer interface {
 	Run() func()
 }

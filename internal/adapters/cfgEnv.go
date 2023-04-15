@@ -27,7 +27,7 @@ func NewCfgEnv(cfgname string) CfgEnv {
 		DB_PORT:   ":1313",
 	}
 	logCfg := LogZero{}
-	if ip, err := IpFromInterfaces(); err != nil {
+	if ip, err := IPFromInterfaces(); err != nil {
 		logCfg = NewLogZero(&cfg)
 		logCfg.LogError(err, "Can not get IP interface")
 	} else {
@@ -49,7 +49,7 @@ func NewCfgEnv(cfgname string) CfgEnv {
 	return cfg
 }
 
-func IpFromInterfaces() (string, error) {
+func IPFromInterfaces() (string, error) {
 	addr, err := net.InterfaceAddrs()
 	if err != nil {
 		return "", err

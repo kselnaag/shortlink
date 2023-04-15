@@ -20,7 +20,7 @@ func NewLogZero(cfg *CfgEnv) LogZero {
 	zerolog.TimestampFieldName = "T"
 	zerolog.LevelFieldName = "L"
 	zerolog.MessageFieldName = "M"
-	zerolog.ErrorFieldName = "E"
+	zerolog.ErrorFieldName = "E" //nolint:reassign // standart reassigning ops for package
 	newlogger := zerolog.New(os.Stderr).Level(zerolog.TraceLevel).With().
 		Timestamp().Str("H", host).Str("S", service).
 		Logger()

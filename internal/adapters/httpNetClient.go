@@ -6,27 +6,29 @@ import (
 	"time"
 )
 
-var _ ports.IHttpClient = (*HttpNetClient)(nil)
+var _ ports.IHTTPClient = (*HTTPNetClient)(nil)
 
-type HttpNetClient struct {
+type HTTPNetClient struct {
 	hcli *http.Client
 }
 
-func NewHttpNetClient() HttpNetClient {
+func NewHTTPNetClient() HTTPNetClient {
 	transport := &http.Transport{
 		MaxIdleConns:       10,
 		IdleConnTimeout:    10 * time.Second,
 		DisableCompression: true,
 	}
-	return HttpNetClient{
+	return HTTPNetClient{
 		hcli: &http.Client{Transport: transport},
 	}
 }
 
-func (h HttpNetClient) Get(link string) (int, error) {
+func (h HTTPNetClient) Get(link string) (int, error) {
 	resp, err := h.hcli.Get(link)
 	if err != nil {
 		return 0, err
+	} else {
+		defer resp.Body.Close()
 	}
 	return resp.StatusCode, nil
 }

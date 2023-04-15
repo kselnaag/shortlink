@@ -9,10 +9,10 @@ import (
 )
 
 func TestLogZero(t *testing.T) {
-	assert := assert.New(t)
+	asrt := assert.New(t)
 	defer func() {
 		err := recover()
-		assert.Nil(err)
+		asrt.Nil(err)
 	}()
 
 	t.Run("LogZero", func(t *testing.T) {

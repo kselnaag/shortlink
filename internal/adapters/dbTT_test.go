@@ -7,10 +7,10 @@ import (
 )
 
 func TestDBTT(t *testing.T) {
-	assert := assert.New(t)
+	asrt := assert.New(t)
 	defer func() {
 		err := recover()
-		assert.Nil(err)
+		asrt.Nil(err)
 	}()
 
 	t.Run("dbTT", func(t *testing.T) {

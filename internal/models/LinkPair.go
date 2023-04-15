@@ -39,14 +39,16 @@ func formatLink(link string) string {
 }
 
 func isLinkValid(link string) bool {
-	return len(link) != 0
+	return link != ""
 }
 
 func calcLinkShort(linkl string) string {
+	hashlen := 6
+	radixlen := 36
 	hash := crc32.ChecksumIEEE([]byte(linkl))
-	str := strconv.FormatUint(uint64(hash), 36)
-	if len(str) > 6 {
-		idx := len(str) - 6
+	str := strconv.FormatUint(uint64(hash), radixlen)
+	if len(str) > hashlen {
+		idx := len(str) - hashlen
 		return str[idx:]
 	}
 	return str
