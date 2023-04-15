@@ -13,7 +13,7 @@ set -o pipefail
 go test -vet=off -count=1 -race ./... | { grep -v 'no test files'; true; }
 if [[ $? -gt 0 ]]; then exit 1; fi
 
-echo -e "\n>>_ShortLink build_<<"
+echo -e "\n>>_Build_<<"
 go build -o ./bin/shortlink ./cmd/main.go
 if [[ $? -gt 0 ]]; then exit 1; fi
 
@@ -21,9 +21,9 @@ echo -e "\n>>_ServerStart_<<"
 ./bin/shortlink 1>/dev/null &
 SERVERPID=$!
 if [[ $? -gt 0 ]]; then exit 1; fi
+sleep 1
 
 echo -e "\n>>_HealthCheck_<<"
-sleep 2
 RESPCODE=`curl -i http://localhost:8080/check/ping 2>/dev/null | head -n 1 | cut -d$' ' -f2`
 if [ "$RESPCODE" != "200" ]; then exit 1; fi
 

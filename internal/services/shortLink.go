@@ -3,8 +3,9 @@ package services
 import (
 	"net/http"
 	"shortlink/internal/models"
-	"shortlink/internal/ports"
 	"sort"
+
+	"shortlink/internal/ports"
 )
 
 var _ ports.ISvcShortLink = (*SvcShortLink)(nil)

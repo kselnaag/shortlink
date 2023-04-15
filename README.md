@@ -15,13 +15,12 @@
 
 ## **🧾Description**
 This is a test project to generate the short link from the long link you already have. We want to be able to:
-<img style="margin-top: 20px; margin-right: 60px;" align="right" width="40%" alt="#POWERGOPHERS" src="./asset/gogogophers.png"/>
+<img style="margin-right: 60px;" align="right" width="40%" alt="#POWERGOPHERS" src="./asset/gogogophers.png"/>
 
 - get the short link from the long link
 - save the result to database
 - redirect from the short link to the long link destination
 - get simple UI as HTML page
-- get all link pairs we already have
 - check if the long link HTTP valid
 
 ## **📊Analysis**
@@ -53,17 +52,28 @@ We choose Monolith as system arch pattern and Rich Domain Model as software arch
 
 - Clean arch + DDD aproach
 - standard go project layout (more or less)
-- pre-commit hooks and github actions (CI) + podman-compose (tests, CD) + minikube (prod 🙃)
-- tests (with mocks and thunderclient) included
+- pre-commit hooks and github actions (CI) + podman-compose (CD) + minikube (prod 🙃)
+- tests with mocks included
 - tarantool migrations and TTL records included
 
 ## **🛠️Libs and tools**
 <img style="margin-right: 0px;" align="right" width="30%" alt="#CICD" src="./asset/cicd.png"/>
 
-- libs
-- podman + podman compose
+Libs:
+- caarlos0/env v3.5.0
+- joho/godotenv v1.5.1
+- rs/zerolog v1.29.0
+- gin-gonic/gin v1.9.0
+- gin-contrib/static v0.0.1
+- valyala/fasthttp v1.45.0
+- gofiber/fiber/v2 v2.42.0
+- stretchr/testify v1.8.2
+
+Tools:
+- golangci-lint
+- curl 
+- podman + podman-compose
 - minikube
-- d
 
 ## **⚙️HowTo**
 
@@ -72,7 +82,7 @@ We choose Monolith as system arch pattern and Rich Domain Model as software arch
 - run everything with `./script/run.sh`
 - go to `localhost:8080` in your browser and try it
 
-## **🦋A picture**
+## **🦋The beauty is like this and nothing more**
 
 ----
 ### **🔗LINKS**
