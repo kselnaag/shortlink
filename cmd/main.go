@@ -17,7 +17,7 @@ func main() {
 	svcsl := services.NewSvcShortLink(&db, &hcli, &log)
 	hsrv := adapters.NewHTTPNetServer(&svcsl, &log, &cfg)
 	hsrvShutdown := hsrv.Run()
-	// interrupt exec waiting for
+	// interrupt exec waiting for signal
 	sig := make(chan os.Signal, 1)
 	signal.Notify(sig, syscall.SIGINT, syscall.SIGTERM, syscall.SIGHUP, syscall.SIGQUIT)
 	<-sig

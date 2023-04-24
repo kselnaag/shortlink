@@ -1,9 +1,10 @@
 [
   {
     "_id": "5743df7e-f2c1-467d-9aa3-17f397b22789",
-    "colName": "tests",
+    "colName": "ShortLinkTests",
     "created": "2023-01-12T23:01:52.659Z",
     "sortNum": 10000,
-    "folders": []
+    "folders": [],
+    "settings": {}
   }
 ]

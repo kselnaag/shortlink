@@ -3,9 +3,11 @@ package adapters
 import (
 	"embed"
 	"encoding/json"
+	"fmt"
 	"net/http"
 	"os"
 	"regexp"
+	"runtime/debug"
 	"shortlink/internal/ports"
 	"shortlink/web"
 	"strings"
@@ -15,7 +17,7 @@ import (
 	"github.com/gofiber/fiber/v2"
 	"github.com/gofiber/fiber/v2/middleware/filesystem"
 	"github.com/gofiber/fiber/v2/middleware/logger"
-	"github.com/gofiber/fiber/v2/middleware/recover"
+	rec "github.com/gofiber/fiber/v2/middleware/recover"
 )
 
 var _ ports.IHTTPServer = (*HTTPFastServer)(nil)
@@ -58,33 +60,44 @@ func (hfs *HTTPFastServer) handlers() {
 	headers := func(c *fiber.Ctx) {
 		c.Set("Cache-Control", "no-cache")
 	}
+	logpanic := func() {
+		if err := recover(); err != nil {
+			hfs.log.LogPanic("%v\n%v", fmt.Sprintf("%v", err), string(debug.Stack()))
+			panic(err)
+		}
+	}
 	hfs.hsrv.Use(logger.New())
 	hfs.hsrv.Use("/", filesystem.New(filesystem.Config{
 		Root:       http.FS(hfs.fs), // static file server
 		PathPrefix: "data",
 		Browse:     false,
 	}))
-	hfs.hsrv.Use(recover.New())
+	hfs.hsrv.Use(rec.New())
 
 	hfs.hsrv.Get("/check/ping", func(c *fiber.Ctx) error {
+		defer logpanic()
 		headers(c)
 		return c.Status(fiber.StatusOK).JSON(Message{true, "check", "pong"})
 	})
 	hfs.hsrv.Get("/check/abs", func(c *fiber.Ctx) error {
+		defer logpanic()
 		headers(c)
 		return c.Status(fiber.StatusNotFound).JSON(Message{true, "check", "404 Not Found"})
 	})
 	hfs.hsrv.Get("/check/panic", func(c *fiber.Ctx) error {
+		defer logpanic()
 		headers(c)
 		panic(`{IsResp:true, Mode:check, Body:panic}`)
 		// return c.Status(fiber.StatusInternalServerError).JSON(Message{true, "check", "panic"})
 	})
 	hfs.hsrv.Get("/check/close", func(c *fiber.Ctx) error {
+		defer logpanic()
 		headers(c)
 		hfs.appClose()
 		return c.Status(fiber.StatusOK).JSON(Message{true, "check", "server close"})
 	})
 	hfs.hsrv.Get("/allpairs", func(c *fiber.Ctx) error {
+		defer logpanic()
 		headers(c)
 		strarr := []string{}
 		pairs := hfs.servSL.GetAllLinkPairs()
@@ -95,6 +108,7 @@ func (hfs *HTTPFastServer) handlers() {
 	})
 	////
 	hfs.hsrv.Post("/long", func(c *fiber.Ctx) error { // link short from link long
+		defer logpanic()
 		headers(c)
 		body := c.Body()
 		req := Message{}
@@ -105,9 +119,10 @@ func (hfs *HTTPFastServer) handlers() {
 		if !lp.IsValid() {
 			return c.Status(fiber.StatusNotFound).JSON(Message{true, "404", req.Body})
 		}
-		return c.Status(fiber.StatusOK).JSON(Message{true, "200", lp.Short()})
+		return c.Status(fiber.StatusPartialContent).JSON(Message{true, "206", lp.Short()})
 	})
 	hfs.hsrv.Post("/short", func(c *fiber.Ctx) error { // link long from link short
+		defer logpanic()
 		headers(c)
 		body := c.Body()
 		req := Message{}
@@ -118,9 +133,10 @@ func (hfs *HTTPFastServer) handlers() {
 		if !lp.IsValid() {
 			return c.Status(fiber.StatusNotFound).JSON(Message{true, "404", req.Body})
 		}
-		return c.Status(fiber.StatusOK).JSON(Message{true, "200", lp.Long()})
+		return c.Status(fiber.StatusPartialContent).JSON(Message{true, "206", lp.Long()})
 	})
 	hfs.hsrv.Post("/save", func(c *fiber.Ctx) error { // save link pair
+		defer logpanic()
 		headers(c)
 		body := c.Body()
 		req := Message{}
@@ -131,9 +147,10 @@ func (hfs *HTTPFastServer) handlers() {
 		if !lp.IsValid() {
 			return c.Status(fiber.StatusBadRequest).JSON(Message{true, "400", req.Body})
 		}
-		return c.Status(fiber.StatusOK).JSON(Message{true, "200", lp.Short()})
+		return c.Status(fiber.StatusCreated).JSON(Message{true, "201", lp.Short()})
 	})
 	hfs.hsrv.Get("/:hash", func(c *fiber.Ctx) error { // redirect
+		defer logpanic()
 		headers(c)
 		hash := c.Params("hash")
 		if !isHash(hash) {
@@ -162,6 +179,7 @@ func (hfs *HTTPFastServer) Run() func() {
 	go func() {
 		if err := hfs.hsrv.Listen(hfs.cfg.HTTP_PORT); err != nil {
 			hfs.log.LogError(err, "Run(): fasthttp server process error")
+			hfs.appClose()
 		}
 		hfs.log.LogInfo("fasthttp server closed")
 	}()

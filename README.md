@@ -80,7 +80,7 @@ Tools:
 - check if `podman` and `podman-compose` has been installed
 - clone the project
 - run everything with `./script/run.sh`
-- go to `localhost:8080` in your browser and try it
+- go to `http://localhost:8080` in your browser and try it
 
 ## **🦋The beauty is like this and nothing more**
 

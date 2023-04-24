@@ -51,9 +51,9 @@ func (l *LogZero) LogError(err error, format string, v ...any) {
 }
 
 func (l *LogZero) LogFatal(format string, v ...any) {
-	l.logger.WithLevel(zerolog.FatalLevel).Stack().Msgf(format, v...)
+	l.logger.WithLevel(zerolog.FatalLevel).Msgf(format, v...)
 }
 
 func (l *LogZero) LogPanic(format string, v ...any) {
-	l.logger.WithLevel(zerolog.PanicLevel).Stack().Msgf(format, v...)
+	l.logger.WithLevel(zerolog.PanicLevel).Msgf(format, v...)
 }
