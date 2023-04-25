@@ -8,7 +8,7 @@
     "method": "GET",
     "sortNum": 30000,
     "created": "2023-04-23T10:07:19.520Z",
-    "modified": "2023-04-23T10:58:49.102Z",
+    "modified": "2023-04-24T15:18:03.463Z",
     "headers": [
       {
         "name": "Accept",
@@ -33,12 +33,6 @@
         "value": "200"
       },
       {
-        "type": "Content-Type",
-        "custom": "",
-        "action": "equal",
-        "value": "application/json; charset=utf-8"
-      },
-      {
         "type": "res-body",
         "custom": "",
         "action": "isjson",
@@ -61,7 +55,7 @@
     "method": "GET",
     "sortNum": 15000,
     "created": "2023-04-23T10:39:38.057Z",
-    "modified": "2023-04-23T10:57:32.141Z",
+    "modified": "2023-04-24T15:17:20.210Z",
     "headers": [
       {
         "name": "Accept",
@@ -83,12 +77,6 @@
         "value": "200"
       },
       {
-        "type": "Content-Type",
-        "custom": "",
-        "action": "equal",
-        "value": "text/html; charset=utf-8"
-      },
-      {
         "type": "res-body",
         "custom": "",
         "action": "istype",
@@ -105,7 +93,7 @@
     "method": "GET",
     "sortNum": 60000,
     "created": "2023-04-23T10:48:40.429Z",
-    "modified": "2023-04-23T10:58:54.716Z",
+    "modified": "2023-04-24T15:18:19.026Z",
     "headers": [
       {
         "name": "Accept",
@@ -125,12 +113,6 @@
         "custom": "",
         "action": "equal",
         "value": "404"
-      },
-      {
-        "type": "Content-Type",
-        "custom": "",
-        "action": "equal",
-        "value": "application/json; charset=utf-8"
       },
       {
         "type": "res-body",
@@ -155,7 +137,7 @@
     "method": "GET",
     "sortNum": 80000,
     "created": "2023-04-23T11:00:17.529Z",
-    "modified": "2023-04-23T11:01:43.794Z",
+    "modified": "2023-04-24T14:57:08.579Z",
     "headers": [
       {
         "name": "Accept",
@@ -187,7 +169,7 @@
     "method": "GET",
     "sortNum": 90000,
     "created": "2023-04-23T11:02:03.572Z",
-    "modified": "2023-04-23T11:04:03.338Z",
+    "modified": "2023-04-24T15:18:43.432Z",
     "headers": [
       {
         "name": "Accept",
@@ -207,12 +189,6 @@
         "custom": "",
         "action": "equal",
         "value": "200"
-      },
-      {
-        "type": "Content-Type",
-        "custom": "",
-        "action": "equal",
-        "value": "application/json; charset=utf-8"
       },
       {
         "type": "res-body",

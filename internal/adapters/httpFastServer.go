@@ -87,7 +87,7 @@ func (hfs *HTTPFastServer) handlers() {
 	hfs.hsrv.Get("/check/panic", func(c *fiber.Ctx) error {
 		defer logpanic()
 		headers(c)
-		panic(`{IsResp:true, Mode:check, Body:panic}`)
+		panic(`{IsResp:true,Mode:check,Body:panic}`)
 		// return c.Status(fiber.StatusInternalServerError).JSON(Message{true, "check", "panic"})
 	})
 	hfs.hsrv.Get("/check/close", func(c *fiber.Ctx) error {
@@ -172,6 +172,10 @@ func (hfs *HTTPFastServer) appClose() {
 			hfs.log.LogError(err, "appClose(): signar not sent")
 		}
 	}
+}
+
+func (hfs *HTTPFastServer) Engine() *fiber.App {
+	return hfs.hsrv
 }
 
 func (hfs *HTTPFastServer) Run() func() {

@@ -34,7 +34,7 @@ type HTTPNetServer struct {
 func NewHTTPNetServer(servSL ports.ISvcShortLink, log ports.ILog, cfg *CfgEnv) HTTPNetServer {
 	return HTTPNetServer{
 		servSL: servSL,
-		hsrv:   gin.Default(),
+		hsrv:   gin.New(),
 		fs:     web.StaticFS,
 		log:    log,
 		cfg:    cfg,
@@ -51,38 +51,39 @@ func (hns *HTTPNetServer) handlers() {
 	headers := func(c *gin.Context) {
 		c.Header("Cache-Control", "no-cache")
 	}
-	logpanic := func() {
+	logpanic := func(c *gin.Context) {
 		if err := recover(); err != nil {
 			hns.log.LogPanic("%v\n%v", fmt.Sprintf("%v", err), string(debug.Stack()))
-			panic(err)
+			c.JSON(http.StatusInternalServerError, Message{true, "check", "panic"})
 		}
 	}
+	hns.hsrv.Use(gin.Logger())
 	hns.hsrv.Use(static.Serve("/", NewEmbedFolder(hns.fs, "data", hns.log)))
 
 	hns.hsrv.GET("/check/ping", func(c *gin.Context) { // checks
-		defer logpanic()
+		defer logpanic(c)
 		headers(c)
 		c.JSON(http.StatusOK, Message{true, "check", "pong"})
 	})
 	hns.hsrv.GET("/check/abs", func(c *gin.Context) {
-		defer logpanic()
+		defer logpanic(c)
 		headers(c)
 		c.JSON(http.StatusNotFound, Message{true, "check", "404 Not Found"})
 	})
 	hns.hsrv.GET("/check/panic", func(c *gin.Context) {
-		defer logpanic()
+		defer logpanic(c)
 		headers(c)
-		panic(`{IsResp:true, Mode:check, Body:panic}`)
+		panic(`{IsResp:true,Mode:check,Body:panic}`)
 		// c.JSON(http.StatusInternalServerError, Message{true, "check", "panic"})
 	})
 	hns.hsrv.GET("/check/close", func(c *gin.Context) {
-		defer logpanic()
+		defer logpanic(c)
 		headers(c)
 		hns.appClose()
 		c.JSON(http.StatusOK, Message{true, "check", "server close"})
 	})
 	hns.hsrv.GET("/allpairs", func(c *gin.Context) {
-		defer logpanic()
+		defer logpanic(c)
 		headers(c)
 		strarr := []string{}
 		pairs := hns.servSL.GetAllLinkPairs()
@@ -93,7 +94,7 @@ func (hns *HTTPNetServer) handlers() {
 	})
 
 	hns.hsrv.POST("/long", func(c *gin.Context) { // link short from link long
-		defer logpanic()
+		defer logpanic(c)
 		headers(c)
 		body, readerr := io.ReadAll(c.Request.Body)
 		req := Message{}
@@ -109,7 +110,7 @@ func (hns *HTTPNetServer) handlers() {
 		c.JSON(http.StatusPartialContent, Message{true, "206", lp.Short()})
 	})
 	hns.hsrv.POST("/short", func(c *gin.Context) { // link long from link short
-		defer logpanic()
+		defer logpanic(c)
 		headers(c)
 		body, readerr := io.ReadAll(c.Request.Body)
 		req := Message{}
@@ -125,7 +126,7 @@ func (hns *HTTPNetServer) handlers() {
 		c.JSON(http.StatusPartialContent, Message{true, "206", lp.Long()})
 	})
 	hns.hsrv.POST("/save", func(c *gin.Context) { // save link pair
-		defer logpanic()
+		defer logpanic(c)
 		headers(c)
 		body, readerr := io.ReadAll(c.Request.Body)
 		req := Message{}
@@ -141,7 +142,7 @@ func (hns *HTTPNetServer) handlers() {
 		c.JSON(http.StatusCreated, Message{true, "201", lp.Short()})
 	})
 	hns.hsrv.GET("/:hash", func(c *gin.Context) { // redirect
-		defer logpanic()
+		defer logpanic(c)
 		headers(c)
 		hash := c.Param("hash")
 		if !isHash(hash) {
@@ -159,7 +160,7 @@ func (hns *HTTPNetServer) handlers() {
 		c.FileFromFS("data/favicon.png", http.FS(hns.fs))
 	}) */
 	hns.hsrv.GET("/", func(c *gin.Context) {
-		defer logpanic()
+		defer logpanic(c)
 		headers(c)
 		c.Header("Content-Type", "text/html; charset=utf-8")
 		data, err := hns.fs.ReadFile("data/index.html")
@@ -182,6 +183,10 @@ func (hns *HTTPNetServer) appClose() {
 			hns.log.LogError(err, "appClose(): signar not sent")
 		}
 	}
+}
+
+func (hns *HTTPNetServer) Engine() *gin.Engine {
+	return hns.hsrv
 }
 
 func (hns *HTTPNetServer) Run() func() {

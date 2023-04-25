@@ -57,9 +57,9 @@ We choose Monolith as system arch pattern and Rich Domain Model as software arch
 - tarantool migrations and TTL records included
 
 ## **🛠️Libs and tools**
-<img style="margin-right: 0px;" align="right" width="30%" alt="#CICD" src="./asset/cicd.png"/>
+<img style="margin-right: 0px;" align="right" width="50%" alt="#DOMAIN" src="./asset/domain.png"/>
 
-Libs:
+Libs (github.com):
 - caarlos0/env v3.5.0
 - joho/godotenv v1.5.1
 - rs/zerolog v1.29.0
@@ -68,6 +68,7 @@ Libs:
 - valyala/fasthttp v1.45.0
 - gofiber/fiber/v2 v2.42.0
 - stretchr/testify v1.8.2
+- gavv/httpexpect v2.15.0
 
 Tools:
 - golangci-lint
@@ -76,6 +77,7 @@ Tools:
 - minikube
 
 ## **⚙️HowTo**
+<img style="margin-right: 0px;" align="right" width="30%" alt="#CICD" src="./asset/cicd.png"/>
 
 - check if `podman` and `podman-compose` has been installed
 - clone the project

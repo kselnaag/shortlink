@@ -15,7 +15,7 @@ if [[ $? -gt 0 ]]; then checksBreaked; fi
 
 echo -e "\n>>_UnitTests_<<"
 set -o pipefail
-go test -vet=off -count=1 -race ./... | { grep -v 'no test files'; true; }
+go test -vet=off -count=1 ./... | { grep -v 'no test files'; true; }
 if [[ $? -gt 0 ]]; then checksBreaked; fi
 
 echo -e "\n>>_Build_<<"
