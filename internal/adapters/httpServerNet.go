@@ -21,9 +21,9 @@ import (
 	"github.com/gin-gonic/gin"
 )
 
-var _ ports.IHTTPServer = (*HTTPNetServer)(nil)
+var _ ports.IHTTPServer = (*HTTPServerNet)(nil)
 
-type HTTPNetServer struct {
+type HTTPServerNet struct {
 	servSL ports.ISvcShortLink
 	hsrv   *gin.Engine
 	fs     embed.FS
@@ -31,8 +31,8 @@ type HTTPNetServer struct {
 	cfg    *CfgEnv
 }
 
-func NewHTTPNetServer(servSL ports.ISvcShortLink, log ports.ILog, cfg *CfgEnv) HTTPNetServer {
-	return HTTPNetServer{
+func NewHTTPServerNet(servSL ports.ISvcShortLink, log ports.ILog, cfg *CfgEnv) HTTPServerNet {
+	return HTTPServerNet{
 		servSL: servSL,
 		hsrv:   gin.New(),
 		fs:     web.StaticFS,
@@ -41,7 +41,7 @@ func NewHTTPNetServer(servSL ports.ISvcShortLink, log ports.ILog, cfg *CfgEnv) H
 	}
 }
 
-func (hns *HTTPNetServer) handlers() {
+func (hns *HTTPServerNet) handlers() {
 	type Message struct {
 		IsResp bool
 		Mode   string
@@ -175,7 +175,7 @@ func (hns *HTTPNetServer) handlers() {
 	// (5clp60)http://lib.ru (dhiu79)http://google.ru (8b4s29)http://lib.ru/PROZA/
 }
 
-func (hns *HTTPNetServer) appClose() {
+func (hns *HTTPServerNet) appClose() {
 	if proc, err := os.FindProcess(syscall.Getpid()); err != nil {
 		hns.log.LogError(err, "appClose(): pid not found")
 	} else {
@@ -185,11 +185,11 @@ func (hns *HTTPNetServer) appClose() {
 	}
 }
 
-func (hns *HTTPNetServer) Engine() *gin.Engine {
+func (hns *HTTPServerNet) Engine() *gin.Engine {
 	return hns.hsrv
 }
 
-func (hns *HTTPNetServer) Run() func() {
+func (hns *HTTPServerNet) Run() func() {
 	hns.handlers()
 	srv := &http.Server{
 		Addr:              hns.cfg.HTTP_PORT,

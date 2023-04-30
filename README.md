@@ -45,36 +45,35 @@ We choose Monolith as system arch pattern and Rich Domain Model as software arch
   - unite short link and long link
   - check if pair is valid
 - `Domain Models`
-  - link pair
+  - link pair (string, string)
 
 ## **💡Solution notes**
 <img style="margin-right: 100px; transform: rotate(03.7deg);" align="right" width="14%" alt="#Prod" src="./asset/production.png"/>
 
-- Clean arch + DDD aproach
-- standard go project layout (more or less)
-- pre-commit hooks and github actions (CI) + podman-compose (CD) + minikube (prod 🙃)
+- clean arch + DDD aproach
+- standart go project layout (more or less)
+- pre-commit hooks and github actions (CI) + podman-compose (CD) + minikube (prod🙃)
 - tests with mocks included
 - tarantool migrations and TTL records included
 
 ## **🛠️Libs and tools**
 <img style="margin-right: 0px;" align="right" width="50%" alt="#DOMAIN" src="./asset/domain.png"/>
 
-Libs (github.com):
-- caarlos0/env v3.5.0
-- joho/godotenv v1.5.1
-- rs/zerolog v1.29.0
-- gin-gonic/gin v1.9.0
-- gin-contrib/static v0.0.1
-- valyala/fasthttp v1.45.0
-- gofiber/fiber/v2 v2.42.0
-- stretchr/testify v1.8.2
-- gavv/httpexpect v2.15.0
-
-Tools:
-- golangci-lint
-- curl 
-- podman + podman-compose
-- minikube
+- `Libs (github.com)`
+  - caarlos0/env v3.5.0
+  - joho/godotenv v1.5.1
+  - rs/zerolog v1.29.0
+  - gin-gonic/gin v1.9.0
+  - gin-contrib/static v0.0.1
+  - valyala/fasthttp v1.45.0
+  - gofiber/fiber/v2 v2.42.0
+  - stretchr/testify v1.8.2
+  - gavv/httpexpect v2.15.0
+- `Tools`
+  - golangci-lint
+  - curl 
+  - podman + podman-compose
+  - minikube
 
 ## **⚙️HowTo**
 <img style="margin-right: 0px;" align="right" width="30%" alt="#CICD" src="./asset/cicd.png"/>

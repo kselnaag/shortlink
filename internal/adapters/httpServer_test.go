@@ -29,10 +29,10 @@ func TestHTTPServer(t *testing.T) {
 		}
 		log := adapters.NewLogZero(&cfg)
 		db := adapters.NewDBMock(&cfg)
-		hcli := adapters.NewHTTPMockClient()
+		hcli := adapters.NewHTTPClientMock()
 		svcsl := services.NewSvcShortLink(&db, &hcli, &log)
-		hsrv := adapters.NewHTTPNetServer(&svcsl, &log, &cfg)
-		grsh := hsrv.Run()
+		hsrv := adapters.NewHTTPServerNet(&svcsl, &log, &cfg)
+		_ = hsrv.Run()
 		he := httpexpect.WithConfig(httpexpect.Config{
 			Client: &http.Client{
 				Transport: httpexpect.NewBinder(hsrv.Engine()),
@@ -46,11 +46,6 @@ func TestHTTPServer(t *testing.T) {
 		he.GET("/check/abs").Expect().Status(http.StatusNotFound).ContentType("application/json", "utf-8").
 			JSON().Object().HasValue("IsResp", true).HasValue("Mode", "check").HasValue("Body", "404 Not Found")
 		he.GET("/check/panic").Expect().Status(http.StatusInternalServerError)
-		/* time.Sleep(1 * time.Second)
-		he.GET("/check/close").Expect().Status(http.StatusOK).ContentType("application/json", "utf-8").
-			JSON().Object().HasValue("IsResp", true).HasValue("Mode", "check").HasValue("Body", "server close")
-		time.Sleep(1 * time.Second) */
-		grsh()
 	})
 
 	t.Run("HTTPFast", func(t *testing.T) {
@@ -63,10 +58,10 @@ func TestHTTPServer(t *testing.T) {
 		}
 		log := adapters.NewLogZero(&cfg)
 		db := adapters.NewDBMock(&cfg)
-		hcli := adapters.NewHTTPMockClient()
+		hcli := adapters.NewHTTPClientMock()
 		svcsl := services.NewSvcShortLink(&db, &hcli, &log)
-		hsrv := adapters.NewHTTPFastServer(&svcsl, &log, &cfg)
-		grsh := hsrv.Run()
+		hsrv := adapters.NewHTTPServerFast(&svcsl, &log, &cfg)
+		_ = hsrv.Run()
 		he := httpexpect.WithConfig(httpexpect.Config{
 			Client: &http.Client{
 				Transport: httpexpect.NewFastBinder(hsrv.Engine().Handler()),
@@ -80,8 +75,5 @@ func TestHTTPServer(t *testing.T) {
 		he.GET("/check/abs").Expect().Status(http.StatusNotFound).ContentType("application/json", "").
 			JSON().Object().HasValue("IsResp", true).HasValue("Mode", "check").HasValue("Body", "404 Not Found")
 		he.GET("/check/panic").Expect().Status(http.StatusInternalServerError)
-		/* he.GET("/check/close").Expect().Status(http.StatusOK).ContentType("application/json", "").
-		JSON().Object().HasValue("IsResp", true).HasValue("Mode", "check").HasValue("Body", "server close") */
-		grsh()
 	})
 }

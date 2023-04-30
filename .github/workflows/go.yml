@@ -27,7 +27,7 @@ jobs:
           version: v1.51.2
                 
     - name: UnitTests
-      run: go test -vet=off -count=1 ./...
+      run: go test -vet=off -count=1 -race ./...
 
     - name: Build
       run: go build -o ./bin/shortlink ./cmd/main.go

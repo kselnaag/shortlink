@@ -37,7 +37,7 @@
                 <mxCell id="17" value="&lt;font style=&quot;background-color: rgb(13, 17, 23);&quot; color=&quot;#e6e6e6&quot;&gt;DB&lt;/font&gt;" style="shape=cylinder3;whiteSpace=wrap;html=1;boundedLbl=1;backgroundOutline=1;size=15;strokeWidth=3;fontSize=20;strokeColor=#E6E6E6;fillColor=#0D1117;" parent="1" vertex="1">
                     <mxGeometry x="523" y="225.25" width="60" height="80" as="geometry"/>
                 </mxCell>
-                <mxCell id="20" value="" style="endArrow=classic;startArrow=classic;html=1;fontSize=20;strokeWidth=3;exitX=0.875;exitY=0.5;exitDx=0;exitDy=0;entryX=0;entryY=0.5;entryDx=0;entryDy=0;strokeColor=#E6E6E6;exitPerimeter=0;" parent="1" target="8" edge="1" source="28">
+                <mxCell id="20" value="" style="endArrow=classic;startArrow=classic;html=1;fontSize=20;strokeWidth=3;exitX=0.875;exitY=0.5;exitDx=0;exitDy=0;entryX=0;entryY=0.5;entryDx=0;entryDy=0;strokeColor=#E6E6E6;exitPerimeter=0;" parent="1" source="28" target="8" edge="1">
                     <mxGeometry width="50" height="50" relative="1" as="geometry">
                         <mxPoint x="160" y="259.5" as="sourcePoint"/>
                         <mxPoint x="470" y="380" as="targetPoint"/>
@@ -64,10 +64,10 @@
                         <mxPoint x="340" y="380" as="targetPoint"/>
                     </mxGeometry>
                 </mxCell>
-                <mxCell id="29" value="" style="shape=document;whiteSpace=wrap;html=1;boundedLbl=1;labelBackgroundColor=#0D1117;strokeColor=#E6E6E6;fontColor=#E6E6E6;fillColor=#0D1117;strokeWidth=3;" vertex="1" parent="1">
+                <mxCell id="29" value="" style="shape=document;whiteSpace=wrap;html=1;boundedLbl=1;labelBackgroundColor=#0D1117;strokeColor=#E6E6E6;fontColor=#E6E6E6;fillColor=#0D1117;strokeWidth=3;" parent="1" vertex="1">
                     <mxGeometry x="290" y="380" width="100" height="60" as="geometry"/>
                 </mxCell>
-                <mxCell id="28" value="&lt;font style=&quot;background-color: rgb(13, 17, 23);&quot; color=&quot;#e6e6e6&quot;&gt;HTTP&lt;/font&gt;" style="ellipse;shape=cloud;whiteSpace=wrap;html=1;strokeWidth=3;fontSize=20;strokeColor=#E6E6E6;fillColor=#0D1117;" parent="1" vertex="1">
+                <mxCell id="28" value="&lt;font style=&quot;background-color: rgb(13, 17, 23);&quot; color=&quot;#e6e6e6&quot;&gt;&amp;nbsp;HTTP&lt;/font&gt;" style="ellipse;shape=cloud;whiteSpace=wrap;html=1;strokeWidth=3;fontSize=20;strokeColor=#E6E6E6;fillColor=#0D1117;" parent="1" vertex="1">
                     <mxGeometry x="46" y="220" width="120" height="80" as="geometry"/>
                 </mxCell>
                 <mxCell id="26" value="&lt;font style=&quot;background-color: rgb(13, 17, 23);&quot; color=&quot;#e6e6e6&quot;&gt;logs&lt;/font&gt;" style="text;html=1;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;strokeWidth=3;fontSize=20;" parent="1" vertex="1">
@@ -76,7 +76,7 @@
                 <mxCell id="4" value="&lt;font color=&quot;#e6e6e6&quot; style=&quot;font-size: 20px; background-color: rgb(13, 17, 23);&quot;&gt;Domain zone&lt;/font&gt;" style="text;html=1;strokeColor=#E6E6E6;fillColor=#0D1117;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;strokeWidth=1;dashed=1;" parent="1" vertex="1">
                     <mxGeometry x="277" y="245.5" width="130" height="35" as="geometry"/>
                 </mxCell>
-                <mxCell id="31" value="&lt;font color=&quot;#e6e6e6&quot; style=&quot;font-size: 20px; background-color: rgb(13, 17, 23);&quot;&gt;Infractructure&lt;/font&gt;" style="text;html=1;strokeColor=#E6E6E6;fillColor=#0D1117;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;strokeWidth=1;dashed=1;" vertex="1" parent="1">
+                <mxCell id="31" value="&lt;font color=&quot;#e6e6e6&quot; style=&quot;font-size: 20px; background-color: rgb(13, 17, 23);&quot;&gt;Infractructure&lt;/font&gt;" style="text;html=1;strokeColor=#E6E6E6;fillColor=#0D1117;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;strokeWidth=1;dashed=1;" parent="1" vertex="1">
                     <mxGeometry x="100" y="107" width="130" height="35" as="geometry"/>
                 </mxCell>
             </root>

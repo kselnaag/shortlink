@@ -27,7 +27,7 @@ func TestServices(t *testing.T) {
 		}
 		log := adapters.NewLogZero(&cfg)
 		db := adapters.NewDBMock(&cfg)
-		hcli := adapters.NewHTTPMockClient()
+		hcli := adapters.NewHTTPClientMock()
 		nssl := services.NewSvcShortLink(&db, &hcli, &log)
 
 		// models.LinkPair{Short: "5clp60", Long: "http://lib.ru"}, models.LinkPair{Short: "8as3rb", Long: "http://lib.ru/abs"}, ("dhiu79", "http://google.ru")

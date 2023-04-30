@@ -13,9 +13,9 @@ func main() {
 	cfg := adapters.NewCfgEnv("config.env")
 	log := adapters.NewLogZero(&cfg)
 	db := adapters.NewDBMock(&cfg)
-	hcli := adapters.NewHTTPNetClient()
+	hcli := adapters.NewHTTPClientNet()
 	svcsl := services.NewSvcShortLink(&db, &hcli, &log)
-	hsrv := adapters.NewHTTPNetServer(&svcsl, &log, &cfg)
+	hsrv := adapters.NewHTTPServerNet(&svcsl, &log, &cfg)
 	hsrvShutdown := hsrv.Run()
 	// interrupt exec waiting for signal
 	sig := make(chan os.Signal, 1)

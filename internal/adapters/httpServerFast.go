@@ -20,9 +20,9 @@ import (
 	rec "github.com/gofiber/fiber/v2/middleware/recover"
 )
 
-var _ ports.IHTTPServer = (*HTTPFastServer)(nil)
+var _ ports.IHTTPServer = (*HTTPServerFast)(nil)
 
-type HTTPFastServer struct {
+type HTTPServerFast struct {
 	servSL ports.ISvcShortLink
 	hsrv   *fiber.App
 	fs     embed.FS
@@ -30,7 +30,7 @@ type HTTPFastServer struct {
 	cfg    *CfgEnv
 }
 
-func NewHTTPFastServer(servSL ports.ISvcShortLink, log ports.ILog, cfg *CfgEnv) HTTPFastServer {
+func NewHTTPServerFast(servSL ports.ISvcShortLink, log ports.ILog, cfg *CfgEnv) HTTPServerFast {
 	fiberconf := fiber.Config{
 		Prefork:           false,
 		CaseSensitive:     true,
@@ -41,7 +41,7 @@ func NewHTTPFastServer(servSL ports.ISvcShortLink, log ports.ILog, cfg *CfgEnv) 
 		ServerHeader:      "fiber",
 		AppName:           "shortlink",
 	}
-	return HTTPFastServer{
+	return HTTPServerFast{
 		servSL: servSL,
 		hsrv:   fiber.New(fiberconf),
 		fs:     web.StaticFS,
@@ -50,7 +50,7 @@ func NewHTTPFastServer(servSL ports.ISvcShortLink, log ports.ILog, cfg *CfgEnv) 
 	}
 }
 
-func (hfs *HTTPFastServer) handlers() {
+func (hfs *HTTPServerFast) handlers() {
 	type Message struct {
 		IsResp bool
 		Mode   string
@@ -164,7 +164,7 @@ func (hfs *HTTPFastServer) handlers() {
 	})
 }
 
-func (hfs *HTTPFastServer) appClose() {
+func (hfs *HTTPServerFast) appClose() {
 	if proc, err := os.FindProcess(syscall.Getpid()); err != nil {
 		hfs.log.LogError(err, "appClose(): pid not found")
 	} else {
@@ -174,11 +174,11 @@ func (hfs *HTTPFastServer) appClose() {
 	}
 }
 
-func (hfs *HTTPFastServer) Engine() *fiber.App {
+func (hfs *HTTPServerFast) Engine() *fiber.App {
 	return hfs.hsrv
 }
 
-func (hfs *HTTPFastServer) Run() func() {
+func (hfs *HTTPServerFast) Run() func() {
 	hfs.handlers()
 	go func() {
 		if err := hfs.hsrv.Listen(hfs.cfg.HTTP_PORT); err != nil {
