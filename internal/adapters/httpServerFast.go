@@ -182,10 +182,11 @@ func (hfs *HTTPServerFast) Run() func() {
 	hfs.handlers()
 	go func() {
 		if err := hfs.hsrv.Listen(hfs.cfg.HTTP_PORT); err != nil {
-			hfs.log.LogError(err, "Run(): fasthttp server process error")
+			hfs.log.LogError(err, "Run(): fasthttp server process error (closed)")
 			hfs.appClose()
+		} else {
+			hfs.log.LogInfo("fasthttp server closed")
 		}
-		hfs.log.LogInfo("fasthttp server closed")
 	}()
 	hfs.log.LogInfo("fasthttp server starting")
 	return func() {

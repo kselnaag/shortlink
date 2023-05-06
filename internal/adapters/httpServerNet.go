@@ -199,7 +199,7 @@ func (hns *HTTPServerNet) Run() func() {
 	go func() {
 		err := srv.ListenAndServe()
 		if (err != nil) && (err != http.ErrServerClosed) {
-			hns.log.LogError(err, "Run(): net/http server process error")
+			hns.log.LogError(err, "Run(): net/http server process error (closed)")
 			hns.appClose()
 		}
 		if err == http.ErrServerClosed {

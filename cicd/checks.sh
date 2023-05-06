@@ -26,7 +26,7 @@ echo -e "\n>>_ServiceStart_<<"
 ./bin/shortlink 1>/dev/null &
 SERVERPID=$!
 if [[ $? -gt 0 ]]; then checksBreaked; fi
-sleep 1
+sleep 5
 
 echo -e "\n>>_HealthCheck_<<"
 RESPCODE=`curl -i http://localhost:8080/check/ping 2>/dev/null | head -n 1 | cut -d$' ' -f2`
