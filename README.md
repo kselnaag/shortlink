@@ -27,12 +27,17 @@ This is a test project to generate the short link from the long link you already
 We choose Monolith as system arch pattern and Rich Domain Model as software arch pattern. Let us look at some architect points:
 <img style="margin-top: 0px; margin-right: 100px;" align="right" width="29%" alt="#ArchPic" src="./asset/arch.png"/>
 
-- `Domain Adapters`
+- `Adapters`
   - HTTP transport
   - SQL database
   - JSON logger
   - file + env config
-- `Use Cases`
+- `Ports`
+  - http
+  - db
+  - log
+  - services
+- `Service`
   - get healthcheck
   - get html UI
   - redirect from short link to long link 
@@ -40,21 +45,21 @@ We choose Monolith as system arch pattern and Rich Domain Model as software arch
   - search the long link if you have a short link
   - get ALL link pairs presented in db
   - check if long link HTTP available
-- `Domain Rules`
+- `Model`
+  - link pair (string, string)
   - compute short link from long link
   - unite short link and long link
   - check if pair is valid
-- `Domain Models`
-  - link pair (string, string)
 
 ## **💡Solution notes**
 <img style="margin-right: 100px; transform: rotate(03.7deg);" align="right" width="14%" alt="#Prod" src="./asset/production.png"/>
 
-- clean arch + DDD aproach
+- clean and hexagonal arch
 - standart go project layout (more or less)
 - pre-commit hooks and github actions (CI) + podman-compose (CD) + minikube (prod🙃)
 - tests with mocks included
-- tarantool migrations and TTL records included
+- HTTPfast or HTTPnet server
+- in-memory tarantool integration
 
 ## **🛠️Libs and tools**
 <img style="margin-right: 0px;" align="right" width="50%" alt="#DOMAIN" src="./asset/domain.png"/>
@@ -70,10 +75,11 @@ We choose Monolith as system arch pattern and Rich Domain Model as software arch
   - stretchr/testify v1.8.2
   - gavv/httpexpect v2.15.0
 - `Tools`
-  - golangci-lint
-  - curl 
+  - go v1.20.2
+  - golangci-lint v1.51.2
+  - curl v7.68.0
   - podman + podman-compose
-  - minikube
+  - minikube 
 
 ## **⚙️HowTo**
 <img style="margin-right: 0px;" align="right" width="30%" alt="#CICD" src="./asset/cicd.png"/>
