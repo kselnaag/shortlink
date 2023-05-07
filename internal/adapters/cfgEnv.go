@@ -12,7 +12,7 @@ import (
 
 type CfgEnv struct {
 	APP_NAME  string `env:"APP_NAME"`
-	HTTP_IP   string
+	HTTP_IP   string `env:"HTTP_IP"`
 	HTTP_PORT string `env:"HTTP_PORT"`
 	DB_IP     string `env:"DB_IP"`
 	DB_PORT   string `env:"DB_PORT"`
@@ -24,17 +24,17 @@ func NewCfgEnv(cfgname string) CfgEnv {
 		HTTP_IP:   "localhost",
 		HTTP_PORT: ":8080",
 		DB_IP:     "localhost",
-		DB_PORT:   ":1313",
+		DB_PORT:   ":3301",
 	}
-	logCfg := LogZero{}
+	logCfg := NewLogZero(&cfg)
 	if ip, err := IPFromInterfaces(); err != nil {
-		logCfg = NewLogZero(&cfg)
 		logCfg.LogError(err, "Can not get IP interface")
 	} else {
 		cfg.HTTP_IP = ip
-		logCfg = NewLogZero(&cfg)
+		cfg.DB_IP = ip
 	}
 
+	logCfg = NewLogZero(&cfg)
 	exec, err := os.Executable() // LoadExecutablePath
 	if err != nil {
 		logCfg.LogError(err, "Executable not found")
