@@ -141,35 +141,30 @@ func (hns *HTTPServerNet) handlers() {
 		}
 		c.JSON(http.StatusCreated, Message{true, "201", lp.Short()})
 	})
-	hns.hsrv.GET("/:hash", func(c *gin.Context) { // redirect
+	hns.hsrv.GET("/r/:hash", func(c *gin.Context) { // redirect
 		defer logpanic(c)
 		headers(c)
 		hash := c.Param("hash")
-		if !isHash(hash) {
-			c.JSON(http.StatusBadRequest, Message{true, "400", hash})
-			return
+		if isHash(hash) {
+			lp := hns.servSL.GetLinkLongFromLinkShort(hash)
+			if lp.IsValid() {
+				c.Redirect(http.StatusMovedPermanently, lp.Long())
+				return
+			}
 		}
-		lp := hns.servSL.GetLinkLongFromLinkShort(hash)
-		if !lp.IsValid() {
-			c.JSON(http.StatusBadRequest, Message{true, "400", hash})
-			return
-		}
-		c.Redirect(http.StatusMovedPermanently, lp.Long())
-	})
-	/* hns.hsrv.GET("/favicon.png", func(c *gin.Context) {
-		c.FileFromFS("data/favicon.png", http.FS(hns.fs))
-	}) */
-	hns.hsrv.GET("/", func(c *gin.Context) {
-		defer logpanic(c)
-		headers(c)
-		c.Header("Content-Type", "text/html; charset=utf-8")
-		data, err := hns.fs.ReadFile("data/index.html")
-		if err != nil {
-			c.JSON(http.StatusInternalServerError, Message{true, "500", "embedFS: index.html not loaded"})
-			return
-		}
-		c.String(http.StatusOK, string(data))
-	})
+		c.JSON(http.StatusBadRequest, Message{true, "400", hash})
+	}) /*
+		hns.hsrv.GET("/", func(c *gin.Context) {
+			defer logpanic(c)
+			headers(c)
+			c.Header("Content-Type", "text/html; charset=utf-8")
+			data, err := hns.fs.ReadFile("data/index.html")
+			if err != nil {
+				c.JSON(http.StatusInternalServerError, Message{true, "500", "embedFS: index.html not loaded"})
+				return
+			}
+			c.String(http.StatusOK, string(data))
+		}) */
 	// curl -i -X POST localhost:8080/save -H 'Content-Type: application/json' -H 'Accept: application/json' -d '{"IsResp":false,"Mode":"client","Body":"http://lib.ru/PROZA/"}'
 	// Cache-Control: no-cache | Content-Type: text/html; charset=utf-8
 	// (5clp60)http://lib.ru (dhiu79)http://google.ru (8b4s29)http://lib.ru/PROZA/
@@ -216,15 +211,6 @@ func (hns *HTTPServerNet) Run() func() {
 	}
 }
 
-/*
-get redirect from short link to long link
-get html UI
-get health check
-get ALL link pairs presented in db
-search the short link if you have a long link
-search the long link if you have a short link
-*/
-
 type embedFileSystem struct {
 	http.FileSystem
 }
@@ -241,6 +227,14 @@ func NewEmbedFolder(fsEmbed embed.FS, targetPath string, log ports.ILog) static.
 
 func (e embedFileSystem) Exists(prefix, path string) bool {
 	trimed := strings.TrimPrefix(path, prefix)
+	tlen := len(trimed)
+	if tlen == 0 {
+		trimed = "/"
+		tlen++
+	}
+	if trimed[tlen-1] == '/' {
+		trimed += "index.html"
+	}
 	_, err := e.Open(trimed)
 	return err == nil
 }

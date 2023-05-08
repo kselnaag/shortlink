@@ -149,18 +149,17 @@ func (hfs *HTTPServerFast) handlers() {
 		}
 		return c.Status(fiber.StatusCreated).JSON(Message{true, "201", lp.Short()})
 	})
-	hfs.hsrv.Get("/:hash", func(c *fiber.Ctx) error { // redirect
+	hfs.hsrv.Get("/r/:hash", func(c *fiber.Ctx) error { // redirect
 		defer logpanic()
 		headers(c)
 		hash := c.Params("hash")
-		if !isHash(hash) {
-			return c.Status(fiber.StatusBadRequest).JSON(Message{true, "400", hash})
+		if isHash(hash) {
+			lp := hfs.servSL.GetLinkLongFromLinkShort(hash)
+			if lp.IsValid() {
+				return c.Redirect(lp.Long())
+			}
 		}
-		lp := hfs.servSL.GetLinkLongFromLinkShort(hash)
-		if !lp.IsValid() {
-			return c.Status(fiber.StatusBadRequest).JSON(Message{true, "400", hash})
-		}
-		return c.Redirect(lp.Long())
+		return c.Status(fiber.StatusBadRequest).JSON(Message{true, "400", hash})
 	})
 }
 
