@@ -60,6 +60,7 @@ We choose Monolith as system arch pattern and Rich Domain Model as software arch
 - tests with mocks included
 - HTTPfast or HTTPnet server
 - in-memory tarantool integration
+- OpenAPI swagger docs
 
 ## **🛠️Libs and tools**
 <img style="margin-right: 0px;" align="right" width="50%" alt="#DOMAIN" src="./asset/domain.png"/>

@@ -96,7 +96,7 @@ func (hfs *HTTPServerFast) handlers() {
 		hfs.appClose()
 		return c.Status(fiber.StatusOK).JSON(Message{true, "check", "server close"})
 	})
-	hfs.hsrv.Get("/allpairs", func(c *fiber.Ctx) error {
+	hfs.hsrv.Get("/check/allpairs", func(c *fiber.Ctx) error {
 		defer logpanic()
 		headers(c)
 		strarr := []string{}

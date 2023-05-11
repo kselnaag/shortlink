@@ -82,7 +82,7 @@ func (hns *HTTPServerNet) handlers() {
 		hns.appClose()
 		c.JSON(http.StatusOK, Message{true, "check", "server close"})
 	})
-	hns.hsrv.GET("/allpairs", func(c *gin.Context) {
+	hns.hsrv.GET("/check/allpairs", func(c *gin.Context) {
 		defer logpanic(c)
 		headers(c)
 		strarr := []string{}
