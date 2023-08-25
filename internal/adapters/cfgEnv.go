@@ -11,27 +11,27 @@ import (
 )
 
 type CfgEnv struct {
-	APP_NAME  string `env:"APP_NAME"`
-	HTTP_IP   string `env:"HTTP_IP"`
-	HTTP_PORT string `env:"HTTP_PORT"`
-	DB_IP     string `env:"DB_IP"`
-	DB_PORT   string `env:"DB_PORT"`
+	SL_APP_NAME  string `env:"SL_APP_NAME"`
+	SL_HTTP_IP   string `env:"SL_HTTP_IP"`
+	SL_HTTP_PORT string `env:"SL_HTTP_PORT"`
+	SL_DB_IP     string `env:"SL_DB_IP"`
+	SL_DB_PORT   string `env:"SL_DB_PORT"`
 }
 
 func NewCfgEnv(cfgname string) CfgEnv {
 	cfg := CfgEnv{ // default env
-		APP_NAME:  "shortlink",
-		HTTP_IP:   "localhost",
-		HTTP_PORT: ":8080",
-		DB_IP:     "localhost",
-		DB_PORT:   ":3301",
+		SL_APP_NAME:  "shortlink",
+		SL_HTTP_IP:   "localhost",
+		SL_HTTP_PORT: ":8080",
+		SL_DB_IP:     "localhost",
+		SL_DB_PORT:   ":3301",
 	}
 	logCfg := NewLogZero(&cfg)
 	if ip, err := IPFromInterfaces(); err != nil {
 		logCfg.LogError(err, "Can not get IP interface")
 	} else {
-		cfg.HTTP_IP = ip
-		cfg.DB_IP = ip
+		cfg.SL_HTTP_IP = ip
+		cfg.SL_DB_IP = ip
 	}
 
 	logCfg = NewLogZero(&cfg)

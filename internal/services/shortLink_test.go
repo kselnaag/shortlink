@@ -19,11 +19,11 @@ func TestServices(t *testing.T) {
 
 	t.Run("ServShortLink", func(t *testing.T) {
 		cfg := adapters.CfgEnv{
-			APP_NAME:  "testSL",
-			HTTP_IP:   "localhost",
-			HTTP_PORT: ":8080",
-			DB_IP:     "localhost",
-			DB_PORT:   ":1313",
+			SL_APP_NAME:  "testSL",
+			SL_HTTP_IP:   "localhost",
+			SL_HTTP_PORT: ":8080",
+			SL_DB_IP:     "localhost",
+			SL_DB_PORT:   ":1313",
 		}
 		log := adapters.NewLogZero(&cfg)
 		db := adapters.NewDBMock(&cfg)

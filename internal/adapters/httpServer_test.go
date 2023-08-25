@@ -21,11 +21,11 @@ func TestHTTPServer(t *testing.T) {
 	t.Run("HTTPNet", func(t *testing.T) {
 		gin.SetMode(gin.ReleaseMode)
 		cfg := adapters.CfgEnv{
-			APP_NAME:  "testSL",
-			HTTP_IP:   "localhost",
-			HTTP_PORT: ":8081",
-			DB_IP:     "localhost",
-			DB_PORT:   ":1313",
+			SL_APP_NAME:  "testSL",
+			SL_HTTP_IP:   "localhost",
+			SL_HTTP_PORT: ":8081",
+			SL_DB_IP:     "localhost",
+			SL_DB_PORT:   ":1313",
 		}
 		log := adapters.NewLogZero(&cfg)
 		db := adapters.NewDBMock(&cfg)
@@ -50,11 +50,11 @@ func TestHTTPServer(t *testing.T) {
 
 	t.Run("HTTPFast", func(t *testing.T) {
 		cfg := adapters.CfgEnv{
-			APP_NAME:  "testSL",
-			HTTP_IP:   "localhost",
-			HTTP_PORT: ":8082",
-			DB_IP:     "localhost",
-			DB_PORT:   ":1313",
+			SL_APP_NAME:  "testSL",
+			SL_HTTP_IP:   "localhost",
+			SL_HTTP_PORT: ":8082",
+			SL_DB_IP:     "localhost",
+			SL_DB_PORT:   ":1313",
 		}
 		log := adapters.NewLogZero(&cfg)
 		db := adapters.NewDBMock(&cfg)

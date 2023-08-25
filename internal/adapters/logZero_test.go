@@ -17,11 +17,11 @@ func TestLogZero(t *testing.T) {
 
 	t.Run("LogZero", func(t *testing.T) {
 		cfg := adapters.CfgEnv{
-			APP_NAME:  "testSL",
-			HTTP_IP:   "localhost",
-			HTTP_PORT: ":8080",
-			DB_IP:     "localhost",
-			DB_PORT:   ":1313",
+			SL_APP_NAME:  "testSL",
+			SL_HTTP_IP:   "localhost",
+			SL_HTTP_PORT: ":8080",
+			SL_DB_IP:     "localhost",
+			SL_DB_PORT:   ":1313",
 		}
 		logger := adapters.NewLogZero(&cfg)
 		logger.LogTrace("Hello, TRACE")

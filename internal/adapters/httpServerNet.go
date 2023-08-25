@@ -187,7 +187,7 @@ func (hns *HTTPServerNet) Engine() *gin.Engine {
 func (hns *HTTPServerNet) Run() func() {
 	hns.handlers()
 	srv := &http.Server{
-		Addr:              hns.cfg.HTTP_PORT,
+		Addr:              hns.cfg.SL_HTTP_PORT,
 		Handler:           hns.hsrv,
 		ReadHeaderTimeout: 10 * time.Second,
 	}
