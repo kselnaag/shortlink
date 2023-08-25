@@ -1,6 +1,7 @@
 package main
 
 import (
+	"fmt"
 	"os"
 	"os/signal"
 	"runtime"
@@ -20,10 +21,19 @@ func main() {
 	hsrv := adapters.NewHTTPServerNet(&svcsl, &log, &cfg)
 	hsrvShutdown := hsrv.Run()
 
+	defer func() {
+		if err := recover(); err != nil {
+			log.LogError(fmt.Errorf("%s", err), "ERROR: shortlink service stoped")
+		}
+	}()
+
+	log.LogInfo("shortlink service started")
 	sig := make(chan os.Signal, 1)
 	signal.Notify(sig, syscall.SIGINT, syscall.SIGTERM, syscall.SIGHUP, syscall.SIGQUIT)
 	<-sig
 
 	hsrvShutdown()
 	// DB disconnect
+
+	log.LogInfo("shortlink service stoped")
 }
