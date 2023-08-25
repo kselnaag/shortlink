@@ -36,8 +36,8 @@ We choose Monolith as system arch pattern and Rich Domain Model as software arch
   - http
   - db
   - log
-  - services
-- `Service`
+  - service
+- `Services`
   - get healthcheck
   - get html UI
   - redirect from short link to long link 
@@ -45,7 +45,7 @@ We choose Monolith as system arch pattern and Rich Domain Model as software arch
   - search the long link if you have a short link
   - get ALL link pairs presented in db
   - check if long link HTTP available
-- `Model`
+- `Models`
   - link pair (string, string)
   - compute short link from long link
   - unite short link and long link
@@ -56,11 +56,11 @@ We choose Monolith as system arch pattern and Rich Domain Model as software arch
 
 - clean and hexagonal arch
 - standart go project layout (more or less)
-- pre-commit hooks and github actions (CI) + podman-compose (CD) + minikube (prod🙃)
+- pre-commit hooks and github actions (CI) + docker-compose (CD) + minikube (prod🙃)
 - tests with mocks included
 - HTTPfast or HTTPnet server
 - in-memory tarantool integration
-- OpenAPI swagger docs
+- OpenAPI Swagger docs
 
 ## **🛠️Libs and tools**
 <img style="margin-right: 0px;" align="right" width="50%" alt="#DOMAIN" src="./asset/domain.png"/>
@@ -79,13 +79,13 @@ We choose Monolith as system arch pattern and Rich Domain Model as software arch
   - go v1.20.2
   - golangci-lint v1.51.2
   - curl v7.68.0
-  - podman + podman-compose
-  - minikube 
+  - docker + docker-compose
+  - minikube
 
 ## **⚙️HowTo**
 <img style="margin-right: 0px;" align="right" width="30%" alt="#CICD" src="./asset/cicd.png"/>
 
-- check if `podman` and `podman-compose` has been installed
+- check if `docker` and `docker-compose` has been installed
 - clone the project
 - run everything with `./script/run.sh`
 - go to `http://localhost:8080` in your browser and try it
@@ -112,4 +112,3 @@ We choose Monolith as system arch pattern and Rich Domain Model as software arch
 | [redis](https://hub.docker.com/_/redis "https://hub.docker.com/_/redis")
 | [redis docs](https://redis.io/docs/ "https://redis.io/docs/")
 |
-
