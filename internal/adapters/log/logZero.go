@@ -4,6 +4,7 @@ import (
 	"os"
 	adapterCfg "shortlink/internal/adapters/cfg"
 	"shortlink/internal/ports"
+	"time"
 
 	"github.com/rs/zerolog"
 )
@@ -18,6 +19,7 @@ type LogZero struct {
 func NewLogZero(cfg *adapterCfg.CfgEnv) LogZero {
 	host := cfg.SL_HTTP_IP + cfg.SL_HTTP_PORT
 	service := cfg.SL_APP_NAME
+	zerolog.TimeFieldFormat = time.RFC3339Nano
 	zerolog.TimestampFieldName = "T"
 	zerolog.LevelFieldName = "L"
 	zerolog.MessageFieldName = "M"

@@ -67,5 +67,6 @@ func ipFromInterfaces() (string, error) {
 }
 
 func logMessage(lvl, host, svc, err, mess string) {
-	fmt.Fprintf(os.Stderr, "{\"L\":\"%s\",\"T\":\"%s\",\"H\":\"%s\",\"S\":\"%s\",\"E\":\"%s\",\"M\":\"%s\"}\n", lvl, time.Now(), host, svc, err, mess)
+	timenow := time.Now().Format(time.RFC3339Nano)
+	fmt.Fprintf(os.Stderr, "{\"L\":\"%s\",\"T\":\"%s\",\"H\":\"%s\",\"S\":\"%s\",\"E\":\"%s\",\"M\":\"%s\"}\n", lvl, timenow, host, svc, err, mess)
 }
