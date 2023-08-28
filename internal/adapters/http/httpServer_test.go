@@ -1,8 +1,11 @@
-package adapters_test
+package adapterHTTP_test
 
 import (
 	"net/http"
-	"shortlink/internal/adapters"
+	adapterCfg "shortlink/internal/adapters/cfg"
+	adapterDB "shortlink/internal/adapters/db"
+	adapterHTTP "shortlink/internal/adapters/http"
+	adapterLog "shortlink/internal/adapters/log"
 	"shortlink/internal/services"
 	"testing"
 
@@ -20,18 +23,18 @@ func TestHTTPServer(t *testing.T) {
 
 	t.Run("HTTPNet", func(t *testing.T) {
 		gin.SetMode(gin.ReleaseMode)
-		cfg := adapters.CfgEnv{
+		cfg := adapterCfg.CfgEnv{
 			SL_APP_NAME:  "testSL",
 			SL_HTTP_IP:   "localhost",
 			SL_HTTP_PORT: ":8081",
 			SL_DB_IP:     "localhost",
 			SL_DB_PORT:   ":1313",
 		}
-		log := adapters.NewLogZero(&cfg)
-		db := adapters.NewDBMock(&cfg)
-		hcli := adapters.NewHTTPClientMock()
+		log := adapterLog.NewLogZero(&cfg)
+		db := adapterDB.NewDBMock(&cfg)
+		hcli := adapterHTTP.NewHTTPClientMock()
 		svcsl := services.NewSvcShortLink(&db, &hcli, &log)
-		hsrv := adapters.NewHTTPServerNet(&svcsl, &log, &cfg)
+		hsrv := adapterHTTP.NewHTTPServerNet(&svcsl, &log, &cfg)
 		_ = hsrv.Run()
 		he := httpexpect.WithConfig(httpexpect.Config{
 			Client: &http.Client{
@@ -49,18 +52,18 @@ func TestHTTPServer(t *testing.T) {
 	})
 
 	t.Run("HTTPFast", func(t *testing.T) {
-		cfg := adapters.CfgEnv{
+		cfg := adapterCfg.CfgEnv{
 			SL_APP_NAME:  "testSL",
 			SL_HTTP_IP:   "localhost",
 			SL_HTTP_PORT: ":8082",
 			SL_DB_IP:     "localhost",
 			SL_DB_PORT:   ":1313",
 		}
-		log := adapters.NewLogZero(&cfg)
-		db := adapters.NewDBMock(&cfg)
-		hcli := adapters.NewHTTPClientMock()
+		log := adapterLog.NewLogZero(&cfg)
+		db := adapterDB.NewDBMock(&cfg)
+		hcli := adapterHTTP.NewHTTPClientMock()
 		svcsl := services.NewSvcShortLink(&db, &hcli, &log)
-		hsrv := adapters.NewHTTPServerFast(&svcsl, &log, &cfg)
+		hsrv := adapterHTTP.NewHTTPServerFast(&svcsl, &log, &cfg)
 		_ = hsrv.Run()
 		he := httpexpect.WithConfig(httpexpect.Config{
 			Client: &http.Client{

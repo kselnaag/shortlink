@@ -1,4 +1,4 @@
-package adapters
+package adapterDB
 
 // "github.com/kselnaag/algos/amath"
 

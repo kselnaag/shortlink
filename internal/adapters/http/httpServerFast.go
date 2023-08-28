@@ -1,4 +1,4 @@
-package adapters
+package adapterHTTP
 
 import (
 	"embed"
@@ -8,6 +8,7 @@ import (
 	"os"
 	"regexp"
 	"runtime/debug"
+	adapterCfg "shortlink/internal/adapters/cfg"
 	"shortlink/internal/ports"
 	"shortlink/web"
 	"strings"
@@ -27,10 +28,10 @@ type HTTPServerFast struct {
 	hsrv   *fiber.App
 	fs     embed.FS
 	log    ports.ILog
-	cfg    *CfgEnv
+	cfg    *adapterCfg.CfgEnv
 }
 
-func NewHTTPServerFast(servSL ports.ISvcShortLink, log ports.ILog, cfg *CfgEnv) HTTPServerFast {
+func NewHTTPServerFast(servSL ports.ISvcShortLink, log ports.ILog, cfg *adapterCfg.CfgEnv) HTTPServerFast {
 	fiberconf := fiber.Config{
 		Prefork:           false,
 		CaseSensitive:     true,
@@ -187,7 +188,7 @@ func (hfs *HTTPServerFast) Run() func() {
 			hfs.log.LogInfo("fasthttp server closed")
 		}
 	}()
-	hfs.log.LogInfo("fasthttp server starting")
+	hfs.log.LogInfo("fasthttp server opened")
 	return func() {
 		if err := hfs.hsrv.ShutdownWithTimeout(5 * time.Second); err != nil {
 			hfs.log.LogError(err, "Run(): fasthttp server graceful shutdown error")

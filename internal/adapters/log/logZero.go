@@ -1,7 +1,8 @@
-package adapters
+package adapterLog
 
 import (
 	"os"
+	adapterCfg "shortlink/internal/adapters/cfg"
 	"shortlink/internal/ports"
 
 	"github.com/rs/zerolog"
@@ -10,11 +11,11 @@ import (
 var _ ports.ILog = (*LogZero)(nil)
 
 type LogZero struct {
-	cfg    *CfgEnv
+	cfg    *adapterCfg.CfgEnv
 	logger zerolog.Logger
 }
 
-func NewLogZero(cfg *CfgEnv) LogZero {
+func NewLogZero(cfg *adapterCfg.CfgEnv) LogZero {
 	host := cfg.SL_HTTP_IP + cfg.SL_HTTP_PORT
 	service := cfg.SL_APP_NAME
 	zerolog.TimestampFieldName = "T"

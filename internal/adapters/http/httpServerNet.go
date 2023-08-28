@@ -1,4 +1,4 @@
-package adapters
+package adapterHTTP
 
 import (
 	"context"
@@ -11,6 +11,7 @@ import (
 	"os"
 	"regexp"
 	"runtime/debug"
+	adapterCfg "shortlink/internal/adapters/cfg"
 	"shortlink/internal/ports"
 	"shortlink/web"
 	"strings"
@@ -28,10 +29,10 @@ type HTTPServerNet struct {
 	hsrv   *gin.Engine
 	fs     embed.FS
 	log    ports.ILog
-	cfg    *CfgEnv
+	cfg    *adapterCfg.CfgEnv
 }
 
-func NewHTTPServerNet(servSL ports.ISvcShortLink, log ports.ILog, cfg *CfgEnv) HTTPServerNet {
+func NewHTTPServerNet(servSL ports.ISvcShortLink, log ports.ILog, cfg *adapterCfg.CfgEnv) HTTPServerNet {
 	return HTTPServerNet{
 		servSL: servSL,
 		hsrv:   gin.New(),
@@ -201,7 +202,7 @@ func (hns *HTTPServerNet) Run() func() {
 			hns.log.LogInfo("net/http server closed")
 		}
 	}()
-	hns.log.LogInfo("net/http server starting")
+	hns.log.LogInfo("net/http server opened")
 	return func() {
 		ctxSHD, cancelSHD := context.WithTimeout(context.Background(), 5*time.Second)
 		defer cancelSHD()

@@ -1,4 +1,4 @@
-package adapters
+package adapterHTTP
 
 import (
 	"shortlink/internal/ports"

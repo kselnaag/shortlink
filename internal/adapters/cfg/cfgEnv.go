@@ -1,10 +1,12 @@
-package adapters
+package adapterCfg
 
 import (
+	"fmt"
 	"net"
 	"os"
 	"path/filepath"
 	"strings"
+	"time"
 
 	"github.com/caarlos0/env"
 	"github.com/joho/godotenv"
@@ -26,30 +28,29 @@ func NewCfgEnv(cfgname string) CfgEnv {
 		SL_DB_IP:     "localhost",
 		SL_DB_PORT:   ":3301",
 	}
-	logCfg := NewLogZero(&cfg)
-	if ip, err := IPFromInterfaces(); err != nil {
-		logCfg.LogError(err, "Can not get IP interface")
+	if ip, err := ipFromInterfaces(); err != nil {
+		logMessage("error", cfg.SL_HTTP_IP+":"+cfg.SL_HTTP_PORT, cfg.SL_APP_NAME, err.Error(), "Can not get IP interface")
 	} else {
 		cfg.SL_HTTP_IP = ip
 		cfg.SL_DB_IP = ip
 	}
 
-	logCfg = NewLogZero(&cfg)
 	exec, err := os.Executable() // LoadExecutablePath
 	if err != nil {
-		logCfg.LogError(err, "Executable not found")
+		logMessage("error", cfg.SL_HTTP_IP+":"+cfg.SL_HTTP_PORT, cfg.SL_APP_NAME, err.Error(), "Executable not found")
 	}
 	filename := filepath.Join(filepath.Dir(exec), cfgname)
 	if err := godotenv.Load(filename); err == nil { // LoadConfFromFileToEnv
-		logCfg.LogInfo("Load config from file: ./%s", cfgname)
+		mess := fmt.Sprintf("Load config from file: ./%s", cfgname)
+		logMessage("info", cfg.SL_HTTP_IP+":"+cfg.SL_HTTP_PORT, cfg.SL_APP_NAME, "", mess)
 	}
 	if err := env.Parse(&cfg); err != nil { // LoadConfFromEnvToStruct
-		logCfg.LogError(err, "Use default config, environment parsing failed")
+		logMessage("error", cfg.SL_HTTP_IP+":"+cfg.SL_HTTP_PORT, cfg.SL_APP_NAME, err.Error(), "Use default config, environment parsing failed")
 	}
 	return cfg
 }
 
-func IPFromInterfaces() (string, error) {
+func ipFromInterfaces() (string, error) {
 	addr, err := net.InterfaceAddrs()
 	if err != nil {
 		return "", err
@@ -63,4 +64,8 @@ func IPFromInterfaces() (string, error) {
 		}
 	}
 	return strings.Join(strarr, "; "), nil
+}
+
+func logMessage(lvl, host, svc, err, mess string) {
+	fmt.Fprintf(os.Stderr, "{\"L\":\"%s\",\"T\":\"%s\",\"H\":\"%s\",\"S\":\"%s\",\"E\":\"%s\",\"M\":\"%s\"}\n", lvl, time.Now(), host, svc, err, mess)
 }

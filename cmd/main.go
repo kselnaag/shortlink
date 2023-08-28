@@ -1,11 +1,13 @@
 package main
 
 import (
-	"fmt"
 	"os"
 	"os/signal"
 	"runtime"
-	"shortlink/internal/adapters"
+	adapterCfg "shortlink/internal/adapters/cfg"
+	adapterDB "shortlink/internal/adapters/db"
+	adapterHTTP "shortlink/internal/adapters/http"
+	adapterLog "shortlink/internal/adapters/log"
 	"shortlink/internal/services"
 	"syscall"
 )
@@ -13,21 +15,22 @@ import (
 func main() {
 	runtime.GOMAXPROCS(1)
 
-	cfg := adapters.NewCfgEnv("config.env")
-	log := adapters.NewLogZero(&cfg)
-	db := adapters.NewDBMock(&cfg)
-	hcli := adapters.NewHTTPClientNet()
+	cfg := adapterCfg.NewCfgEnv("config.env")
+	log := adapterLog.NewLogZero(&cfg)
+	db := adapterDB.NewDBMock(&cfg)
+	hcli := adapterHTTP.NewHTTPClientNet()
 	svcsl := services.NewSvcShortLink(&db, &hcli, &log)
-	hsrv := adapters.NewHTTPServerNet(&svcsl, &log, &cfg)
+	hsrv := adapterHTTP.NewHTTPServerNet(&svcsl, &log, &cfg)
 	hsrvShutdown := hsrv.Run()
 
 	defer func() {
 		if err := recover(); err != nil {
-			log.LogError(fmt.Errorf("%s", err), "ERROR: shortlink service stoped")
+			log.LogError(err.(error), "PANIC: "+cfg.SL_APP_NAME+" app stoped")
+			os.Exit(1)
 		}
 	}()
 
-	log.LogInfo("shortlink service started")
+	log.LogInfo(cfg.SL_APP_NAME + " app started")
 	sig := make(chan os.Signal, 1)
 	signal.Notify(sig, syscall.SIGINT, syscall.SIGTERM, syscall.SIGHUP, syscall.SIGQUIT)
 	<-sig
@@ -35,5 +38,5 @@ func main() {
 	hsrvShutdown()
 	// DB disconnect
 
-	log.LogInfo("shortlink service stoped")
+	log.LogInfo(cfg.SL_APP_NAME + " app stoped")
 }

@@ -1,4 +1,4 @@
-package adapters_test
+package adapterDB_test
 
 import (
 	"testing"
