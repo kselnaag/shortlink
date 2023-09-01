@@ -2,11 +2,11 @@ package adapterHTTP
 
 import (
 	"net/http"
-	I "shortlink/internal/intrface"
+	"shortlink/internal/i7e"
 	"time"
 )
 
-var _ I.IHTTPClient = (*HTTPClientNet)(nil)
+var _ i7e.IHTTPClient = (*HTTPClientNet)(nil)
 
 type HTTPClientNet struct {
 	hcli *http.Client

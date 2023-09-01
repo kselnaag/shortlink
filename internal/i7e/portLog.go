@@ -1,4 +1,4 @@
-package intrface
+package i7e
 
 type ILog interface {
 	LogTrace(format string, v ...any)

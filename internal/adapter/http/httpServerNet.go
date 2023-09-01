@@ -12,7 +12,7 @@ import (
 	"regexp"
 	"runtime/debug"
 	adapterCfg "shortlink/internal/adapter/cfg"
-	I "shortlink/internal/intrface"
+	"shortlink/internal/i7e"
 	"shortlink/web"
 	"strings"
 	"syscall"
@@ -22,17 +22,17 @@ import (
 	"github.com/gin-gonic/gin"
 )
 
-var _ I.IHTTPServer = (*HTTPServerNet)(nil)
+var _ i7e.IHTTPServer = (*HTTPServerNet)(nil)
 
 type HTTPServerNet struct {
-	servSL I.ISvcShortLink
+	servSL i7e.ISvcShortLink
 	hsrv   *gin.Engine
 	fs     embed.FS
-	log    I.ILog
+	log    i7e.ILog
 	cfg    *adapterCfg.CfgEnv
 }
 
-func NewHTTPServerNet(servSL I.ISvcShortLink, log I.ILog, cfg *adapterCfg.CfgEnv) HTTPServerNet {
+func NewHTTPServerNet(servSL i7e.ISvcShortLink, log i7e.ILog, cfg *adapterCfg.CfgEnv) HTTPServerNet {
 	return HTTPServerNet{
 		servSL: servSL,
 		hsrv:   gin.New(),
@@ -216,7 +216,7 @@ type embedFileSystem struct {
 	http.FileSystem
 }
 
-func NewEmbedFolder(fsEmbed embed.FS, targetPath string, log I.ILog) static.ServeFileSystem {
+func NewEmbedFolder(fsEmbed embed.FS, targetPath string, log i7e.ILog) static.ServeFileSystem {
 	subFS, err := fs.Sub(fsEmbed, targetPath)
 	if err != nil {
 		log.LogError(err, "NewEmbedFolder(): embedFS error")

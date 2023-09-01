@@ -3,13 +3,13 @@ package adapterLog
 import (
 	"os"
 	adapterCfg "shortlink/internal/adapter/cfg"
-	I "shortlink/internal/intrface"
+	"shortlink/internal/i7e"
 	"time"
 
 	"github.com/rs/zerolog"
 )
 
-var _ I.ILog = (*LogZero)(nil)
+var _ i7e.ILog = (*LogZero)(nil)
 
 type LogZero struct {
 	cfg    *adapterCfg.CfgEnv

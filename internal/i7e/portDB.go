@@ -1,4 +1,4 @@
-package intrface
+package i7e
 
 import "shortlink/internal/model"
 

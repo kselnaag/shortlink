@@ -2,11 +2,11 @@ package adapterHTTP
 
 import (
 	"net/http"
-	I "shortlink/internal/intrface"
+	"shortlink/internal/i7e"
 	"sync"
 )
 
-var _ I.IHTTPClient = (*HTTPClientMock)(nil)
+var _ i7e.IHTTPClient = (*HTTPClientMock)(nil)
 
 type HTTPClientMock struct {
 	hcli *sync.Map

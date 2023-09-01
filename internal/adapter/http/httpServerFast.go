@@ -9,7 +9,7 @@ import (
 	"regexp"
 	"runtime/debug"
 	adapterCfg "shortlink/internal/adapter/cfg"
-	I "shortlink/internal/intrface"
+	"shortlink/internal/i7e"
 	"shortlink/web"
 	"strings"
 	"syscall"
@@ -21,17 +21,17 @@ import (
 	rec "github.com/gofiber/fiber/v2/middleware/recover"
 )
 
-var _ I.IHTTPServer = (*HTTPServerFast)(nil)
+var _ i7e.IHTTPServer = (*HTTPServerFast)(nil)
 
 type HTTPServerFast struct {
-	servSL I.ISvcShortLink
+	servSL i7e.ISvcShortLink
 	hsrv   *fiber.App
 	fs     embed.FS
-	log    I.ILog
+	log    i7e.ILog
 	cfg    *adapterCfg.CfgEnv
 }
 
-func NewHTTPServerFast(servSL I.ISvcShortLink, log I.ILog, cfg *adapterCfg.CfgEnv) HTTPServerFast {
+func NewHTTPServerFast(servSL i7e.ISvcShortLink, log i7e.ILog, cfg *adapterCfg.CfgEnv) HTTPServerFast {
 	fiberconf := fiber.Config{
 		Prefork:           false,
 		CaseSensitive:     true,

@@ -2,12 +2,12 @@ package adapterDB
 
 import (
 	adapterCfg "shortlink/internal/adapter/cfg"
-	I "shortlink/internal/intrface"
+	"shortlink/internal/i7e"
 	"shortlink/internal/model"
 	"sync"
 )
 
-var _ I.Idb = (*DBMock)(nil)
+var _ i7e.Idb = (*DBMock)(nil)
 
 type DBMock struct {
 	cfg *adapterCfg.CfgEnv

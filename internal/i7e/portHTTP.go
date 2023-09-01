@@ -1,4 +1,4 @@
-package intrface
+package i7e
 
 type IHTTPClient interface {
 	Get(ink string) (int, error)
