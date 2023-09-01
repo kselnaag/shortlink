@@ -2,11 +2,11 @@ package adapterHTTP_test
 
 import (
 	"net/http"
-	adapterCfg "shortlink/internal/adapters/cfg"
-	adapterDB "shortlink/internal/adapters/db"
-	adapterHTTP "shortlink/internal/adapters/http"
-	adapterLog "shortlink/internal/adapters/log"
-	"shortlink/internal/services"
+	adapterCfg "shortlink/internal/adapter/cfg"
+	adapterDB "shortlink/internal/adapter/db"
+	adapterHTTP "shortlink/internal/adapter/http"
+	adapterLog "shortlink/internal/adapter/log"
+	"shortlink/internal/service"
 	"testing"
 
 	"github.com/gavv/httpexpect/v2"
@@ -33,7 +33,7 @@ func TestHTTPServer(t *testing.T) {
 		log := adapterLog.NewLogZero(&cfg)
 		db := adapterDB.NewDBMock(&cfg)
 		hcli := adapterHTTP.NewHTTPClientMock()
-		svcsl := services.NewSvcShortLink(&db, &hcli, &log)
+		svcsl := service.NewSvcShortLink(&db, &hcli, &log)
 		hsrv := adapterHTTP.NewHTTPServerNet(&svcsl, &log, &cfg)
 		_ = hsrv.Run()
 		he := httpexpect.WithConfig(httpexpect.Config{
@@ -62,7 +62,7 @@ func TestHTTPServer(t *testing.T) {
 		log := adapterLog.NewLogZero(&cfg)
 		db := adapterDB.NewDBMock(&cfg)
 		hcli := adapterHTTP.NewHTTPClientMock()
-		svcsl := services.NewSvcShortLink(&db, &hcli, &log)
+		svcsl := service.NewSvcShortLink(&db, &hcli, &log)
 		hsrv := adapterHTTP.NewHTTPServerFast(&svcsl, &log, &cfg)
 		_ = hsrv.Run()
 		he := httpexpect.WithConfig(httpexpect.Config{

@@ -1,4 +1,4 @@
-package ports
+package intrface
 
 type ILog interface {
 	LogTrace(format string, v ...any)

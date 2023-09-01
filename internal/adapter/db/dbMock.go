@@ -1,13 +1,13 @@
 package adapterDB
 
 import (
-	adapterCfg "shortlink/internal/adapters/cfg"
-	"shortlink/internal/models"
-	"shortlink/internal/ports"
+	adapterCfg "shortlink/internal/adapter/cfg"
+	I "shortlink/internal/intrface"
+	"shortlink/internal/model"
 	"sync"
 )
 
-var _ ports.Idb = (*DBMock)(nil)
+var _ I.Idb = (*DBMock)(nil)
 
 type DBMock struct {
 	cfg *adapterCfg.CfgEnv
@@ -24,23 +24,23 @@ func NewDBMock(cfg *adapterCfg.CfgEnv) DBMock {
 	}
 }
 
-func (m *DBMock) SaveLinkPair(lp models.LinkPair) bool {
+func (m *DBMock) SaveLinkPair(lp model.LinkPair) bool {
 	m.db.Store(lp.Short(), lp.Long())
 	return true
 }
 
-func (m *DBMock) LoadLinkPair(linkshort string) models.LinkPair {
+func (m *DBMock) LoadLinkPair(linkshort string) model.LinkPair {
 	linklong, ok := m.db.Load(linkshort)
 	if !ok {
-		return models.LinkPair{}
+		return model.LinkPair{}
 	}
-	return models.NewLinkPair(linklong.(string))
+	return model.NewLinkPair(linklong.(string))
 }
 
-func (m *DBMock) LoadAllLinkPairs() []models.LinkPair {
-	res := make([]models.LinkPair, 0, 8)
+func (m *DBMock) LoadAllLinkPairs() []model.LinkPair {
+	res := make([]model.LinkPair, 0, 8)
 	m.db.Range(func(key, value any) bool {
-		res = append(res, models.NewLinkPair(value.(string)))
+		res = append(res, model.NewLinkPair(value.(string)))
 		return true
 	})
 	return res

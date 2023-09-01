@@ -32,11 +32,14 @@ We choose Monolith as system arch pattern and Rich Domain Model as software arch
   - SQL database
   - JSON logger
   - file + env config
-- `Ports`
+- `Interfaces`
+  - (port)http
+  - (port)db
+  - (port)log
+  - service
+- `Controllers`
   - http
   - db
-  - log
-  - service
 - `Services`
   - get healthcheck
   - get html UI

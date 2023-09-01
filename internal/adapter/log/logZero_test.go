@@ -2,8 +2,8 @@ package adapterLog_test
 
 import (
 	"errors"
-	adapterCfg "shortlink/internal/adapters/cfg"
-	adapterLog "shortlink/internal/adapters/log"
+	adapterCfg "shortlink/internal/adapter/cfg"
+	adapterLog "shortlink/internal/adapter/log"
 	"testing"
 
 	"github.com/stretchr/testify/assert"

@@ -1,22 +1,22 @@
-package services
+package service
 
 import (
 	"net/http"
-	"shortlink/internal/models"
+	"shortlink/internal/model"
 	"sort"
 
-	"shortlink/internal/ports"
+	I "shortlink/internal/intrface"
 )
 
-var _ ports.ISvcShortLink = (*SvcShortLink)(nil)
+var _ I.ISvcShortLink = (*SvcShortLink)(nil)
 
 type SvcShortLink struct {
-	db   ports.Idb
-	hcli ports.IHTTPClient
-	log  ports.ILog
+	db   I.Idb
+	hcli I.IHTTPClient
+	log  I.ILog
 }
 
-func NewSvcShortLink(db ports.Idb, hcli ports.IHTTPClient, log ports.ILog) SvcShortLink {
+func NewSvcShortLink(db I.Idb, hcli I.IHTTPClient, log I.ILog) SvcShortLink {
 	return SvcShortLink{
 		db:   db,
 		hcli: hcli,
@@ -24,8 +24,8 @@ func NewSvcShortLink(db ports.Idb, hcli ports.IHTTPClient, log ports.ILog) SvcSh
 	}
 }
 
-func (ssl *SvcShortLink) GetAllLinkPairs() []models.LinkPair {
-	res := make([]models.LinkPair, 0, 8)
+func (ssl *SvcShortLink) GetAllLinkPairs() []model.LinkPair {
+	res := make([]model.LinkPair, 0, 8)
 	allpairs := ssl.db.LoadAllLinkPairs()
 	for _, el := range allpairs {
 		if el.IsValid() {
@@ -38,28 +38,28 @@ func (ssl *SvcShortLink) GetAllLinkPairs() []models.LinkPair {
 	return res
 }
 
-func (ssl *SvcShortLink) GetLinkLongFromLinkShort(linkshort string) models.LinkPair {
+func (ssl *SvcShortLink) GetLinkLongFromLinkShort(linkshort string) model.LinkPair {
 	lp := ssl.db.LoadLinkPair(linkshort)
 	if lp.IsValid() {
 		return lp
 	}
 	ssl.log.LogWarn("GetLinkLongFromLinkShort(): Link pair is not valid")
-	return models.LinkPair{}
+	return model.LinkPair{}
 }
 
-func (ssl *SvcShortLink) GetLinkShortFromLinkLong(linklong string) models.LinkPair {
-	newLP := models.NewLinkPair(linklong)
+func (ssl *SvcShortLink) GetLinkShortFromLinkLong(linklong string) model.LinkPair {
+	newLP := model.NewLinkPair(linklong)
 	lp := ssl.db.LoadLinkPair(newLP.Short())
 	if lp.IsValid() {
 		return lp
 	}
 	ssl.log.LogWarn("GetLinkShortFromLinkLong(): Link pair is not valid")
-	return models.LinkPair{}
+	return model.LinkPair{}
 }
 
-func (ssl *SvcShortLink) SetLinkPairFromLinkLong(linklong string) models.LinkPair {
-	empty := models.LinkPair{}
-	newLP := models.NewLinkPair(linklong) // make pair
+func (ssl *SvcShortLink) SetLinkPairFromLinkLong(linklong string) model.LinkPair {
+	empty := model.LinkPair{}
+	newLP := model.NewLinkPair(linklong) // make pair
 	if !newLP.IsValid() {
 		ssl.log.LogWarn("SetLinkPairFromLinkLong(): Link pair is not valid")
 		return empty

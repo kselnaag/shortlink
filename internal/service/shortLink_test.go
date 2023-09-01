@@ -1,14 +1,14 @@
-package services_test
+package service_test
 
 import (
 	"testing"
 
-	adaptersCfg "shortlink/internal/adapters/cfg"
-	adapterDB "shortlink/internal/adapters/db"
-	adapterHTTP "shortlink/internal/adapters/http"
-	adapterLog "shortlink/internal/adapters/log"
-	"shortlink/internal/models"
-	"shortlink/internal/services"
+	adapterCfg "shortlink/internal/adapter/cfg"
+	adapterDB "shortlink/internal/adapter/db"
+	adapterHTTP "shortlink/internal/adapter/http"
+	adapterLog "shortlink/internal/adapter/log"
+	"shortlink/internal/model"
+	"shortlink/internal/service"
 
 	"github.com/stretchr/testify/assert"
 )
@@ -21,7 +21,7 @@ func TestServices(t *testing.T) {
 	}()
 
 	t.Run("ServShortLink", func(t *testing.T) {
-		cfg := adaptersCfg.CfgEnv{
+		cfg := adapterCfg.CfgEnv{
 			SL_APP_NAME:  "testSL",
 			SL_HTTP_IP:   "localhost",
 			SL_HTTP_PORT: ":8080",
@@ -31,10 +31,10 @@ func TestServices(t *testing.T) {
 		log := adapterLog.NewLogZero(&cfg)
 		db := adapterDB.NewDBMock(&cfg)
 		hcli := adapterHTTP.NewHTTPClientMock()
-		nssl := services.NewSvcShortLink(&db, &hcli, &log)
+		nssl := service.NewSvcShortLink(&db, &hcli, &log)
 
 		// models.LinkPair{Short: "5clp60", Long: "http://lib.ru"}, models.LinkPair{Short: "8as3rb", Long: "http://lib.ru/abs"}, ("dhiu79", "http://google.ru")
-		asrt.Equal([]models.LinkPair{models.NewLinkPair("http://lib.ru"), models.NewLinkPair("http://google.ru")},
+		asrt.Equal([]model.LinkPair{model.NewLinkPair("http://lib.ru"), model.NewLinkPair("http://google.ru")},
 			nssl.GetAllLinkPairs())
 
 		asrt.True(nssl.IsLinkLongHTTPValid("http://lib.ru/PROZA/"))
@@ -48,7 +48,7 @@ func TestServices(t *testing.T) {
 		asrt.Equal("http://lib.ru/PROZA/", lp.Long())
 		asrt.False(nssl.GetLinkLongFromLinkShort("8as3rb").IsValid())
 
-		asrt.Equal([]models.LinkPair{models.NewLinkPair("http://lib.ru"), models.NewLinkPair("http://lib.ru/PROZA/"), models.NewLinkPair("http://google.ru")},
+		asrt.Equal([]model.LinkPair{model.NewLinkPair("http://lib.ru"), model.NewLinkPair("http://lib.ru/PROZA/"), model.NewLinkPair("http://google.ru")},
 			nssl.GetAllLinkPairs())
 	})
 

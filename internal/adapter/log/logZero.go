@@ -2,14 +2,14 @@ package adapterLog
 
 import (
 	"os"
-	adapterCfg "shortlink/internal/adapters/cfg"
-	"shortlink/internal/ports"
+	adapterCfg "shortlink/internal/adapter/cfg"
+	I "shortlink/internal/intrface"
 	"time"
 
 	"github.com/rs/zerolog"
 )
 
-var _ ports.ILog = (*LogZero)(nil)
+var _ I.ILog = (*LogZero)(nil)
 
 type LogZero struct {
 	cfg    *adapterCfg.CfgEnv

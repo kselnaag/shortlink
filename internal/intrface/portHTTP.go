@@ -1,4 +1,4 @@
-package ports
+package intrface
 
 type IHTTPClient interface {
 	Get(ink string) (int, error)

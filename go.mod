@@ -3,13 +3,14 @@ module shortlink
 go 1.20
 
 replace (
-	shortlink/internal/adapters/cfg => ./internal/adapters/cfg
-	shortlink/internal/adapters/log => ./internal/adapters/log
-	shortlink/internal/adapters/db => ./internal/adapters/db
-	shortlink/internal/adapters/http => ./internal/adapters/http
-	shortlink/internal/models => ./internal/models
-	shortlink/internal/ports => ./internal/ports
-	shortlink/internal/services => ./internal/services
+	shortlink/internal/adapter/cfg => ./internal/adapter/cfg
+	shortlink/internal/adapter/log => ./internal/adapter/log
+	shortlink/internal/adapter/db => ./internal/adapter/db
+	shortlink/internal/adapter/http => ./internal/adapter/http	
+	shortlink/internal/intrface => ./internal/intrface
+	shortlink/internal/control => ./internal/control
+	shortlink/internal/service => ./internal/service
+	shortlink/internal/model => ./internal/model
 	shortlink/web => ./web
 )
 
