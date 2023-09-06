@@ -10,7 +10,7 @@ go fmt ./...
 if [[ $? -gt 0 ]]; then checksBreaked; fi
 
 echo -e "\n>>_Linting_<<"
-golangci-lint run ./...
+golangci-lint run ./... --config=./config/.golangci.yaml
 if [[ $? -gt 0 ]]; then checksBreaked; fi
 
 echo -e "\n>>_UnitTests_<<"

@@ -25,6 +25,7 @@ jobs:
       uses: golangci/golangci-lint-action@v3
       with:
           version: v1.51.2
+          args: --config=./config/.golangci.yaml
                 
     - name: UnitTests
       run: go test -vet=off -count=1 -race ./...
