@@ -1,6 +1,6 @@
 module shortlink
 
-go 1.20
+go 1.21
 
 replace (
 	shortlink/internal/adapter/cfg => ./internal/adapter/cfg
