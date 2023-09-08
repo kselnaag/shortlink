@@ -57,7 +57,7 @@ We choose Monolith as system arch pattern and Rich Domain Model as software arch
 ## **💡Solution notes**
 <img style="margin-right: 100px; transform: rotate(03.7deg);" align="right" width="14%" alt="#Prod" src="./asset/production.png"/>
 
-- clean and hexagonal arch
+- hexagonal arch
 - standart go project layout (more or less)
 - pre-commit hooks and github actions (CI) + docker-compose (CD) + minikube (prod🙃)
 - tests with mocks included
@@ -79,7 +79,7 @@ We choose Monolith as system arch pattern and Rich Domain Model as software arch
   - stretchr/testify v1.8.2
   - gavv/httpexpect v2.15.0
 - `Tools`
-  - go v1.20.2
+  - golang v1.21
   - golangci-lint v1.51.2
   - curl v7.68.0
   - docker + docker-compose

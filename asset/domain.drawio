@@ -1,6 +1,6 @@
 <mxfile host="65bd71144e">
     <diagram id="rU-xtE7swLQ4DO77qGND" name="Страница 1">
-        <mxGraphModel dx="1047" dy="787" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="827" pageHeight="1169" background="none" math="0" shadow="0">
+        <mxGraphModel dx="985" dy="628" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="827" pageHeight="1169" background="none" math="0" shadow="0">
             <root>
                 <mxCell id="0"/>
                 <mxCell id="1" parent="0"/>
@@ -64,8 +64,8 @@
                 <mxCell id="4" value="&lt;font color=&quot;#e6e6e6&quot; style=&quot;font-size: 20px; background-color: rgb(13, 17, 23);&quot;&gt;Domain zone&lt;/font&gt;" style="text;html=1;strokeColor=#E6E6E6;fillColor=#0D1117;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;strokeWidth=1;dashed=1;" parent="1" vertex="1">
                     <mxGeometry x="277" y="245.5" width="130" height="35" as="geometry"/>
                 </mxCell>
-                <mxCell id="31" value="&lt;font color=&quot;#e6e6e6&quot; style=&quot;font-size: 20px; background-color: rgb(13, 17, 23);&quot;&gt;Infractructure&lt;/font&gt;" style="text;html=1;strokeColor=#E6E6E6;fillColor=#0D1117;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;strokeWidth=1;dashed=1;" parent="1" vertex="1">
-                    <mxGeometry x="100" y="107" width="130" height="35" as="geometry"/>
+                <mxCell id="31" value="&lt;font color=&quot;#e6e6e6&quot; style=&quot;font-size: 20px; background-color: rgb(13, 17, 23);&quot;&gt;Infrastructure zone&lt;/font&gt;" style="text;html=1;strokeColor=#E6E6E6;fillColor=#0D1117;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;strokeWidth=1;dashed=1;" parent="1" vertex="1">
+                    <mxGeometry x="100" y="107" width="170" height="35" as="geometry"/>
                 </mxCell>
             </root>
         </mxGraphModel>
