@@ -11,6 +11,7 @@ replace (
 	shortlink/internal/control => ./internal/control
 	shortlink/internal/service => ./internal/service
 	shortlink/internal/model => ./internal/model
+	shortlink/internal => ./internal
 	shortlink/web => ./web
 )
 

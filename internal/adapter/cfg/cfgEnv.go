@@ -5,6 +5,7 @@ import (
 	"net"
 	"os"
 	"path/filepath"
+	"shortlink/internal/i7e"
 	"strings"
 	"time"
 
@@ -12,16 +13,8 @@ import (
 	"github.com/joho/godotenv"
 )
 
-type CfgEnv struct {
-	SL_APP_NAME  string `env:"SL_APP_NAME"`
-	SL_HTTP_IP   string `env:"SL_HTTP_IP"`
-	SL_HTTP_PORT string `env:"SL_HTTP_PORT"`
-	SL_DB_IP     string `env:"SL_DB_IP"`
-	SL_DB_PORT   string `env:"SL_DB_PORT"`
-}
-
-func NewCfgEnv(cfgname string) CfgEnv {
-	cfg := CfgEnv{ // default env
+func NewCfgEnv(cfgname string) i7e.CfgEnv {
+	cfg := i7e.CfgEnv{ // default env
 		SL_APP_NAME:  "shortlink",
 		SL_HTTP_IP:   "localhost",
 		SL_HTTP_PORT: ":8080",

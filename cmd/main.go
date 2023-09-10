@@ -4,12 +4,7 @@ import (
 	"os"
 	"os/signal"
 	"runtime"
-	adapterCfg "shortlink/internal/adapter/cfg"
-	adapterDB "shortlink/internal/adapter/db"
-	adapterHTTP "shortlink/internal/adapter/http"
-	adapterLog "shortlink/internal/adapter/log"
-	"shortlink/internal/control"
-	"shortlink/internal/service"
+	a9n "shortlink/internal"
 	"syscall"
 )
 
@@ -18,31 +13,18 @@ func main() {
 	// debug.SetGCPercent(100) // GOGC=100
 	// debug.SetMemoryLimit(2 831 155 200) // GOMEMLIMIT=2700MiB
 
-	cfg := adapterCfg.NewCfgEnv("config.env")
-	log := adapterLog.NewLogZero(&cfg)
-	db := adapterDB.NewDBMock(&cfg)
-	hcli := adapterHTTP.NewHTTPClientNet()
-	svcsl := service.NewSvcShortLink(&db, &hcli, &log)
-	ctrl := control.NewCtrlHTTP(&svcsl)
-	hsrv := adapterHTTP.NewHTTPServerNet(&ctrl, &log, &cfg)
-	// dbShutdown := db.Connect(&log, &cfg)
-	hsrvShutdown := hsrv.Run()
+	app := a9n.NewA9n()
+	appStop := app.Start()
 
 	defer func() {
 		if err := recover(); err != nil {
-			hsrvShutdown()
-			// dbShutdown(err.(error))
-			log.LogError(err.(error), "PANIC: "+cfg.SL_APP_NAME+" app stoped")
-			os.Exit(1)
+			appStop(err.(error))
 		}
 	}()
 
 	sig := make(chan os.Signal, 1)
 	signal.Notify(sig, syscall.SIGINT, syscall.SIGTERM, syscall.SIGHUP, syscall.SIGQUIT)
-	log.LogInfo(cfg.SL_APP_NAME + " app started")
 	<-sig
 
-	hsrvShutdown()
-	// dbShutdown(nil)
-	log.LogInfo(cfg.SL_APP_NAME + " app stoped")
+	appStop(nil)
 }

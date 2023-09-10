@@ -3,10 +3,10 @@ package service_test
 import (
 	"testing"
 
-	adapterCfg "shortlink/internal/adapter/cfg"
 	adapterDB "shortlink/internal/adapter/db"
 	adapterHTTP "shortlink/internal/adapter/http"
 	adapterLog "shortlink/internal/adapter/log"
+	"shortlink/internal/i7e"
 	"shortlink/internal/model"
 	"shortlink/internal/service"
 
@@ -21,7 +21,7 @@ func TestServices(t *testing.T) {
 	}()
 
 	t.Run("ServShortLink", func(t *testing.T) {
-		cfg := adapterCfg.CfgEnv{
+		cfg := i7e.CfgEnv{
 			SL_APP_NAME:  "testSL",
 			SL_HTTP_IP:   "localhost",
 			SL_HTTP_PORT: ":8080",

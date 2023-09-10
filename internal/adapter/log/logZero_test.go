@@ -2,8 +2,8 @@ package adapterLog_test
 
 import (
 	"errors"
-	adapterCfg "shortlink/internal/adapter/cfg"
 	adapterLog "shortlink/internal/adapter/log"
+	"shortlink/internal/i7e"
 	"testing"
 
 	"github.com/stretchr/testify/assert"
@@ -17,7 +17,7 @@ func TestLogZero(t *testing.T) {
 	}()
 
 	t.Run("LogZero", func(t *testing.T) {
-		cfg := adapterCfg.CfgEnv{
+		cfg := i7e.CfgEnv{
 			SL_APP_NAME:  "testSL",
 			SL_HTTP_IP:   "localhost",
 			SL_HTTP_PORT: ":8080",

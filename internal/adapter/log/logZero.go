@@ -2,7 +2,6 @@ package adapterLog
 
 import (
 	"os"
-	adapterCfg "shortlink/internal/adapter/cfg"
 	"shortlink/internal/i7e"
 	"time"
 
@@ -12,11 +11,11 @@ import (
 var _ i7e.ILog = (*LogZero)(nil)
 
 type LogZero struct {
-	cfg    *adapterCfg.CfgEnv
+	cfg    *i7e.CfgEnv
 	logger zerolog.Logger
 }
 
-func NewLogZero(cfg *adapterCfg.CfgEnv) LogZero {
+func NewLogZero(cfg *i7e.CfgEnv) LogZero {
 	host := cfg.SL_HTTP_IP + cfg.SL_HTTP_PORT
 	service := cfg.SL_APP_NAME
 	zerolog.TimeFieldFormat = time.RFC3339Nano

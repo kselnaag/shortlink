@@ -4,10 +4,8 @@ import (
 	"embed"
 	"net/http"
 	"os"
-	adapterCfg "shortlink/internal/adapter/cfg"
 	"shortlink/internal/i7e"
 	"shortlink/web"
-	"syscall"
 	"time"
 
 	"github.com/gofiber/fiber/v2"
@@ -23,10 +21,10 @@ type HTTPServerFast struct {
 	hsrv *fiber.App
 	fs   embed.FS
 	log  i7e.ILog
-	cfg  *adapterCfg.CfgEnv
+	cfg  *i7e.CfgEnv
 }
 
-func NewHTTPServerFast(ctrl i7e.ICtrlHTTP, log i7e.ILog, cfg *adapterCfg.CfgEnv) HTTPServerFast {
+func NewHTTPServerFast(ctrl i7e.ICtrlHTTP, log i7e.ILog, cfg *i7e.CfgEnv) HTTPServerFast {
 	fiberconf := fiber.Config{
 		Prefork:           false,
 		CaseSensitive:     true,
@@ -129,20 +127,15 @@ func (hfs *HTTPServerFast) handlers() {
 }
 
 func (hfs *HTTPServerFast) appClose() {
-	if proc, err := os.FindProcess(syscall.Getpid()); err != nil {
-		hfs.log.LogError(err, "appClose(): pid not found")
-	} else {
-		if err := proc.Signal(syscall.SIGINT); err != nil {
-			hfs.log.LogError(err, "appClose(): signar not sent")
-		}
-	}
+	hfs.log.LogInfo("fasthttp server closed by appClose() handle")
+	os.Exit(0)
 }
 
 func (hfs *HTTPServerFast) Engine() *fiber.App {
 	return hfs.hsrv
 }
 
-func (hfs *HTTPServerFast) Run() func() {
+func (hfs *HTTPServerFast) Run() func(e error) {
 	hfs.handlers()
 	go func() {
 		if err := hfs.hsrv.Listen(hfs.cfg.SL_HTTP_PORT); err != nil {
@@ -153,9 +146,12 @@ func (hfs *HTTPServerFast) Run() func() {
 		}
 	}()
 	hfs.log.LogInfo("fasthttp server opened")
-	return func() {
+	return func(e error) {
 		if err := hfs.hsrv.ShutdownWithTimeout(5 * time.Second); err != nil {
-			hfs.log.LogError(err, "Run(): fasthttp server graceful shutdown error")
+			hfs.log.LogError(err, "Run(): fasthttp server graceful_shutdown error")
+		}
+		if e != nil {
+			hfs.log.LogError(e, "Run(): fasthttp server shutdown with error")
 		}
 	}
 }

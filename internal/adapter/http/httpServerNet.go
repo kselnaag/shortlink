@@ -7,11 +7,9 @@ import (
 	"io/fs"
 	"net/http"
 	"os"
-	adapterCfg "shortlink/internal/adapter/cfg"
 	"shortlink/internal/i7e"
 	"shortlink/web"
 	"strings"
-	"syscall"
 	"time"
 
 	"github.com/gin-contrib/static"
@@ -25,10 +23,10 @@ type HTTPServerNet struct {
 	hsrv *gin.Engine
 	fs   embed.FS
 	log  i7e.ILog
-	cfg  *adapterCfg.CfgEnv
+	cfg  *i7e.CfgEnv
 }
 
-func NewHTTPServerNet(ctrl i7e.ICtrlHTTP, log i7e.ILog, cfg *adapterCfg.CfgEnv) HTTPServerNet {
+func NewHTTPServerNet(ctrl i7e.ICtrlHTTP, log i7e.ILog, cfg *i7e.CfgEnv) HTTPServerNet {
 	return HTTPServerNet{
 		ctrl: ctrl,
 		hsrv: gin.New(),
@@ -147,20 +145,15 @@ func (hns *HTTPServerNet) handlers() {
 }
 
 func (hns *HTTPServerNet) appClose() {
-	if proc, err := os.FindProcess(syscall.Getpid()); err != nil {
-		hns.log.LogError(err, "appClose(): pid not found")
-	} else {
-		if err := proc.Signal(syscall.SIGINT); err != nil {
-			hns.log.LogError(err, "appClose(): signar not sent")
-		}
-	}
+	hns.log.LogInfo("net/http server closed by appClose() handle")
+	os.Exit(0)
 }
 
 func (hns *HTTPServerNet) Engine() *gin.Engine {
 	return hns.hsrv
 }
 
-func (hns *HTTPServerNet) Run() func() {
+func (hns *HTTPServerNet) Run() func(e error) {
 	hns.handlers()
 	srv := &http.Server{
 		Addr:              hns.cfg.SL_HTTP_PORT,
@@ -178,11 +171,14 @@ func (hns *HTTPServerNet) Run() func() {
 		}
 	}()
 	hns.log.LogInfo("net/http server opened")
-	return func() {
+	return func(e error) {
 		ctxSHD, cancelSHD := context.WithTimeout(context.Background(), 5*time.Second)
 		defer cancelSHD()
 		if err := srv.Shutdown(ctxSHD); err != nil {
-			hns.log.LogError(err, "Run(): net/http server graceful shutdown error")
+			hns.log.LogError(err, "Run(): net/http server graceful_shutdown error")
+		}
+		if e != nil {
+			hns.log.LogError(e, "Run(): net/http server shutdown with error")
 		}
 	}
 }
