@@ -2,16 +2,11 @@ package adapterHTTP
 
 import (
 	"embed"
-	"encoding/json"
-	"fmt"
 	"net/http"
 	"os"
-	"regexp"
-	"runtime/debug"
 	adapterCfg "shortlink/internal/adapter/cfg"
 	"shortlink/internal/i7e"
 	"shortlink/web"
-	"strings"
 	"syscall"
 	"time"
 
@@ -24,14 +19,14 @@ import (
 var _ i7e.IHTTPServer = (*HTTPServerFast)(nil)
 
 type HTTPServerFast struct {
-	servSL i7e.ISvcShortLink
-	hsrv   *fiber.App
-	fs     embed.FS
-	log    i7e.ILog
-	cfg    *adapterCfg.CfgEnv
+	ctrl i7e.ICtrlHTTP
+	hsrv *fiber.App
+	fs   embed.FS
+	log  i7e.ILog
+	cfg  *adapterCfg.CfgEnv
 }
 
-func NewHTTPServerFast(servSL i7e.ISvcShortLink, log i7e.ILog, cfg *adapterCfg.CfgEnv) HTTPServerFast {
+func NewHTTPServerFast(ctrl i7e.ICtrlHTTP, log i7e.ILog, cfg *adapterCfg.CfgEnv) HTTPServerFast {
 	fiberconf := fiber.Config{
 		Prefork:           false,
 		CaseSensitive:     true,
@@ -43,11 +38,11 @@ func NewHTTPServerFast(servSL i7e.ISvcShortLink, log i7e.ILog, cfg *adapterCfg.C
 		AppName:           "shortlink",
 	}
 	return HTTPServerFast{
-		servSL: servSL,
-		hsrv:   fiber.New(fiberconf),
-		fs:     web.StaticFS,
-		log:    log,
-		cfg:    cfg,
+		ctrl: ctrl,
+		hsrv: fiber.New(fiberconf),
+		fs:   web.StaticFS,
+		log:  log,
+		cfg:  cfg,
 	}
 }
 
@@ -57,15 +52,8 @@ func (hfs *HTTPServerFast) handlers() {
 		Mode   string
 		Body   string
 	}
-	isHash := regexp.MustCompile(`^[a-z0-9]{6}$`).MatchString
 	headers := func(c *fiber.Ctx) {
 		c.Set("Cache-Control", "no-cache")
-	}
-	logpanic := func() {
-		if err := recover(); err != nil {
-			hfs.log.LogPanic("%v\n%v", fmt.Sprintf("%v", err), string(debug.Stack()))
-			panic(err)
-		}
 	}
 	hfs.hsrv.Use(logger.New())
 	hfs.hsrv.Use("/", filesystem.New(filesystem.Config{
@@ -76,91 +64,67 @@ func (hfs *HTTPServerFast) handlers() {
 	hfs.hsrv.Use(rec.New())
 
 	hfs.hsrv.Get("/check/ping", func(c *fiber.Ctx) error {
-		defer logpanic()
 		headers(c)
 		return c.Status(fiber.StatusOK).JSON(Message{true, "check", "pong"})
 	})
 	hfs.hsrv.Get("/check/abs", func(c *fiber.Ctx) error {
-		defer logpanic()
 		headers(c)
 		return c.Status(fiber.StatusNotFound).JSON(Message{true, "check", "404 Not Found"})
 	})
 	hfs.hsrv.Get("/check/panic", func(c *fiber.Ctx) error {
-		defer logpanic()
 		headers(c)
 		panic(`{IsResp:true,Mode:check,Body:panic}`)
 		// return c.Status(fiber.StatusInternalServerError).JSON(Message{true, "check", "panic"})
 	})
 	hfs.hsrv.Get("/check/close", func(c *fiber.Ctx) error {
-		defer logpanic()
 		headers(c)
 		hfs.appClose()
 		return c.Status(fiber.StatusOK).JSON(Message{true, "check", "server close"})
 	})
 	hfs.hsrv.Get("/check/allpairs", func(c *fiber.Ctx) error {
-		defer logpanic()
 		headers(c)
-		strarr := []string{}
-		pairs := hfs.servSL.GetAllLinkPairs()
-		for _, el := range pairs {
-			strarr = append(strarr, el.Short()+": "+el.Long())
+		all, err := hfs.ctrl.AllPairs()
+		if err != nil {
+			return c.Status(fiber.StatusNotFound).JSON(Message{true, "404", err.Error()})
 		}
-		return c.Status(fiber.StatusOK).JSON(Message{true, "200", strings.Join(strarr, "; ")})
+		return c.Status(fiber.StatusOK).JSON(Message{true, "200", all})
 	})
 	////
 	hfs.hsrv.Post("/long", func(c *fiber.Ctx) error { // link short from link long
-		defer logpanic()
 		headers(c)
 		body := c.Body()
-		req := Message{}
-		if err := json.Unmarshal(body, &req); (err != nil) || (req.IsResp) || (req.Body == "") {
-			return c.Status(fiber.StatusBadRequest).JSON(Message{true, "400", req.Body})
+		short, err := hfs.ctrl.Long(body)
+		if err != nil {
+			return c.Status(fiber.StatusNotFound).JSON(Message{true, "404", err.Error()})
 		}
-		lp := hfs.servSL.GetLinkShortFromLinkLong(req.Body)
-		if !lp.IsValid() {
-			return c.Status(fiber.StatusNotFound).JSON(Message{true, "404", req.Body})
-		}
-		return c.Status(fiber.StatusPartialContent).JSON(Message{true, "206", lp.Short()})
+		return c.Status(fiber.StatusPartialContent).JSON(Message{true, "206", short})
 	})
 	hfs.hsrv.Post("/short", func(c *fiber.Ctx) error { // link long from link short
-		defer logpanic()
 		headers(c)
 		body := c.Body()
-		req := Message{}
-		if err := json.Unmarshal(body, &req); (err != nil) || (req.IsResp) || (!isHash(req.Body)) {
-			return c.Status(fiber.StatusBadRequest).JSON(Message{true, "400", req.Body})
+		long, err := hfs.ctrl.Short(body)
+		if err != nil {
+			return c.Status(fiber.StatusNotFound).JSON(Message{true, "404", err.Error()})
 		}
-		lp := hfs.servSL.GetLinkLongFromLinkShort(req.Body)
-		if !lp.IsValid() {
-			return c.Status(fiber.StatusNotFound).JSON(Message{true, "404", req.Body})
-		}
-		return c.Status(fiber.StatusPartialContent).JSON(Message{true, "206", lp.Long()})
+		return c.Status(fiber.StatusPartialContent).JSON(Message{true, "206", long})
 	})
 	hfs.hsrv.Post("/save", func(c *fiber.Ctx) error { // save link pair
-		defer logpanic()
 		headers(c)
 		body := c.Body()
-		req := Message{}
-		if err := json.Unmarshal(body, &req); (err != nil) || (req.IsResp) || (req.Body == "") {
-			return c.Status(fiber.StatusBadRequest).JSON(Message{true, "400", req.Body})
+		short, err := hfs.ctrl.Save(body)
+		if err != nil {
+			return c.Status(fiber.StatusNotFound).JSON(Message{true, "404", err.Error()})
 		}
-		lp := hfs.servSL.SetLinkPairFromLinkLong(req.Body)
-		if !lp.IsValid() {
-			return c.Status(fiber.StatusBadRequest).JSON(Message{true, "400", req.Body})
-		}
-		return c.Status(fiber.StatusCreated).JSON(Message{true, "201", lp.Short()})
+		return c.Status(fiber.StatusCreated).JSON(Message{true, "201", short})
 	})
 	hfs.hsrv.Get("/r/:hash", func(c *fiber.Ctx) error { // redirect
-		defer logpanic()
 		headers(c)
 		hash := c.Params("hash")
-		if isHash(hash) {
-			lp := hfs.servSL.GetLinkLongFromLinkShort(hash)
-			if lp.IsValid() {
-				return c.Redirect(lp.Long())
-			}
+		long, err := hfs.ctrl.Hash(hash)
+		if err != nil {
+			return c.Status(fiber.StatusNotFound).JSON(Message{true, "404", err.Error()})
 		}
-		return c.Status(fiber.StatusBadRequest).JSON(Message{true, "400", hash})
+		return c.Redirect(long)
 	})
 }
 

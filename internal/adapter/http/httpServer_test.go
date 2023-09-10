@@ -6,6 +6,7 @@ import (
 	adapterDB "shortlink/internal/adapter/db"
 	adapterHTTP "shortlink/internal/adapter/http"
 	adapterLog "shortlink/internal/adapter/log"
+	"shortlink/internal/control"
 	"shortlink/internal/service"
 	"testing"
 
@@ -34,7 +35,8 @@ func TestHTTPServer(t *testing.T) {
 		db := adapterDB.NewDBMock(&cfg)
 		hcli := adapterHTTP.NewHTTPClientMock()
 		svcsl := service.NewSvcShortLink(&db, &hcli, &log)
-		hsrv := adapterHTTP.NewHTTPServerNet(&svcsl, &log, &cfg)
+		ctrl := control.NewCtrlHTTP(&svcsl)
+		hsrv := adapterHTTP.NewHTTPServerNet(&ctrl, &log, &cfg)
 		_ = hsrv.Run()
 		he := httpexpect.WithConfig(httpexpect.Config{
 			Client: &http.Client{
@@ -48,7 +50,7 @@ func TestHTTPServer(t *testing.T) {
 			JSON().Object().HasValue("IsResp", true).HasValue("Mode", "check").HasValue("Body", "pong")
 		he.GET("/check/abs").Expect().Status(http.StatusNotFound).ContentType("application/json", "utf-8").
 			JSON().Object().HasValue("IsResp", true).HasValue("Mode", "check").HasValue("Body", "404 Not Found")
-		he.GET("/check/panic").Expect().Status(http.StatusInternalServerError)
+		asrt.Panics(func() { he.GET("/check/panic").Expect().Status(http.StatusInternalServerError) }, "HTTP Handle not panic")
 	})
 
 	t.Run("HTTPFast", func(t *testing.T) {
@@ -63,7 +65,8 @@ func TestHTTPServer(t *testing.T) {
 		db := adapterDB.NewDBMock(&cfg)
 		hcli := adapterHTTP.NewHTTPClientMock()
 		svcsl := service.NewSvcShortLink(&db, &hcli, &log)
-		hsrv := adapterHTTP.NewHTTPServerFast(&svcsl, &log, &cfg)
+		ctrl := control.NewCtrlHTTP(&svcsl)
+		hsrv := adapterHTTP.NewHTTPServerFast(&ctrl, &log, &cfg)
 		_ = hsrv.Run()
 		he := httpexpect.WithConfig(httpexpect.Config{
 			Client: &http.Client{
