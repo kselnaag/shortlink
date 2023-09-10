@@ -54,9 +54,6 @@
               }
             }
           },
-          "400": {
-            "description": "Bad request"
-          },
           "404": {
             "description": "Page not found"
           },
@@ -82,6 +79,9 @@
                 }
               }
             }
+          },
+          "500": {
+            "description": "Internal server error"
           }
         }
       }
@@ -102,6 +102,9 @@
                 }
               }
             }
+          },
+          "500": {
+            "description": "Internal server error"
           }
         }
       }
@@ -142,6 +145,9 @@
                 }
               }
             }
+          },
+          "500": {
+            "description": "Internal server error"
           }
         }
       }
@@ -162,6 +168,9 @@
                 }
               }
             }
+          },
+          "500": {
+            "description": "Internal server error"
           }
         }
       }
@@ -183,11 +192,8 @@
               }
             }
           },
-          "400": {
-            "description": "Bad request"
-          },
           "404": {
-            "description": "Page not found"
+            "description": "Not found"
           },
           "500": {
             "description": "Internal server error"
@@ -225,8 +231,11 @@
               }
             }
           },
-          "400": {
-            "description": "Bad request"
+          "404": {
+            "description": "Not found"
+          },
+          "500": {
+            "description": "Internal server error"
           }
         }
       }
@@ -258,11 +267,8 @@
               }
             }
           },
-          "400": {
-            "description": "Bad request"
-          },
           "404": {
-            "description": "Page not found"
+            "description": "Not found"
           },
           "500": {
             "description": "Internal server error"
@@ -297,11 +303,8 @@
               }
             }
           },
-          "400": {
-            "description": "Bad request"
-          },
           "404": {
-            "description": "Page not found"
+            "description": "Not found"
           },
           "500": {
             "description": "Internal server error"
@@ -336,8 +339,8 @@
               }
             }
           },
-          "400": {
-            "description": "Bad request"
+          "404": {
+            "description": "Not found"
           },
           "500": {
             "description": "Internal server error"
