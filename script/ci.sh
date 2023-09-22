@@ -42,6 +42,7 @@ function build {
 function run {
     go build -o ./bin/shortlink ./cmd/main.go
     ./bin/shortlink
+    exit 0
 }
 
 function start {
@@ -81,7 +82,6 @@ if [[ $# -ne 1 ]]; then info; else
         ;;
     "run")
         run
-        exit 0
         ;;
     "start")
         build
@@ -111,6 +111,5 @@ if [[ $# -ne 1 ]]; then info; else
         ;;
     esac
 fi
-
 
 echo -e "\n>>_ChecksSuccessfull_<<\n"
