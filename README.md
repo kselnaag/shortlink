@@ -57,13 +57,14 @@ We choose Monolith as system arch pattern and Rich Domain Model as software arch
 ## **💡Solution notes**
 <img style="margin-right: 100px; transform: rotate(03.7deg);" align="right" width="14%" alt="#Prod" src="./asset/production.png"/>
 
-- hexagonal arch
+- layering and hexagonal arch
 - standart go project layout (more or less)
 - pre-commit hooks and github actions (CI) + docker-compose (CD) + minikube (prod🙃)
 - tests with mocks included
-- HTTPfast or HTTPnet server
-- in-memory tarantool integration
-- OpenAPI Swagger docs
+- HTTPfast or HTTPnet server adapters
+- logZero, logSlog or logFprintf logger adapters
+- postgreSQL, redis, mongoDB or tarantool db adapters
+- OpenAPI Swagger docs `http://localhost:8080/oapi`
 
 ## **🛠️Libs and tools**
 <img style="margin-right: 0px;" align="right" width="50%" alt="#DOMAIN" src="./asset/domain.png"/>
@@ -82,15 +83,16 @@ We choose Monolith as system arch pattern and Rich Domain Model as software arch
   - golang v1.21
   - golangci-lint v1.51.2
   - curl v7.68.0
-  - docker + docker-compose
+  - docker
   - minikube
 
 ## **⚙️HowTo**
 <img style="margin-right: 0px;" align="right" width="30%" alt="#CICD" src="./asset/cicd.png"/>
 
-- check if `docker` and `docker-compose` has been installed
-- clone the project
-- run everything with `./script/run.sh`
+- check if `docker` has been installed
+- clone the project `git clone https://github.com/kselnaag/shortlink`
+- dive into a folder `cd shortlink`
+- run everything with `./script/ci.sh run`
 - go to `http://localhost:8080` in your browser and try it
 
 ## **🦋The beauty is like this and nothing more**
