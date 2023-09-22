@@ -6,6 +6,6 @@ type ILog interface {
 	LogInfo(format string, v ...any)
 	LogWarn(format string, v ...any)
 	LogError(err error, format string, v ...any)
-	LogFatal(format string, v ...any)
-	LogPanic(format string, v ...any)
+	LogFatal(err error, format string, v ...any)
+	LogPanic(err error, format string, v ...any)
 }

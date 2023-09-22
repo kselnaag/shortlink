@@ -20,6 +20,7 @@ func NewCfgEnv(cfgname string) types.CfgEnv {
 		SL_HTTP_PORT: ":8080",
 		SL_DB_IP:     "localhost",
 		SL_DB_PORT:   ":3301",
+		SL_LOG_LEVEL: "info",
 	}
 	if ip, err := ipFromInterfaces(); err != nil {
 		logMessage("error", cfg.SL_HTTP_IP+":"+cfg.SL_HTTP_PORT, cfg.SL_APP_NAME, err.Error(), "Can not get IP interface")
