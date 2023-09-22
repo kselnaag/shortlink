@@ -20,7 +20,7 @@ type App struct {
 
 func NewApp() App {
 	cfg := adapterCfg.NewCfgEnv("shortlink.env")
-	log := adapterLog.NewLogZero(&cfg)
+	log := adapterLog.NewLogFprintf(&cfg)
 	db := adapterDB.NewDBMock(&cfg)
 	hcli := adapterHTTP.NewHTTPClientNet()
 	svcsl := service.NewSvcShortLink(&db, &hcli, &log)

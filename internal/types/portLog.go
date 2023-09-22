@@ -9,3 +9,14 @@ type ILog interface {
 	LogFatal(err error, format string, v ...any)
 	LogPanic(err error, format string, v ...any)
 }
+
+const (
+	LevelTraceValue    = "trace"
+	LevelDebugValue    = "debug"
+	LevelInfoValue     = "info"
+	LevelWarnValue     = "warn"
+	LevelErrorValue    = "error"
+	LevelFatalValue    = "fatal"
+	LevelPanicValue    = "panic"
+	LevelDisabledValue = "disabled"
+)

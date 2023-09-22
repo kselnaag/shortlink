@@ -31,9 +31,9 @@ func TestLog(t *testing.T) {
 		log.LogDebug("Hello, DEBUG")
 		log.LogInfo("Hello, INFO")
 		log.LogWarn("Hello, WARN")
-		log.LogError(errors.New("test error"), "Hello, ERROR")
-		log.LogFatal(errors.New("fatal error"), "Hello, FATAL")
-		log.LogPanic(errors.New("panic error"), "Hello, PANIC")
+		log.LogError(errors.New("test_error"), "Hello,error")
+		log.LogFatal(errors.New("fatal_error"), "Hello,fatal")
+		log.LogPanic(errors.New("panic_error"), "Hello,PANIC")
 	})
 
 	t.Run("LogFprintf", func(t *testing.T) {
@@ -42,20 +42,19 @@ func TestLog(t *testing.T) {
 		log.LogDebug("Hello, DEBUG")
 		log.LogInfo("Hello, INFO")
 		log.LogWarn("Hello, WARN")
-		log.LogError(errors.New("test error"), "Hello, ERROR")
-		log.LogFatal(errors.New("fatal error"), "Hello, FATAL")
-		log.LogPanic(errors.New("panic error"), "Hello, PANIC")
+		log.LogError(errors.New("test_error"), "Hello,error")
+		log.LogFatal(errors.New("fatal_error"), "Hello,fatal")
+		log.LogPanic(errors.New("panic_error"), "Hello,panic")
 	})
 
-	/* 	t.Run("LogSlog", func(t *testing.T) {
+	t.Run("LogSlog", func(t *testing.T) {
 		log := adapterLog.NewLogSlog(&cfg)
 		log.LogTrace("Hello, TRACE")
 		log.LogDebug("Hello, DEBUG")
 		log.LogInfo("Hello, INFO")
 		log.LogWarn("Hello, WARN")
-		log.LogError(errors.New("test error"), "Hello, ERROR")
-		log.LogFatal(errors.New("fatal error"), "Hello, FATAL")
-		log.LogPanic(errors.New("panic error"), "Hello, PANIC")
-	}) */
-
+		log.LogError(errors.New("test_error"), "Hello,error")
+		log.LogFatal(errors.New("fatal_error"), "Hello,fatal")
+		log.LogPanic(errors.New("panic_error"), "Hello,panic")
+	})
 }
