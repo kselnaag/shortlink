@@ -1,4 +1,4 @@
-package a9n
+package app
 
 import (
 	"os"
@@ -7,18 +7,18 @@ import (
 	adapterHTTP "shortlink/internal/adapter/http"
 	adapterLog "shortlink/internal/adapter/log"
 	"shortlink/internal/control"
-	"shortlink/internal/i7e"
 	"shortlink/internal/service"
+	"shortlink/internal/types"
 )
 
-type A9n struct {
-	hsrv i7e.IHTTPServer
-	db   i7e.Idb
-	log  i7e.ILog
-	cfg  *i7e.CfgEnv
+type App struct {
+	hsrv types.IHTTPServer
+	db   types.Idb
+	log  types.ILog
+	cfg  *types.CfgEnv
 }
 
-func NewA9n() A9n {
+func NewApp() App {
 	cfg := adapterCfg.NewCfgEnv("shortlink.env")
 	log := adapterLog.NewLogZero(&cfg)
 	db := adapterDB.NewDBMock(&cfg)
@@ -26,7 +26,7 @@ func NewA9n() A9n {
 	svcsl := service.NewSvcShortLink(&db, &hcli, &log)
 	ctrl := control.NewCtrlHTTP(&svcsl)
 	hsrv := adapterHTTP.NewHTTPServerNet(&ctrl, &log, &cfg)
-	return A9n{
+	return App{
 		hsrv: &hsrv,
 		db:   &db,
 		log:  &log,
@@ -34,7 +34,7 @@ func NewA9n() A9n {
 	}
 }
 
-func (a *A9n) Start() func(err error) {
+func (a *App) Start() func(err error) {
 	// dbShutdown := db.Connect(&log, &cfg)
 	hsrvShutdown := a.hsrv.Run()
 	a.log.LogInfo(a.cfg.SL_APP_NAME + " app started")

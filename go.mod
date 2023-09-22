@@ -7,7 +7,7 @@ replace (
 	shortlink/internal/adapter/log => ./internal/adapter/log
 	shortlink/internal/adapter/db => ./internal/adapter/db
 	shortlink/internal/adapter/http => ./internal/adapter/http	
-	shortlink/internal/i7e => ./internal/i7e
+	shortlink/internal/types => ./internal/types
 	shortlink/internal/control => ./internal/control
 	shortlink/internal/service => ./internal/service
 	shortlink/internal/model => ./internal/model

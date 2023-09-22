@@ -5,7 +5,7 @@ import (
 	"net"
 	"os"
 	"path/filepath"
-	"shortlink/internal/i7e"
+	"shortlink/internal/types"
 	"strings"
 	"time"
 
@@ -13,8 +13,8 @@ import (
 	"github.com/joho/godotenv"
 )
 
-func NewCfgEnv(cfgname string) i7e.CfgEnv {
-	cfg := i7e.CfgEnv{ // default env
+func NewCfgEnv(cfgname string) types.CfgEnv {
+	cfg := types.CfgEnv{ // default env
 		SL_APP_NAME:  "shortlink",
 		SL_HTTP_IP:   "localhost",
 		SL_HTTP_PORT: ":8080",
@@ -61,5 +61,5 @@ func ipFromInterfaces() (string, error) {
 
 func logMessage(lvl, host, svc, err, mess string) {
 	timenow := time.Now().Format(time.RFC3339Nano)
-	fmt.Fprintf(os.Stderr, "{\"L\":\"%s\",\"T\":\"%s\",\"H\":\"%s\",\"S\":\"%s\",\"E\":\"%s\",\"M\":\"%s\"}\n", lvl, timenow, host, svc, err, mess)
+	fmt.Fprintf(os.Stderr, "{\"L\":\"%s\",\"T\":\"%s\",\"H\":\"%s\",\"S\":\"%s\",\"M\":\"%s\",\"E\":\"%s\"}\n", lvl, timenow, host, svc, mess, err)
 }

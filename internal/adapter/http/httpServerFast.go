@@ -4,9 +4,10 @@ import (
 	"embed"
 	"net/http"
 	"os"
-	"shortlink/internal/i7e"
 	"shortlink/web"
 	"time"
+
+	"shortlink/internal/types"
 
 	"github.com/gofiber/fiber/v2"
 	"github.com/gofiber/fiber/v2/middleware/filesystem"
@@ -14,17 +15,17 @@ import (
 	rec "github.com/gofiber/fiber/v2/middleware/recover"
 )
 
-var _ i7e.IHTTPServer = (*HTTPServerFast)(nil)
+var _ types.IHTTPServer = (*HTTPServerFast)(nil)
 
 type HTTPServerFast struct {
-	ctrl i7e.ICtrlHTTP
+	ctrl types.ICtrlHTTP
 	hsrv *fiber.App
 	fs   embed.FS
-	log  i7e.ILog
-	cfg  *i7e.CfgEnv
+	log  types.ILog
+	cfg  *types.CfgEnv
 }
 
-func NewHTTPServerFast(ctrl i7e.ICtrlHTTP, log i7e.ILog, cfg *i7e.CfgEnv) HTTPServerFast {
+func NewHTTPServerFast(ctrl types.ICtrlHTTP, log types.ILog, cfg *types.CfgEnv) HTTPServerFast {
 	fiberconf := fiber.Config{
 		Prefork:           false,
 		CaseSensitive:     true,
@@ -45,11 +46,6 @@ func NewHTTPServerFast(ctrl i7e.ICtrlHTTP, log i7e.ILog, cfg *i7e.CfgEnv) HTTPSe
 }
 
 func (hfs *HTTPServerFast) handlers() {
-	type Message struct {
-		IsResp bool
-		Mode   string
-		Body   string
-	}
 	headers := func(c *fiber.Ctx) {
 		c.Set("Cache-Control", "no-cache")
 	}
@@ -63,29 +59,29 @@ func (hfs *HTTPServerFast) handlers() {
 
 	hfs.hsrv.Get("/check/ping", func(c *fiber.Ctx) error {
 		headers(c)
-		return c.Status(fiber.StatusOK).JSON(Message{true, "check", "pong"})
+		return c.Status(fiber.StatusOK).JSON(types.HTTPMessage{IsResp: true, Mode: "check", Body: "pong"})
 	})
 	hfs.hsrv.Get("/check/abs", func(c *fiber.Ctx) error {
 		headers(c)
-		return c.Status(fiber.StatusNotFound).JSON(Message{true, "check", "404 Not Found"})
+		return c.Status(fiber.StatusNotFound).JSON(types.HTTPMessage{IsResp: true, Mode: "check", Body: "404 Not Found"})
 	})
 	hfs.hsrv.Get("/check/panic", func(c *fiber.Ctx) error {
 		headers(c)
 		panic(`{IsResp:true,Mode:check,Body:panic}`)
-		// return c.Status(fiber.StatusInternalServerError).JSON(Message{true, "check", "panic"})
+		// return c.Status(fiber.StatusInternalServerError).JSON(HTTPMessage{IsResp:true, Mode:"check", Body:"panic"})
 	})
 	hfs.hsrv.Get("/check/close", func(c *fiber.Ctx) error {
 		headers(c)
 		hfs.appClose()
-		return c.Status(fiber.StatusOK).JSON(Message{true, "check", "server close"})
+		return c.Status(fiber.StatusOK).JSON(types.HTTPMessage{IsResp: true, Mode: "check", Body: "server close"})
 	})
 	hfs.hsrv.Get("/check/allpairs", func(c *fiber.Ctx) error {
 		headers(c)
 		all, err := hfs.ctrl.AllPairs()
 		if err != nil {
-			return c.Status(fiber.StatusNotFound).JSON(Message{true, "404", err.Error()})
+			return c.Status(fiber.StatusNotFound).JSON(types.HTTPMessage{IsResp: true, Mode: "404", Body: err.Error()})
 		}
-		return c.Status(fiber.StatusOK).JSON(Message{true, "200", all})
+		return c.Status(fiber.StatusOK).JSON(types.HTTPMessage{IsResp: true, Mode: "200", Body: all})
 	})
 	////
 	hfs.hsrv.Post("/long", func(c *fiber.Ctx) error { // link short from link long
@@ -93,34 +89,34 @@ func (hfs *HTTPServerFast) handlers() {
 		body := c.Body()
 		short, err := hfs.ctrl.Long(body)
 		if err != nil {
-			return c.Status(fiber.StatusNotFound).JSON(Message{true, "404", err.Error()})
+			return c.Status(fiber.StatusNotFound).JSON(types.HTTPMessage{IsResp: true, Mode: "404", Body: err.Error()})
 		}
-		return c.Status(fiber.StatusPartialContent).JSON(Message{true, "206", short})
+		return c.Status(fiber.StatusPartialContent).JSON(types.HTTPMessage{IsResp: true, Mode: "206", Body: short})
 	})
 	hfs.hsrv.Post("/short", func(c *fiber.Ctx) error { // link long from link short
 		headers(c)
 		body := c.Body()
 		long, err := hfs.ctrl.Short(body)
 		if err != nil {
-			return c.Status(fiber.StatusNotFound).JSON(Message{true, "404", err.Error()})
+			return c.Status(fiber.StatusNotFound).JSON(types.HTTPMessage{IsResp: true, Mode: "404", Body: err.Error()})
 		}
-		return c.Status(fiber.StatusPartialContent).JSON(Message{true, "206", long})
+		return c.Status(fiber.StatusPartialContent).JSON(types.HTTPMessage{IsResp: true, Mode: "206", Body: long})
 	})
 	hfs.hsrv.Post("/save", func(c *fiber.Ctx) error { // save link pair
 		headers(c)
 		body := c.Body()
 		short, err := hfs.ctrl.Save(body)
 		if err != nil {
-			return c.Status(fiber.StatusNotFound).JSON(Message{true, "404", err.Error()})
+			return c.Status(fiber.StatusNotFound).JSON(types.HTTPMessage{IsResp: true, Mode: "404", Body: err.Error()})
 		}
-		return c.Status(fiber.StatusCreated).JSON(Message{true, "201", short})
+		return c.Status(fiber.StatusCreated).JSON(types.HTTPMessage{IsResp: true, Mode: "201", Body: short})
 	})
 	hfs.hsrv.Get("/r/:hash", func(c *fiber.Ctx) error { // redirect
 		headers(c)
 		hash := c.Params("hash")
 		long, err := hfs.ctrl.Hash(hash)
 		if err != nil {
-			return c.Status(fiber.StatusNotFound).JSON(Message{true, "404", err.Error()})
+			return c.Status(fiber.StatusNotFound).JSON(types.HTTPMessage{IsResp: true, Mode: "404", Body: err.Error()})
 		}
 		return c.Redirect(long)
 	})

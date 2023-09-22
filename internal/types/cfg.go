@@ -1,4 +1,4 @@
-package i7e
+package types
 
 type CfgEnv struct {
 	SL_APP_NAME  string `env:"SL_APP_NAME"`

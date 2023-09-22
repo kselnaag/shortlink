@@ -1,19 +1,19 @@
 package adapterDB
 
 import (
-	"shortlink/internal/i7e"
 	"shortlink/internal/model"
+	"shortlink/internal/types"
 	"sync"
 )
 
-var _ i7e.Idb = (*DBMock)(nil)
+var _ types.Idb = (*DBMock)(nil)
 
 type DBMock struct {
-	cfg *i7e.CfgEnv
+	cfg *types.CfgEnv
 	db  *sync.Map
 }
 
-func NewDBMock(cfg *i7e.CfgEnv) DBMock {
+func NewDBMock(cfg *types.CfgEnv) DBMock {
 	dbmock := sync.Map{}
 	dbmock.Store("5clp60", "http://lib.ru")
 	dbmock.Store("dhiu79", "http://google.ru")

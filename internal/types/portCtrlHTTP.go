@@ -1,4 +1,4 @@
-package i7e
+package types
 
 type ICtrlHTTP interface {
 	AllPairs() (string, error)

@@ -1,4 +1,4 @@
-package i7e
+package types
 
 import "shortlink/internal/model"
 

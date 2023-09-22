@@ -1,4 +1,4 @@
-package i7e
+package types
 
 type IHTTPClient interface {
 	Get(link string) (int, error)
@@ -6,4 +6,10 @@ type IHTTPClient interface {
 
 type IHTTPServer interface {
 	Run() func(e error)
+}
+
+type HTTPMessage struct {
+	IsResp bool
+	Mode   string
+	Body   string
 }

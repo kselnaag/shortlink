@@ -4,24 +4,18 @@ import (
 	"encoding/json"
 	"errors"
 	"regexp"
-	"shortlink/internal/i7e"
+	"shortlink/internal/types"
 	"strings"
 )
 
-var _ i7e.ICtrlHTTP = (*CtrlHTTP)(nil)
-
-type Message struct {
-	IsResp bool
-	Mode   string
-	Body   string
-}
+var _ types.ICtrlHTTP = (*CtrlHTTP)(nil)
 
 type CtrlHTTP struct {
-	servSL     i7e.ISvcShortLink
+	servSL     types.ISvcShortLink
 	ishashfunc func(s string) bool
 }
 
-func NewCtrlHTTP(servSL i7e.ISvcShortLink) CtrlHTTP {
+func NewCtrlHTTP(servSL types.ISvcShortLink) CtrlHTTP {
 	isHash := regexp.MustCompile(`^[a-z0-9]{6}$`).MatchString
 	return CtrlHTTP{
 		servSL:     servSL,
@@ -39,7 +33,7 @@ func (ctrl *CtrlHTTP) AllPairs() (string, error) {
 }
 
 func (ctrl *CtrlHTTP) Long(body []byte) (string, error) {
-	req := Message{}
+	req := types.HTTPMessage{}
 	if err := json.Unmarshal(body, &req); (err != nil) || (req.IsResp) || (req.Body == "") {
 		return "", errors.New(string(body))
 	}
@@ -51,7 +45,7 @@ func (ctrl *CtrlHTTP) Long(body []byte) (string, error) {
 }
 
 func (ctrl *CtrlHTTP) Short(body []byte) (string, error) {
-	req := Message{}
+	req := types.HTTPMessage{}
 	if err := json.Unmarshal(body, &req); (err != nil) || (req.IsResp) || (!ctrl.ishashfunc(req.Body)) {
 		return "", errors.New(string(body))
 	}
@@ -63,7 +57,7 @@ func (ctrl *CtrlHTTP) Short(body []byte) (string, error) {
 }
 
 func (ctrl *CtrlHTTP) Save(body []byte) (string, error) {
-	req := Message{}
+	req := types.HTTPMessage{}
 	if err := json.Unmarshal(body, &req); (err != nil) || (req.IsResp) || (req.Body == "") {
 		return "", errors.New(string(body))
 	}

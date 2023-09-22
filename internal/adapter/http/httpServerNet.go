@@ -7,7 +7,7 @@ import (
 	"io/fs"
 	"net/http"
 	"os"
-	"shortlink/internal/i7e"
+	"shortlink/internal/types"
 	"shortlink/web"
 	"strings"
 	"time"
@@ -16,17 +16,17 @@ import (
 	"github.com/gin-gonic/gin"
 )
 
-var _ i7e.IHTTPServer = (*HTTPServerNet)(nil)
+var _ types.IHTTPServer = (*HTTPServerNet)(nil)
 
 type HTTPServerNet struct {
-	ctrl i7e.ICtrlHTTP
+	ctrl types.ICtrlHTTP
 	hsrv *gin.Engine
 	fs   embed.FS
-	log  i7e.ILog
-	cfg  *i7e.CfgEnv
+	log  types.ILog
+	cfg  *types.CfgEnv
 }
 
-func NewHTTPServerNet(ctrl i7e.ICtrlHTTP, log i7e.ILog, cfg *i7e.CfgEnv) HTTPServerNet {
+func NewHTTPServerNet(ctrl types.ICtrlHTTP, log types.ILog, cfg *types.CfgEnv) HTTPServerNet {
 	return HTTPServerNet{
 		ctrl: ctrl,
 		hsrv: gin.New(),
@@ -37,11 +37,6 @@ func NewHTTPServerNet(ctrl i7e.ICtrlHTTP, log i7e.ILog, cfg *i7e.CfgEnv) HTTPSer
 }
 
 func (hns *HTTPServerNet) handlers() {
-	type Message struct {
-		IsResp bool
-		Mode   string
-		Body   string
-	}
 	headers := func(c *gin.Context) {
 		c.Header("Cache-Control", "no-cache")
 	}
@@ -50,80 +45,80 @@ func (hns *HTTPServerNet) handlers() {
 
 	hns.hsrv.GET("/check/ping", func(c *gin.Context) { // checks
 		headers(c)
-		c.JSON(http.StatusOK, Message{true, "check", "pong"})
+		c.JSON(http.StatusOK, types.HTTPMessage{IsResp: true, Mode: "check", Body: "pong"})
 	})
 	hns.hsrv.GET("/check/abs", func(c *gin.Context) {
 		headers(c)
-		c.JSON(http.StatusNotFound, Message{true, "check", "404 Not Found"})
+		c.JSON(http.StatusNotFound, types.HTTPMessage{IsResp: true, Mode: "check", Body: "404 Not Found"})
 	})
 	hns.hsrv.GET("/check/panic", func(c *gin.Context) {
 		headers(c)
 		panic(`{IsResp:true,Mode:check,Body:panic}`)
-		// c.JSON(http.StatusInternalServerError, Message{true, "check", "panic"})
+		// c.JSON(http.StatusInternalServerError, HTTPMessage{true, "check", "panic"})
 	})
 	hns.hsrv.GET("/check/close", func(c *gin.Context) {
 		headers(c)
 		hns.appClose()
-		c.JSON(http.StatusOK, Message{true, "check", "server close"})
+		c.JSON(http.StatusOK, types.HTTPMessage{IsResp: true, Mode: "check", Body: "server close"})
 	})
 	hns.hsrv.GET("/check/allpairs", func(c *gin.Context) {
 		headers(c)
 		all, err := hns.ctrl.AllPairs()
 		if err != nil {
-			c.JSON(http.StatusNotFound, Message{true, "404", err.Error()})
+			c.JSON(http.StatusNotFound, types.HTTPMessage{IsResp: true, Mode: "404", Body: err.Error()})
 			return
 		}
-		c.JSON(http.StatusOK, Message{true, "200", all})
+		c.JSON(http.StatusOK, types.HTTPMessage{IsResp: true, Mode: "200", Body: all})
 	})
 
 	hns.hsrv.POST("/long", func(c *gin.Context) { // link short from link long
 		headers(c)
 		body, readerr := io.ReadAll(c.Request.Body)
 		if readerr != nil {
-			c.JSON(http.StatusNotFound, Message{true, "404", readerr.Error()})
+			c.JSON(http.StatusNotFound, types.HTTPMessage{IsResp: true, Mode: "404", Body: readerr.Error()})
 			return
 		}
 		short, err := hns.ctrl.Long(body)
 		if err != nil {
-			c.JSON(http.StatusNotFound, Message{true, "404", err.Error()})
+			c.JSON(http.StatusNotFound, types.HTTPMessage{IsResp: true, Mode: "404", Body: err.Error()})
 			return
 		}
-		c.JSON(http.StatusPartialContent, Message{true, "206", short})
+		c.JSON(http.StatusPartialContent, types.HTTPMessage{IsResp: true, Mode: "206", Body: short})
 	})
 	hns.hsrv.POST("/short", func(c *gin.Context) { // link long from link short
 		headers(c)
 		body, readerr := io.ReadAll(c.Request.Body)
 		if readerr != nil {
-			c.JSON(http.StatusNotFound, Message{true, "404", readerr.Error()})
+			c.JSON(http.StatusNotFound, types.HTTPMessage{IsResp: true, Mode: "404", Body: readerr.Error()})
 			return
 		}
 		long, err := hns.ctrl.Short(body)
 		if err != nil {
-			c.JSON(http.StatusNotFound, Message{true, "404", err.Error()})
+			c.JSON(http.StatusNotFound, types.HTTPMessage{IsResp: true, Mode: "404", Body: err.Error()})
 			return
 		}
-		c.JSON(http.StatusPartialContent, Message{true, "206", long})
+		c.JSON(http.StatusPartialContent, types.HTTPMessage{IsResp: true, Mode: "206", Body: long})
 	})
 	hns.hsrv.POST("/save", func(c *gin.Context) { // save link pair
 		headers(c)
 		body, readerr := io.ReadAll(c.Request.Body)
 		if readerr != nil {
-			c.JSON(http.StatusNotFound, Message{true, "404", readerr.Error()})
+			c.JSON(http.StatusNotFound, types.HTTPMessage{IsResp: true, Mode: "404", Body: readerr.Error()})
 			return
 		}
 		short, err := hns.ctrl.Save(body)
 		if err != nil {
-			c.JSON(http.StatusNotFound, Message{true, "404", err.Error()})
+			c.JSON(http.StatusNotFound, types.HTTPMessage{IsResp: true, Mode: "404", Body: err.Error()})
 			return
 		}
-		c.JSON(http.StatusCreated, Message{true, "201", short})
+		c.JSON(http.StatusCreated, types.HTTPMessage{IsResp: true, Mode: "201", Body: short})
 	})
 	hns.hsrv.GET("/r/:hash", func(c *gin.Context) { // redirect
 		headers(c)
 		hash := c.Param("hash")
 		long, err := hns.ctrl.Hash(hash)
 		if err != nil {
-			c.JSON(http.StatusNotFound, Message{true, "404", err.Error()})
+			c.JSON(http.StatusNotFound, types.HTTPMessage{IsResp: true, Mode: "404", Body: err.Error()})
 			return
 		}
 		c.Redirect(http.StatusMovedPermanently, long)
@@ -187,7 +182,7 @@ type embedFileSystem struct {
 	http.FileSystem
 }
 
-func NewEmbedFolder(fsEmbed embed.FS, targetPath string, log i7e.ILog) static.ServeFileSystem {
+func NewEmbedFolder(fsEmbed embed.FS, targetPath string, log types.ILog) static.ServeFileSystem {
 	subFS, err := fs.Sub(fsEmbed, targetPath)
 	if err != nil {
 		log.LogError(err, "NewEmbedFolder(): embedFS error")

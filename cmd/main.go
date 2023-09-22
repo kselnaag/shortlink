@@ -4,7 +4,7 @@ import (
 	"os"
 	"os/signal"
 	"runtime"
-	a9n "shortlink/internal"
+	app "shortlink/internal"
 	"syscall"
 )
 
@@ -13,12 +13,12 @@ func main() {
 	// debug.SetGCPercent(100) // GOGC=100
 	// debug.SetMemoryLimit(2 831 155 200) // GOMEMLIMIT=2700MiB
 
-	app := a9n.NewA9n()
-	appStop := app.Start()
+	myApp := app.NewApp()
+	myAppStop := myApp.Start()
 
 	defer func() {
 		if err := recover(); err != nil {
-			appStop(err.(error))
+			myAppStop(err.(error))
 		}
 	}()
 
@@ -26,5 +26,5 @@ func main() {
 	signal.Notify(sig, syscall.SIGINT, syscall.SIGTERM, syscall.SIGHUP, syscall.SIGQUIT)
 	<-sig
 
-	appStop(nil)
+	myAppStop(nil)
 }
