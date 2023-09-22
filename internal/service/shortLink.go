@@ -43,7 +43,7 @@ func (ssl *SvcShortLink) GetLinkLongFromLinkShort(linkshort string) model.LinkPa
 	if lp.IsValid() {
 		return lp
 	}
-	ssl.log.LogWarn("GetLinkLongFromLinkShort(): Link pair is not valid")
+	ssl.log.LogDebug("GetLinkLongFromLinkShort(): Link pair is not valid")
 	return model.LinkPair{}
 }
 
@@ -53,7 +53,7 @@ func (ssl *SvcShortLink) GetLinkShortFromLinkLong(linklong string) model.LinkPai
 	if lp.IsValid() {
 		return lp
 	}
-	ssl.log.LogWarn("GetLinkShortFromLinkLong(): Link pair is not valid")
+	ssl.log.LogDebug("GetLinkShortFromLinkLong(): Link pair is not valid")
 	return model.LinkPair{}
 }
 
@@ -61,11 +61,11 @@ func (ssl *SvcShortLink) SetLinkPairFromLinkLong(linklong string) model.LinkPair
 	empty := model.LinkPair{}
 	newLP := model.NewLinkPair(linklong) // make pair
 	if !newLP.IsValid() {
-		ssl.log.LogWarn("SetLinkPairFromLinkLong(): Link pair is not valid")
+		ssl.log.LogDebug("SetLinkPairFromLinkLong(): Link pair is not valid")
 		return empty
 	}
 	if !ssl.IsLinkLongHTTPValid(newLP.Long()) { // check http valid
-		ssl.log.LogWarn("SetLinkPairFromLinkLong(): Link Long is not HTTP valid")
+		ssl.log.LogDebug("SetLinkPairFromLinkLong(): Link Long is not HTTP valid")
 		return empty
 	}
 	dbsearchedLP := ssl.GetLinkLongFromLinkShort(newLP.Short()) // search in db
@@ -73,7 +73,7 @@ func (ssl *SvcShortLink) SetLinkPairFromLinkLong(linklong string) model.LinkPair
 		return newLP
 	}
 	if !ssl.db.SaveLinkPair(newLP) { // save in db
-		ssl.log.LogWarn("SetLinkPairFromLinkLong(): Link pair is not saved in db")
+		ssl.log.LogDebug("SetLinkPairFromLinkLong(): Link pair is not saved in db")
 		return empty
 	}
 	return newLP
@@ -82,13 +82,13 @@ func (ssl *SvcShortLink) SetLinkPairFromLinkLong(linklong string) model.LinkPair
 func (ssl *SvcShortLink) IsLinkLongHTTPValid(linklong string) bool {
 	resp, err := ssl.hcli.Get(linklong)
 	if err != nil {
-		ssl.log.LogError(err, "IsLinkLongHttpValid(): http client GET error")
+		ssl.log.LogDebug("IsLinkLongHttpValid(): http client GET error: %s", err.Error())
 		return false
 	}
 	if resp == http.StatusOK {
 		return true
 	}
-	ssl.log.LogWarn("IsLinkLongHttpValid(): http client GET is not OK: %d", resp)
+	ssl.log.LogDebug("IsLinkLongHttpValid(): http client GET is not OK: %d", resp)
 	return false
 }
 
