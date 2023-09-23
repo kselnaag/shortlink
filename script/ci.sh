@@ -4,13 +4,15 @@ SERVERPID=0
 RESPCODE=0
 
 function info {
-    echo -e "\nCI/CD COMMANDS: style lint test build run start checknolint check"
-    echo -e "EXAMLPE:        ./script/cicd.sh run\n"
+    echo -e "
+CI COMMANDS: style lint test build run start checknolint check
+EXAMLPE:     ./script/cicd.sh run
+"
     exit 0
 }
 
 function checksBreaked {
-    echo -e "\n>>_ChecksBreaked_<<"
+    echo -e "\n>>_ChecksBreaked_<<\n"
     exit 1 
 }
 
@@ -60,7 +62,7 @@ function healthCheck {
 }
 
 function stop {
-    echo -e "\n>>_ServiceClose_<<\n"
+    echo -e "\n>>_ServiceClose_<<"
     kill $SERVERPID
     if [[ $? -gt 0 ]]; then checksBreaked; fi
     sleep 1
