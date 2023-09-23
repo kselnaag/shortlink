@@ -1,6 +1,7 @@
 package adapterLog
 
 import (
+	"errors"
 	"os"
 	T "shortlink/internal/apptype"
 	"time"
@@ -52,21 +53,24 @@ func NewLogZero(cfg *T.CfgEnv) LogZero {
 		logger: newlogger,
 	}
 }
+func blankerr() error {
+	return errors.New("")
+}
 
 func (l *LogZero) LogTrace(format string, v ...any) {
-	l.logger.Trace().Msgf(format, v...)
+	l.logger.Trace().Err(blankerr()).Msgf(format, v...)
 }
 
 func (l *LogZero) LogDebug(format string, v ...any) {
-	l.logger.Debug().Msgf(format, v...)
+	l.logger.Debug().Err(blankerr()).Msgf(format, v...)
 }
 
 func (l *LogZero) LogInfo(format string, v ...any) {
-	l.logger.Info().Msgf(format, v...)
+	l.logger.Info().Err(blankerr()).Msgf(format, v...)
 }
 
 func (l *LogZero) LogWarn(format string, v ...any) {
-	l.logger.Warn().Msgf(format, v...)
+	l.logger.Warn().Err(blankerr()).Msgf(format, v...)
 }
 
 func (l *LogZero) LogError(err error, format string, v ...any) {
