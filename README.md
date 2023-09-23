@@ -55,7 +55,7 @@ We choose Monolith as system arch pattern and Rich Domain Model as software arch
   - check if pair is valid
 
 ## **💡Solution notes**
-<img style="margin-right: 100px; transform: rotate(03.7deg);" align="right" width="14%" alt="#Prod" src="./asset/production.png"/>
+<img style="margin-right: 100px;" align="right" width="14%" alt="#Prod" src="./asset/production.png"/>
 
 - layering and hexagonal arch
 - standart go project layout (more or less)

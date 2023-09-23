@@ -6,14 +6,14 @@ import (
 	"github.com/stretchr/testify/assert"
 )
 
-func TestDBTT(t *testing.T) {
+func TestDB(t *testing.T) {
 	asrt := assert.New(t)
 	defer func() {
 		err := recover()
 		asrt.Nil(err)
 	}()
 
-	t.Run("dbTT", func(t *testing.T) {
+	t.Run("dbTarantool", func(t *testing.T) {
 		/* 		const (
 		   			u32 uint32 = 1<<32 - 1
 		   			i32 int32  = 1<<31 - 1

@@ -10,8 +10,8 @@ import (
 
 func main() {
 	runtime.GOMAXPROCS(1) // GOMAXPROCS=1
-	// debug.SetGCPercent(100) // GOGC=100
-	// debug.SetMemoryLimit(2 831 155 200) // GOMEMLIMIT=2700MiB
+	// debug.SetGCPercent(100)				// GOGC=100
+	// debug.SetMemoryLimit(2 831 155 200)	// GOMEMLIMIT=2700MiB
 
 	myApp := app.NewApp()
 	myAppStop := myApp.Start()
