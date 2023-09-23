@@ -1,13 +1,13 @@
 package adapterHTTP
 
 import (
-	"shortlink/internal/types"
+	T "shortlink/internal/apptype"
 	"time"
 
 	"github.com/valyala/fasthttp"
 )
 
-var _ types.IHTTPClient = (*HTTPClientFast)(nil)
+var _ T.IHTTPClient = (*HTTPClientFast)(nil)
 
 type HTTPClientFast struct {
 	hcli *fasthttp.Client

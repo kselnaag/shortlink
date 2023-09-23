@@ -5,9 +5,9 @@ import (
 	adapterDB "shortlink/internal/adapter/db"
 	adapterHTTP "shortlink/internal/adapter/http"
 	adapterLog "shortlink/internal/adapter/log"
+	T "shortlink/internal/apptype"
 	"shortlink/internal/control"
 	"shortlink/internal/service"
-	"shortlink/internal/types"
 	"testing"
 
 	"github.com/gavv/httpexpect/v2"
@@ -24,7 +24,7 @@ func TestHTTPServer(t *testing.T) {
 
 	t.Run("HTTPNet", func(t *testing.T) {
 		gin.SetMode(gin.ReleaseMode)
-		cfg := types.CfgEnv{
+		cfg := T.CfgEnv{
 			SL_APP_NAME:  "testSL",
 			SL_HTTP_IP:   "localhost",
 			SL_HTTP_PORT: ":8081",
@@ -54,7 +54,7 @@ func TestHTTPServer(t *testing.T) {
 	})
 
 	t.Run("HTTPFast", func(t *testing.T) {
-		cfg := types.CfgEnv{
+		cfg := T.CfgEnv{
 			SL_APP_NAME:  "testSL",
 			SL_HTTP_IP:   "localhost",
 			SL_HTTP_PORT: ":8082",

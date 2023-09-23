@@ -2,7 +2,7 @@ package adapterLog
 
 import (
 	"os"
-	"shortlink/internal/types"
+	T "shortlink/internal/apptype"
 
 	"log/slog"
 
@@ -10,7 +10,7 @@ import (
 	"fmt"
 )
 
-var _ types.ILog = (*LogSlog)(nil)
+var _ T.ILog = (*LogSlog)(nil)
 
 const (
 	LevelTrace    = slog.Level(-8)
@@ -24,12 +24,12 @@ const (
 )
 
 type LogSlog struct {
-	cfg    *types.CfgEnv
+	cfg    *T.CfgEnv
 	logger *slog.Logger
 	ctx    context.Context
 }
 
-func NewLogSlog(cfg *types.CfgEnv) LogSlog {
+func NewLogSlog(cfg *T.CfgEnv) LogSlog {
 	ctx := context.Background()
 	host := cfg.SL_HTTP_IP + cfg.SL_HTTP_PORT
 	svc := cfg.SL_APP_NAME
@@ -39,21 +39,21 @@ func NewLogSlog(cfg *types.CfgEnv) LogSlog {
 			level := a.Value.Any().(slog.Level)
 			switch {
 			case level <= LevelTrace:
-				a.Value = slog.StringValue(types.LevelTraceValue)
+				a.Value = slog.StringValue(T.LevelTraceValue)
 			case level <= LevelDebug:
-				a.Value = slog.StringValue(types.LevelDebugValue)
+				a.Value = slog.StringValue(T.LevelDebugValue)
 			case level <= LevelInfo:
-				a.Value = slog.StringValue(types.LevelInfoValue)
+				a.Value = slog.StringValue(T.LevelInfoValue)
 			case level <= LevelWarning:
-				a.Value = slog.StringValue(types.LevelWarnValue)
+				a.Value = slog.StringValue(T.LevelWarnValue)
 			case level <= LevelError:
-				a.Value = slog.StringValue(types.LevelErrorValue)
+				a.Value = slog.StringValue(T.LevelErrorValue)
 			case level <= LevelFatal:
-				a.Value = slog.StringValue(types.LevelFatalValue)
+				a.Value = slog.StringValue(T.LevelFatalValue)
 			case level <= LevelPanic:
-				a.Value = slog.StringValue(types.LevelPanicValue)
+				a.Value = slog.StringValue(T.LevelPanicValue)
 			default:
-				a.Value = slog.StringValue(types.LevelDisabledValue)
+				a.Value = slog.StringValue(T.LevelDisabledValue)
 			}
 		}
 		if a.Key == slog.TimeKey {
@@ -72,19 +72,19 @@ func NewLogSlog(cfg *types.CfgEnv) LogSlog {
 	logger = logger.With("H", host).With("S", svc)
 	slog.SetDefault(logger)
 	switch cfg.SL_LOG_LEVEL {
-	case types.LevelTraceValue:
+	case T.LevelTraceValue:
 		logLevel.Set(LevelTrace)
-	case types.LevelDebugValue:
+	case T.LevelDebugValue:
 		logLevel.Set(LevelDebug)
-	case types.LevelInfoValue:
+	case T.LevelInfoValue:
 		logLevel.Set(LevelInfo)
-	case types.LevelWarnValue:
+	case T.LevelWarnValue:
 		logLevel.Set(LevelWarning)
-	case types.LevelErrorValue:
+	case T.LevelErrorValue:
 		logLevel.Set(LevelError)
-	case types.LevelFatalValue:
+	case T.LevelFatalValue:
 		logLevel.Set(LevelFatal)
-	case types.LevelPanicValue:
+	case T.LevelPanicValue:
 		logLevel.Set(LevelPanic)
 	default:
 		logLevel.Set(LevelDisabled)

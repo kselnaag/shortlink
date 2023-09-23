@@ -3,11 +3,11 @@ package adapterLog
 import (
 	"fmt"
 	"os"
-	"shortlink/internal/types"
+	T "shortlink/internal/apptype"
 	"time"
 )
 
-var _ types.ILog = (*LogFprintf)(nil)
+var _ T.ILog = (*LogFprintf)(nil)
 
 type LogLevel int8
 
@@ -23,30 +23,30 @@ const (
 )
 
 type LogFprintf struct {
-	cfg    *types.CfgEnv
+	cfg    *T.CfgEnv
 	loglvl LogLevel
 	host   string
 	svc    string
 }
 
-func NewLogFprintf(cfg *types.CfgEnv) LogFprintf {
+func NewLogFprintf(cfg *T.CfgEnv) LogFprintf {
 	host := cfg.SL_HTTP_IP + cfg.SL_HTTP_PORT
 	svc := cfg.SL_APP_NAME
 	var lvl LogLevel
 	switch cfg.SL_LOG_LEVEL {
-	case types.LevelTraceValue:
+	case T.LevelTraceValue:
 		lvl = TraceLevel
-	case types.LevelDebugValue:
+	case T.LevelDebugValue:
 		lvl = DebugLevel
-	case types.LevelInfoValue:
+	case T.LevelInfoValue:
 		lvl = InfoLevel
-	case types.LevelWarnValue:
+	case T.LevelWarnValue:
 		lvl = WarnLevel
-	case types.LevelErrorValue:
+	case T.LevelErrorValue:
 		lvl = ErrorLevel
-	case types.LevelFatalValue:
+	case T.LevelFatalValue:
 		lvl = FatalLevel
-	case types.LevelPanicValue:
+	case T.LevelPanicValue:
 		lvl = PanicLevel
 	default:
 		lvl = Disabled
@@ -66,42 +66,42 @@ func logMessage(lvl, host, svc, err, mess string) {
 
 func (l *LogFprintf) LogTrace(format string, v ...any) {
 	if l.loglvl <= TraceLevel {
-		logMessage(types.LevelTraceValue, l.host, l.svc, "", fmt.Sprintf(format, v...))
+		logMessage(T.LevelTraceValue, l.host, l.svc, "", fmt.Sprintf(format, v...))
 	}
 }
 
 func (l *LogFprintf) LogDebug(format string, v ...any) {
 	if l.loglvl <= DebugLevel {
-		logMessage(types.LevelDebugValue, l.host, l.svc, "", fmt.Sprintf(format, v...))
+		logMessage(T.LevelDebugValue, l.host, l.svc, "", fmt.Sprintf(format, v...))
 	}
 }
 
 func (l *LogFprintf) LogInfo(format string, v ...any) {
 	if l.loglvl <= InfoLevel {
-		logMessage(types.LevelInfoValue, l.host, l.svc, "", fmt.Sprintf(format, v...))
+		logMessage(T.LevelInfoValue, l.host, l.svc, "", fmt.Sprintf(format, v...))
 	}
 }
 
 func (l *LogFprintf) LogWarn(format string, v ...any) {
 	if l.loglvl <= WarnLevel {
-		logMessage(types.LevelWarnValue, l.host, l.svc, "", fmt.Sprintf(format, v...))
+		logMessage(T.LevelWarnValue, l.host, l.svc, "", fmt.Sprintf(format, v...))
 	}
 }
 
 func (l *LogFprintf) LogError(err error, format string, v ...any) {
 	if l.loglvl <= ErrorLevel {
-		logMessage(types.LevelErrorValue, l.host, l.svc, err.Error(), fmt.Sprintf(format, v...))
+		logMessage(T.LevelErrorValue, l.host, l.svc, err.Error(), fmt.Sprintf(format, v...))
 	}
 }
 
 func (l *LogFprintf) LogFatal(err error, format string, v ...any) {
 	if l.loglvl <= FatalLevel {
-		logMessage(types.LevelFatalValue, l.host, l.svc, err.Error(), fmt.Sprintf(format, v...))
+		logMessage(T.LevelFatalValue, l.host, l.svc, err.Error(), fmt.Sprintf(format, v...))
 	}
 }
 
 func (l *LogFprintf) LogPanic(err error, format string, v ...any) {
 	if l.loglvl <= PanicLevel {
-		logMessage(types.LevelPanicValue, l.host, l.svc, err.Error(), fmt.Sprintf(format, v...))
+		logMessage(T.LevelPanicValue, l.host, l.svc, err.Error(), fmt.Sprintf(format, v...))
 	}
 }

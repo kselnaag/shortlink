@@ -6,16 +6,16 @@ import (
 	adapterDB "shortlink/internal/adapter/db"
 	adapterHTTP "shortlink/internal/adapter/http"
 	adapterLog "shortlink/internal/adapter/log"
+	T "shortlink/internal/apptype"
 	"shortlink/internal/control"
 	"shortlink/internal/service"
-	"shortlink/internal/types"
 )
 
 type App struct {
-	hsrv types.IHTTPServer
-	db   types.Idb
-	log  types.ILog
-	cfg  *types.CfgEnv
+	hsrv T.IHTTPServer
+	db   T.Idb
+	log  T.ILog
+	cfg  *T.CfgEnv
 }
 
 func NewApp() App {

@@ -5,7 +5,7 @@ import (
 	"net"
 	"os"
 	"path/filepath"
-	"shortlink/internal/types"
+	T "shortlink/internal/apptype"
 	"strings"
 	"time"
 
@@ -13,8 +13,8 @@ import (
 	"github.com/joho/godotenv"
 )
 
-func NewCfgEnv(cfgname string) types.CfgEnv {
-	cfg := types.CfgEnv{ // default env
+func NewCfgEnv(cfgname string) T.CfgEnv {
+	cfg := T.CfgEnv{ // default env
 		SL_APP_NAME:  "shortlink",
 		SL_HTTP_IP:   "localhost",
 		SL_HTTP_PORT: ":8080",

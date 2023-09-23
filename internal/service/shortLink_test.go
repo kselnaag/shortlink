@@ -6,9 +6,9 @@ import (
 	adapterDB "shortlink/internal/adapter/db"
 	adapterHTTP "shortlink/internal/adapter/http"
 	adapterLog "shortlink/internal/adapter/log"
+	T "shortlink/internal/apptype"
 	"shortlink/internal/model"
 	"shortlink/internal/service"
-	"shortlink/internal/types"
 
 	"github.com/stretchr/testify/assert"
 )
@@ -21,7 +21,7 @@ func TestServices(t *testing.T) {
 	}()
 
 	t.Run("ServShortLink", func(t *testing.T) {
-		cfg := types.CfgEnv{
+		cfg := T.CfgEnv{
 			SL_APP_NAME:  "testSL",
 			SL_HTTP_IP:   "localhost",
 			SL_HTTP_PORT: ":8080",

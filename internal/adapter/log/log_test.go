@@ -3,7 +3,7 @@ package adapterLog_test
 import (
 	"errors"
 	adapterLog "shortlink/internal/adapter/log"
-	"shortlink/internal/types"
+	T "shortlink/internal/apptype"
 	"testing"
 
 	"github.com/stretchr/testify/assert"
@@ -16,7 +16,7 @@ func TestLog(t *testing.T) {
 		asrt.Nil(err)
 	}()
 
-	cfg := types.CfgEnv{
+	cfg := T.CfgEnv{
 		SL_APP_NAME:  "testSL",
 		SL_HTTP_IP:   "localhost",
 		SL_HTTP_PORT: ":8080",

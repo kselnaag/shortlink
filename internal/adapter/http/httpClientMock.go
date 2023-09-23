@@ -2,11 +2,11 @@ package adapterHTTP
 
 import (
 	"net/http"
-	"shortlink/internal/types"
+	T "shortlink/internal/apptype"
 	"sync"
 )
 
-var _ types.IHTTPClient = (*HTTPClientMock)(nil)
+var _ T.IHTTPClient = (*HTTPClientMock)(nil)
 
 type HTTPClientMock struct {
 	hcli *sync.Map

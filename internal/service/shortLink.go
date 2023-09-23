@@ -5,18 +5,18 @@ import (
 	"shortlink/internal/model"
 	"sort"
 
-	"shortlink/internal/types"
+	T "shortlink/internal/apptype"
 )
 
-var _ types.ISvcShortLink = (*SvcShortLink)(nil)
+var _ T.ISvcShortLink = (*SvcShortLink)(nil)
 
 type SvcShortLink struct {
-	db   types.Idb
-	hcli types.IHTTPClient
-	log  types.ILog
+	db   T.Idb
+	hcli T.IHTTPClient
+	log  T.ILog
 }
 
-func NewSvcShortLink(db types.Idb, hcli types.IHTTPClient, log types.ILog) SvcShortLink {
+func NewSvcShortLink(db T.Idb, hcli T.IHTTPClient, log T.ILog) SvcShortLink {
 	return SvcShortLink{
 		db:   db,
 		hcli: hcli,
