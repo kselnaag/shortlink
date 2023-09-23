@@ -37,7 +37,7 @@ function unitTest {
 
 function build {
     echo -e "\n>>_Build_<<"
-    go build -o ./bin/shortlink ./cmd/main.go
+    CGO_ENABLED=0 GOOS=linux GOARCH=amd64 go build -ldflags='-w -s -extldflags "-static"' -a -o ./bin/shortlink ./cmd/main.go
     if [[ $? -gt 0 ]]; then checksBreaked; fi
 }
 
