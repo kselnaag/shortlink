@@ -1,0 +1,34 @@
+# syntax=docker/dockerfile:1
+FROM kselnaag/gobuilder:1.21.1 AS gobuilder
+
+ARG COMHASH=HEAD
+
+ENV USER=appuser
+ENV UID=10001
+RUN adduser \
+--disabled-password \
+--gecos "" \
+--home "/nonexistent" \
+--shell "/sbin/nologin" \
+ --no-create-home \
+--uid "$UID" \
+"$USER"
+
+WORKDIR /go
+RUN git clone https://github.com/kselnaag/shortlink \
+&& cd shortlink \
+&& git checkout $COMHASH \
+&& chmod a+x ./script/ci.sh \
+&& ./script/ci.sh build \
+&& chmod a+x ./bin/shortlink
+
+FROM scratch
+
+COPY --from=gobuilder /go/shortlink/bin/shortlink /shortlink
+EXPOSE 8080/tcp
+USER appuser:appuser
+ENTRYPOINT ["/shortlink"]
+
+# docker buildx build --platform linux/amd64 --no-cache -f ./script/shortlink.dock -t kselnaag/shortlink . --load (--build-arg COMHASH=2639ae4fa)
+# docker run -it --user 10001 -p 8080:8080/tcp kselnaag/shortlink:latest
+# CGO_ENABLED=0 GOOS=linux GOARCH=amd64 go build -ldflags='-w -s -extldflags "-static"' -a -o /go/bin/hello .
