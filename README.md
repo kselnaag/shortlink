@@ -69,7 +69,7 @@ We choose Monolith as system arch pattern and Rich Domain Model as software arch
 ## **🛠️Libs and tools**
 <img style="margin-right: 0px;" align="right" width="50%" alt="#DOMAIN" src="./asset/domain.png"/>
 
-- `Libs (github.com)`
+- `Libs (https://github.com/)`
   - caarlos0/env v3.5.0
   - joho/godotenv v1.5.1
   - rs/zerolog v1.29.0
@@ -83,16 +83,16 @@ We choose Monolith as system arch pattern and Rich Domain Model as software arch
   - golang v1.21
   - golangci-lint v1.51.2
   - curl v7.68.0
-  - docker
+  - docker v24.0.6 and docker-compose v1.25.0
   - minikube
 
 ## **⚙️HowTo**
 <img style="margin-right: 0px;" align="right" width="30%" alt="#CICD" src="./asset/cicd.png"/>
 
-- check if `docker` has been installed
+- check if `docker` and `docker-compose` has been installed
 - clone the project `git clone https://github.com/kselnaag/shortlink`
 - dive into a folder `cd shortlink`
-- run everything with `./script/ci.sh run`
+- run everything with `./script/cicd.sh compose-up`
 - go to `http://localhost:8080` in your browser and try it
 
 ## **🦋The beauty is like this and nothing more**
