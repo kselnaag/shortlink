@@ -18,8 +18,8 @@ WORKDIR /go
 RUN git clone https://github.com/kselnaag/shortlink \
 && cd shortlink \
 && git checkout $COMHASH \
-&& chmod a+x ./script/ci.sh \
-&& ./script/ci.sh build \
+&& chmod a+x ./script/cicd.sh \
+&& ./script/cicd.sh build \
 && chmod a+x ./bin/shortlink
 
 FROM scratch
