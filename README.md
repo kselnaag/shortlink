@@ -1,19 +1,15 @@
 <p align="left">
-	<img src="https://img.shields.io/github/languages/code-size/kselnaag/shortlink?style=plastic" title="src files size" alt="src files size">
-	<img src="https://img.shields.io/github/repo-size/kselnaag/shortlink?style=plastic" title="repo size" alt="repo size">
-	<a href="https://github.com/kselnaag/shortlink/blob/master/LICENSE" title="LICENSE"><img src="https://img.shields.io/github/license/kselnaag/shortlink?style=plastic" alt="license"></a>
-	<a href="https://github.com/kselnaag/shortlink/actions" title="Workflows"><img src="https://img.shields.io/github/actions/workflow/status/kselnaag/shortlink/go.yml?branch=master&style=plastic" alt="tests checks"></a>
-</p>
-<p align="left">
   <img src="https://img.shields.io/static/v1?label=test&message=Project&color=ffa757&style=plastic" alt="test Project">
 	<img src="https://img.shields.io/static/v1?label=build%20by&message=Go&color=ffa757&style=plastic" alt="build by Go">
 	<img src="https://img.shields.io/static/v1?label=make%20with&message=Fun&color=ffa757&style=plastic" alt="make with Fun">
+	<a href="https://github.com/kselnaag/shortlink/blob/master/LICENSE" title="LICENSE"><img src="https://img.shields.io/github/license/kselnaag/shortlink?style=plastic" alt="license"></a>
+	<a href="https://github.com/kselnaag/shortlink/actions" title="Workflows"><img src="https://img.shields.io/github/actions/workflow/status/kselnaag/shortlink/go.yml?branch=master&style=plastic" alt="tests checks"></a>
 </p>
 
 ### **SHORTLINK** 📏 Let us make your links shorter in easy way !
 ----
 
-## **🧾Description**
+## **📜 Description**
 This is a test project to generate the short link from the long link you already have. We want to be able to:
 <img style="margin-right: 60px;" align="right" width="40%" alt="#POWERGOPHERS" src="./asset/gogogophers.png"/>
 
@@ -23,7 +19,7 @@ This is a test project to generate the short link from the long link you already
 - get simple UI as HTML page
 - check if the long link HTTP valid
 
-## **📊Analysis**
+## **🔬 Analysis**
 We choose Monolith as system arch pattern and Rich Domain Model as software arch pattern. Let us look at some architect points:
 <img style="margin-top: 0px; margin-right: 100px;" align="right" width="29%" alt="#ArchPic" src="./asset/arch.png"/>
 
@@ -54,7 +50,7 @@ We choose Monolith as system arch pattern and Rich Domain Model as software arch
   - unite short link and long link
   - check if pair is valid
 
-## **💡Solution notes**
+## **💡 Solution notes**
 <img style="margin-right: 100px;" align="right" width="14%" alt="#Prod" src="./asset/production.png"/>
 
 - layering and hexagonal arch
@@ -66,7 +62,7 @@ We choose Monolith as system arch pattern and Rich Domain Model as software arch
 - postgreSQL, redis, mongoDB or tarantool db adapters
 - OpenAPI Swagger docs `http://localhost:8080/oapi`
 
-## **🛠️Libs and tools**
+## **🛠️ Libs and tools**
 <img style="margin-right: 0px;" align="right" width="50%" alt="#DOMAIN" src="./asset/domain.png"/>
 
 - `Libs (https://github.com/)`
@@ -86,7 +82,13 @@ We choose Monolith as system arch pattern and Rich Domain Model as software arch
   - docker v24.0.6 and docker-compose v1.25.0
   - minikube
 
-## **⚙️HowTo**
+## **📊 Metrics**
+<p align="left">
+	<img src="https://img.shields.io/github/languages/code-size/kselnaag/shortlink?style=plastic" title="src files size" alt="src files size">
+	<img src="https://img.shields.io/github/repo-size/kselnaag/shortlink?style=plastic" title="repo size" alt="repo size">
+</p>
+
+## **⚙️ HowTo**
 <img style="margin-right: 0px;" align="right" width="30%" alt="#CICD" src="./asset/cicd.png"/>
 
 - check if `docker` and `docker-compose` has been installed
@@ -95,10 +97,10 @@ We choose Monolith as system arch pattern and Rich Domain Model as software arch
 - run everything with `./script/cicd.sh compose-up`
 - go to `http://localhost:8080` in your browser and try it
 
-## **🦋The beauty is like this and nothing more**
+## **🦋 The beauty is like this and nothing more**
 
 ----
-### **🔗LINKS**
+### **🔗 LINKS**
 | [gin](https://github.com/gin-gonic/gin "https://github.com/gin-gonic/gin")
 | [gin docs](https://gin-gonic.com/docs/ "https://gin-gonic.com/docs/")
 |             

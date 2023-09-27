@@ -5,7 +5,9 @@ RESPCODE=0
 
 function info {
     echo -e "
-CI COMMANDS: style lint test build run start check check-no-lint docker-gobuilder docker-build docker-run docker-up compose-up
+CI COMMANDS: style lint test build run start check check-no-lint 
+             docker-gobuilder docker-build docker-run docker-up compose-up
+             metrics
 EXAMLPE:     ./script/cicd.sh run
 "
     exit 0
@@ -88,7 +90,7 @@ function container-run {
 
 function container-up {
     echo -e "\n>>_DockerAppUp_<<"
-    docker run --user 10001 -p 8080:8080/tcp kselnaag/shortlink:latest
+    docker run -d --user 10001 -p 8080:8080/tcp kselnaag/shortlink:latest
     if [[ $? -gt 0 ]]; then checksBreaked; fi
 }
 
@@ -96,6 +98,16 @@ function compose-up {
     echo -e "\n>>_ComposeAllUp_<<"
     #
     if [[ $? -gt 0 ]]; then checksBreaked; fi
+}
+
+function loc {
+    echo -e "\n>>_LinesOfCode_<<"
+    FPATH=./script/sl.loc
+    gcloc . > $FPATH
+    cat $FPATH | grep Language
+    if [[ $? -gt 0 ]]; then checksBreaked; fi
+    cat $FPATH | grep Golang
+    cat $FPATH | grep Bash
 }
 
 if [[ $# -ne 1 ]]; then info; else
@@ -154,6 +166,22 @@ if [[ $# -ne 1 ]]; then info; else
         ;;
     "compose-up")
         compose-up
+        ;;
+    "metrics")
+        loc
+
+        ;;
+    "dock") # experiments
+        PWD=`pwd`
+        CNUM=581395379aed
+        # build
+        docker cp "$PWD/bin/shortlink" $CNUM:"/shortlink"
+        docker cp "$PWD/config/shortlink.env" $CNUM:"/shortlink.env"
+        docker start $CNUM
+        docker logs $CNUM
+        docker stop $CNUM
+        # docker run -it --user 10001 -p 8080:8080/tcp kselnaag/shortlink:latest
+
         ;;
     *)
         info
