@@ -1,0 +1,907 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<graphml xmlns="http://graphml.graphdrawing.org/xmlns" xmlns:java="http://www.yworks.com/xml/yfiles-common/1.0/java" xmlns:sys="http://www.yworks.com/xml/yfiles-common/markup/primitives/2.0" xmlns:x="http://www.yworks.com/xml/yfiles-common/markup/2.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:y="http://www.yworks.com/xml/graphml" xmlns:yed="http://www.yworks.com/xml/yed/3" xsi:schemaLocation="http://graphml.graphdrawing.org/xmlns http://www.yworks.com/xml/schema/graphml/1.1/ygraphml.xsd">
+  <key for="port" id="d0" yfiles.type="portgraphics"/>
+  <key for="port" id="d1" yfiles.type="portgeometry"/>
+  <key for="port" id="d2" yfiles.type="portuserdata"/>
+  <key attr.name="url" attr.type="string" for="node" id="d3"/>
+  <key attr.name="description" attr.type="string" for="node" id="d4"/>
+  <key for="node" id="d5" yfiles.type="nodegraphics"/>
+  <key for="graphml" id="d6" yfiles.type="resources"/>
+  <key attr.name="url" attr.type="string" for="edge" id="d7"/>
+  <key attr.name="description" attr.type="string" for="edge" id="d8"/>
+  <key for="edge" id="d9" yfiles.type="edgegraphics"/>
+  <graph edgedefault="directed" id="G">
+    <node id="n0" yfiles.foldertype="group">
+      <data key="d5">
+        <y:ProxyAutoBoundsNode>
+          <y:Realizers active="0">
+            <y:GroupNode>
+              <y:Geometry height="12.0" width="20.0" x="0.0" y="0.0"/>
+              <y:Fill color="#F5F5F5" transparent="false"/>
+              <y:BorderStyle color="#F5F5F5" type="dashed" width="1.0"/>
+              <y:NodeLabel alignment="right" autoSizePolicy="content" backgroundColor="#EBEBEB" borderDistance="0.0" fontFamily="Dialog" fontSize="10" fontStyle="plain" hasLineColor="false" height="12.0" horizontalTextPosition="center" iconTextGap="4" modelName="sandwich" modelPosition="n" textColor="#000000" verticalTextPosition="bottom" width="20.0" x="0" xml:space="preserve" y="0">.</y:NodeLabel>
+              <y:Shape type="roundrectangle"/>
+              <y:State closed="false" closedHeight="80.0" closedWidth="100.0" innerGraphDisplayEnabled="false"/>
+              <y:Insets bottom="15" bottomF="15.0" left="15" leftF="15.0" right="15" rightF="15.0" top="15" topF="15.0"/>
+              <y:BorderInsets bottom="54" bottomF="54.0" left="0" leftF="0.0" right="23" rightF="23.35" top="0" topF="0.0"/>
+            </y:GroupNode>
+            <y:GroupNode>
+              <y:Geometry height="12.0" width="20.0" x="0.0" y="0.0"/>
+              <y:Fill color="#F5F5F5" transparent="false"/>
+              <y:BorderStyle color="#000000" type="dashed" width="1.0"/>
+              <y:NodeLabel alignment="right" autoSizePolicy="content" backgroundColor="#EBEBEB" borderDistance="0.0" fontFamily="Dialog" fontSize="10" fontStyle="plain" hasLineColor="false" hasText="false" height="12.0" horizontalTextPosition="center" iconTextGap="4" modelName="sandwich" modelPosition="n" textColor="#000000" verticalTextPosition="bottom" width="20.0" x="0" y="0"/>
+              <y:Shape type="roundrectangle"/>
+              <y:State closed="true" closedHeight="80.0" closedWidth="100.0" innerGraphDisplayEnabled="false"/>
+              <y:Insets bottom="15" bottomF="15.0" left="15" leftF="15.0" right="15" rightF="15.0" top="15" topF="15.0"/>
+              <y:BorderInsets bottom="54" bottomF="54.0" left="0" leftF="0.0" right="23" rightF="23.35" top="0" topF="0.0"/>
+            </y:GroupNode>
+          </y:Realizers>
+        </y:ProxyAutoBoundsNode>
+      </data>
+      <graph edgedefault="directed" id="n0:">
+        <node id="n0::n0" yfiles.foldertype="group">
+          <data key="d5">
+            <y:ProxyAutoBoundsNode>
+              <y:Realizers active="0">
+                <y:GroupNode>
+                  <y:Geometry height="12.0" width="230.0" x="0.0" y="0.0"/>
+                  <y:Fill color="#F5F5F5" transparent="false"/>
+                  <y:BorderStyle color="#F5F5F5" type="dashed" width="1.0"/>
+                  <y:NodeLabel alignment="right" autoSizePolicy="content" backgroundColor="#EBEBEB" borderDistance="0.0" fontFamily="Dialog" fontSize="10" fontStyle="plain" hasLineColor="false" height="12.0" horizontalTextPosition="center" iconTextGap="4" modelName="sandwich" modelPosition="n" textColor="#000000" verticalTextPosition="bottom" width="230.0" x="0" xml:space="preserve" y="0">cmd (1 func, 30 lines)</y:NodeLabel>
+                  <y:Shape type="roundrectangle"/>
+                  <y:State closed="false" closedHeight="80.0" closedWidth="100.0" innerGraphDisplayEnabled="false"/>
+                  <y:Insets bottom="15" bottomF="15.0" left="15" leftF="15.0" right="15" rightF="15.0" top="15" topF="15.0"/>
+                  <y:BorderInsets bottom="54" bottomF="54.0" left="0" leftF="0.0" right="23" rightF="23.35" top="0" topF="0.0"/>
+                </y:GroupNode>
+                <y:GroupNode>
+                  <y:Geometry height="12.0" width="230.0" x="0.0" y="0.0"/>
+                  <y:Fill color="#F5F5F5" transparent="false"/>
+                  <y:BorderStyle color="#000000" type="dashed" width="1.0"/>
+                  <y:NodeLabel alignment="right" autoSizePolicy="content" backgroundColor="#EBEBEB" borderDistance="0.0" fontFamily="Dialog" fontSize="10" fontStyle="plain" hasLineColor="false" hasText="false" height="12.0" horizontalTextPosition="center" iconTextGap="4" modelName="sandwich" modelPosition="n" textColor="#000000" verticalTextPosition="bottom" width="230.0" x="0" y="0"/>
+                  <y:Shape type="roundrectangle"/>
+                  <y:State closed="true" closedHeight="80.0" closedWidth="100.0" innerGraphDisplayEnabled="false"/>
+                  <y:Insets bottom="15" bottomF="15.0" left="15" leftF="15.0" right="15" rightF="15.0" top="15" topF="15.0"/>
+                  <y:BorderInsets bottom="54" bottomF="54.0" left="0" leftF="0.0" right="23" rightF="23.35" top="0" topF="0.0"/>
+                </y:GroupNode>
+              </y:Realizers>
+            </y:ProxyAutoBoundsNode>
+          </data>
+          <graph edgedefault="directed" id="n0::n0:">
+            <node id="n0::n0::n0">
+              <data key="d5">
+                <y:ShapeNode>
+                  <y:Geometry height="26.0" width="64.0" x="0.0" y="0.0"/>
+                  <y:Fill color="#FFFFFF" transparent="false"/>
+                  <y:BorderStyle color="#000000" type="line" width="1.0"/>
+                  <y:NodeLabel alignment="center" autoSizePolicy="content" fontFamily="Dialog" fontSize="16" fontStyle="plain" hasBackgroundColor="false" hasLineColor="false" height="26.0" horizontalTextPosition="center" iconTextGap="4" modelName="internal" modelPosition="c" textColor="#000000" verticalTextPosition="bottom" visible="true" width="64.0" x="0.0" xml:space="preserve" y="0.0">main</y:NodeLabel>
+                  <y:Shape type="rectangle"/>
+                </y:ShapeNode>
+              </data>
+            </node>
+          </graph>
+        </node>
+        <node id="n0::n1" yfiles.foldertype="group">
+          <data key="d5">
+            <y:ProxyAutoBoundsNode>
+              <y:Realizers active="0">
+                <y:GroupNode>
+                  <y:Geometry height="12.0" width="30.0" x="0.0" y="0.0"/>
+                  <y:Fill color="#F5F5F5" transparent="false"/>
+                  <y:BorderStyle color="#F5F5F5" type="dashed" width="1.0"/>
+                  <y:NodeLabel alignment="right" autoSizePolicy="content" backgroundColor="#EBEBEB" borderDistance="0.0" fontFamily="Dialog" fontSize="10" fontStyle="plain" hasLineColor="false" height="12.0" horizontalTextPosition="center" iconTextGap="4" modelName="sandwich" modelPosition="n" textColor="#000000" verticalTextPosition="bottom" width="30.0" x="0" xml:space="preserve" y="0">db</y:NodeLabel>
+                  <y:Shape type="roundrectangle"/>
+                  <y:State closed="false" closedHeight="80.0" closedWidth="100.0" innerGraphDisplayEnabled="false"/>
+                  <y:Insets bottom="15" bottomF="15.0" left="15" leftF="15.0" right="15" rightF="15.0" top="15" topF="15.0"/>
+                  <y:BorderInsets bottom="54" bottomF="54.0" left="0" leftF="0.0" right="23" rightF="23.35" top="0" topF="0.0"/>
+                </y:GroupNode>
+                <y:GroupNode>
+                  <y:Geometry height="12.0" width="30.0" x="0.0" y="0.0"/>
+                  <y:Fill color="#F5F5F5" transparent="false"/>
+                  <y:BorderStyle color="#000000" type="dashed" width="1.0"/>
+                  <y:NodeLabel alignment="right" autoSizePolicy="content" backgroundColor="#EBEBEB" borderDistance="0.0" fontFamily="Dialog" fontSize="10" fontStyle="plain" hasLineColor="false" hasText="false" height="12.0" horizontalTextPosition="center" iconTextGap="4" modelName="sandwich" modelPosition="n" textColor="#000000" verticalTextPosition="bottom" width="30.0" x="0" y="0"/>
+                  <y:Shape type="roundrectangle"/>
+                  <y:State closed="true" closedHeight="80.0" closedWidth="100.0" innerGraphDisplayEnabled="false"/>
+                  <y:Insets bottom="15" bottomF="15.0" left="15" leftF="15.0" right="15" rightF="15.0" top="15" topF="15.0"/>
+                  <y:BorderInsets bottom="54" bottomF="54.0" left="0" leftF="0.0" right="23" rightF="23.35" top="0" topF="0.0"/>
+                </y:GroupNode>
+              </y:Realizers>
+            </y:ProxyAutoBoundsNode>
+          </data>
+          <graph edgedefault="directed" id="n0::n1:"/>
+        </node>
+        <node id="n0::n2" yfiles.foldertype="group">
+          <data key="d5">
+            <y:ProxyAutoBoundsNode>
+              <y:Realizers active="0">
+                <y:GroupNode>
+                  <y:Geometry height="12.0" width="280.0" x="0.0" y="0.0"/>
+                  <y:Fill color="#F5F5F5" transparent="false"/>
+                  <y:BorderStyle color="#F5F5F5" type="dashed" width="1.0"/>
+                  <y:NodeLabel alignment="right" autoSizePolicy="content" backgroundColor="#EBEBEB" borderDistance="0.0" fontFamily="Dialog" fontSize="10" fontStyle="plain" hasLineColor="false" height="12.0" horizontalTextPosition="center" iconTextGap="4" modelName="sandwich" modelPosition="n" textColor="#000000" verticalTextPosition="bottom" width="280.0" x="0" xml:space="preserve" y="0">internal (2 func, 50 lines)</y:NodeLabel>
+                  <y:Shape type="roundrectangle"/>
+                  <y:State closed="false" closedHeight="80.0" closedWidth="100.0" innerGraphDisplayEnabled="false"/>
+                  <y:Insets bottom="15" bottomF="15.0" left="15" leftF="15.0" right="15" rightF="15.0" top="15" topF="15.0"/>
+                  <y:BorderInsets bottom="54" bottomF="54.0" left="0" leftF="0.0" right="23" rightF="23.35" top="0" topF="0.0"/>
+                </y:GroupNode>
+                <y:GroupNode>
+                  <y:Geometry height="12.0" width="280.0" x="0.0" y="0.0"/>
+                  <y:Fill color="#F5F5F5" transparent="false"/>
+                  <y:BorderStyle color="#000000" type="dashed" width="1.0"/>
+                  <y:NodeLabel alignment="right" autoSizePolicy="content" backgroundColor="#EBEBEB" borderDistance="0.0" fontFamily="Dialog" fontSize="10" fontStyle="plain" hasLineColor="false" hasText="false" height="12.0" horizontalTextPosition="center" iconTextGap="4" modelName="sandwich" modelPosition="n" textColor="#000000" verticalTextPosition="bottom" width="280.0" x="0" y="0"/>
+                  <y:Shape type="roundrectangle"/>
+                  <y:State closed="true" closedHeight="80.0" closedWidth="100.0" innerGraphDisplayEnabled="false"/>
+                  <y:Insets bottom="15" bottomF="15.0" left="15" leftF="15.0" right="15" rightF="15.0" top="15" topF="15.0"/>
+                  <y:BorderInsets bottom="54" bottomF="54.0" left="0" leftF="0.0" right="23" rightF="23.35" top="0" topF="0.0"/>
+                </y:GroupNode>
+              </y:Realizers>
+            </y:ProxyAutoBoundsNode>
+          </data>
+          <graph edgedefault="directed" id="n0::n2:">
+            <node id="n0::n2::n0">
+              <data key="d5">
+                <y:ShapeNode>
+                  <y:Geometry height="26.0" width="56.0" x="0.0" y="0.0"/>
+                  <y:Fill color="#FFFFFF" transparent="false"/>
+                  <y:BorderStyle color="#000000" type="line" width="1.0"/>
+                  <y:NodeLabel alignment="center" autoSizePolicy="content" fontFamily="Dialog" fontSize="16" fontStyle="plain" hasBackgroundColor="false" hasLineColor="false" height="26.0" horizontalTextPosition="center" iconTextGap="4" modelName="internal" modelPosition="c" textColor="#000000" verticalTextPosition="bottom" visible="true" width="56.0" x="0.0" xml:space="preserve" y="0.0">app</y:NodeLabel>
+                  <y:Shape type="rectangle"/>
+                </y:ShapeNode>
+              </data>
+            </node>
+            <node id="n0::n2::n1" yfiles.foldertype="group">
+              <data key="d5">
+                <y:ProxyAutoBoundsNode>
+                  <y:Realizers active="0">
+                    <y:GroupNode>
+                      <y:Geometry height="12.0" width="80.0" x="0.0" y="0.0"/>
+                      <y:Fill color="#F5F5F5" transparent="false"/>
+                      <y:BorderStyle color="#F5F5F5" type="dashed" width="1.0"/>
+                      <y:NodeLabel alignment="right" autoSizePolicy="content" backgroundColor="#EBEBEB" borderDistance="0.0" fontFamily="Dialog" fontSize="10" fontStyle="plain" hasLineColor="false" height="12.0" horizontalTextPosition="center" iconTextGap="4" modelName="sandwich" modelPosition="n" textColor="#000000" verticalTextPosition="bottom" width="80.0" x="0" xml:space="preserve" y="0">adapter</y:NodeLabel>
+                      <y:Shape type="roundrectangle"/>
+                      <y:State closed="false" closedHeight="80.0" closedWidth="100.0" innerGraphDisplayEnabled="false"/>
+                      <y:Insets bottom="15" bottomF="15.0" left="15" leftF="15.0" right="15" rightF="15.0" top="15" topF="15.0"/>
+                      <y:BorderInsets bottom="54" bottomF="54.0" left="0" leftF="0.0" right="23" rightF="23.35" top="0" topF="0.0"/>
+                    </y:GroupNode>
+                    <y:GroupNode>
+                      <y:Geometry height="12.0" width="80.0" x="0.0" y="0.0"/>
+                      <y:Fill color="#F5F5F5" transparent="false"/>
+                      <y:BorderStyle color="#000000" type="dashed" width="1.0"/>
+                      <y:NodeLabel alignment="right" autoSizePolicy="content" backgroundColor="#EBEBEB" borderDistance="0.0" fontFamily="Dialog" fontSize="10" fontStyle="plain" hasLineColor="false" hasText="false" height="12.0" horizontalTextPosition="center" iconTextGap="4" modelName="sandwich" modelPosition="n" textColor="#000000" verticalTextPosition="bottom" width="80.0" x="0" y="0"/>
+                      <y:Shape type="roundrectangle"/>
+                      <y:State closed="true" closedHeight="80.0" closedWidth="100.0" innerGraphDisplayEnabled="false"/>
+                      <y:Insets bottom="15" bottomF="15.0" left="15" leftF="15.0" right="15" rightF="15.0" top="15" topF="15.0"/>
+                      <y:BorderInsets bottom="54" bottomF="54.0" left="0" leftF="0.0" right="23" rightF="23.35" top="0" topF="0.0"/>
+                    </y:GroupNode>
+                  </y:Realizers>
+                </y:ProxyAutoBoundsNode>
+              </data>
+              <graph edgedefault="directed" id="n0::n2::n1:">
+                <node id="n0::n2::n1::n0" yfiles.foldertype="group">
+                  <data key="d5">
+                    <y:ProxyAutoBoundsNode>
+                      <y:Realizers active="0">
+                        <y:GroupNode>
+                          <y:Geometry height="12.0" width="230.0" x="0.0" y="0.0"/>
+                          <y:Fill color="#F5F5F5" transparent="false"/>
+                          <y:BorderStyle color="#F5F5F5" type="dashed" width="1.0"/>
+                          <y:NodeLabel alignment="right" autoSizePolicy="content" backgroundColor="#EBEBEB" borderDistance="0.0" fontFamily="Dialog" fontSize="10" fontStyle="plain" hasLineColor="false" height="12.0" horizontalTextPosition="center" iconTextGap="4" modelName="sandwich" modelPosition="n" textColor="#000000" verticalTextPosition="bottom" width="230.0" x="0" xml:space="preserve" y="0">cfg (2 func, 58 lines)</y:NodeLabel>
+                          <y:Shape type="roundrectangle"/>
+                          <y:State closed="false" closedHeight="80.0" closedWidth="100.0" innerGraphDisplayEnabled="false"/>
+                          <y:Insets bottom="15" bottomF="15.0" left="15" leftF="15.0" right="15" rightF="15.0" top="15" topF="15.0"/>
+                          <y:BorderInsets bottom="54" bottomF="54.0" left="0" leftF="0.0" right="23" rightF="23.35" top="0" topF="0.0"/>
+                        </y:GroupNode>
+                        <y:GroupNode>
+                          <y:Geometry height="12.0" width="230.0" x="0.0" y="0.0"/>
+                          <y:Fill color="#F5F5F5" transparent="false"/>
+                          <y:BorderStyle color="#000000" type="dashed" width="1.0"/>
+                          <y:NodeLabel alignment="right" autoSizePolicy="content" backgroundColor="#EBEBEB" borderDistance="0.0" fontFamily="Dialog" fontSize="10" fontStyle="plain" hasLineColor="false" hasText="false" height="12.0" horizontalTextPosition="center" iconTextGap="4" modelName="sandwich" modelPosition="n" textColor="#000000" verticalTextPosition="bottom" width="230.0" x="0" y="0"/>
+                          <y:Shape type="roundrectangle"/>
+                          <y:State closed="true" closedHeight="80.0" closedWidth="100.0" innerGraphDisplayEnabled="false"/>
+                          <y:Insets bottom="15" bottomF="15.0" left="15" leftF="15.0" right="15" rightF="15.0" top="15" topF="15.0"/>
+                          <y:BorderInsets bottom="54" bottomF="54.0" left="0" leftF="0.0" right="23" rightF="23.35" top="0" topF="0.0"/>
+                        </y:GroupNode>
+                      </y:Realizers>
+                    </y:ProxyAutoBoundsNode>
+                  </data>
+                  <graph edgedefault="directed" id="n0::n2::n1::n0:">
+                    <node id="n0::n2::n1::n0::n0">
+                      <data key="d5">
+                        <y:ShapeNode>
+                          <y:Geometry height="26.0" width="112.0" x="0.0" y="0.0"/>
+                          <y:Fill color="#FFFFFF" transparent="false"/>
+                          <y:BorderStyle color="#000000" type="line" width="1.0"/>
+                          <y:NodeLabel alignment="center" autoSizePolicy="content" fontFamily="Dialog" fontSize="16" fontStyle="plain" hasBackgroundColor="false" hasLineColor="false" height="26.0" horizontalTextPosition="center" iconTextGap="4" modelName="internal" modelPosition="c" textColor="#000000" verticalTextPosition="bottom" visible="true" width="112.0" x="0.0" xml:space="preserve" y="0.0">adapterCfg</y:NodeLabel>
+                          <y:Shape type="rectangle"/>
+                        </y:ShapeNode>
+                      </data>
+                    </node>
+                  </graph>
+                </node>
+                <node id="n0::n2::n1::n1" yfiles.foldertype="group">
+                  <data key="d5">
+                    <y:ProxyAutoBoundsNode>
+                      <y:Realizers active="0">
+                        <y:GroupNode>
+                          <y:Geometry height="12.0" width="220.0" x="0.0" y="0.0"/>
+                          <y:Fill color="#F5F5F5" transparent="false"/>
+                          <y:BorderStyle color="#F5F5F5" type="dashed" width="1.0"/>
+                          <y:NodeLabel alignment="right" autoSizePolicy="content" backgroundColor="#EBEBEB" borderDistance="0.0" fontFamily="Dialog" fontSize="10" fontStyle="plain" hasLineColor="false" height="12.0" horizontalTextPosition="center" iconTextGap="4" modelName="sandwich" modelPosition="n" textColor="#000000" verticalTextPosition="bottom" width="220.0" x="0" xml:space="preserve" y="0">db (4 func, 59 lines)</y:NodeLabel>
+                          <y:Shape type="roundrectangle"/>
+                          <y:State closed="false" closedHeight="80.0" closedWidth="100.0" innerGraphDisplayEnabled="false"/>
+                          <y:Insets bottom="15" bottomF="15.0" left="15" leftF="15.0" right="15" rightF="15.0" top="15" topF="15.0"/>
+                          <y:BorderInsets bottom="54" bottomF="54.0" left="0" leftF="0.0" right="23" rightF="23.35" top="0" topF="0.0"/>
+                        </y:GroupNode>
+                        <y:GroupNode>
+                          <y:Geometry height="12.0" width="220.0" x="0.0" y="0.0"/>
+                          <y:Fill color="#F5F5F5" transparent="false"/>
+                          <y:BorderStyle color="#000000" type="dashed" width="1.0"/>
+                          <y:NodeLabel alignment="right" autoSizePolicy="content" backgroundColor="#EBEBEB" borderDistance="0.0" fontFamily="Dialog" fontSize="10" fontStyle="plain" hasLineColor="false" hasText="false" height="12.0" horizontalTextPosition="center" iconTextGap="4" modelName="sandwich" modelPosition="n" textColor="#000000" verticalTextPosition="bottom" width="220.0" x="0" y="0"/>
+                          <y:Shape type="roundrectangle"/>
+                          <y:State closed="true" closedHeight="80.0" closedWidth="100.0" innerGraphDisplayEnabled="false"/>
+                          <y:Insets bottom="15" bottomF="15.0" left="15" leftF="15.0" right="15" rightF="15.0" top="15" topF="15.0"/>
+                          <y:BorderInsets bottom="54" bottomF="54.0" left="0" leftF="0.0" right="23" rightF="23.35" top="0" topF="0.0"/>
+                        </y:GroupNode>
+                      </y:Realizers>
+                    </y:ProxyAutoBoundsNode>
+                  </data>
+                  <graph edgedefault="directed" id="n0::n2::n1::n1:">
+                    <node id="n0::n2::n1::n1::n0">
+                      <data key="d5">
+                        <y:ShapeNode>
+                          <y:Geometry height="26.0" width="104.0" x="0.0" y="0.0"/>
+                          <y:Fill color="#FFFFFF" transparent="false"/>
+                          <y:BorderStyle color="#000000" type="line" width="1.0"/>
+                          <y:NodeLabel alignment="center" autoSizePolicy="content" fontFamily="Dialog" fontSize="16" fontStyle="plain" hasBackgroundColor="false" hasLineColor="false" height="26.0" horizontalTextPosition="center" iconTextGap="4" modelName="internal" modelPosition="c" textColor="#000000" verticalTextPosition="bottom" visible="true" width="104.0" x="0.0" xml:space="preserve" y="0.0">adapterDB</y:NodeLabel>
+                          <y:Shape type="rectangle"/>
+                        </y:ShapeNode>
+                      </data>
+                    </node>
+                  </graph>
+                </node>
+                <node id="n0::n2::n1::n2" yfiles.foldertype="group">
+                  <data key="d5">
+                    <y:ProxyAutoBoundsNode>
+                      <y:Realizers active="0">
+                        <y:GroupNode>
+                          <y:Geometry height="12.0" width="260.0" x="0.0" y="0.0"/>
+                          <y:Fill color="#F5F5F5" transparent="false"/>
+                          <y:BorderStyle color="#F5F5F5" type="dashed" width="1.0"/>
+                          <y:NodeLabel alignment="right" autoSizePolicy="content" backgroundColor="#EBEBEB" borderDistance="0.0" fontFamily="Dialog" fontSize="10" fontStyle="plain" hasLineColor="false" height="12.0" horizontalTextPosition="center" iconTextGap="4" modelName="sandwich" modelPosition="n" textColor="#000000" verticalTextPosition="bottom" width="260.0" x="0" xml:space="preserve" y="0">http (18 func, 458 lines)</y:NodeLabel>
+                          <y:Shape type="roundrectangle"/>
+                          <y:State closed="false" closedHeight="80.0" closedWidth="100.0" innerGraphDisplayEnabled="false"/>
+                          <y:Insets bottom="15" bottomF="15.0" left="15" leftF="15.0" right="15" rightF="15.0" top="15" topF="15.0"/>
+                          <y:BorderInsets bottom="54" bottomF="54.0" left="0" leftF="0.0" right="23" rightF="23.35" top="0" topF="0.0"/>
+                        </y:GroupNode>
+                        <y:GroupNode>
+                          <y:Geometry height="12.0" width="260.0" x="0.0" y="0.0"/>
+                          <y:Fill color="#F5F5F5" transparent="false"/>
+                          <y:BorderStyle color="#000000" type="dashed" width="1.0"/>
+                          <y:NodeLabel alignment="right" autoSizePolicy="content" backgroundColor="#EBEBEB" borderDistance="0.0" fontFamily="Dialog" fontSize="10" fontStyle="plain" hasLineColor="false" hasText="false" height="12.0" horizontalTextPosition="center" iconTextGap="4" modelName="sandwich" modelPosition="n" textColor="#000000" verticalTextPosition="bottom" width="260.0" x="0" y="0"/>
+                          <y:Shape type="roundrectangle"/>
+                          <y:State closed="true" closedHeight="80.0" closedWidth="100.0" innerGraphDisplayEnabled="false"/>
+                          <y:Insets bottom="15" bottomF="15.0" left="15" leftF="15.0" right="15" rightF="15.0" top="15" topF="15.0"/>
+                          <y:BorderInsets bottom="54" bottomF="54.0" left="0" leftF="0.0" right="23" rightF="23.35" top="0" topF="0.0"/>
+                        </y:GroupNode>
+                      </y:Realizers>
+                    </y:ProxyAutoBoundsNode>
+                  </data>
+                  <graph edgedefault="directed" id="n0::n2::n1::n2:">
+                    <node id="n0::n2::n1::n2::n0">
+                      <data key="d5">
+                        <y:ShapeNode>
+                          <y:Geometry height="26.0" width="120.0" x="0.0" y="0.0"/>
+                          <y:Fill color="#FFFFFF" transparent="false"/>
+                          <y:BorderStyle color="#000000" type="line" width="1.0"/>
+                          <y:NodeLabel alignment="center" autoSizePolicy="content" fontFamily="Dialog" fontSize="16" fontStyle="plain" hasBackgroundColor="false" hasLineColor="false" height="26.0" horizontalTextPosition="center" iconTextGap="4" modelName="internal" modelPosition="c" textColor="#000000" verticalTextPosition="bottom" visible="true" width="120.0" x="0.0" xml:space="preserve" y="0.0">adapterHTTP</y:NodeLabel>
+                          <y:Shape type="rectangle"/>
+                        </y:ShapeNode>
+                      </data>
+                    </node>
+                  </graph>
+                </node>
+                <node id="n0::n2::n1::n3" yfiles.foldertype="group">
+                  <data key="d5">
+                    <y:ProxyAutoBoundsNode>
+                      <y:Realizers active="0">
+                        <y:GroupNode>
+                          <y:Geometry height="12.0" width="250.0" x="0.0" y="0.0"/>
+                          <y:Fill color="#F5F5F5" transparent="false"/>
+                          <y:BorderStyle color="#F5F5F5" type="dashed" width="1.0"/>
+                          <y:NodeLabel alignment="right" autoSizePolicy="content" backgroundColor="#EBEBEB" borderDistance="0.0" fontFamily="Dialog" fontSize="10" fontStyle="plain" hasLineColor="false" height="12.0" horizontalTextPosition="center" iconTextGap="4" modelName="sandwich" modelPosition="n" textColor="#000000" verticalTextPosition="bottom" width="250.0" x="0" xml:space="preserve" y="0">log (26 func, 318 lines)</y:NodeLabel>
+                          <y:Shape type="roundrectangle"/>
+                          <y:State closed="false" closedHeight="80.0" closedWidth="100.0" innerGraphDisplayEnabled="false"/>
+                          <y:Insets bottom="15" bottomF="15.0" left="15" leftF="15.0" right="15" rightF="15.0" top="15" topF="15.0"/>
+                          <y:BorderInsets bottom="54" bottomF="54.0" left="0" leftF="0.0" right="23" rightF="23.35" top="0" topF="0.0"/>
+                        </y:GroupNode>
+                        <y:GroupNode>
+                          <y:Geometry height="12.0" width="250.0" x="0.0" y="0.0"/>
+                          <y:Fill color="#F5F5F5" transparent="false"/>
+                          <y:BorderStyle color="#000000" type="dashed" width="1.0"/>
+                          <y:NodeLabel alignment="right" autoSizePolicy="content" backgroundColor="#EBEBEB" borderDistance="0.0" fontFamily="Dialog" fontSize="10" fontStyle="plain" hasLineColor="false" hasText="false" height="12.0" horizontalTextPosition="center" iconTextGap="4" modelName="sandwich" modelPosition="n" textColor="#000000" verticalTextPosition="bottom" width="250.0" x="0" y="0"/>
+                          <y:Shape type="roundrectangle"/>
+                          <y:State closed="true" closedHeight="80.0" closedWidth="100.0" innerGraphDisplayEnabled="false"/>
+                          <y:Insets bottom="15" bottomF="15.0" left="15" leftF="15.0" right="15" rightF="15.0" top="15" topF="15.0"/>
+                          <y:BorderInsets bottom="54" bottomF="54.0" left="0" leftF="0.0" right="23" rightF="23.35" top="0" topF="0.0"/>
+                        </y:GroupNode>
+                      </y:Realizers>
+                    </y:ProxyAutoBoundsNode>
+                  </data>
+                  <graph edgedefault="directed" id="n0::n2::n1::n3:">
+                    <node id="n0::n2::n1::n3::n0">
+                      <data key="d5">
+                        <y:ShapeNode>
+                          <y:Geometry height="26.0" width="112.0" x="0.0" y="0.0"/>
+                          <y:Fill color="#FFFFFF" transparent="false"/>
+                          <y:BorderStyle color="#000000" type="line" width="1.0"/>
+                          <y:NodeLabel alignment="center" autoSizePolicy="content" fontFamily="Dialog" fontSize="16" fontStyle="plain" hasBackgroundColor="false" hasLineColor="false" height="26.0" horizontalTextPosition="center" iconTextGap="4" modelName="internal" modelPosition="c" textColor="#000000" verticalTextPosition="bottom" visible="true" width="112.0" x="0.0" xml:space="preserve" y="0.0">adapterLog</y:NodeLabel>
+                          <y:Shape type="rectangle"/>
+                        </y:ShapeNode>
+                      </data>
+                    </node>
+                  </graph>
+                </node>
+              </graph>
+            </node>
+            <node id="n0::n2::n2" yfiles.foldertype="group">
+              <data key="d5">
+                <y:ProxyAutoBoundsNode>
+                  <y:Realizers active="0">
+                    <y:GroupNode>
+                      <y:Geometry height="12.0" width="190.0" x="0.0" y="0.0"/>
+                      <y:Fill color="#F5F5F5" transparent="false"/>
+                      <y:BorderStyle color="#F5F5F5" type="dashed" width="1.0"/>
+                      <y:NodeLabel alignment="right" autoSizePolicy="content" backgroundColor="#EBEBEB" borderDistance="0.0" fontFamily="Dialog" fontSize="10" fontStyle="plain" hasLineColor="false" height="12.0" horizontalTextPosition="center" iconTextGap="4" modelName="sandwich" modelPosition="n" textColor="#000000" verticalTextPosition="bottom" width="190.0" x="0" xml:space="preserve" y="0">apptype (76 lines)</y:NodeLabel>
+                      <y:Shape type="roundrectangle"/>
+                      <y:State closed="false" closedHeight="80.0" closedWidth="100.0" innerGraphDisplayEnabled="false"/>
+                      <y:Insets bottom="15" bottomF="15.0" left="15" leftF="15.0" right="15" rightF="15.0" top="15" topF="15.0"/>
+                      <y:BorderInsets bottom="54" bottomF="54.0" left="0" leftF="0.0" right="23" rightF="23.35" top="0" topF="0.0"/>
+                    </y:GroupNode>
+                    <y:GroupNode>
+                      <y:Geometry height="12.0" width="190.0" x="0.0" y="0.0"/>
+                      <y:Fill color="#F5F5F5" transparent="false"/>
+                      <y:BorderStyle color="#000000" type="dashed" width="1.0"/>
+                      <y:NodeLabel alignment="right" autoSizePolicy="content" backgroundColor="#EBEBEB" borderDistance="0.0" fontFamily="Dialog" fontSize="10" fontStyle="plain" hasLineColor="false" hasText="false" height="12.0" horizontalTextPosition="center" iconTextGap="4" modelName="sandwich" modelPosition="n" textColor="#000000" verticalTextPosition="bottom" width="190.0" x="0" y="0"/>
+                      <y:Shape type="roundrectangle"/>
+                      <y:State closed="true" closedHeight="80.0" closedWidth="100.0" innerGraphDisplayEnabled="false"/>
+                      <y:Insets bottom="15" bottomF="15.0" left="15" leftF="15.0" right="15" rightF="15.0" top="15" topF="15.0"/>
+                      <y:BorderInsets bottom="54" bottomF="54.0" left="0" leftF="0.0" right="23" rightF="23.35" top="0" topF="0.0"/>
+                    </y:GroupNode>
+                  </y:Realizers>
+                </y:ProxyAutoBoundsNode>
+              </data>
+              <graph edgedefault="directed" id="n0::n2::n2:">
+                <node id="n0::n2::n2::n0">
+                  <data key="d5">
+                    <y:ShapeNode>
+                      <y:Geometry height="26.0" width="72.0" x="0.0" y="0.0"/>
+                      <y:Fill color="#FFFFFF" transparent="false"/>
+                      <y:BorderStyle color="#000000" type="line" width="1.0"/>
+                      <y:NodeLabel alignment="center" autoSizePolicy="content" fontFamily="Dialog" fontSize="16" fontStyle="plain" hasBackgroundColor="false" hasLineColor="false" height="26.0" horizontalTextPosition="center" iconTextGap="4" modelName="internal" modelPosition="c" textColor="#000000" verticalTextPosition="bottom" visible="true" width="72.0" x="0.0" xml:space="preserve" y="0.0">types</y:NodeLabel>
+                      <y:Shape type="rectangle"/>
+                    </y:ShapeNode>
+                  </data>
+                </node>
+              </graph>
+            </node>
+            <node id="n0::n2::n3" yfiles.foldertype="group">
+              <data key="d5">
+                <y:ProxyAutoBoundsNode>
+                  <y:Realizers active="0">
+                    <y:GroupNode>
+                      <y:Geometry height="12.0" width="270.0" x="0.0" y="0.0"/>
+                      <y:Fill color="#F5F5F5" transparent="false"/>
+                      <y:BorderStyle color="#F5F5F5" type="dashed" width="1.0"/>
+                      <y:NodeLabel alignment="right" autoSizePolicy="content" backgroundColor="#EBEBEB" borderDistance="0.0" fontFamily="Dialog" fontSize="10" fontStyle="plain" hasLineColor="false" height="12.0" horizontalTextPosition="center" iconTextGap="4" modelName="sandwich" modelPosition="n" textColor="#000000" verticalTextPosition="bottom" width="270.0" x="0" xml:space="preserve" y="0">control (6 func, 79 lines)</y:NodeLabel>
+                      <y:Shape type="roundrectangle"/>
+                      <y:State closed="false" closedHeight="80.0" closedWidth="100.0" innerGraphDisplayEnabled="false"/>
+                      <y:Insets bottom="15" bottomF="15.0" left="15" leftF="15.0" right="15" rightF="15.0" top="15" topF="15.0"/>
+                      <y:BorderInsets bottom="54" bottomF="54.0" left="0" leftF="0.0" right="23" rightF="23.35" top="0" topF="0.0"/>
+                    </y:GroupNode>
+                    <y:GroupNode>
+                      <y:Geometry height="12.0" width="270.0" x="0.0" y="0.0"/>
+                      <y:Fill color="#F5F5F5" transparent="false"/>
+                      <y:BorderStyle color="#000000" type="dashed" width="1.0"/>
+                      <y:NodeLabel alignment="right" autoSizePolicy="content" backgroundColor="#EBEBEB" borderDistance="0.0" fontFamily="Dialog" fontSize="10" fontStyle="plain" hasLineColor="false" hasText="false" height="12.0" horizontalTextPosition="center" iconTextGap="4" modelName="sandwich" modelPosition="n" textColor="#000000" verticalTextPosition="bottom" width="270.0" x="0" y="0"/>
+                      <y:Shape type="roundrectangle"/>
+                      <y:State closed="true" closedHeight="80.0" closedWidth="100.0" innerGraphDisplayEnabled="false"/>
+                      <y:Insets bottom="15" bottomF="15.0" left="15" leftF="15.0" right="15" rightF="15.0" top="15" topF="15.0"/>
+                      <y:BorderInsets bottom="54" bottomF="54.0" left="0" leftF="0.0" right="23" rightF="23.35" top="0" topF="0.0"/>
+                    </y:GroupNode>
+                  </y:Realizers>
+                </y:ProxyAutoBoundsNode>
+              </data>
+              <graph edgedefault="directed" id="n0::n2::n3:">
+                <node id="n0::n2::n3::n0">
+                  <data key="d5">
+                    <y:ShapeNode>
+                      <y:Geometry height="26.0" width="88.0" x="0.0" y="0.0"/>
+                      <y:Fill color="#FFFFFF" transparent="false"/>
+                      <y:BorderStyle color="#000000" type="line" width="1.0"/>
+                      <y:NodeLabel alignment="center" autoSizePolicy="content" fontFamily="Dialog" fontSize="16" fontStyle="plain" hasBackgroundColor="false" hasLineColor="false" height="26.0" horizontalTextPosition="center" iconTextGap="4" modelName="internal" modelPosition="c" textColor="#000000" verticalTextPosition="bottom" visible="true" width="88.0" x="0.0" xml:space="preserve" y="0.0">control</y:NodeLabel>
+                      <y:Shape type="rectangle"/>
+                    </y:ShapeNode>
+                  </data>
+                </node>
+              </graph>
+            </node>
+            <node id="n0::n2::n4" yfiles.foldertype="group">
+              <data key="d5">
+                <y:ProxyAutoBoundsNode>
+                  <y:Realizers active="0">
+                    <y:GroupNode>
+                      <y:Geometry height="12.0" width="250.0" x="0.0" y="0.0"/>
+                      <y:Fill color="#F5F5F5" transparent="false"/>
+                      <y:BorderStyle color="#F5F5F5" type="dashed" width="1.0"/>
+                      <y:NodeLabel alignment="right" autoSizePolicy="content" backgroundColor="#EBEBEB" borderDistance="0.0" fontFamily="Dialog" fontSize="10" fontStyle="plain" hasLineColor="false" height="12.0" horizontalTextPosition="center" iconTextGap="4" modelName="sandwich" modelPosition="n" textColor="#000000" verticalTextPosition="bottom" width="250.0" x="0" xml:space="preserve" y="0">model (7 func, 61 lines)</y:NodeLabel>
+                      <y:Shape type="roundrectangle"/>
+                      <y:State closed="false" closedHeight="80.0" closedWidth="100.0" innerGraphDisplayEnabled="false"/>
+                      <y:Insets bottom="15" bottomF="15.0" left="15" leftF="15.0" right="15" rightF="15.0" top="15" topF="15.0"/>
+                      <y:BorderInsets bottom="54" bottomF="54.0" left="0" leftF="0.0" right="23" rightF="23.35" top="0" topF="0.0"/>
+                    </y:GroupNode>
+                    <y:GroupNode>
+                      <y:Geometry height="12.0" width="250.0" x="0.0" y="0.0"/>
+                      <y:Fill color="#F5F5F5" transparent="false"/>
+                      <y:BorderStyle color="#000000" type="dashed" width="1.0"/>
+                      <y:NodeLabel alignment="right" autoSizePolicy="content" backgroundColor="#EBEBEB" borderDistance="0.0" fontFamily="Dialog" fontSize="10" fontStyle="plain" hasLineColor="false" hasText="false" height="12.0" horizontalTextPosition="center" iconTextGap="4" modelName="sandwich" modelPosition="n" textColor="#000000" verticalTextPosition="bottom" width="250.0" x="0" y="0"/>
+                      <y:Shape type="roundrectangle"/>
+                      <y:State closed="true" closedHeight="80.0" closedWidth="100.0" innerGraphDisplayEnabled="false"/>
+                      <y:Insets bottom="15" bottomF="15.0" left="15" leftF="15.0" right="15" rightF="15.0" top="15" topF="15.0"/>
+                      <y:BorderInsets bottom="54" bottomF="54.0" left="0" leftF="0.0" right="23" rightF="23.35" top="0" topF="0.0"/>
+                    </y:GroupNode>
+                  </y:Realizers>
+                </y:ProxyAutoBoundsNode>
+              </data>
+              <graph edgedefault="directed" id="n0::n2::n4:">
+                <node id="n0::n2::n4::n0">
+                  <data key="d5">
+                    <y:ShapeNode>
+                      <y:Geometry height="26.0" width="72.0" x="0.0" y="0.0"/>
+                      <y:Fill color="#FFFFFF" transparent="false"/>
+                      <y:BorderStyle color="#000000" type="line" width="1.0"/>
+                      <y:NodeLabel alignment="center" autoSizePolicy="content" fontFamily="Dialog" fontSize="16" fontStyle="plain" hasBackgroundColor="false" hasLineColor="false" height="26.0" horizontalTextPosition="center" iconTextGap="4" modelName="internal" modelPosition="c" textColor="#000000" verticalTextPosition="bottom" visible="true" width="72.0" x="0.0" xml:space="preserve" y="0.0">model</y:NodeLabel>
+                      <y:Shape type="rectangle"/>
+                    </y:ShapeNode>
+                  </data>
+                </node>
+              </graph>
+            </node>
+            <node id="n0::n2::n5" yfiles.foldertype="group">
+              <data key="d5">
+                <y:ProxyAutoBoundsNode>
+                  <y:Realizers active="0">
+                    <y:GroupNode>
+                      <y:Geometry height="12.0" width="280.0" x="0.0" y="0.0"/>
+                      <y:Fill color="#F5F5F5" transparent="false"/>
+                      <y:BorderStyle color="#F5F5F5" type="dashed" width="1.0"/>
+                      <y:NodeLabel alignment="right" autoSizePolicy="content" backgroundColor="#EBEBEB" borderDistance="0.0" fontFamily="Dialog" fontSize="10" fontStyle="plain" hasLineColor="false" height="12.0" horizontalTextPosition="center" iconTextGap="4" modelName="sandwich" modelPosition="n" textColor="#000000" verticalTextPosition="bottom" width="280.0" x="0" xml:space="preserve" y="0">service (6 func, 100 lines)</y:NodeLabel>
+                      <y:Shape type="roundrectangle"/>
+                      <y:State closed="false" closedHeight="80.0" closedWidth="100.0" innerGraphDisplayEnabled="false"/>
+                      <y:Insets bottom="15" bottomF="15.0" left="15" leftF="15.0" right="15" rightF="15.0" top="15" topF="15.0"/>
+                      <y:BorderInsets bottom="54" bottomF="54.0" left="0" leftF="0.0" right="23" rightF="23.35" top="0" topF="0.0"/>
+                    </y:GroupNode>
+                    <y:GroupNode>
+                      <y:Geometry height="12.0" width="280.0" x="0.0" y="0.0"/>
+                      <y:Fill color="#F5F5F5" transparent="false"/>
+                      <y:BorderStyle color="#000000" type="dashed" width="1.0"/>
+                      <y:NodeLabel alignment="right" autoSizePolicy="content" backgroundColor="#EBEBEB" borderDistance="0.0" fontFamily="Dialog" fontSize="10" fontStyle="plain" hasLineColor="false" hasText="false" height="12.0" horizontalTextPosition="center" iconTextGap="4" modelName="sandwich" modelPosition="n" textColor="#000000" verticalTextPosition="bottom" width="280.0" x="0" y="0"/>
+                      <y:Shape type="roundrectangle"/>
+                      <y:State closed="true" closedHeight="80.0" closedWidth="100.0" innerGraphDisplayEnabled="false"/>
+                      <y:Insets bottom="15" bottomF="15.0" left="15" leftF="15.0" right="15" rightF="15.0" top="15" topF="15.0"/>
+                      <y:BorderInsets bottom="54" bottomF="54.0" left="0" leftF="0.0" right="23" rightF="23.35" top="0" topF="0.0"/>
+                    </y:GroupNode>
+                  </y:Realizers>
+                </y:ProxyAutoBoundsNode>
+              </data>
+              <graph edgedefault="directed" id="n0::n2::n5:">
+                <node id="n0::n2::n5::n0">
+                  <data key="d5">
+                    <y:ShapeNode>
+                      <y:Geometry height="26.0" width="88.0" x="0.0" y="0.0"/>
+                      <y:Fill color="#FFFFFF" transparent="false"/>
+                      <y:BorderStyle color="#000000" type="line" width="1.0"/>
+                      <y:NodeLabel alignment="center" autoSizePolicy="content" fontFamily="Dialog" fontSize="16" fontStyle="plain" hasBackgroundColor="false" hasLineColor="false" height="26.0" horizontalTextPosition="center" iconTextGap="4" modelName="internal" modelPosition="c" textColor="#000000" verticalTextPosition="bottom" visible="true" width="88.0" x="0.0" xml:space="preserve" y="0.0">service</y:NodeLabel>
+                      <y:Shape type="rectangle"/>
+                    </y:ShapeNode>
+                  </data>
+                </node>
+              </graph>
+            </node>
+          </graph>
+        </node>
+        <node id="n0::n3" yfiles.foldertype="group">
+          <data key="d5">
+            <y:ProxyAutoBoundsNode>
+              <y:Realizers active="0">
+                <y:GroupNode>
+                  <y:Geometry height="12.0" width="50.0" x="0.0" y="0.0"/>
+                  <y:Fill color="#F5F5F5" transparent="false"/>
+                  <y:BorderStyle color="#F5F5F5" type="dashed" width="1.0"/>
+                  <y:NodeLabel alignment="right" autoSizePolicy="content" backgroundColor="#EBEBEB" borderDistance="0.0" fontFamily="Dialog" fontSize="10" fontStyle="plain" hasLineColor="false" height="12.0" horizontalTextPosition="center" iconTextGap="4" modelName="sandwich" modelPosition="n" textColor="#000000" verticalTextPosition="bottom" width="50.0" x="0" xml:space="preserve" y="0">test</y:NodeLabel>
+                  <y:Shape type="roundrectangle"/>
+                  <y:State closed="false" closedHeight="80.0" closedWidth="100.0" innerGraphDisplayEnabled="false"/>
+                  <y:Insets bottom="15" bottomF="15.0" left="15" leftF="15.0" right="15" rightF="15.0" top="15" topF="15.0"/>
+                  <y:BorderInsets bottom="54" bottomF="54.0" left="0" leftF="0.0" right="23" rightF="23.35" top="0" topF="0.0"/>
+                </y:GroupNode>
+                <y:GroupNode>
+                  <y:Geometry height="12.0" width="50.0" x="0.0" y="0.0"/>
+                  <y:Fill color="#F5F5F5" transparent="false"/>
+                  <y:BorderStyle color="#000000" type="dashed" width="1.0"/>
+                  <y:NodeLabel alignment="right" autoSizePolicy="content" backgroundColor="#EBEBEB" borderDistance="0.0" fontFamily="Dialog" fontSize="10" fontStyle="plain" hasLineColor="false" hasText="false" height="12.0" horizontalTextPosition="center" iconTextGap="4" modelName="sandwich" modelPosition="n" textColor="#000000" verticalTextPosition="bottom" width="50.0" x="0" y="0"/>
+                  <y:Shape type="roundrectangle"/>
+                  <y:State closed="true" closedHeight="80.0" closedWidth="100.0" innerGraphDisplayEnabled="false"/>
+                  <y:Insets bottom="15" bottomF="15.0" left="15" leftF="15.0" right="15" rightF="15.0" top="15" topF="15.0"/>
+                  <y:BorderInsets bottom="54" bottomF="54.0" left="0" leftF="0.0" right="23" rightF="23.35" top="0" topF="0.0"/>
+                </y:GroupNode>
+              </y:Realizers>
+            </y:ProxyAutoBoundsNode>
+          </data>
+          <graph edgedefault="directed" id="n0::n3:"/>
+        </node>
+        <node id="n0::n4" yfiles.foldertype="group">
+          <data key="d5">
+            <y:ProxyAutoBoundsNode>
+              <y:Realizers active="0">
+                <y:GroupNode>
+                  <y:Geometry height="12.0" width="140.0" x="0.0" y="0.0"/>
+                  <y:Fill color="#F5F5F5" transparent="false"/>
+                  <y:BorderStyle color="#F5F5F5" type="dashed" width="1.0"/>
+                  <y:NodeLabel alignment="right" autoSizePolicy="content" backgroundColor="#EBEBEB" borderDistance="0.0" fontFamily="Dialog" fontSize="10" fontStyle="plain" hasLineColor="false" height="12.0" horizontalTextPosition="center" iconTextGap="4" modelName="sandwich" modelPosition="n" textColor="#000000" verticalTextPosition="bottom" width="140.0" x="0" xml:space="preserve" y="0">web (6 lines)</y:NodeLabel>
+                  <y:Shape type="roundrectangle"/>
+                  <y:State closed="false" closedHeight="80.0" closedWidth="100.0" innerGraphDisplayEnabled="false"/>
+                  <y:Insets bottom="15" bottomF="15.0" left="15" leftF="15.0" right="15" rightF="15.0" top="15" topF="15.0"/>
+                  <y:BorderInsets bottom="54" bottomF="54.0" left="0" leftF="0.0" right="23" rightF="23.35" top="0" topF="0.0"/>
+                </y:GroupNode>
+                <y:GroupNode>
+                  <y:Geometry height="12.0" width="140.0" x="0.0" y="0.0"/>
+                  <y:Fill color="#F5F5F5" transparent="false"/>
+                  <y:BorderStyle color="#000000" type="dashed" width="1.0"/>
+                  <y:NodeLabel alignment="right" autoSizePolicy="content" backgroundColor="#EBEBEB" borderDistance="0.0" fontFamily="Dialog" fontSize="10" fontStyle="plain" hasLineColor="false" hasText="false" height="12.0" horizontalTextPosition="center" iconTextGap="4" modelName="sandwich" modelPosition="n" textColor="#000000" verticalTextPosition="bottom" width="140.0" x="0" y="0"/>
+                  <y:Shape type="roundrectangle"/>
+                  <y:State closed="true" closedHeight="80.0" closedWidth="100.0" innerGraphDisplayEnabled="false"/>
+                  <y:Insets bottom="15" bottomF="15.0" left="15" leftF="15.0" right="15" rightF="15.0" top="15" topF="15.0"/>
+                  <y:BorderInsets bottom="54" bottomF="54.0" left="0" leftF="0.0" right="23" rightF="23.35" top="0" topF="0.0"/>
+                </y:GroupNode>
+              </y:Realizers>
+            </y:ProxyAutoBoundsNode>
+          </data>
+          <graph edgedefault="directed" id="n0::n4:">
+            <node id="n0::n4::n0">
+              <data key="d5">
+                <y:ShapeNode>
+                  <y:Geometry height="26.0" width="56.0" x="0.0" y="0.0"/>
+                  <y:Fill color="#FFFFFF" transparent="false"/>
+                  <y:BorderStyle color="#000000" type="line" width="1.0"/>
+                  <y:NodeLabel alignment="center" autoSizePolicy="content" fontFamily="Dialog" fontSize="16" fontStyle="plain" hasBackgroundColor="false" hasLineColor="false" height="26.0" horizontalTextPosition="center" iconTextGap="4" modelName="internal" modelPosition="c" textColor="#000000" verticalTextPosition="bottom" visible="true" width="56.0" x="0.0" xml:space="preserve" y="0.0">web</y:NodeLabel>
+                  <y:Shape type="rectangle"/>
+                </y:ShapeNode>
+              </data>
+            </node>
+            <node id="n0::n4::n1" yfiles.foldertype="group">
+              <data key="d5">
+                <y:ProxyAutoBoundsNode>
+                  <y:Realizers active="0">
+                    <y:GroupNode>
+                      <y:Geometry height="12.0" width="50.0" x="0.0" y="0.0"/>
+                      <y:Fill color="#F5F5F5" transparent="false"/>
+                      <y:BorderStyle color="#F5F5F5" type="dashed" width="1.0"/>
+                      <y:NodeLabel alignment="right" autoSizePolicy="content" backgroundColor="#EBEBEB" borderDistance="0.0" fontFamily="Dialog" fontSize="10" fontStyle="plain" hasLineColor="false" height="12.0" horizontalTextPosition="center" iconTextGap="4" modelName="sandwich" modelPosition="n" textColor="#000000" verticalTextPosition="bottom" width="50.0" x="0" xml:space="preserve" y="0">data</y:NodeLabel>
+                      <y:Shape type="roundrectangle"/>
+                      <y:State closed="false" closedHeight="80.0" closedWidth="100.0" innerGraphDisplayEnabled="false"/>
+                      <y:Insets bottom="15" bottomF="15.0" left="15" leftF="15.0" right="15" rightF="15.0" top="15" topF="15.0"/>
+                      <y:BorderInsets bottom="54" bottomF="54.0" left="0" leftF="0.0" right="23" rightF="23.35" top="0" topF="0.0"/>
+                    </y:GroupNode>
+                    <y:GroupNode>
+                      <y:Geometry height="12.0" width="50.0" x="0.0" y="0.0"/>
+                      <y:Fill color="#F5F5F5" transparent="false"/>
+                      <y:BorderStyle color="#000000" type="dashed" width="1.0"/>
+                      <y:NodeLabel alignment="right" autoSizePolicy="content" backgroundColor="#EBEBEB" borderDistance="0.0" fontFamily="Dialog" fontSize="10" fontStyle="plain" hasLineColor="false" hasText="false" height="12.0" horizontalTextPosition="center" iconTextGap="4" modelName="sandwich" modelPosition="n" textColor="#000000" verticalTextPosition="bottom" width="50.0" x="0" y="0"/>
+                      <y:Shape type="roundrectangle"/>
+                      <y:State closed="true" closedHeight="80.0" closedWidth="100.0" innerGraphDisplayEnabled="false"/>
+                      <y:Insets bottom="15" bottomF="15.0" left="15" leftF="15.0" right="15" rightF="15.0" top="15" topF="15.0"/>
+                      <y:BorderInsets bottom="54" bottomF="54.0" left="0" leftF="0.0" right="23" rightF="23.35" top="0" topF="0.0"/>
+                    </y:GroupNode>
+                  </y:Realizers>
+                </y:ProxyAutoBoundsNode>
+              </data>
+              <graph edgedefault="directed" id="n0::n4::n1:"/>
+            </node>
+          </graph>
+        </node>
+      </graph>
+    </node>
+    <edge id="e1" source="n0::n2::n1::n0::n0" target="n0::n2::n1::n3::n0">
+      <data key="d8" xml:space="preserve"><![CDATA[adapterCfg -> adapterLog]]></data>
+      <data key="d9">
+        <y:PolyLineEdge>
+          <y:Path sx="0.0" sy="0.0" tx="0.0" ty="0.0"/>
+          <y:LineStyle color="#000000" type="line" width="1.0"/>
+          <y:Arrows source="none" target="standard"/>
+          <y:EdgeLabel alignment="center" configuration="AutoFlippingLabel" distance="0.0" fontFamily="Dialog" fontSize="8" fontStyle="plain" hasBackgroundColor="false" hasLineColor="false" height="17.96875" horizontalTextPosition="center" iconTextGap="4" modelName="centered" modelPosition="head" preferredPlacement="anywhere" ratio="0.5" textColor="#000000" verticalTextPosition="bottom" visible="true" width="41.8" x="71.5" xml:space="preserve" y="0.5" bottomInset="0" leftInset="0" rightInset="0" topInset="0">
+            <y:PreferredPlacementDescriptor angle="0.0" angleOffsetOnRightSide="0" angleReference="absolute" angleRotationOnRightSide="co" distance="-1.0" frozen="true" placement="anywhere" side="anywhere" sideReference="relative_to_edge_flow"/>
+          </y:EdgeLabel>
+          <y:BendStyle smoothed="false"/>
+        </y:PolyLineEdge>
+      </data>
+    </edge>
+    <edge id="e2" source="n0::n2::n1::n0::n0" target="n0::n2::n2::n0">
+      <data key="d8" xml:space="preserve"><![CDATA[adapterCfg -> types]]></data>
+      <data key="d9">
+        <y:PolyLineEdge>
+          <y:Path sx="0.0" sy="0.0" tx="0.0" ty="0.0"/>
+          <y:LineStyle color="#000000" type="dashed" width="1.0"/>
+          <y:Arrows source="none" target="standard"/>
+          <y:EdgeLabel alignment="center" configuration="AutoFlippingLabel" distance="0.0" fontFamily="Dialog" fontSize="8" fontStyle="plain" hasBackgroundColor="false" hasLineColor="false" height="17.96875" horizontalTextPosition="center" iconTextGap="4" modelName="centered" modelPosition="head" preferredPlacement="anywhere" ratio="0.5" textColor="#000000" verticalTextPosition="bottom" visible="true" width="41.8" x="71.5" xml:space="preserve" y="0.5" bottomInset="0" leftInset="0" rightInset="0" topInset="0">
+            <y:PreferredPlacementDescriptor angle="0.0" angleOffsetOnRightSide="0" angleReference="absolute" angleRotationOnRightSide="co" distance="-1.0" frozen="true" placement="anywhere" side="anywhere" sideReference="relative_to_edge_flow"/>
+          </y:EdgeLabel>
+          <y:BendStyle smoothed="false"/>
+        </y:PolyLineEdge>
+      </data>
+    </edge>
+    <edge id="e3" source="n0::n2::n1::n2::n0" target="n0::n4::n0">
+      <data key="d8" xml:space="preserve"><![CDATA[adapterHTTP -> web]]></data>
+      <data key="d9">
+        <y:PolyLineEdge>
+          <y:Path sx="0.0" sy="0.0" tx="0.0" ty="0.0"/>
+          <y:LineStyle color="#000000" type="dashed" width="1.0"/>
+          <y:Arrows source="none" target="standard"/>
+          <y:EdgeLabel alignment="center" configuration="AutoFlippingLabel" distance="0.0" fontFamily="Dialog" fontSize="8" fontStyle="plain" hasBackgroundColor="false" hasLineColor="false" height="17.96875" horizontalTextPosition="center" iconTextGap="4" modelName="centered" modelPosition="head" preferredPlacement="anywhere" ratio="0.5" textColor="#000000" verticalTextPosition="bottom" visible="true" width="41.8" x="71.5" xml:space="preserve" y="0.5" bottomInset="0" leftInset="0" rightInset="0" topInset="0">
+            <y:PreferredPlacementDescriptor angle="0.0" angleOffsetOnRightSide="0" angleReference="absolute" angleRotationOnRightSide="co" distance="-1.0" frozen="true" placement="anywhere" side="anywhere" sideReference="relative_to_edge_flow"/>
+          </y:EdgeLabel>
+          <y:BendStyle smoothed="false"/>
+        </y:PolyLineEdge>
+      </data>
+    </edge>
+    <edge id="e4" source="n0::n2::n1::n2::n0" target="n0::n2::n2::n0">
+      <data key="d8" xml:space="preserve"><![CDATA[adapterHTTP -> types]]></data>
+      <data key="d9">
+        <y:PolyLineEdge>
+          <y:Path sx="0.0" sy="0.0" tx="0.0" ty="0.0"/>
+          <y:LineStyle color="#000000" type="dashed" width="1.0"/>
+          <y:Arrows source="none" target="standard"/>
+          <y:EdgeLabel alignment="center" configuration="AutoFlippingLabel" distance="0.0" fontFamily="Dialog" fontSize="8" fontStyle="plain" hasBackgroundColor="false" hasLineColor="false" height="17.96875" horizontalTextPosition="center" iconTextGap="4" modelName="centered" modelPosition="head" preferredPlacement="anywhere" ratio="0.5" textColor="#000000" verticalTextPosition="bottom" visible="true" width="41.8" x="71.5" xml:space="preserve" y="0.5" bottomInset="0" leftInset="0" rightInset="0" topInset="0">
+            <y:PreferredPlacementDescriptor angle="0.0" angleOffsetOnRightSide="0" angleReference="absolute" angleRotationOnRightSide="co" distance="-1.0" frozen="true" placement="anywhere" side="anywhere" sideReference="relative_to_edge_flow"/>
+          </y:EdgeLabel>
+          <y:BendStyle smoothed="false"/>
+        </y:PolyLineEdge>
+      </data>
+    </edge>
+    <edge id="e5" source="n0::n0::n0" target="n0::n2::n0">
+      <data key="d8" xml:space="preserve"><![CDATA[main -> app]]></data>
+      <data key="d9">
+        <y:PolyLineEdge>
+          <y:Path sx="0.0" sy="0.0" tx="0.0" ty="0.0"/>
+          <y:LineStyle color="#000000" type="dashed" width="1.0"/>
+          <y:Arrows source="none" target="standard"/>
+          <y:EdgeLabel alignment="center" configuration="AutoFlippingLabel" distance="0.0" fontFamily="Dialog" fontSize="8" fontStyle="plain" hasBackgroundColor="false" hasLineColor="false" height="17.96875" horizontalTextPosition="center" iconTextGap="4" modelName="centered" modelPosition="head" preferredPlacement="anywhere" ratio="0.5" textColor="#000000" verticalTextPosition="bottom" visible="true" width="41.8" x="71.5" xml:space="preserve" y="0.5" bottomInset="0" leftInset="0" rightInset="0" topInset="0">
+            <y:PreferredPlacementDescriptor angle="0.0" angleOffsetOnRightSide="0" angleReference="absolute" angleRotationOnRightSide="co" distance="-1.0" frozen="true" placement="anywhere" side="anywhere" sideReference="relative_to_edge_flow"/>
+          </y:EdgeLabel>
+          <y:BendStyle smoothed="false"/>
+        </y:PolyLineEdge>
+      </data>
+    </edge>
+    <edge id="e6" source="n0::n2::n1::n1::n0" target="n0::n2::n2::n0">
+      <data key="d8" xml:space="preserve"><![CDATA[adapterDB -> types]]></data>
+      <data key="d9">
+        <y:PolyLineEdge>
+          <y:Path sx="0.0" sy="0.0" tx="0.0" ty="0.0"/>
+          <y:LineStyle color="#000000" type="dashed" width="1.0"/>
+          <y:Arrows source="none" target="standard"/>
+          <y:EdgeLabel alignment="center" configuration="AutoFlippingLabel" distance="0.0" fontFamily="Dialog" fontSize="8" fontStyle="plain" hasBackgroundColor="false" hasLineColor="false" height="17.96875" horizontalTextPosition="center" iconTextGap="4" modelName="centered" modelPosition="head" preferredPlacement="anywhere" ratio="0.5" textColor="#000000" verticalTextPosition="bottom" visible="true" width="41.8" x="71.5" xml:space="preserve" y="0.5" bottomInset="0" leftInset="0" rightInset="0" topInset="0">
+            <y:PreferredPlacementDescriptor angle="0.0" angleOffsetOnRightSide="0" angleReference="absolute" angleRotationOnRightSide="co" distance="-1.0" frozen="true" placement="anywhere" side="anywhere" sideReference="relative_to_edge_flow"/>
+          </y:EdgeLabel>
+          <y:BendStyle smoothed="false"/>
+        </y:PolyLineEdge>
+      </data>
+    </edge>
+    <edge id="e7" source="n0::n2::n1::n1::n0" target="n0::n2::n4::n0">
+      <data key="d8" xml:space="preserve"><![CDATA[adapterDB -> model]]></data>
+      <data key="d9">
+        <y:PolyLineEdge>
+          <y:Path sx="0.0" sy="0.0" tx="0.0" ty="0.0"/>
+          <y:LineStyle color="#000000" type="line" width="1.0"/>
+          <y:Arrows source="none" target="standard"/>
+          <y:EdgeLabel alignment="center" configuration="AutoFlippingLabel" distance="0.0" fontFamily="Dialog" fontSize="8" fontStyle="plain" hasBackgroundColor="false" hasLineColor="false" height="17.96875" horizontalTextPosition="center" iconTextGap="4" modelName="centered" modelPosition="head" preferredPlacement="anywhere" ratio="0.5" textColor="#000000" verticalTextPosition="bottom" visible="true" width="41.8" x="71.5" xml:space="preserve" y="0.5" bottomInset="0" leftInset="0" rightInset="0" topInset="0">
+            <y:PreferredPlacementDescriptor angle="0.0" angleOffsetOnRightSide="0" angleReference="absolute" angleRotationOnRightSide="co" distance="-1.0" frozen="true" placement="anywhere" side="anywhere" sideReference="relative_to_edge_flow"/>
+          </y:EdgeLabel>
+          <y:BendStyle smoothed="false"/>
+        </y:PolyLineEdge>
+      </data>
+    </edge>
+    <edge id="e8" source="n0::n2::n1::n3::n0" target="n0::n2::n2::n0">
+      <data key="d8" xml:space="preserve"><![CDATA[adapterLog -> types]]></data>
+      <data key="d9">
+        <y:PolyLineEdge>
+          <y:Path sx="0.0" sy="0.0" tx="0.0" ty="0.0"/>
+          <y:LineStyle color="#000000" type="dashed" width="1.0"/>
+          <y:Arrows source="none" target="standard"/>
+          <y:EdgeLabel alignment="center" configuration="AutoFlippingLabel" distance="0.0" fontFamily="Dialog" fontSize="8" fontStyle="plain" hasBackgroundColor="false" hasLineColor="false" height="17.96875" horizontalTextPosition="center" iconTextGap="4" modelName="centered" modelPosition="head" preferredPlacement="anywhere" ratio="0.5" textColor="#000000" verticalTextPosition="bottom" visible="true" width="41.8" x="71.5" xml:space="preserve" y="0.5" bottomInset="0" leftInset="0" rightInset="0" topInset="0">
+            <y:PreferredPlacementDescriptor angle="0.0" angleOffsetOnRightSide="0" angleReference="absolute" angleRotationOnRightSide="co" distance="-1.0" frozen="true" placement="anywhere" side="anywhere" sideReference="relative_to_edge_flow"/>
+          </y:EdgeLabel>
+          <y:BendStyle smoothed="false"/>
+        </y:PolyLineEdge>
+      </data>
+    </edge>
+    <edge id="e9" source="n0::n2::n2::n0" target="n0::n2::n4::n0">
+      <data key="d8" xml:space="preserve"><![CDATA[types -> model]]></data>
+      <data key="d9">
+        <y:PolyLineEdge>
+          <y:Path sx="0.0" sy="0.0" tx="0.0" ty="0.0"/>
+          <y:LineStyle color="#000000" type="dashed" width="1.0"/>
+          <y:Arrows source="none" target="standard"/>
+          <y:EdgeLabel alignment="center" configuration="AutoFlippingLabel" distance="0.0" fontFamily="Dialog" fontSize="8" fontStyle="plain" hasBackgroundColor="false" hasLineColor="false" height="17.96875" horizontalTextPosition="center" iconTextGap="4" modelName="centered" modelPosition="head" preferredPlacement="anywhere" ratio="0.5" textColor="#000000" verticalTextPosition="bottom" visible="true" width="41.8" x="71.5" xml:space="preserve" y="0.5" bottomInset="0" leftInset="0" rightInset="0" topInset="0">
+            <y:PreferredPlacementDescriptor angle="0.0" angleOffsetOnRightSide="0" angleReference="absolute" angleRotationOnRightSide="co" distance="-1.0" frozen="true" placement="anywhere" side="anywhere" sideReference="relative_to_edge_flow"/>
+          </y:EdgeLabel>
+          <y:BendStyle smoothed="false"/>
+        </y:PolyLineEdge>
+      </data>
+    </edge>
+    <edge id="e10" source="n0::n2::n3::n0" target="n0::n2::n2::n0">
+      <data key="d8" xml:space="preserve"><![CDATA[control -> types]]></data>
+      <data key="d9">
+        <y:PolyLineEdge>
+          <y:Path sx="0.0" sy="0.0" tx="0.0" ty="0.0"/>
+          <y:LineStyle color="#000000" type="dashed" width="1.0"/>
+          <y:Arrows source="none" target="standard"/>
+          <y:EdgeLabel alignment="center" configuration="AutoFlippingLabel" distance="0.0" fontFamily="Dialog" fontSize="8" fontStyle="plain" hasBackgroundColor="false" hasLineColor="false" height="17.96875" horizontalTextPosition="center" iconTextGap="4" modelName="centered" modelPosition="head" preferredPlacement="anywhere" ratio="0.5" textColor="#000000" verticalTextPosition="bottom" visible="true" width="41.8" x="71.5" xml:space="preserve" y="0.5" bottomInset="0" leftInset="0" rightInset="0" topInset="0">
+            <y:PreferredPlacementDescriptor angle="0.0" angleOffsetOnRightSide="0" angleReference="absolute" angleRotationOnRightSide="co" distance="-1.0" frozen="true" placement="anywhere" side="anywhere" sideReference="relative_to_edge_flow"/>
+          </y:EdgeLabel>
+          <y:BendStyle smoothed="false"/>
+        </y:PolyLineEdge>
+      </data>
+    </edge>
+    <edge id="e11" source="n0::n2::n5::n0" target="n0::n2::n4::n0">
+      <data key="d8" xml:space="preserve"><![CDATA[service -> model]]></data>
+      <data key="d9">
+        <y:PolyLineEdge>
+          <y:Path sx="0.0" sy="0.0" tx="0.0" ty="0.0"/>
+          <y:LineStyle color="#000000" type="line" width="1.0"/>
+          <y:Arrows source="none" target="standard"/>
+          <y:EdgeLabel alignment="center" configuration="AutoFlippingLabel" distance="0.0" fontFamily="Dialog" fontSize="8" fontStyle="plain" hasBackgroundColor="false" hasLineColor="false" height="17.96875" horizontalTextPosition="center" iconTextGap="4" modelName="centered" modelPosition="head" preferredPlacement="anywhere" ratio="0.5" textColor="#000000" verticalTextPosition="bottom" visible="true" width="41.8" x="71.5" xml:space="preserve" y="0.5" bottomInset="0" leftInset="0" rightInset="0" topInset="0">
+            <y:PreferredPlacementDescriptor angle="0.0" angleOffsetOnRightSide="0" angleReference="absolute" angleRotationOnRightSide="co" distance="-1.0" frozen="true" placement="anywhere" side="anywhere" sideReference="relative_to_edge_flow"/>
+          </y:EdgeLabel>
+          <y:BendStyle smoothed="false"/>
+        </y:PolyLineEdge>
+      </data>
+    </edge>
+    <edge id="e12" source="n0::n2::n5::n0" target="n0::n2::n2::n0">
+      <data key="d8" xml:space="preserve"><![CDATA[service -> types]]></data>
+      <data key="d9">
+        <y:PolyLineEdge>
+          <y:Path sx="0.0" sy="0.0" tx="0.0" ty="0.0"/>
+          <y:LineStyle color="#000000" type="dashed" width="1.0"/>
+          <y:Arrows source="none" target="standard"/>
+          <y:EdgeLabel alignment="center" configuration="AutoFlippingLabel" distance="0.0" fontFamily="Dialog" fontSize="8" fontStyle="plain" hasBackgroundColor="false" hasLineColor="false" height="17.96875" horizontalTextPosition="center" iconTextGap="4" modelName="centered" modelPosition="head" preferredPlacement="anywhere" ratio="0.5" textColor="#000000" verticalTextPosition="bottom" visible="true" width="41.8" x="71.5" xml:space="preserve" y="0.5" bottomInset="0" leftInset="0" rightInset="0" topInset="0">
+            <y:PreferredPlacementDescriptor angle="0.0" angleOffsetOnRightSide="0" angleReference="absolute" angleRotationOnRightSide="co" distance="-1.0" frozen="true" placement="anywhere" side="anywhere" sideReference="relative_to_edge_flow"/>
+          </y:EdgeLabel>
+          <y:BendStyle smoothed="false"/>
+        </y:PolyLineEdge>
+      </data>
+    </edge>
+    <edge id="e13" source="n0::n2::n0" target="n0::n2::n1::n1::n0">
+      <data key="d8" xml:space="preserve"><![CDATA[app -> adapterDB]]></data>
+      <data key="d9">
+        <y:PolyLineEdge>
+          <y:Path sx="0.0" sy="0.0" tx="0.0" ty="0.0"/>
+          <y:LineStyle color="#000000" type="dashed" width="1.0"/>
+          <y:Arrows source="none" target="standard"/>
+          <y:EdgeLabel alignment="center" configuration="AutoFlippingLabel" distance="0.0" fontFamily="Dialog" fontSize="8" fontStyle="plain" hasBackgroundColor="false" hasLineColor="false" height="17.96875" horizontalTextPosition="center" iconTextGap="4" modelName="centered" modelPosition="head" preferredPlacement="anywhere" ratio="0.5" textColor="#000000" verticalTextPosition="bottom" visible="true" width="41.8" x="71.5" xml:space="preserve" y="0.5" bottomInset="0" leftInset="0" rightInset="0" topInset="0">
+            <y:PreferredPlacementDescriptor angle="0.0" angleOffsetOnRightSide="0" angleReference="absolute" angleRotationOnRightSide="co" distance="-1.0" frozen="true" placement="anywhere" side="anywhere" sideReference="relative_to_edge_flow"/>
+          </y:EdgeLabel>
+          <y:BendStyle smoothed="false"/>
+        </y:PolyLineEdge>
+      </data>
+    </edge>
+    <edge id="e14" source="n0::n2::n0" target="n0::n2::n1::n2::n0">
+      <data key="d8" xml:space="preserve"><![CDATA[app -> adapterHTTP]]></data>
+      <data key="d9">
+        <y:PolyLineEdge>
+          <y:Path sx="0.0" sy="0.0" tx="0.0" ty="0.0"/>
+          <y:LineStyle color="#000000" type="dashed" width="1.0"/>
+          <y:Arrows source="none" target="standard"/>
+          <y:EdgeLabel alignment="center" configuration="AutoFlippingLabel" distance="0.0" fontFamily="Dialog" fontSize="8" fontStyle="plain" hasBackgroundColor="false" hasLineColor="false" height="17.96875" horizontalTextPosition="center" iconTextGap="4" modelName="centered" modelPosition="head" preferredPlacement="anywhere" ratio="0.5" textColor="#000000" verticalTextPosition="bottom" visible="true" width="41.8" x="71.5" xml:space="preserve" y="0.5" bottomInset="0" leftInset="0" rightInset="0" topInset="0">
+            <y:PreferredPlacementDescriptor angle="0.0" angleOffsetOnRightSide="0" angleReference="absolute" angleRotationOnRightSide="co" distance="-1.0" frozen="true" placement="anywhere" side="anywhere" sideReference="relative_to_edge_flow"/>
+          </y:EdgeLabel>
+          <y:BendStyle smoothed="false"/>
+        </y:PolyLineEdge>
+      </data>
+    </edge>
+    <edge id="e15" source="n0::n2::n0" target="n0::n2::n1::n3::n0">
+      <data key="d8" xml:space="preserve"><![CDATA[app -> adapterLog]]></data>
+      <data key="d9">
+        <y:PolyLineEdge>
+          <y:Path sx="0.0" sy="0.0" tx="0.0" ty="0.0"/>
+          <y:LineStyle color="#000000" type="dashed" width="1.0"/>
+          <y:Arrows source="none" target="standard"/>
+          <y:EdgeLabel alignment="center" configuration="AutoFlippingLabel" distance="0.0" fontFamily="Dialog" fontSize="8" fontStyle="plain" hasBackgroundColor="false" hasLineColor="false" height="17.96875" horizontalTextPosition="center" iconTextGap="4" modelName="centered" modelPosition="head" preferredPlacement="anywhere" ratio="0.5" textColor="#000000" verticalTextPosition="bottom" visible="true" width="41.8" x="71.5" xml:space="preserve" y="0.5" bottomInset="0" leftInset="0" rightInset="0" topInset="0">
+            <y:PreferredPlacementDescriptor angle="0.0" angleOffsetOnRightSide="0" angleReference="absolute" angleRotationOnRightSide="co" distance="-1.0" frozen="true" placement="anywhere" side="anywhere" sideReference="relative_to_edge_flow"/>
+          </y:EdgeLabel>
+          <y:BendStyle smoothed="false"/>
+        </y:PolyLineEdge>
+      </data>
+    </edge>
+    <edge id="e16" source="n0::n2::n0" target="n0::n2::n2::n0">
+      <data key="d8" xml:space="preserve"><![CDATA[app -> types]]></data>
+      <data key="d9">
+        <y:PolyLineEdge>
+          <y:Path sx="0.0" sy="0.0" tx="0.0" ty="0.0"/>
+          <y:LineStyle color="#000000" type="dashed" width="1.0"/>
+          <y:Arrows source="none" target="standard"/>
+          <y:EdgeLabel alignment="center" configuration="AutoFlippingLabel" distance="0.0" fontFamily="Dialog" fontSize="8" fontStyle="plain" hasBackgroundColor="false" hasLineColor="false" height="17.96875" horizontalTextPosition="center" iconTextGap="4" modelName="centered" modelPosition="head" preferredPlacement="anywhere" ratio="0.5" textColor="#000000" verticalTextPosition="bottom" visible="true" width="41.8" x="71.5" xml:space="preserve" y="0.5" bottomInset="0" leftInset="0" rightInset="0" topInset="0">
+            <y:PreferredPlacementDescriptor angle="0.0" angleOffsetOnRightSide="0" angleReference="absolute" angleRotationOnRightSide="co" distance="-1.0" frozen="true" placement="anywhere" side="anywhere" sideReference="relative_to_edge_flow"/>
+          </y:EdgeLabel>
+          <y:BendStyle smoothed="false"/>
+        </y:PolyLineEdge>
+      </data>
+    </edge>
+    <edge id="e17" source="n0::n2::n0" target="n0::n2::n3::n0">
+      <data key="d8" xml:space="preserve"><![CDATA[app -> control]]></data>
+      <data key="d9">
+        <y:PolyLineEdge>
+          <y:Path sx="0.0" sy="0.0" tx="0.0" ty="0.0"/>
+          <y:LineStyle color="#000000" type="line" width="1.0"/>
+          <y:Arrows source="none" target="standard"/>
+          <y:EdgeLabel alignment="center" configuration="AutoFlippingLabel" distance="0.0" fontFamily="Dialog" fontSize="8" fontStyle="plain" hasBackgroundColor="false" hasLineColor="false" height="17.96875" horizontalTextPosition="center" iconTextGap="4" modelName="centered" modelPosition="head" preferredPlacement="anywhere" ratio="0.5" textColor="#000000" verticalTextPosition="bottom" visible="true" width="41.8" x="71.5" xml:space="preserve" y="0.5" bottomInset="0" leftInset="0" rightInset="0" topInset="0">
+            <y:PreferredPlacementDescriptor angle="0.0" angleOffsetOnRightSide="0" angleReference="absolute" angleRotationOnRightSide="co" distance="-1.0" frozen="true" placement="anywhere" side="anywhere" sideReference="relative_to_edge_flow"/>
+          </y:EdgeLabel>
+          <y:BendStyle smoothed="false"/>
+        </y:PolyLineEdge>
+      </data>
+    </edge>
+    <edge id="e18" source="n0::n2::n0" target="n0::n2::n5::n0">
+      <data key="d8" xml:space="preserve"><![CDATA[app -> service]]></data>
+      <data key="d9">
+        <y:PolyLineEdge>
+          <y:Path sx="0.0" sy="0.0" tx="0.0" ty="0.0"/>
+          <y:LineStyle color="#000000" type="line" width="1.0"/>
+          <y:Arrows source="none" target="standard"/>
+          <y:EdgeLabel alignment="center" configuration="AutoFlippingLabel" distance="0.0" fontFamily="Dialog" fontSize="8" fontStyle="plain" hasBackgroundColor="false" hasLineColor="false" height="17.96875" horizontalTextPosition="center" iconTextGap="4" modelName="centered" modelPosition="head" preferredPlacement="anywhere" ratio="0.5" textColor="#000000" verticalTextPosition="bottom" visible="true" width="41.8" x="71.5" xml:space="preserve" y="0.5" bottomInset="0" leftInset="0" rightInset="0" topInset="0">
+            <y:PreferredPlacementDescriptor angle="0.0" angleOffsetOnRightSide="0" angleReference="absolute" angleRotationOnRightSide="co" distance="-1.0" frozen="true" placement="anywhere" side="anywhere" sideReference="relative_to_edge_flow"/>
+          </y:EdgeLabel>
+          <y:BendStyle smoothed="false"/>
+        </y:PolyLineEdge>
+      </data>
+    </edge>
+    <edge id="e19" source="n0::n2::n0" target="n0::n2::n1::n0::n0">
+      <data key="d8" xml:space="preserve"><![CDATA[app -> adapterCfg]]></data>
+      <data key="d9">
+        <y:PolyLineEdge>
+          <y:Path sx="0.0" sy="0.0" tx="0.0" ty="0.0"/>
+          <y:LineStyle color="#000000" type="dashed" width="1.0"/>
+          <y:Arrows source="none" target="standard"/>
+          <y:EdgeLabel alignment="center" configuration="AutoFlippingLabel" distance="0.0" fontFamily="Dialog" fontSize="8" fontStyle="plain" hasBackgroundColor="false" hasLineColor="false" height="17.96875" horizontalTextPosition="center" iconTextGap="4" modelName="centered" modelPosition="head" preferredPlacement="anywhere" ratio="0.5" textColor="#000000" verticalTextPosition="bottom" visible="true" width="41.8" x="71.5" xml:space="preserve" y="0.5" bottomInset="0" leftInset="0" rightInset="0" topInset="0">
+            <y:PreferredPlacementDescriptor angle="0.0" angleOffsetOnRightSide="0" angleReference="absolute" angleRotationOnRightSide="co" distance="-1.0" frozen="true" placement="anywhere" side="anywhere" sideReference="relative_to_edge_flow"/>
+          </y:EdgeLabel>
+          <y:BendStyle smoothed="false"/>
+        </y:PolyLineEdge>
+      </data>
+    </edge>
+    <edge id="e20" source="n0::n2::n1::n2::n0" target="n0::n2::n1::n2::n0">
+      <data key="d8" xml:space="preserve"><![CDATA[adapterHTTP -> ]]></data>
+      <data key="d9">
+        <y:PolyLineEdge>
+          <y:Path sx="0.0" sy="0.0" tx="0.0" ty="0.0"/>
+          <y:LineStyle color="#0000FF" type="line" width="1.0"/>
+          <y:Arrows source="none" target="standard"/>
+          <y:EdgeLabel alignment="center" configuration="AutoFlippingLabel" distance="0.0" fontFamily="Dialog" fontSize="8" fontStyle="plain" hasBackgroundColor="false" hasLineColor="false" height="17.96875" horizontalTextPosition="center" iconTextGap="4" modelName="centered" modelPosition="head" preferredPlacement="anywhere" ratio="0.5" textColor="#0000FF" verticalTextPosition="bottom" visible="true" width="41.8" x="71.5" xml:space="preserve" y="0.5" bottomInset="0" leftInset="0" rightInset="0" topInset="0">
+            <y:PreferredPlacementDescriptor angle="0.0" angleOffsetOnRightSide="0" angleReference="absolute" angleRotationOnRightSide="co" distance="-1.0" frozen="true" placement="anywhere" side="anywhere" sideReference="relative_to_edge_flow"/>
+          </y:EdgeLabel>
+          <y:BendStyle smoothed="false"/>
+        </y:PolyLineEdge>
+      </data>
+    </edge>
+    <edge id="e21" source="n0::n2::n1::n2::n0" target="n0::n2::n1::n2::n0">
+      <data key="d8" xml:space="preserve"><![CDATA[adapterHTTP -> ]]></data>
+      <data key="d9">
+        <y:PolyLineEdge>
+          <y:Path sx="0.0" sy="0.0" tx="0.0" ty="0.0"/>
+          <y:LineStyle color="#0000FF" type="line" width="1.0"/>
+          <y:Arrows source="none" target="standard"/>
+          <y:EdgeLabel alignment="center" configuration="AutoFlippingLabel" distance="0.0" fontFamily="Dialog" fontSize="8" fontStyle="plain" hasBackgroundColor="false" hasLineColor="false" height="17.96875" horizontalTextPosition="center" iconTextGap="4" modelName="centered" modelPosition="head" preferredPlacement="anywhere" ratio="0.5" textColor="#0000FF" verticalTextPosition="bottom" visible="true" width="41.8" x="71.5" xml:space="preserve" y="0.5" bottomInset="0" leftInset="0" rightInset="0" topInset="0">
+            <y:PreferredPlacementDescriptor angle="0.0" angleOffsetOnRightSide="0" angleReference="absolute" angleRotationOnRightSide="co" distance="-1.0" frozen="true" placement="anywhere" side="anywhere" sideReference="relative_to_edge_flow"/>
+          </y:EdgeLabel>
+          <y:BendStyle smoothed="false"/>
+        </y:PolyLineEdge>
+      </data>
+    </edge>
+  </graph>
+</graphml>

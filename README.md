@@ -21,7 +21,7 @@ This is a test project to generate the short link from the long link you already
 
 ## **🔬 Analysis**
 We choose Monolith as system arch pattern and Rich Domain Model as software arch pattern. Let us look at some architect points:
-<img style="margin-top: 0px; margin-right: 100px;" align="right" width="29%" alt="#ArchPic" src="./asset/arch.png"/>
+<img style="margin-top: 0px; margin-right: 100px;" align="right" width="29%" alt="#ARCPIC" src="./asset/arch.png"/>
 
 - `Adapters`
   - HTTP transport
@@ -51,7 +51,7 @@ We choose Monolith as system arch pattern and Rich Domain Model as software arch
   - check if pair is valid
 
 ## **💡 Solution notes**
-<img style="margin-right: 100px;" align="right" width="14%" alt="#Prod" src="./asset/production.png"/>
+<img style="margin-right: 100px;" align="right" width="14%" alt="#PROD" src="./asset/production.png"/>
 
 - layering and hexagonal arch
 - standart go project layout (more or less)
@@ -83,10 +83,24 @@ We choose Monolith as system arch pattern and Rich Domain Model as software arch
   - minikube
 
 ## **📊 Metrics**
+<img style="margin-right: 0px;" align="right" width="60%" alt="#METRICS" src="./asset/metrics.png"/>
 <p align="left">
 	<img src="https://img.shields.io/github/languages/code-size/kselnaag/shortlink?style=plastic" title="src files size" alt="src files size">
 	<img src="https://img.shields.io/github/repo-size/kselnaag/shortlink?style=plastic" title="repo size" alt="repo size">
 </p>
+
+- Code size + Repository size
+- Package graph ---------------------------------->
+- Unit test coverage
+- Lines of code (loc)
+- Cyclomatic complexity (cycl)
+- Cognitive Complexity (cogn)
+- Halstead complexity (hals)
+- Maintainability index (maint)
+- 
+- 
+- 
+- 
 
 ## **⚙️ HowTo**
 <img style="margin-right: 0px;" align="right" width="30%" alt="#CICD" src="./asset/cicd.png"/>
