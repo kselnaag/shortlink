@@ -11,14 +11,14 @@ import (
 var _ T.ISvcShortLink = (*SvcShortLink)(nil)
 
 type SvcShortLink struct {
-	db   T.Idb
+	ctrl T.ICtrlDB
 	hcli T.IHTTPClient
 	log  T.ILog
 }
 
-func NewSvcShortLink(db T.Idb, hcli T.IHTTPClient, log T.ILog) SvcShortLink {
+func NewSvcShortLink(ctrl T.ICtrlDB, hcli T.IHTTPClient, log T.ILog) SvcShortLink {
 	return SvcShortLink{
-		db:   db,
+		ctrl: ctrl,
 		hcli: hcli,
 		log:  log,
 	}
@@ -26,7 +26,7 @@ func NewSvcShortLink(db T.Idb, hcli T.IHTTPClient, log T.ILog) SvcShortLink {
 
 func (ssl *SvcShortLink) GetAllLinkPairs() []model.LinkPair {
 	res := make([]model.LinkPair, 0, 8)
-	allpairs := ssl.db.LoadAllLinkPairs()
+	allpairs := ssl.ctrl.LoadAllLinkPairs()
 	for _, el := range allpairs {
 		if el.IsValid() {
 			res = append(res, el)
@@ -39,7 +39,7 @@ func (ssl *SvcShortLink) GetAllLinkPairs() []model.LinkPair {
 }
 
 func (ssl *SvcShortLink) GetLinkLongFromLinkShort(linkshort string) model.LinkPair {
-	lp := ssl.db.LoadLinkPair(linkshort)
+	lp := ssl.ctrl.LoadLinkPair(linkshort)
 	if lp.IsValid() {
 		return lp
 	}
@@ -49,7 +49,7 @@ func (ssl *SvcShortLink) GetLinkLongFromLinkShort(linkshort string) model.LinkPa
 
 func (ssl *SvcShortLink) GetLinkShortFromLinkLong(linklong string) model.LinkPair {
 	newLP := model.NewLinkPair(linklong)
-	lp := ssl.db.LoadLinkPair(newLP.Short())
+	lp := ssl.ctrl.LoadLinkPair(newLP.Short())
 	if lp.IsValid() {
 		return lp
 	}
@@ -72,7 +72,7 @@ func (ssl *SvcShortLink) SetLinkPairFromLinkLong(linklong string) model.LinkPair
 	if dbsearchedLP.IsValid() {
 		return newLP
 	}
-	if !ssl.db.SaveLinkPair(newLP) { // save in db
+	if !ssl.ctrl.SaveLinkPair(newLP) { // save in db
 		ssl.log.LogDebug("SetLinkPairFromLinkLong(): Link pair is not saved in db")
 		return empty
 	}

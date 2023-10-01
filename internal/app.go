@@ -13,7 +13,7 @@ import (
 
 type App struct {
 	hsrv T.IHTTPServer
-	db   T.Idb
+	db   T.IDB
 	log  T.ILog
 	cfg  *T.CfgEnv
 }
@@ -21,11 +21,12 @@ type App struct {
 func NewApp() App {
 	cfg := adapterCfg.NewCfgEnv("shortlink.env")
 	log := adapterLog.NewLogFprintf(&cfg)
-	db := adapterDB.NewDBMock(&cfg)
+	db := adapterDB.NewDBMock(&cfg, &log)
+	ctrlDB := control.NewCtrlDB(&db)
 	hcli := adapterHTTP.NewHTTPClientNet()
-	svcsl := service.NewSvcShortLink(&db, &hcli, &log)
-	ctrl := control.NewCtrlHTTP(&svcsl)
-	hsrv := adapterHTTP.NewHTTPServerNet(&ctrl, &log, &cfg)
+	svcsl := service.NewSvcShortLink(&ctrlDB, &hcli, &log)
+	ctrlHTTP := control.NewCtrlHTTP(&svcsl)
+	hsrv := adapterHTTP.NewHTTPServerNet(&ctrlHTTP, &log, &cfg)
 	return App{
 		hsrv: &hsrv,
 		db:   &db,
@@ -35,12 +36,12 @@ func NewApp() App {
 }
 
 func (a *App) Start() func(err error) {
-	// dbShutdown := db.Connect(&log, &cfg)
+	dbShutdown := a.db.Connect()
 	hsrvShutdown := a.hsrv.Run()
 	a.log.LogInfo(a.cfg.SL_APP_NAME + " app started")
 	return func(err error) {
 		hsrvShutdown(err)
-		// dbShutdown(err)
+		dbShutdown(err)
 		if err != nil {
 			a.log.LogError(err, a.cfg.SL_APP_NAME+" app stoped")
 			os.Exit(1)

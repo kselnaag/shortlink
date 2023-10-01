@@ -59,29 +59,29 @@ func (hfs *HTTPServerFast) handlers() {
 
 	hfs.hsrv.Get("/check/ping", func(c *fiber.Ctx) error {
 		headers(c)
-		return c.Status(fiber.StatusOK).JSON(T.HTTPMessage{IsResp: true, Mode: "check", Body: "pong"})
+		return c.Status(fiber.StatusOK).JSON(T.HTTPMessageDTO{IsResp: true, Mode: "check", Body: "pong"})
 	})
 	hfs.hsrv.Get("/check/abs", func(c *fiber.Ctx) error {
 		headers(c)
-		return c.Status(fiber.StatusNotFound).JSON(T.HTTPMessage{IsResp: true, Mode: "check", Body: "404 Not Found"})
+		return c.Status(fiber.StatusNotFound).JSON(T.HTTPMessageDTO{IsResp: true, Mode: "check", Body: "404 Not Found"})
 	})
 	hfs.hsrv.Get("/check/panic", func(c *fiber.Ctx) error {
 		headers(c)
 		panic(`{IsResp:true,Mode:check,Body:panic}`)
-		// return c.Status(fiber.StatusInternalServerError).JSON(HTTPMessage{IsResp:true, Mode:"check", Body:"panic"})
+		// return c.Status(fiber.StatusInternalServerError).JSON(HTTPMessageDTO{IsResp:true, Mode:"check", Body:"panic"})
 	})
 	hfs.hsrv.Get("/check/close", func(c *fiber.Ctx) error {
 		headers(c)
 		hfs.appClose()
-		return c.Status(fiber.StatusOK).JSON(T.HTTPMessage{IsResp: true, Mode: "check", Body: "server close"})
+		return c.Status(fiber.StatusOK).JSON(T.HTTPMessageDTO{IsResp: true, Mode: "check", Body: "server close"})
 	})
 	hfs.hsrv.Get("/check/allpairs", func(c *fiber.Ctx) error {
 		headers(c)
 		all, err := hfs.ctrl.AllPairs()
 		if err != nil {
-			return c.Status(fiber.StatusNotFound).JSON(T.HTTPMessage{IsResp: true, Mode: "404", Body: err.Error()})
+			return c.Status(fiber.StatusNotFound).JSON(T.HTTPMessageDTO{IsResp: true, Mode: "404", Body: err.Error()})
 		}
-		return c.Status(fiber.StatusOK).JSON(T.HTTPMessage{IsResp: true, Mode: "200", Body: all})
+		return c.Status(fiber.StatusOK).JSON(T.HTTPMessageDTO{IsResp: true, Mode: "200", Body: all})
 	})
 	////
 	hfs.hsrv.Post("/long", func(c *fiber.Ctx) error { // link short from link long
@@ -89,34 +89,34 @@ func (hfs *HTTPServerFast) handlers() {
 		body := c.Body()
 		short, err := hfs.ctrl.Long(body)
 		if err != nil {
-			return c.Status(fiber.StatusNotFound).JSON(T.HTTPMessage{IsResp: true, Mode: "404", Body: err.Error()})
+			return c.Status(fiber.StatusNotFound).JSON(T.HTTPMessageDTO{IsResp: true, Mode: "404", Body: err.Error()})
 		}
-		return c.Status(fiber.StatusPartialContent).JSON(T.HTTPMessage{IsResp: true, Mode: "206", Body: short})
+		return c.Status(fiber.StatusPartialContent).JSON(T.HTTPMessageDTO{IsResp: true, Mode: "206", Body: short})
 	})
 	hfs.hsrv.Post("/short", func(c *fiber.Ctx) error { // link long from link short
 		headers(c)
 		body := c.Body()
 		long, err := hfs.ctrl.Short(body)
 		if err != nil {
-			return c.Status(fiber.StatusNotFound).JSON(T.HTTPMessage{IsResp: true, Mode: "404", Body: err.Error()})
+			return c.Status(fiber.StatusNotFound).JSON(T.HTTPMessageDTO{IsResp: true, Mode: "404", Body: err.Error()})
 		}
-		return c.Status(fiber.StatusPartialContent).JSON(T.HTTPMessage{IsResp: true, Mode: "206", Body: long})
+		return c.Status(fiber.StatusPartialContent).JSON(T.HTTPMessageDTO{IsResp: true, Mode: "206", Body: long})
 	})
 	hfs.hsrv.Post("/save", func(c *fiber.Ctx) error { // save link pair
 		headers(c)
 		body := c.Body()
 		short, err := hfs.ctrl.Save(body)
 		if err != nil {
-			return c.Status(fiber.StatusNotFound).JSON(T.HTTPMessage{IsResp: true, Mode: "404", Body: err.Error()})
+			return c.Status(fiber.StatusNotFound).JSON(T.HTTPMessageDTO{IsResp: true, Mode: "404", Body: err.Error()})
 		}
-		return c.Status(fiber.StatusCreated).JSON(T.HTTPMessage{IsResp: true, Mode: "201", Body: short})
+		return c.Status(fiber.StatusCreated).JSON(T.HTTPMessageDTO{IsResp: true, Mode: "201", Body: short})
 	})
 	hfs.hsrv.Get("/r/:hash", func(c *fiber.Ctx) error { // redirect
 		headers(c)
 		hash := c.Params("hash")
 		long, err := hfs.ctrl.Hash(hash)
 		if err != nil {
-			return c.Status(fiber.StatusNotFound).JSON(T.HTTPMessage{IsResp: true, Mode: "404", Body: err.Error()})
+			return c.Status(fiber.StatusNotFound).JSON(T.HTTPMessageDTO{IsResp: true, Mode: "404", Body: err.Error()})
 		}
 		return c.Redirect(long)
 	})

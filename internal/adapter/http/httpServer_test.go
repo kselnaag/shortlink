@@ -31,12 +31,13 @@ func TestHTTPServer(t *testing.T) {
 			SL_DB_IP:     "localhost",
 			SL_DB_PORT:   ":1313",
 		}
-		log := adapterLog.NewLogZero(&cfg)
-		db := adapterDB.NewDBMock(&cfg)
+		log := adapterLog.NewLogFprintf(&cfg)
+		db := adapterDB.NewDBMock(&cfg, &log)
+		ctrlDB := control.NewCtrlDB(&db)
 		hcli := adapterHTTP.NewHTTPClientMock()
-		svcsl := service.NewSvcShortLink(&db, &hcli, &log)
-		ctrl := control.NewCtrlHTTP(&svcsl)
-		hsrv := adapterHTTP.NewHTTPServerNet(&ctrl, &log, &cfg)
+		svcsl := service.NewSvcShortLink(&ctrlDB, &hcli, &log)
+		ctrlHTTP := control.NewCtrlHTTP(&svcsl)
+		hsrv := adapterHTTP.NewHTTPServerNet(&ctrlHTTP, &log, &cfg)
 		_ = hsrv.Run()
 		he := httpexpect.WithConfig(httpexpect.Config{
 			Client: &http.Client{
@@ -61,12 +62,13 @@ func TestHTTPServer(t *testing.T) {
 			SL_DB_IP:     "localhost",
 			SL_DB_PORT:   ":1313",
 		}
-		log := adapterLog.NewLogZero(&cfg)
-		db := adapterDB.NewDBMock(&cfg)
+		log := adapterLog.NewLogFprintf(&cfg)
+		db := adapterDB.NewDBMock(&cfg, &log)
+		ctrlDB := control.NewCtrlDB(&db)
 		hcli := adapterHTTP.NewHTTPClientMock()
-		svcsl := service.NewSvcShortLink(&db, &hcli, &log)
-		ctrl := control.NewCtrlHTTP(&svcsl)
-		hsrv := adapterHTTP.NewHTTPServerFast(&ctrl, &log, &cfg)
+		svcsl := service.NewSvcShortLink(&ctrlDB, &hcli, &log)
+		ctrlHTTP := control.NewCtrlHTTP(&svcsl)
+		hsrv := adapterHTTP.NewHTTPServerFast(&ctrlHTTP, &log, &cfg)
 		_ = hsrv.Run()
 		he := httpexpect.WithConfig(httpexpect.Config{
 			Client: &http.Client{

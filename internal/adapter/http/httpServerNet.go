@@ -45,80 +45,80 @@ func (hns *HTTPServerNet) handlers() {
 
 	hns.hsrv.GET("/check/ping", func(c *gin.Context) { // checks
 		headers(c)
-		c.JSON(http.StatusOK, T.HTTPMessage{IsResp: true, Mode: "check", Body: "pong"})
+		c.JSON(http.StatusOK, T.HTTPMessageDTO{IsResp: true, Mode: "check", Body: "pong"})
 	})
 	hns.hsrv.GET("/check/abs", func(c *gin.Context) {
 		headers(c)
-		c.JSON(http.StatusNotFound, T.HTTPMessage{IsResp: true, Mode: "check", Body: "404 Not Found"})
+		c.JSON(http.StatusNotFound, T.HTTPMessageDTO{IsResp: true, Mode: "check", Body: "404 Not Found"})
 	})
 	hns.hsrv.GET("/check/panic", func(c *gin.Context) {
 		headers(c)
 		panic(`{IsResp:true,Mode:check,Body:panic}`)
-		// c.JSON(http.StatusInternalServerError, HTTPMessage{true, "check", "panic"})
+		// c.JSON(http.StatusInternalServerError, HTTPMessageDTO{true, "check", "panic"})
 	})
 	hns.hsrv.GET("/check/close", func(c *gin.Context) {
 		headers(c)
 		hns.appClose()
-		c.JSON(http.StatusOK, T.HTTPMessage{IsResp: true, Mode: "check", Body: "server close"})
+		c.JSON(http.StatusOK, T.HTTPMessageDTO{IsResp: true, Mode: "check", Body: "server close"})
 	})
 	hns.hsrv.GET("/check/allpairs", func(c *gin.Context) {
 		headers(c)
 		all, err := hns.ctrl.AllPairs()
 		if err != nil {
-			c.JSON(http.StatusNotFound, T.HTTPMessage{IsResp: true, Mode: "404", Body: err.Error()})
+			c.JSON(http.StatusNotFound, T.HTTPMessageDTO{IsResp: true, Mode: "404", Body: err.Error()})
 			return
 		}
-		c.JSON(http.StatusOK, T.HTTPMessage{IsResp: true, Mode: "200", Body: all})
+		c.JSON(http.StatusOK, T.HTTPMessageDTO{IsResp: true, Mode: "200", Body: all})
 	})
 
 	hns.hsrv.POST("/long", func(c *gin.Context) { // link short from link long
 		headers(c)
 		body, readerr := io.ReadAll(c.Request.Body)
 		if readerr != nil {
-			c.JSON(http.StatusNotFound, T.HTTPMessage{IsResp: true, Mode: "404", Body: readerr.Error()})
+			c.JSON(http.StatusNotFound, T.HTTPMessageDTO{IsResp: true, Mode: "404", Body: readerr.Error()})
 			return
 		}
 		short, err := hns.ctrl.Long(body)
 		if err != nil {
-			c.JSON(http.StatusNotFound, T.HTTPMessage{IsResp: true, Mode: "404", Body: err.Error()})
+			c.JSON(http.StatusNotFound, T.HTTPMessageDTO{IsResp: true, Mode: "404", Body: err.Error()})
 			return
 		}
-		c.JSON(http.StatusPartialContent, T.HTTPMessage{IsResp: true, Mode: "206", Body: short})
+		c.JSON(http.StatusPartialContent, T.HTTPMessageDTO{IsResp: true, Mode: "206", Body: short})
 	})
 	hns.hsrv.POST("/short", func(c *gin.Context) { // link long from link short
 		headers(c)
 		body, readerr := io.ReadAll(c.Request.Body)
 		if readerr != nil {
-			c.JSON(http.StatusNotFound, T.HTTPMessage{IsResp: true, Mode: "404", Body: readerr.Error()})
+			c.JSON(http.StatusNotFound, T.HTTPMessageDTO{IsResp: true, Mode: "404", Body: readerr.Error()})
 			return
 		}
 		long, err := hns.ctrl.Short(body)
 		if err != nil {
-			c.JSON(http.StatusNotFound, T.HTTPMessage{IsResp: true, Mode: "404", Body: err.Error()})
+			c.JSON(http.StatusNotFound, T.HTTPMessageDTO{IsResp: true, Mode: "404", Body: err.Error()})
 			return
 		}
-		c.JSON(http.StatusPartialContent, T.HTTPMessage{IsResp: true, Mode: "206", Body: long})
+		c.JSON(http.StatusPartialContent, T.HTTPMessageDTO{IsResp: true, Mode: "206", Body: long})
 	})
 	hns.hsrv.POST("/save", func(c *gin.Context) { // save link pair
 		headers(c)
 		body, readerr := io.ReadAll(c.Request.Body)
 		if readerr != nil {
-			c.JSON(http.StatusNotFound, T.HTTPMessage{IsResp: true, Mode: "404", Body: readerr.Error()})
+			c.JSON(http.StatusNotFound, T.HTTPMessageDTO{IsResp: true, Mode: "404", Body: readerr.Error()})
 			return
 		}
 		short, err := hns.ctrl.Save(body)
 		if err != nil {
-			c.JSON(http.StatusNotFound, T.HTTPMessage{IsResp: true, Mode: "404", Body: err.Error()})
+			c.JSON(http.StatusNotFound, T.HTTPMessageDTO{IsResp: true, Mode: "404", Body: err.Error()})
 			return
 		}
-		c.JSON(http.StatusCreated, T.HTTPMessage{IsResp: true, Mode: "201", Body: short})
+		c.JSON(http.StatusCreated, T.HTTPMessageDTO{IsResp: true, Mode: "201", Body: short})
 	})
 	hns.hsrv.GET("/r/:hash", func(c *gin.Context) { // redirect
 		headers(c)
 		hash := c.Param("hash")
 		long, err := hns.ctrl.Hash(hash)
 		if err != nil {
-			c.JSON(http.StatusNotFound, T.HTTPMessage{IsResp: true, Mode: "404", Body: err.Error()})
+			c.JSON(http.StatusNotFound, T.HTTPMessageDTO{IsResp: true, Mode: "404", Body: err.Error()})
 			return
 		}
 		c.Redirect(http.StatusMovedPermanently, long)

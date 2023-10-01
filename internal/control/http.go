@@ -33,7 +33,7 @@ func (ctrl *CtrlHTTP) AllPairs() (string, error) {
 }
 
 func (ctrl *CtrlHTTP) Long(body []byte) (string, error) {
-	req := T.HTTPMessage{}
+	req := T.HTTPMessageDTO{}
 	if err := json.Unmarshal(body, &req); (err != nil) || (req.IsResp) || (req.Body == "") {
 		return "", errors.New(string(body))
 	}
@@ -45,7 +45,7 @@ func (ctrl *CtrlHTTP) Long(body []byte) (string, error) {
 }
 
 func (ctrl *CtrlHTTP) Short(body []byte) (string, error) {
-	req := T.HTTPMessage{}
+	req := T.HTTPMessageDTO{}
 	if err := json.Unmarshal(body, &req); (err != nil) || (req.IsResp) || (!ctrl.ishashfunc(req.Body)) {
 		return "", errors.New(string(body))
 	}
@@ -57,7 +57,7 @@ func (ctrl *CtrlHTTP) Short(body []byte) (string, error) {
 }
 
 func (ctrl *CtrlHTTP) Save(body []byte) (string, error) {
-	req := T.HTTPMessage{}
+	req := T.HTTPMessageDTO{}
 	if err := json.Unmarshal(body, &req); (err != nil) || (req.IsResp) || (req.Body == "") {
 		return "", errors.New(string(body))
 	}

@@ -112,9 +112,9 @@ function compose-up {
     if [[ $? -gt 0 ]]; then checksBreaked; fi
 }
 
-function metrics-graph { # https://www.yworks.com/yed-live/
+function metrics-graph {                                    # https://www.yworks.com/yed-live/
     echo -e "\n>>_MetricsGraph_<<"
-    image_packages . ./script/sl.graphml
+    image_packages . ./script/sl.graphml                    # TODO:move to ./assets/metrics.graphml
     if [[ $? -gt 0 ]]; then checksBreaked; fi
 }
 

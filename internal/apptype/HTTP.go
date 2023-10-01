@@ -7,9 +7,3 @@ type IHTTPClient interface {
 type IHTTPServer interface {
 	Run() func(e error)
 }
-
-type HTTPMessage struct {
-	IsResp bool
-	Mode   string
-	Body   string
-}

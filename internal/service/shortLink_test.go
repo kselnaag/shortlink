@@ -7,6 +7,7 @@ import (
 	adapterHTTP "shortlink/internal/adapter/http"
 	adapterLog "shortlink/internal/adapter/log"
 	T "shortlink/internal/apptype"
+	"shortlink/internal/control"
 	"shortlink/internal/model"
 	"shortlink/internal/service"
 
@@ -28,10 +29,11 @@ func TestServices(t *testing.T) {
 			SL_DB_IP:     "localhost",
 			SL_DB_PORT:   ":1313",
 		}
-		log := adapterLog.NewLogZero(&cfg)
-		db := adapterDB.NewDBMock(&cfg)
+		log := adapterLog.NewLogFprintf(&cfg)
+		db := adapterDB.NewDBMock(&cfg, &log)
+		ctrlDB := control.NewCtrlDB(&db)
 		hcli := adapterHTTP.NewHTTPClientMock()
-		nssl := service.NewSvcShortLink(&db, &hcli, &log)
+		nssl := service.NewSvcShortLink(&ctrlDB, &hcli, &log)
 
 		// models.LinkPair{Short: "5clp60", Long: "http://lib.ru"}, models.LinkPair{Short: "8as3rb", Long: "http://lib.ru/abs"}, ("dhiu79", "http://google.ru")
 		asrt.Equal([]model.LinkPair{model.NewLinkPair("http://lib.ru"), model.NewLinkPair("http://google.ru")},
