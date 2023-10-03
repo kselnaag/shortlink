@@ -114,13 +114,13 @@ function compose-up {
 
 function metrics-graph {                                    # https://www.yworks.com/yed-live/
     echo -e "\n>>_MetricsGraph_<<"
-    image_packages . ./script/sl.graphml                    # TODO:move to ./assets/metrics.graphml
+    image_packages . ./asset/metrics.graphml                # TODO:move to ./assets/metrics.graphml
     if [[ $? -gt 0 ]]; then checksBreaked; fi
 }
 
 function loc {
     echo -e "\n>>_LinesOfCode_<<"
-    FPATH=./script/sl.loc
+    FPATH=./script/metrics/sl.loc
     gcloc . > $FPATH
     cat $FPATH | grep Language
     if [[ $? -gt 0 ]]; then checksBreaked; fi
@@ -130,7 +130,7 @@ function loc {
 
 function cycl {
     echo -e "\n>>_CyclomaticComplexity_<<"
-    FPATH=./script/sl.cycl
+    FPATH=./script/metrics/sl.cycl
     gocyclo -avg . > $FPATH
     cat $FPATH | grep Average
     if [[ $? -gt 0 ]]; then checksBreaked; fi
@@ -138,7 +138,7 @@ function cycl {
 
 function cogn {
     echo -e "\n>>_CognitiveComplexity_<<"
-    FPATH=./script/sl.cogn
+    FPATH=./script/metrics/sl.cogn
     gocognit -avg . > $FPATH
     cat $FPATH | grep Average
     if [[ $? -gt 0 ]]; then checksBreaked; fi
@@ -146,21 +146,24 @@ function cogn {
 
 function testcov {
     echo -e "\n>>_TestCoverage_<<"
-    FTEMP=./script/coverage.test
-    FOUT=./script/sl.cov
+    FTEMP=./script/metrics/coverage.test
+    FOUT=./script/metrics/sl.cov
     go test -vet=off -count=1 -coverprofile=$FTEMP ./...
     go tool cover -func=$FTEMP > $FOUT
-    cat $FOUT | grep total
-     if [[ $? -gt 0 ]]; then checksBreaked; fi
-    rm $FTEMP
+    cat $FOUT | grep total | awk '{print "TOTAL:", $3}'
+    if [[ $? -gt 0 ]]; then checksBreaked; fi
 }
 
-function maintain { # !
-    echo -e "\n>>_MaintainabilityIndex_<<"
-    FPATH=./script/sl.maint
-    go vet -vettool=$(which complexity) --maintunder 100 ./... > $FPATH
-    cat $FPATH | grep 'index='
+function complex {
+    echo -e "\n>>_ComplexityMetrics_<<"
+    FPATH=./script/metrics/sl.compl
+    go vet -vettool=$(which complexity) -loc -cyclo -halst -maint ./... 2>$FPATH    
+    cat $FPATH | grep locSum | awk 'BEGIN{sum=0}{sum+=$2}END{print "TOTAL LoC:", sum}'
     if [[ $? -gt 0 ]]; then checksBreaked; fi
+    cat $FPATH | grep cycloAvg | awk 'BEGIN{sum=0;div=0}{sum+=$3;div+=$4}END{if (div==0) div=1; print "TOTAL cycloAvg:", sum/div}'
+    cat $FPATH | grep halstVolAvg | awk 'BEGIN{sum=0;div=0}{sum+=$3;div+=$4}END{if (div==0) div=1; print "TOTAL halstVolAvg:", sum/div}'
+    cat $FPATH | grep halstDiffAvg | awk 'BEGIN{sum=0;div=0}{sum+=$3;div+=$4}END{if (div==0) div=1; print "TOTAL halstDiffAvg:", sum/div}'
+    cat $FPATH | grep maintAvg | awk 'BEGIN{sum=0;div=0}{sum+=$3;div+=$4}END{if (div==0) div=1; print "TOTAL maintAvg:", sum/div}'    
 }
 
 if [[ $# -ne 1 ]]; then info; else
@@ -224,10 +227,11 @@ if [[ $# -ne 1 ]]; then info; else
         metrics-graph
         ;;
     "metrics")
+        testcov
         loc
         cycl
-        cogn
-        testcov
+        cogn        
+        complex
         ;;    
     "dock") # experiments
         PWD=`pwd`
@@ -258,12 +262,12 @@ METRICS:
 1. Lines of Code
 2. Cyclomatic Complexity
 3. Cognitive Complexity
+4. Halstead Complexity
 12. Test Coverage
+15. Maintainability index
 19. Code size + Repository size
 
 ...
-4. Halstead Complexity
-15. Maintainability index
 22. Commit itme (Checks time + Build time)
 24. Code duplication
 

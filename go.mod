@@ -2,19 +2,6 @@ module shortlink
 
 go 1.21
 
-replace (
-	shortlink/internal/adapter/cfg => ./internal/adapter/cfg
-	shortlink/internal/adapter/log => ./internal/adapter/log
-	shortlink/internal/adapter/db => ./internal/adapter/db
-	shortlink/internal/adapter/http => ./internal/adapter/http	
-	shortlink/internal/apptype => ./internal/apptype
-	shortlink/internal/control => ./internal/control
-	shortlink/internal/service => ./internal/service
-	shortlink/internal/model => ./internal/model
-	shortlink/internal => ./internal
-	shortlink/web => ./web
-)
-
 require (
 	github.com/caarlos0/env v3.5.0+incompatible
 	github.com/gavv/httpexpect/v2 v2.15.0

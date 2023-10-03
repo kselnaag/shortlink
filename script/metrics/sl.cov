@@ -18,12 +18,12 @@ shortlink/internal/adapter/http/httpServerFast.go:28:	NewHTTPServerFast		100.0%
 shortlink/internal/adapter/http/httpServerFast.go:48:	handlers			38.5%
 shortlink/internal/adapter/http/httpServerFast.go:125:	appClose			0.0%
 shortlink/internal/adapter/http/httpServerFast.go:130:	Engine				100.0%
-shortlink/internal/adapter/http/httpServerFast.go:134:	Run				33.3%
+shortlink/internal/adapter/http/httpServerFast.go:134:	Run				41.7%
 shortlink/internal/adapter/http/httpServerNet.go:29:	NewHTTPServerNet		100.0%
 shortlink/internal/adapter/http/httpServerNet.go:39:	handlers			29.2%
 shortlink/internal/adapter/http/httpServerNet.go:142:	appClose			0.0%
 shortlink/internal/adapter/http/httpServerNet.go:147:	Engine				100.0%
-shortlink/internal/adapter/http/httpServerNet.go:151:	Run				29.4%
+shortlink/internal/adapter/http/httpServerNet.go:151:	Run				41.2%
 shortlink/internal/adapter/http/httpServerNet.go:185:	NewEmbedFolder			75.0%
 shortlink/internal/adapter/http/httpServerNet.go:195:	Exists				100.0%
 shortlink/internal/adapter/log/logFprintf.go:32:	NewLogFprintf			46.2%
@@ -65,4 +65,4 @@ shortlink/internal/service/shortLink.go:41:		GetLinkLongFromLinkShort	100.0%
 shortlink/internal/service/shortLink.go:50:		GetLinkShortFromLinkLong	0.0%
 shortlink/internal/service/shortLink.go:60:		SetLinkPairFromLinkLong		66.7%
 shortlink/internal/service/shortLink.go:82:		IsLinkLongHTTPValid		75.0%
-total:							(statements)			52.3%
+total:							(statements)			52.5%
