@@ -79,28 +79,71 @@ We choose Monolith as system arch pattern and Rich Domain Model as software arch
   - golang v1.21
   - golangci-lint v1.51.2
   - curl v7.68.0
-  - docker v24.0.6 and docker-compose v1.25.0
+  - docker v24.0.6 + docker-compose v1.25.0
   - minikube
 
 ## **📊 Metrics**
-<img style="margin-right: 0px;" align="right" width="60%" alt="#METRICS" src="./asset/metrics.png"/>
+<img style="margin-right: 0px;" align="right" width="60%" alt="#METRICS" src="./asset/metricsgraph.png"/>
 <p align="left">
 	<img src="https://img.shields.io/github/languages/code-size/kselnaag/shortlink?style=plastic" title="src files size" alt="src files size">
 	<img src="https://img.shields.io/github/repo-size/kselnaag/shortlink?style=plastic" title="repo size" alt="repo size">
 </p>
 
-- Code size + Repository size
-- Package graph (image_packages) ---->
-- Unit test coverage (go tool cover)
-- Lines of code (gcloc, complexity)
-- Cyclomatic complexity (gocyclo, complexity)
-- Cognitive Complexity (gocognit)
-- Halstead complexity (complexity)
-- Maintainability index (complexity)
-- 
-- 
-- 
-- 
+- `Use some metrics`
+  - Code size + Repository size
+  - Package graph (image_packages) -->
+  - Unit test coverage (go tool cover)
+  - Lines of code (gcloc, complexity)
+  - Cyclomatic complexity (gocyclo, complexity)
+  - Cognitive Complexity (gocognit)
+  - Halstead complexity (complexity)
+  - Maintainability index (complexity)
+- `Metric repos (https://github.com/)`
+  - ManyakRus/image_packages
+  - JoaoDanielRufino/gcloc
+  - fzipp/gocyclo
+  - uudashr/gocognit
+  - kselnaag/go-complexity-analysis (fork)
+
+```
+kselnaag:shortlink$ ./script/cicd.sh metrics
+
+>>_TestCoverage_<<
+?       shortlink/cmd                   [no test files]
+?       shortlink/internal              [no test files]
+?       shortlink/internal/adapter/cfg  [no test files]
+ok      shortlink/internal/adapter/db   0.026s  coverage: 35.4% of statements
+?       shortlink/internal/apptype      [no test files]
+?       shortlink/internal/control      [no test files]
+?       shortlink/web                   [no test files]
+ok      shortlink/internal/adapter/http 0.094s  coverage: 38.6% of statements
+ok      shortlink/internal/adapter/log  0.022s  coverage: 77.0% of statements
+ok      shortlink/internal/model        0.031s  coverage: 100.0% of statements
+ok      shortlink/internal/service      0.030s  coverage: 69.8% of statements
+TOTAL: 64.2%
+
+>>_LinesOfCode_<<
+  Language   | Files | Lines | Blank lines | Comments | Code lines
+  Golang     |    33 |  1698 |         205 |       52 |       1441
+  Bash       |     1 |   294 |          32 |        6 |        256
+
+>>_CyclomaticComplexity_<<
+Average: 2.26
+
+>>_CognitiveComplexity_<<
+Average: 1.38
+
+>>_ComplexityMetrics_<<
+TOTAL LoC: 1138
+TOTAL cycloAvg: 2.31034
+TOTAL halstVolAvg: 323.898
+TOTAL halstDiffAvg: 18.3464
+TOTAL maintAvg: 64.5287
+
+>>_Successfull_<<
+```
+
+More details in: ./script/metrics/
 
 ## **⚙️ HowTo**
 <img style="margin-right: 0px;" align="right" width="30%" alt="#CICD" src="./asset/cicd.png"/>

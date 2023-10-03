@@ -4,6 +4,16 @@ cycloAvg= 0 0 0
 halstVolAvg= 0.0 0.0 0
 halstDiffAvg= 0.0 0.0 0
 maintAvg= 0 0 0
+# shortlink/internal/adapter/db_test
+internal/adapter/db/db_test.go:9:1: func TestDB (lines of code=27)
+internal/adapter/db/db_test.go:9:1: func TestDB (cyclomatic complexity=1)
+internal/adapter/db/db_test.go:9:1: func TestDB (Halstead complexity: volume=137.608, difficulty=12.250)
+internal/adapter/db/db_test.go:9:1: func TestDB (maintainability index=53)
+locSum= 27
+cycloAvg= 1 1 1
+halstVolAvg= 137.607525 137.607525 1
+halstDiffAvg= 12.250000 12.250000 1
+maintAvg= 53 53 1
 # shortlink/internal/model
 internal/model/linkPair.go:14:1: func IsValid (lines of code=6)
 internal/model/linkPair.go:14:1: func IsValid (cyclomatic complexity=3)
@@ -38,16 +48,6 @@ cycloAvg= 1 11 7
 halstVolAvg= 80.194625 561.362376 7
 halstDiffAvg= 7.071429 49.500000 7
 maintAvg= 72 509 7
-# shortlink/internal/adapter/db_test
-internal/adapter/db/db_test.go:9:1: func TestDB (lines of code=27)
-internal/adapter/db/db_test.go:9:1: func TestDB (cyclomatic complexity=1)
-internal/adapter/db/db_test.go:9:1: func TestDB (Halstead complexity: volume=137.608, difficulty=12.250)
-internal/adapter/db/db_test.go:9:1: func TestDB (maintainability index=53)
-locSum= 27
-cycloAvg= 1 1 1
-halstVolAvg= 137.607525 137.607525 1
-halstDiffAvg= 12.250000 12.250000 1
-maintAvg= 53 53 1
 # shortlink/internal/model_test
 internal/model/linkPair_test.go:10:1: func TestModels (lines of code=44)
 internal/model/linkPair_test.go:10:1: func TestModels (cyclomatic complexity=1)
@@ -140,52 +140,6 @@ cycloAvg= 2 16 6
 halstVolAvg= 196.572182 1179.433095 6
 halstDiffAvg= 16.608333 99.650000 6
 maintAvg= 61 366 6
-# shortlink/internal/adapter/db
-internal/adapter/db/dbMock.go:16:1: func NewDBMock (lines of code=10)
-internal/adapter/db/dbMock.go:16:1: func NewDBMock (cyclomatic complexity=1)
-internal/adapter/db/dbMock.go:16:1: func NewDBMock (Halstead complexity: volume=138.302, difficulty=9.750)
-internal/adapter/db/dbMock.go:16:1: func NewDBMock (maintainability index=63)
-internal/adapter/db/dbMock.go:27:1: func SaveLinkPair (lines of code=4)
-internal/adapter/db/dbMock.go:27:1: func SaveLinkPair (cyclomatic complexity=1)
-internal/adapter/db/dbMock.go:27:1: func SaveLinkPair (Halstead complexity: volume=53.774, difficulty=7.500)
-internal/adapter/db/dbMock.go:27:1: func SaveLinkPair (maintainability index=74)
-internal/adapter/db/dbMock.go:32:1: func LoadLinkPair (lines of code=7)
-internal/adapter/db/dbMock.go:32:1: func LoadLinkPair (cyclomatic complexity=2)
-internal/adapter/db/dbMock.go:32:1: func LoadLinkPair (Halstead complexity: volume=151.267, difficulty=14.000)
-internal/adapter/db/dbMock.go:32:1: func LoadLinkPair (maintainability index=66)
-internal/adapter/db/dbMock.go:40:1: func LoadAllLinkPairs (lines of code=8)
-internal/adapter/db/dbMock.go:40:1: func LoadAllLinkPairs (cyclomatic complexity=1)
-internal/adapter/db/dbMock.go:40:1: func LoadAllLinkPairs (Halstead complexity: volume=190.398, difficulty=14.250)
-internal/adapter/db/dbMock.go:40:1: func LoadAllLinkPairs (maintainability index=64)
-internal/adapter/db/dbMock.go:49:1: func Connect (lines of code=9)
-internal/adapter/db/dbMock.go:49:1: func Connect (cyclomatic complexity=2)
-internal/adapter/db/dbMock.go:49:1: func Connect (Halstead complexity: volume=126.711, difficulty=9.600)
-internal/adapter/db/dbMock.go:49:1: func Connect (maintainability index=64)
-internal/adapter/db/dbPostgre.go:14:1: func NewDBPostgre (lines of code=6)
-internal/adapter/db/dbPostgre.go:14:1: func NewDBPostgre (cyclomatic complexity=1)
-internal/adapter/db/dbPostgre.go:14:1: func NewDBPostgre (Halstead complexity: volume=41.209, difficulty=5.000)
-internal/adapter/db/dbPostgre.go:14:1: func NewDBPostgre (maintainability index=71)
-internal/adapter/db/dbPostgre.go:21:1: func SaveLinkPair (lines of code=4)
-internal/adapter/db/dbPostgre.go:21:1: func SaveLinkPair (cyclomatic complexity=1)
-internal/adapter/db/dbPostgre.go:21:1: func SaveLinkPair (Halstead complexity: volume=18.095, difficulty=0.000)
-internal/adapter/db/dbPostgre.go:21:1: func SaveLinkPair (maintainability index=77)
-internal/adapter/db/dbPostgre.go:26:1: func LoadLinkPair (lines of code=7)
-internal/adapter/db/dbPostgre.go:26:1: func LoadLinkPair (cyclomatic complexity=1)
-internal/adapter/db/dbPostgre.go:26:1: func LoadLinkPair (Halstead complexity: volume=25.266, difficulty=0.000)
-internal/adapter/db/dbPostgre.go:26:1: func LoadLinkPair (maintainability index=71)
-internal/adapter/db/dbPostgre.go:34:1: func LoadAllLinkPairs (lines of code=8)
-internal/adapter/db/dbPostgre.go:34:1: func LoadAllLinkPairs (cyclomatic complexity=1)
-internal/adapter/db/dbPostgre.go:34:1: func LoadAllLinkPairs (Halstead complexity: volume=16.253, difficulty=0.000)
-internal/adapter/db/dbPostgre.go:34:1: func LoadAllLinkPairs (maintainability index=71)
-internal/adapter/db/dbPostgre.go:43:1: func Connect (lines of code=9)
-internal/adapter/db/dbPostgre.go:43:1: func Connect (cyclomatic complexity=2)
-internal/adapter/db/dbPostgre.go:43:1: func Connect (Halstead complexity: volume=126.711, difficulty=9.600)
-internal/adapter/db/dbPostgre.go:43:1: func Connect (maintainability index=64)
-locSum= 72
-cycloAvg= 1 13 10
-halstVolAvg= 88.798787 887.987873 10
-halstDiffAvg= 6.970000 69.700000 10
-maintAvg= 68 685 10
 # shortlink/internal/adapter/log
 internal/adapter/log/logFprintf.go:32:1: func NewLogFprintf (lines of code=29)
 internal/adapter/log/logFprintf.go:32:1: func NewLogFprintf (cyclomatic complexity=9)
@@ -296,6 +250,52 @@ cycloAvg= 2 69 26
 halstVolAvg= 193.397642 5028.338679 26
 halstDiffAvg= 12.133052 315.459341 26
 maintAvg= 70 1826 26
+# shortlink/internal/adapter/db
+internal/adapter/db/dbMock.go:16:1: func NewDBMock (lines of code=10)
+internal/adapter/db/dbMock.go:16:1: func NewDBMock (cyclomatic complexity=1)
+internal/adapter/db/dbMock.go:16:1: func NewDBMock (Halstead complexity: volume=138.302, difficulty=9.750)
+internal/adapter/db/dbMock.go:16:1: func NewDBMock (maintainability index=63)
+internal/adapter/db/dbMock.go:27:1: func SaveLinkPair (lines of code=4)
+internal/adapter/db/dbMock.go:27:1: func SaveLinkPair (cyclomatic complexity=1)
+internal/adapter/db/dbMock.go:27:1: func SaveLinkPair (Halstead complexity: volume=53.774, difficulty=7.500)
+internal/adapter/db/dbMock.go:27:1: func SaveLinkPair (maintainability index=74)
+internal/adapter/db/dbMock.go:32:1: func LoadLinkPair (lines of code=7)
+internal/adapter/db/dbMock.go:32:1: func LoadLinkPair (cyclomatic complexity=2)
+internal/adapter/db/dbMock.go:32:1: func LoadLinkPair (Halstead complexity: volume=151.267, difficulty=14.000)
+internal/adapter/db/dbMock.go:32:1: func LoadLinkPair (maintainability index=66)
+internal/adapter/db/dbMock.go:40:1: func LoadAllLinkPairs (lines of code=8)
+internal/adapter/db/dbMock.go:40:1: func LoadAllLinkPairs (cyclomatic complexity=1)
+internal/adapter/db/dbMock.go:40:1: func LoadAllLinkPairs (Halstead complexity: volume=190.398, difficulty=14.250)
+internal/adapter/db/dbMock.go:40:1: func LoadAllLinkPairs (maintainability index=64)
+internal/adapter/db/dbMock.go:49:1: func Connect (lines of code=9)
+internal/adapter/db/dbMock.go:49:1: func Connect (cyclomatic complexity=2)
+internal/adapter/db/dbMock.go:49:1: func Connect (Halstead complexity: volume=126.711, difficulty=9.600)
+internal/adapter/db/dbMock.go:49:1: func Connect (maintainability index=64)
+internal/adapter/db/dbPostgre.go:14:1: func NewDBPostgre (lines of code=6)
+internal/adapter/db/dbPostgre.go:14:1: func NewDBPostgre (cyclomatic complexity=1)
+internal/adapter/db/dbPostgre.go:14:1: func NewDBPostgre (Halstead complexity: volume=41.209, difficulty=5.000)
+internal/adapter/db/dbPostgre.go:14:1: func NewDBPostgre (maintainability index=71)
+internal/adapter/db/dbPostgre.go:21:1: func SaveLinkPair (lines of code=4)
+internal/adapter/db/dbPostgre.go:21:1: func SaveLinkPair (cyclomatic complexity=1)
+internal/adapter/db/dbPostgre.go:21:1: func SaveLinkPair (Halstead complexity: volume=18.095, difficulty=0.000)
+internal/adapter/db/dbPostgre.go:21:1: func SaveLinkPair (maintainability index=77)
+internal/adapter/db/dbPostgre.go:26:1: func LoadLinkPair (lines of code=7)
+internal/adapter/db/dbPostgre.go:26:1: func LoadLinkPair (cyclomatic complexity=1)
+internal/adapter/db/dbPostgre.go:26:1: func LoadLinkPair (Halstead complexity: volume=25.266, difficulty=0.000)
+internal/adapter/db/dbPostgre.go:26:1: func LoadLinkPair (maintainability index=71)
+internal/adapter/db/dbPostgre.go:34:1: func LoadAllLinkPairs (lines of code=8)
+internal/adapter/db/dbPostgre.go:34:1: func LoadAllLinkPairs (cyclomatic complexity=1)
+internal/adapter/db/dbPostgre.go:34:1: func LoadAllLinkPairs (Halstead complexity: volume=16.253, difficulty=0.000)
+internal/adapter/db/dbPostgre.go:34:1: func LoadAllLinkPairs (maintainability index=71)
+internal/adapter/db/dbPostgre.go:43:1: func Connect (lines of code=9)
+internal/adapter/db/dbPostgre.go:43:1: func Connect (cyclomatic complexity=2)
+internal/adapter/db/dbPostgre.go:43:1: func Connect (Halstead complexity: volume=126.711, difficulty=9.600)
+internal/adapter/db/dbPostgre.go:43:1: func Connect (maintainability index=64)
+locSum= 72
+cycloAvg= 1 13 10
+halstVolAvg= 88.798787 887.987873 10
+halstDiffAvg= 6.970000 69.700000 10
+maintAvg= 68 685 10
 # shortlink/internal/adapter/cfg
 internal/adapter/cfg/cfgEnv.go:15:1: func NewCfgEnv (lines of code=28)
 internal/adapter/cfg/cfgEnv.go:15:1: func NewCfgEnv (cyclomatic complexity=5)
