@@ -90,7 +90,7 @@ We choose Monolith as system arch pattern and Rich Domain Model as software arch
 </p>
 
 - Code size + Repository size
-- Package graph (image_packages) ----->
+- Package graph (image_packages) ---->
 - Unit test coverage (go tool cover)
 - Lines of code (gcloc, complexity)
 - Cyclomatic complexity (gocyclo, complexity)
