@@ -25,13 +25,13 @@ We choose Monolith as system arch pattern and Rich Domain Model as software arch
 
 - `Adapters`
   - HTTP transport
-  - SQL database
+  - SQL or NoSQL database
   - JSON logger
   - file + env config
 - `Interfaces`
-  - (port)http
-  - (port)db
-  - (port)log
+  - http
+  - db
+  - log
   - service
 - `Controllers`
   - http
@@ -75,6 +75,7 @@ We choose Monolith as system arch pattern and Rich Domain Model as software arch
   - gofiber/fiber/v2 v2.42.0
   - stretchr/testify v1.8.2
   - gavv/httpexpect v2.15.0
+  - jackc/pgx/v5/pgxpool v5.4.3
 - `Tools`
   - golang v1.21
   - golangci-lint v1.51.2

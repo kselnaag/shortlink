@@ -47,9 +47,11 @@ func (m *DBMock) LoadAllLinkPairs() []T.DBlinksDTO {
 }
 
 func (m *DBMock) Connect() func(e error) {
+	m.log.LogInfo("mock db connected")
 	return func(e error) {
 		if e != nil {
 			m.log.LogError(e, "DBMock.Connect(): db graceful_shutdown error")
 		}
+		m.log.LogInfo("mock db disconnected")
 	}
 }

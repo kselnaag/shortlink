@@ -268,7 +268,7 @@ METRICS:
 19. Code size + Repository size
 
 ...
-22. Commit itme (Checks time + Build time)
+22. Commit time (Checks time + Build time)
 24. Code duplication
 
 ?
