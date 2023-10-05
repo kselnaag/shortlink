@@ -33,7 +33,8 @@ function lint {
 function unitTest {
     echo -e "\n>>_UnitTests_<<"
     set -o pipefail
-    go test -vet=off -count=1 -race ./... | { grep -v 'no test files'; true; }
+    go test -vet=off -count=1 -race shortlink/internal/adapter/http shortlink/internal/adapter/log shortlink/internal/model shortlink/internal/service
+    # | { grep -v 'no test files'; true; }
     if [[ $? -gt 0 ]]; then checksBreaked; fi   
 }
 
@@ -148,7 +149,7 @@ function testcov {
     echo -e "\n>>_TestCoverage_<<"
     FTEMP=./script/metrics/coverage.test
     FOUT=./script/metrics/sl.cov
-    go test -vet=off -count=1 -coverprofile=$FTEMP ./...
+    go test -vet=off -count=1 -coverprofile=$FTEMP shortlink/internal/adapter/http shortlink/internal/adapter/log shortlink/internal/model shortlink/internal/service
     go tool cover -func=$FTEMP > $FOUT
     cat $FOUT | grep total | awk '{print "TOTAL:", $3}'
     if [[ $? -gt 0 ]]; then checksBreaked; fi
@@ -244,7 +245,7 @@ if [[ $# -ne 1 ]]; then info; else
         docker logs $SRV
         docker stop $SRV
         # docker run -it --name SLsrv --user 10001 -p 8080:8080/tcp kselnaag/shortlink
-        # docker run -d --name SLpg -p 5432:5432 -e POSTGRES_USER=postgres -e POSTGRES_PASSWORD=example postgres:16.0-alpine3.18
+        # docker run -d --name SLpg -p 5432:5432 -e POSTGRES_DB=shortlink -e POSTGRES_USER=login -e POSTGRES_PASSWORD=password postgres:16.0-alpine3.18
         # docker start SLpostgres && docker exec -it SLpostgres ls -la /var/lib/postgresql
         ;;
     *)

@@ -22,11 +22,12 @@ func TestDB(t *testing.T) {
 			SL_LOG_LEVEL: "trace",
 			SL_HTTP_IP:   "localhost",
 			SL_HTTP_PORT: ":8080",
+			SL_DB_MODE:   "postgres",
 			SL_DB_IP:     "localhost",
 			SL_DB_PORT:   ":5432",
-			SL_DB_LOGIN:  "postgres",
-			SL_DB_PASS:   "example",
-			SL_DB_DBNAME: "postgres",
+			SL_DB_LOGIN:  "login",
+			SL_DB_PASS:   "password",
+			SL_DB_DBNAME: "shortlink",
 		}
 
 		log := adapterLog.NewLogFprintf(&cfg)

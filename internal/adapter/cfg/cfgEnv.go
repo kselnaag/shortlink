@@ -15,14 +15,17 @@ import (
 func NewCfgEnv(cfgname string) T.CfgEnv {
 	cfg := T.CfgEnv{ // default env
 		SL_APP_NAME:  "shortlink",
+		SL_LOG_MODE:  "fprintf",
 		SL_LOG_LEVEL: "info",
+		SL_HTTP_MODE: "gin",
 		SL_HTTP_IP:   "localhost",
 		SL_HTTP_PORT: ":8080",
+		SL_DB_MODE:   "mock",
 		SL_DB_IP:     "localhost",
-		SL_DB_PORT:   ":3301",
-		SL_DB_LOGIN:  "postgres",
-		SL_DB_PASS:   "example",
-		SL_DB_DBNAME: "postgres",
+		SL_DB_PORT:   "",
+		SL_DB_LOGIN:  "login",
+		SL_DB_PASS:   "password",
+		SL_DB_DBNAME: "shortlink",
 	}
 	log := adapterLog.NewLogFprintf(&cfg)
 	if ip, err := ipFromInterfaces(); err != nil {
