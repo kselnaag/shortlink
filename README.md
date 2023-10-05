@@ -90,16 +90,15 @@ We choose Monolith as system arch pattern and Rich Domain Model as software arch
 	<img src="https://img.shields.io/github/repo-size/kselnaag/shortlink?style=plastic" title="repo size" alt="repo size">
 </p>
 
-- `Use some metrics`
-  - Code size + Repository size
-  - Package graph (image_packages) -->
-  - Unit test coverage (go tool cover)
-  - Lines of code (gcloc, complexity)
-  - Cyclomatic complexity (gocyclo, complexity)
-  - Cognitive Complexity (gocognit)
-  - Halstead complexity (complexity)
-  - Maintainability index (complexity)
-- `Metric repos (https://github.com/)`
+- Code size + Repository size
+- Package graph (image_packages) -->
+- Unit test coverage (go tool cover)
+- Lines of code (gcloc, complexity)
+- Cyclomatic complexity (gocyclo, complexity)
+- Cognitive Complexity (gocognit)
+- Halstead complexity (complexity)
+- Maintainability index (complexity)
+- `Metrics repos (https://github.com/)`
   - ManyakRus/image_packages
   - JoaoDanielRufino/gcloc
   - fzipp/gocyclo
