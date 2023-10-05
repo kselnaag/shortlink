@@ -11,7 +11,7 @@
 
 ## **📜 Description**
 This is a test project to generate the short link from the long link you already have. We want to be able to:
-<img style="margin-right: 60px;" align="right" width="40%" alt="#POWERGOPHERS" src="./asset/gogogophers.png"/>
+<img style="margin-right: 60px;" align="right" width="40%" title ="Go go, Power Gophers !" alt="#POWERGOPHERS" src="./asset/gogogophers.png"/>
 
 - get the short link from the long link
 - save the result to database
@@ -21,7 +21,7 @@ This is a test project to generate the short link from the long link you already
 
 ## **🔬 Analysis**
 We choose Monolith as system arch pattern and Rich Domain Model as software arch pattern. Let us look at some architect points:
-<img style="margin-top: 0px; margin-right: 100px;" align="right" width="29%" alt="#ARCPIC" src="./asset/arch.png"/>
+<img style="margin-top: 0px; margin-right: 100px;" align="right" width="29%" title ="Architecture" alt="#ARCPIC" src="./asset/arch.png"/>
 
 - `Adapters`
   - HTTP transport
@@ -51,19 +51,19 @@ We choose Monolith as system arch pattern and Rich Domain Model as software arch
   - check if pair is valid
 
 ## **💡 Solution notes**
-<img style="margin-right: 100px;" align="right" width="14%" alt="#PROD" src="./asset/production.png"/>
+<img style="margin-right: 100px;" align="right" width="14%" title ="Prod 🙃" alt="#PROD" src="./asset/production.png"/>
 
 - layering and hexagonal arch
 - standart go project layout (more or less)
 - pre-commit hooks and github actions (CI) + docker-compose (CD) + minikube (prod🙃)
-- tests with mocks included
+- integration and unit tests with mocks included
 - HTTPfast or HTTPnet server adapters
 - logZero, logSlog or logFprintf logger adapters
 - postgreSQL, redis, mongoDB or tarantool db adapters
 - OpenAPI Swagger docs `http://localhost:8080/oapi`
 
 ## **🛠️ Libs and tools**
-<img style="margin-right: 0px;" align="right" width="50%" alt="#DOMAIN" src="./asset/domain.png"/>
+<img style="margin-right: 0px;" align="right" width="50%" title ="Domain" alt="#DOMAIN" src="./asset/domain.png"/>
 
 - `Libs (https://github.com/)`
   - caarlos0/env v3.5.0
@@ -72,10 +72,10 @@ We choose Monolith as system arch pattern and Rich Domain Model as software arch
   - gin-gonic/gin v1.9.0
   - gin-contrib/static v0.0.1
   - valyala/fasthttp v1.45.0
-  - gofiber/fiber/v2 v2.42.0
+  - gofiber/fiber v2.42.0
   - stretchr/testify v1.8.2
   - gavv/httpexpect v2.15.0
-  - jackc/pgx/v5/pgxpool v5.4.3
+  - jackc/pgx v5.4.3
 - `Tools`
   - golang v1.21
   - golangci-lint v1.51.2
@@ -84,14 +84,14 @@ We choose Monolith as system arch pattern and Rich Domain Model as software arch
   - minikube
 
 ## **📊 Metrics**
-<img style="margin-right: 0px;" align="right" width="60%" alt="#METRICS" src="./asset/metricsgraph.png"/>
+<img style="margin-right: 0px;" align="right" width="60%" title="Package graph" alt="#METRICS" src="./asset/metricsgraph.png"/>
 <p align="left">
 	<img src="https://img.shields.io/github/languages/code-size/kselnaag/shortlink?style=plastic" title="src files size" alt="src files size">
 	<img src="https://img.shields.io/github/repo-size/kselnaag/shortlink?style=plastic" title="repo size" alt="repo size">
 </p>
 
 - Code size + Repository size
-- Package graph (image_packages) -->
+- Package graph (image_packages)
 - Unit test coverage (go tool cover)
 - Lines of code (gcloc, complexity)
 - Cyclomatic complexity (gocyclo, complexity)
@@ -106,6 +106,13 @@ We choose Monolith as system arch pattern and Rich Domain Model as software arch
   - kselnaag/go-complexity-analysis (fork)
 
 ```
+kselnaag:shortlink$ ./script/cicd.sh
+
+CI/CD COMMANDS: style lint test build run start check check-no-lint 
+                docker-gobuilder docker-build docker-run docker-up compose-up
+                metrics metrics-graph
+EXAMLPE:        ./script/cicd.sh build
+
 kselnaag:shortlink$ ./script/cicd.sh metrics
 
 >>_TestCoverage_<<
@@ -146,7 +153,7 @@ TOTAL maintAvg: 64.5287
 More details in: ./script/metrics/
 
 ## **⚙️ HowTo**
-<img style="margin-right: 0px;" align="right" width="30%" alt="#CICD" src="./asset/cicd.png"/>
+<img style="margin-right: 0px;" align="right" width="30%" title="CI/CD workflow" alt="#CICD" src="./asset/cicd.png"/>
 
 - check if `docker` and `docker-compose` has been installed
 - clone the project `git clone https://github.com/kselnaag/shortlink`

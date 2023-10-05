@@ -4,12 +4,12 @@ SERVERPID=0
 RESPCODE=0
 
 function info {
-    echo -e "
-CI COMMANDS: style lint test build run start check check-no-lint 
-             docker-gobuilder docker-build docker-run docker-up compose-up
-             metrics metrics-graph
-EXAMLPE:     ./script/cicd.sh run
-"
+    echo -e "\n
+CI/CD COMMANDS: style lint test build run start check check-no-lint 
+                docker-gobuilder docker-build docker-run docker-up compose-up
+                metrics metrics-graph
+EXAMLPE:        ./script/cicd.sh build
+\n"
     exit 0
 }
 
@@ -270,6 +270,7 @@ METRICS:
 ...
 22. Commit time (Checks time + Build time)
 24. Code duplication
+25. Control-flow graph
 
 ?
 5. Coupling
