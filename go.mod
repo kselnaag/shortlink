@@ -5,7 +5,6 @@ go 1.21
 require (
 	github.com/caarlos0/env v3.5.0+incompatible
 	github.com/gavv/httpexpect/v2 v2.15.0
-	github.com/georgysavva/scany/v2 v2.0.0
 	github.com/gin-contrib/static v0.0.1
 	github.com/gin-gonic/gin v1.9.0
 	github.com/gofiber/fiber/v2 v2.42.0
@@ -52,6 +51,7 @@ require (
 	github.com/philhofer/fwd v1.1.1 // indirect
 	github.com/pmezard/go-difflib v1.0.0 // indirect
 	github.com/rivo/uniseg v0.2.0 // indirect
+	github.com/rogpeppe/go-internal v1.9.0 // indirect
 	github.com/sanity-io/litter v1.5.5 // indirect
 	github.com/savsgio/dictpool v0.0.0-20221023140959-7bf2e61cea94 // indirect
 	github.com/savsgio/gotils v0.0.0-20220530130905-52f3993e8d6d // indirect

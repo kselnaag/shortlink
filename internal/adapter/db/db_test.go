@@ -17,6 +17,9 @@ func TestDB(t *testing.T) {
 	}()
 
 	t.Run("dbPostgre", func(t *testing.T) {
+		if testing.Short() {
+			t.Skip("skipping _dbPostgre_ tests in short mode")
+		}
 		cfg := T.CfgEnv{
 			SL_APP_NAME:  "shortlink",
 			SL_LOG_LEVEL: "trace",
@@ -29,7 +32,6 @@ func TestDB(t *testing.T) {
 			SL_DB_PASS:   "password",
 			SL_DB_DBNAME: "shortlink",
 		}
-
 		log := adapterLog.NewLogFprintf(&cfg)
 		pg := adapterDB.NewDBPostgre(&cfg, &log)
 		shutdown := pg.Connect()
