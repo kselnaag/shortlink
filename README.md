@@ -24,7 +24,7 @@ We choose Monolith as system arch pattern and Rich Domain Model as software arch
 <img style="margin-top: 0px; margin-right: 100px;" align="right" width="29%" title ="Architecture" alt="#ARCPIC" src="./asset/arch.png"/>
 
 - `Adapters`
-  - HTTP transport
+  - HTTP transport with static file server
   - SQL or NoSQL database
   - JSON logger
   - file + env config
@@ -37,12 +37,10 @@ We choose Monolith as system arch pattern and Rich Domain Model as software arch
   - http
   - db
 - `Services`
-  - get healthcheck
-  - get html UI
-  - redirect from short link to long link 
+  - redirect from short link to long link
   - search the short link if you have a long link
   - search the long link if you have a short link
-  - get ALL link pairs presented in db
+  - get ALL link pairs presented in db (test functional)
   - check if long link HTTP available
 - `Models`
   - link pair (string, string)
@@ -56,8 +54,9 @@ We choose Monolith as system arch pattern and Rich Domain Model as software arch
 - layering and hexagonal arch
 - standart go project layout (more or less)
 - pre-commit hooks and github actions (CI) + docker-compose (CD) + minikube (prod🙃)
-- integration and unit tests with mocks included
-- HTTPfast or HTTPnet server adapters
+- integration and unit tests with mocks
+- e2e tests with ThunderClient
+- HTTPfast(fiber) or HTTPnet(gin) server adapters
 - logZero, logSlog or logFprintf logger adapters
 - postgreSQL, redis, mongoDB or tarantool db adapters
 - OpenAPI Swagger docs `http://localhost:8080/oapi`
@@ -71,6 +70,7 @@ We choose Monolith as system arch pattern and Rich Domain Model as software arch
   - rs/zerolog v1.29.0
   - gin-gonic/gin v1.9.0
   - gin-contrib/static v0.0.1
+  - gin-contrib/pprof v1.4.0
   - valyala/fasthttp v1.45.0
   - gofiber/fiber v2.42.0
   - stretchr/testify v1.8.2
@@ -80,24 +80,28 @@ We choose Monolith as system arch pattern and Rich Domain Model as software arch
   - golang v1.21
   - golangci-lint v1.51.2
   - curl v7.68.0
+  - apache benchmark v2.3 (apache2-utils)
   - docker v24.0.6 + docker-compose v1.25.0
   - minikube
 
 ## **📊 Metrics**
-<img style="margin-right: 0px;" align="right" width="60%" title="Package graph" alt="#METRICS" src="./asset/metricsgraph.png"/>
-<p align="left">
-	<img src="https://img.shields.io/github/languages/code-size/kselnaag/shortlink?style=plastic" title="src files size" alt="src files size">
-	<img src="https://img.shields.io/github/repo-size/kselnaag/shortlink?style=plastic" title="repo size" alt="repo size">
-</p>
 
-- Code size + Repository size
-- Package graph (image_packages)
-- Unit test coverage (go tool cover)
-- Lines of code (gcloc, complexity)
-- Cyclomatic complexity (gocyclo, complexity)
-- Cognitive Complexity (gocognit)
-- Halstead complexity (complexity)
-- Maintainability index (complexity)
+<p align="right">Package graph
+<img align="left" src="https://img.shields.io/github/languages/code-size/kselnaag/shortlink?style=plastic" title="src files size" alt="src files size">
+<img align="left" src="https://img.shields.io/github/repo-size/kselnaag/shortlink?style=plastic" title="repo size" alt="repo size">
+</p>
+<img width="50%" align="right" title="Package graph" alt="#METRICS" src="./asset/metricsgraph.png"/>
+
+- `Project metrics`
+  - Code size + Repository size
+  - Package graph (image_packages)
+  - Control-flow graph (go tool pprof)
+  - Unit test coverage (go tool cover)
+  - Lines of code (gcloc, complexity)
+  - Cyclomatic complexity (gocyclo, complexity)
+  - Cognitive Complexity (gocognit)
+  - Halstead complexity (complexity)
+  - Maintainability index (complexity)
 - `Metrics repos (https://github.com/)`
   - ManyakRus/image_packages
   - JoaoDanielRufino/gcloc
@@ -150,6 +154,10 @@ TOTAL maintAvg: 64.5287
 >>_Successfull_<<
 ```
 
+Control-flow graph (for `http://localhost:8080/`)
+
+<img width="100%" title="Control-flow graph" alt="#CONTROLFLOW" src="./asset/controlFlow.png"/>
+
 More details in: ./script/metrics/
 
 ## **⚙️ HowTo**
@@ -163,6 +171,15 @@ More details in: ./script/metrics/
 
 ## **🦋 The beauty is like this and nothing more**
 
+
+## **🤡 Final memes**
+<p align="left">Project begin</p>
+<p align="middle"><img width="50%" title="kubernetes, only" alt="#KUBERNRTES" src="./asset/kuber.jpg"/></p>
+<p align="left">Project under construction</p>
+<p align="middle"><img width="50%" title="snapshot" alt="#KUBERNRTES" src="./asset/snapshot.jpg"/></p>
+<p align="left">Project end</p>
+<p align="middle"><img width="50%" title="ast-tree" alt="#KUBERNRTES" src="./asset/ast.jpg"/></p>
+
 ----
 ### **🔗 LINKS**
 | [gin](https://github.com/gin-gonic/gin "https://github.com/gin-gonic/gin")
@@ -172,6 +189,9 @@ More details in: ./script/metrics/
 |                    
 | [tarantool](https://hub.docker.com/r/tarantool/tarantool "https://hub.docker.com/r/tarantool/tarantool")
 | [tarantool docs](https://www.tarantool.io/ru/doc/ "https://www.tarantool.io/ru/doc")
+|         
+| [postgres](https://hub.docker.com/_/postgres "https://hub.docker.com/_/postgres")
+| [postgres docs](https://www.postgresql.org/docs/16/ "https://www.postgresql.org/docs/16/")
 | 
 
 | [fiber](https://github.com/gofiber/fiber "https://github.com/gofiber/fiber")
@@ -182,4 +202,7 @@ More details in: ./script/metrics/
 |        
 | [redis](https://hub.docker.com/_/redis "https://hub.docker.com/_/redis")
 | [redis docs](https://redis.io/docs/ "https://redis.io/docs/")
+|                      
+| [mongoDB](https://hub.docker.com/_/mongo "https://hub.docker.com/_/mongo")
+| [mongoDB docs](https://www.mongodb.com/docs/manual/ "https://www.mongodb.com/docs/manual/")
 |
