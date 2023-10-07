@@ -101,14 +101,15 @@ func (p *DBPostgre) Connect() func(e error) {
 	if p.cfg.SL_DB_PORT == "" {
 		p.cfg.SL_DB_PORT = ":5432"
 	}
-	// pgURL := "postgres://login:pass@localhost:5432/database_name"
-	pgURL := "postgres://" + p.cfg.SL_DB_LOGIN + ":" + p.cfg.SL_DB_PASS + "@" + p.cfg.SL_DB_IP + p.cfg.SL_DB_PORT + "/" + p.cfg.SL_DB_DBNAME
-	pgpool, err := pgxpool.New(context.Background(), pgURL)
+	// pgURI := "postgres://login:pass@localhost:5432/database_name"
+	pgURI := "postgres://" + p.cfg.SL_DB_LOGIN + ":" + p.cfg.SL_DB_PASS + "@" + p.cfg.SL_DB_IP + p.cfg.SL_DB_PORT + "/" + p.cfg.SL_DB_DBNAME
+	pgpool, err := pgxpool.New(context.Background(), pgURI)
 	if err != nil {
-		p.log.LogError(err, "Unable to connect to postgres db: "+pgURL)
+		p.log.LogError(err, "Connect(): Unable to connect to postgres db: "+pgURI)
+		return func(e error) {}
 	} else {
 		p.conn = pgpool
-		p.log.LogInfo("postgres db connected: " + pgURL)
+		p.log.LogInfo("postgres db connected: " + pgURI)
 	}
 	p.Migration()
 	return func(e error) {
