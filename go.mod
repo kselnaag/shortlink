@@ -5,6 +5,7 @@ go 1.21
 require (
 	github.com/caarlos0/env v3.5.0+incompatible
 	github.com/gavv/httpexpect/v2 v2.15.0
+	github.com/gin-contrib/pprof v1.4.0
 	github.com/gin-contrib/static v0.0.1
 	github.com/gin-gonic/gin v1.9.0
 	github.com/gofiber/fiber/v2 v2.42.0

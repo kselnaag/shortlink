@@ -12,6 +12,7 @@ import (
 	"strings"
 	"time"
 
+	"github.com/gin-contrib/pprof"
 	"github.com/gin-contrib/static"
 	"github.com/gin-gonic/gin"
 )
@@ -42,6 +43,22 @@ func (hns *HTTPServerNet) handlers() {
 	}
 	hns.hsrv.Use(gin.Logger())
 	hns.hsrv.Use(static.Serve("/", NewEmbedFolder(hns.fs, "data", hns.log)))
+
+	/*
+		[GIN-debug] GET    /debug/pprof/             --> github.com/gin-contrib/pprof.RouteRegister.WrapF.func1 (3 handlers)
+		[GIN-debug] GET    /debug/pprof/cmdline      --> github.com/gin-contrib/pprof.RouteRegister.WrapF.func2 (3 handlers)
+		[GIN-debug] GET    /debug/pprof/profile      --> github.com/gin-contrib/pprof.RouteRegister.WrapF.func3 (3 handlers)
+		[GIN-debug] POST   /debug/pprof/symbol       --> github.com/gin-contrib/pprof.RouteRegister.WrapF.func4 (3 handlers)
+		[GIN-debug] GET    /debug/pprof/symbol       --> github.com/gin-contrib/pprof.RouteRegister.WrapF.func5 (3 handlers)
+		[GIN-debug] GET    /debug/pprof/trace        --> github.com/gin-contrib/pprof.RouteRegister.WrapF.func6 (3 handlers)
+		[GIN-debug] GET    /debug/pprof/allocs       --> github.com/gin-contrib/pprof.RouteRegister.WrapH.func7 (3 handlers)
+		[GIN-debug] GET    /debug/pprof/block        --> github.com/gin-contrib/pprof.RouteRegister.WrapH.func8 (3 handlers)
+		[GIN-debug] GET    /debug/pprof/goroutine    --> github.com/gin-contrib/pprof.RouteRegister.WrapH.func9 (3 handlers)
+		[GIN-debug] GET    /debug/pprof/heap         --> github.com/gin-contrib/pprof.RouteRegister.WrapH.func10 (3 handlers)
+		[GIN-debug] GET    /debug/pprof/mutex        --> github.com/gin-contrib/pprof.RouteRegister.WrapH.func11 (3 handlers)
+		[GIN-debug] GET    /debug/pprof/threadcreate --> github.com/gin-contrib/pprof.RouteRegister.WrapH.func12 (3 handlers)
+	*/
+	pprof.Register(hns.hsrv)
 
 	hns.hsrv.GET("/check/ping", func(c *gin.Context) { // checks
 		headers(c)

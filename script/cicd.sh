@@ -44,7 +44,6 @@ function build {
 }
 
 function run {
-    go build -o ./bin/shortlink ./cmd/main.go
     ./bin/shortlink
     exit 0
 }
@@ -246,6 +245,10 @@ if [[ $# -ne 1 ]]; then info; else
         # docker run -it --name SLsrv --user 10001 -p 8080:8080/tcp kselnaag/shortlink
         # docker run -d --name SLpg -p 5432:5432 -e POSTGRES_DB=shortlink -e POSTGRES_USER=login -e POSTGRES_PASSWORD=password postgres:16.0-alpine3.18
         # docker start SLpostgres && docker exec -it SLpostgres ls -la /var/lib/postgresql
+
+        # pprof
+        # go tool pprof shortlink http://localhost:8080/debug/pprof/profile
+        # ab -n 100000 -c10 http://localhost:8080/        
         ;;
     *)
         info
@@ -266,11 +269,11 @@ METRICS:
 12. Test Coverage
 15. Maintainability index
 19. Code size + Repository size
+25. Control-flow graph
 
 ...
 22. Commit time (Checks time + Build time)
 24. Code duplication
-25. Control-flow graph
 
 ?
 5. Coupling

@@ -12,6 +12,7 @@ import (
 	"github.com/gofiber/fiber/v2"
 	"github.com/gofiber/fiber/v2/middleware/filesystem"
 	"github.com/gofiber/fiber/v2/middleware/logger"
+	"github.com/gofiber/fiber/v2/middleware/pprof"
 	rec "github.com/gofiber/fiber/v2/middleware/recover"
 )
 
@@ -56,6 +57,7 @@ func (hfs *HTTPServerFast) handlers() {
 		Browse:     false,
 	}))
 	hfs.hsrv.Use(rec.New())
+	hfs.hsrv.Use(pprof.New())
 
 	hfs.hsrv.Get("/check/ping", func(c *fiber.Ctx) error {
 		headers(c)
