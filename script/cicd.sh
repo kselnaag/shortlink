@@ -245,6 +245,7 @@ if [[ $# -ne 1 ]]; then info; else
         # docker run -d --name SLsrv --user 10001 -p 8080:8080/tcp kselnaag/shortlink
         # docker run -d --name SLpg -p 5432:5432 -e POSTGRES_DB=shortlink -e POSTGRES_USER=login -e POSTGRES_PASSWORD=password postgres:16.0-alpine3.18
         # docker run -d --name SLmg -p 27017:27017 -e MONGO_INITDB_DATABASE=shortlink -e MONGO_INITDB_ROOT_USERNAME=login -e MONGO_INITDB_ROOT_PASSWORD=password mongo:7.0.2 
+        # docker run -d --name SLrd -p 6378:6379 -e REDIS_ARGS="--requirepass password" redis:7.2.1-alpine3.18
 
         # pprof
         # go tool pprof shortlink http://localhost:8080/debug/pprof/profile

@@ -102,7 +102,33 @@ func TestRedis(t *testing.T) {
 		if testing.Short() {
 			t.Skip("skipping _dbRedis_ tests in short mode")
 		}
+		cfg := T.CfgEnv{
+			SL_APP_NAME:  "shortlink",
+			SL_LOG_LEVEL: "trace",
+			SL_HTTP_IP:   "localhost",
+			SL_HTTP_PORT: ":8080",
+			SL_DB_MODE:   "redis",
+			SL_DB_IP:     "localhost",
+			SL_DB_PORT:   "",
+			SL_DB_LOGIN:  "login",
+			SL_DB_PASS:   "password",
+			SL_DB_DBNAME: "shortlink",
+		}
+		log := adapterLog.NewLogFprintf(&cfg)
+		rd := adapterDB.NewDBRedis(&cfg, &log)
+		dbShutdown := rd.Connect()
 
+		links := T.DBlinksDTO{Short: "abcd", Long: "efjh"}
+		asrt.True(rd.SaveLinkPair(links))
+		links1 := rd.LoadLinkPair(T.DBlinksDTO{Short: "5clp60", Long: ""})
+		asrt.Equal(T.DBlinksDTO{Short: "5clp60", Long: "http://lib.ru"}, links1)
+		links2 := rd.LoadLinkPair(T.DBlinksDTO{Short: "abcd", Long: ""})
+		asrt.Equal(T.DBlinksDTO{Short: "abcd", Long: "efjh"}, links2)
+		links3 := rd.LoadAllLinkPairs()
+		asrt.Equal([]T.DBlinksDTO{{Short: "abcd", Long: "efjh"}, {Short: "dhiu79", Long: "http://google.ru"}, {Short: "5clp60", Long: "http://lib.ru"}}, links3)
+
+		rd.Migration()
+		dbShutdown(nil)
 	})
 }
 

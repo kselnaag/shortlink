@@ -160,10 +160,10 @@ func (m *DBMongo) Connect() func(e error) {
 		ctxSHD, cancelSHD := context.WithTimeout(ctx, 5*time.Second)
 		defer cancelSHD()
 		if err := conn.Disconnect(ctxSHD); err != nil {
-			m.log.LogError(err, "(DBMongo).Connect(): mongodb graceful_shutdown error")
+			m.log.LogError(err, "(DBMongo).Connect(): mongodb disconnected with error")
 		}
 		if e != nil {
-			m.log.LogError(e, "(DBMongo).Connect(): mongodb disconnected with error")
+			m.log.LogError(e, "(DBMongo).Connect(): mongodb shutdown with error")
 		}
 		m.log.LogInfo("mongodb disconnected")
 	}

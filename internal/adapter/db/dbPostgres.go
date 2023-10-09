@@ -115,7 +115,7 @@ func (p *DBPostgre) Connect() func(e error) {
 	return func(e error) {
 		pgpool.Close()
 		if e != nil {
-			p.log.LogError(e, "(DBPostgre).Connect(): postgres db disconnected with error")
+			p.log.LogError(e, "(DBPostgre).Connect(): postgres db shutdown with error")
 		}
 		p.log.LogInfo("postgres db disconnected")
 	}
