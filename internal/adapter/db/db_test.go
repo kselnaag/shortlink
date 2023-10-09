@@ -9,7 +9,7 @@ import (
 	"github.com/stretchr/testify/assert"
 )
 
-func TestDB(t *testing.T) {
+func TestPostgresDB(t *testing.T) {
 	asrt := assert.New(t)
 	defer func() {
 		err := recover()
@@ -27,28 +27,96 @@ func TestDB(t *testing.T) {
 			SL_HTTP_PORT: ":8080",
 			SL_DB_MODE:   "postgres",
 			SL_DB_IP:     "localhost",
-			SL_DB_PORT:   ":5432",
+			SL_DB_PORT:   "",
 			SL_DB_LOGIN:  "login",
 			SL_DB_PASS:   "password",
 			SL_DB_DBNAME: "shortlink",
 		}
 		log := adapterLog.NewLogFprintf(&cfg)
 		pg := adapterDB.NewDBPostgre(&cfg, &log)
-		shutdown := pg.Connect()
+		dbShutdown := pg.Connect()
 
 		links := T.DBlinksDTO{Short: "abcd", Long: "efjh"}
 		asrt.True(pg.SaveLinkPair(links))
-
 		links1 := pg.LoadLinkPair(T.DBlinksDTO{Short: "5clp60", Long: ""})
-		asrt.Equal(links1, T.DBlinksDTO{Short: "5clp60", Long: "http://lib.ru"})
-
+		asrt.Equal(T.DBlinksDTO{Short: "5clp60", Long: "http://lib.ru"}, links1)
 		links2 := pg.LoadLinkPair(T.DBlinksDTO{Short: "abcd", Long: ""})
-		asrt.Equal(links2, T.DBlinksDTO{Short: "abcd", Long: "efjh"})
-
+		asrt.Equal(T.DBlinksDTO{Short: "abcd", Long: "efjh"}, links2)
 		links3 := pg.LoadAllLinkPairs()
-		asrt.Equal(links3, []T.DBlinksDTO{{Short: "5clp60", Long: "http://lib.ru"}, {Short: "dhiu79", Long: "http://google.ru"}, {Short: "abcd", Long: "efjh"}})
+		asrt.Equal([]T.DBlinksDTO{{Short: "5clp60", Long: "http://lib.ru"}, {Short: "dhiu79", Long: "http://google.ru"}, {Short: "abcd", Long: "efjh"}}, links3)
 
 		pg.Migration()
-		shutdown(nil)
+		dbShutdown(nil)
+	})
+}
+
+func TestMongoDB(t *testing.T) {
+	asrt := assert.New(t)
+	defer func() {
+		err := recover()
+		asrt.Nil(err)
+	}()
+
+	t.Run("dbMongo", func(t *testing.T) {
+		if testing.Short() {
+			t.Skip("skipping _dbMongo_ tests in short mode")
+		}
+		cfg := T.CfgEnv{
+			SL_APP_NAME:  "shortlink",
+			SL_LOG_LEVEL: "trace",
+			SL_HTTP_IP:   "localhost",
+			SL_HTTP_PORT: ":8080",
+			SL_DB_MODE:   "mongo",
+			SL_DB_IP:     "localhost",
+			SL_DB_PORT:   "",
+			SL_DB_LOGIN:  "login",
+			SL_DB_PASS:   "password",
+			SL_DB_DBNAME: "shortlink",
+		}
+		log := adapterLog.NewLogFprintf(&cfg)
+		mg := adapterDB.NewDBMongo(&cfg, &log)
+		dbShutdown := mg.Connect()
+
+		links := T.DBlinksDTO{Short: "abcd", Long: "efjh"}
+		asrt.True(mg.SaveLinkPair(links))
+		links1 := mg.LoadLinkPair(T.DBlinksDTO{Short: "5clp60", Long: ""})
+		asrt.Equal(T.DBlinksDTO{Short: "5clp60", Long: "http://lib.ru"}, links1)
+		links2 := mg.LoadLinkPair(T.DBlinksDTO{Short: "abcd", Long: ""})
+		asrt.Equal(T.DBlinksDTO{Short: "abcd", Long: "efjh"}, links2)
+		links3 := mg.LoadAllLinkPairs()
+		asrt.Equal([]T.DBlinksDTO{{Short: "5clp60", Long: "http://lib.ru"}, {Short: "dhiu79", Long: "http://google.ru"}, {Short: "abcd", Long: "efjh"}}, links3)
+
+		mg.Migration()
+		dbShutdown(nil)
+	})
+}
+
+func TestRedis(t *testing.T) {
+	asrt := assert.New(t)
+	defer func() {
+		err := recover()
+		asrt.Nil(err)
+	}()
+
+	t.Run("dbRedis", func(t *testing.T) {
+		if testing.Short() {
+			t.Skip("skipping _dbRedis_ tests in short mode")
+		}
+
+	})
+}
+
+func TestTarantool(t *testing.T) {
+	asrt := assert.New(t)
+	defer func() {
+		err := recover()
+		asrt.Nil(err)
+	}()
+
+	t.Run("dbTarantool", func(t *testing.T) {
+		if testing.Short() {
+			t.Skip("skipping _dbTarantool_ tests in short mode")
+		}
+
 	})
 }

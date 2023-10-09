@@ -242,13 +242,13 @@ if [[ $# -ne 1 ]]; then info; else
         docker start $SRV
         docker logs $SRV
         docker stop $SRV
-        # docker run -it --name SLsrv --user 10001 -p 8080:8080/tcp kselnaag/shortlink
+        # docker run -d --name SLsrv --user 10001 -p 8080:8080/tcp kselnaag/shortlink
         # docker run -d --name SLpg -p 5432:5432 -e POSTGRES_DB=shortlink -e POSTGRES_USER=login -e POSTGRES_PASSWORD=password postgres:16.0-alpine3.18
-        # docker start SLpostgres && docker exec -it SLpostgres ls -la /var/lib/postgresql
+        # docker run -d --name SLmg -p 27017:27017 -e MONGO_INITDB_DATABASE=shortlink -e MONGO_INITDB_ROOT_USERNAME=login -e MONGO_INITDB_ROOT_PASSWORD=password mongo:7.0.2 
 
         # pprof
         # go tool pprof shortlink http://localhost:8080/debug/pprof/profile
-        # ab -n 100000 -c10 http://localhost:8080/        
+        # ab -n 100000 -c10 http://localhost:8080/
         ;;
     *)
         info
@@ -257,42 +257,3 @@ if [[ $# -ne 1 ]]; then info; else
 fi
 
 echo -e "\n>>_Successfull_<<\n"
-
-: <<COMMENT
-METRICS:
-+
-0. Package graph
-1. Lines of Code
-2. Cyclomatic Complexity
-3. Cognitive Complexity
-4. Halstead Complexity
-12. Test Coverage
-15. Maintainability index
-19. Code size + Repository size
-25. Control-flow graph
-
-...
-22. Commit time (Checks time + Build time)
-24. Code duplication
-
-?
-5. Coupling
-7. Hits of Code (Code Churn)
-8. LCOMx
-9. PCC
-10. LCC
-11. MMAC and NHD
-13. DSQI
-14. Instruction path length
-16. Function Points
-
--
-6. GitHub stars
-17. Mutation Coverage
-18. Number of methods, classes, etc.
-20. Forks and pull requests !
-21. Bugs !
-23. Algorithmic complexity Big-O
-
-COMMENT
-

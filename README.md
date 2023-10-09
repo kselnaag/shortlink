@@ -76,6 +76,7 @@ We choose Monolith as system arch pattern and Rich Domain Model as software arch
   - stretchr/testify v1.8.2
   - gavv/httpexpect v2.15.0
   - jackc/pgx v5.4.3
+  - mongodb/mongo-go-driver v1.12.1
 - `Tools`
   - golang v1.21
   - golangci-lint v1.51.2
@@ -163,22 +164,13 @@ More details in: ./script/metrics/
 ## **⚙️ HowTo**
 <img style="margin-right: 0px;" align="right" width="30%" title="CI/CD workflow" alt="#CICD" src="./asset/cicd.png"/>
 
-- check if `docker` and `docker-compose` has been installed
+- check if `docker` and `docker-compose` has been installed and works
 - clone the project `git clone https://github.com/kselnaag/shortlink`
 - dive into a folder `cd shortlink`
 - run everything with `./script/cicd.sh compose-up`
 - go to `http://localhost:8080` in your browser and try it
 
 ## **🦋 The beauty is like this and nothing more**
-
-
-## **🤡 Final memes**
-<p align="left">Project begin</p>
-<p align="middle"><img width="50%" title="kubernetes, only" alt="#KUBERNRTES" src="./asset/kuber.jpg"/></p>
-<p align="left">Project under construction</p>
-<p align="middle"><img width="50%" title="snapshot" alt="#KUBERNRTES" src="./asset/snapshot.jpg"/></p>
-<p align="left">Project end</p>
-<p align="middle"><img width="50%" title="ast-tree" alt="#KUBERNRTES" src="./asset/ast.jpg"/></p>
 
 ----
 ### **🔗 LINKS**
