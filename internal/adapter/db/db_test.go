@@ -16,7 +16,7 @@ func TestPostgresDB(t *testing.T) {
 		asrt.Nil(err)
 	}()
 
-	t.Run("dbPostgre", func(t *testing.T) {
+	t.Run("dbPostgres", func(t *testing.T) {
 		if testing.Short() {
 			t.Skip("skipping _dbPostgre_ tests in short mode")
 		}
@@ -33,7 +33,7 @@ func TestPostgresDB(t *testing.T) {
 			SL_DB_DBNAME: "shortlink",
 		}
 		log := adapterLog.NewLogFprintf(&cfg)
-		pg := adapterDB.NewDBPostgre(&cfg, &log)
+		pg := adapterDB.NewDBPostgres(&cfg, &log)
 		dbShutdown := pg.Connect()
 
 		links := T.DBlinksDTO{Short: "abcd", Long: "efjh"}
@@ -139,10 +139,36 @@ func TestTarantool(t *testing.T) {
 		asrt.Nil(err)
 	}()
 
-	t.Run("dbTarantool", func(t *testing.T) {
+	t.Run("dbTarantool", func(t *testing.T) { // # &"C:\Program Files\Go\bin\go.exe" test -v -tags go_tarantool_ssl_disable -vet=off -count=1 -run ^TestTarantool$ shortlink/internal/adapter/db
 		if testing.Short() {
 			t.Skip("skipping _dbTarantool_ tests in short mode")
 		}
+		cfg := T.CfgEnv{
+			SL_APP_NAME:  "shortlink",
+			SL_LOG_LEVEL: "trace",
+			SL_HTTP_IP:   "localhost",
+			SL_HTTP_PORT: ":8080",
+			SL_DB_MODE:   "tarantool",
+			SL_DB_IP:     "localhost",
+			SL_DB_PORT:   "",
+			SL_DB_LOGIN:  "login",
+			SL_DB_PASS:   "password",
+			SL_DB_DBNAME: "shortlink",
+		}
+		log := adapterLog.NewLogFprintf(&cfg)
+		tt := adapterDB.NewDBTarantool(&cfg, &log)
+		dbShutdown := tt.Connect()
 
+		links := T.DBlinksDTO{Short: "abcd", Long: "efjh"}
+		asrt.True(tt.SaveLinkPair(links))
+		links1 := tt.LoadLinkPair(T.DBlinksDTO{Short: "5clp60", Long: ""})
+		asrt.Equal(T.DBlinksDTO{Short: "5clp60", Long: "http://lib.ru"}, links1)
+		links2 := tt.LoadLinkPair(T.DBlinksDTO{Short: "abcd", Long: ""})
+		asrt.Equal(T.DBlinksDTO{Short: "abcd", Long: "efjh"}, links2)
+		links3 := tt.LoadAllLinkPairs()
+		asrt.Equal([]T.DBlinksDTO{{Short: "5clp60", Long: "http://lib.ru"}, {Short: "abcd", Long: "efjh"}, {Short: "dhiu79", Long: "http://google.ru"}}, links3)
+
+		tt.Migration()
+		dbShutdown(nil)
 	})
 }

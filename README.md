@@ -54,8 +54,8 @@ We choose Monolith as system arch pattern and Rich Domain Model as software arch
 - layering and hexagonal arch
 - standart go project layout (more or less)
 - pre-commit hooks and github actions (CI) + docker-compose (CD) + minikube (prod🙃)
-- integration and unit tests with mocks
-- e2e tests with ThunderClient
+- integration tests and unit tests with mocks
+- e2e tests in ThunderClient
 - HTTPfast(fiber) or HTTPnet(gin) server adapters
 - logZero, logSlog or logFprintf logger adapters
 - postgreSQL, redis, mongoDB or tarantool db adapters
@@ -77,6 +77,8 @@ We choose Monolith as system arch pattern and Rich Domain Model as software arch
   - gavv/httpexpect v2.15.0
   - jackc/pgx v5.4.3
   - mongodb/mongo-go-driver v1.12.1
+  - redis/go-redis v9.2.1
+  - tarantool/go-tarantool v2.0.0
 - `Tools`
   - golang v1.21
   - golangci-lint v1.51.2

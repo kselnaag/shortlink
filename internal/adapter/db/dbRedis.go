@@ -97,12 +97,13 @@ func (r *DBRedis) Connect() func(e error) {
 	}
 	r.Migration()
 	return func(e error) {
-		if err := conn.Close(); err != nil {
-			r.log.LogError(e, "(DBRedis).Connect(): redis db disconnected with error")
+		if err := r.conn.Close(); err != nil {
+			r.log.LogError(e, "(DBRedis).Connect(): redis db disconnection error")
 		}
 		if e != nil {
 			r.log.LogError(e, "(DBRedis).Connect(): redis db shutdown with error")
 		}
+		r.conn = nil
 		r.log.LogInfo("redis db disconnected")
 	}
 }

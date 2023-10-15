@@ -14,6 +14,7 @@ require (
 	github.com/redis/go-redis/v9 v9.2.1
 	github.com/rs/zerolog v1.29.0
 	github.com/stretchr/testify v1.8.2
+	github.com/tarantool/go-tarantool/v2 v2.0.0-20231009153225-852ec7e207a4
 	github.com/valyala/fasthttp v1.45.0
 	go.mongodb.org/mongo-driver v1.12.1
 )
@@ -49,6 +50,7 @@ require (
 	github.com/leodido/go-urn v1.2.2 // indirect
 	github.com/mattn/go-colorable v0.1.13 // indirect
 	github.com/mattn/go-isatty v0.0.17 // indirect
+	github.com/mattn/go-pointer v0.0.1 // indirect
 	github.com/mattn/go-runewidth v0.0.14 // indirect
 	github.com/mitchellh/go-wordwrap v1.0.1 // indirect
 	github.com/modern-go/concurrent v0.0.0-20180306012644-bacd9c7ef1dd // indirect
@@ -63,11 +65,16 @@ require (
 	github.com/savsgio/dictpool v0.0.0-20221023140959-7bf2e61cea94 // indirect
 	github.com/savsgio/gotils v0.0.0-20220530130905-52f3993e8d6d // indirect
 	github.com/sergi/go-diff v1.0.0 // indirect
+	github.com/spacemonkeygo/spacelog v0.0.0-20180420211403-2296661a0572 // indirect
+	github.com/tarantool/go-iproto v0.1.0 // indirect
+	github.com/tarantool/go-openssl v0.0.8-0.20230801114713-b452431f934a // indirect
 	github.com/tinylib/msgp v1.1.6 // indirect
 	github.com/twitchyliquid64/golang-asm v0.15.1 // indirect
 	github.com/ugorji/go/codec v1.2.10 // indirect
 	github.com/valyala/bytebufferpool v1.0.0 // indirect
 	github.com/valyala/tcplisten v1.0.0 // indirect
+	github.com/vmihailenco/msgpack/v5 v5.3.5 // indirect
+	github.com/vmihailenco/tagparser/v2 v2.0.0 // indirect
 	github.com/xdg-go/pbkdf2 v1.0.0 // indirect
 	github.com/xdg-go/scram v1.1.2 // indirect
 	github.com/xdg-go/stringprep v1.0.4 // indirect

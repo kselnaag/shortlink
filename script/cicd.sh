@@ -5,7 +5,7 @@ RESPCODE=0
 
 function info {
     echo -e "\n
-CI/CD COMMANDS: style lint test build run start check check-no-lint 
+CI/CD COMMANDS: style lint test ttTest build run start check check-no-lint 
                 docker-gobuilder docker-build docker-run docker-up compose-up
                 metrics metrics-graph
 EXAMLPE:        ./script/cicd.sh build
@@ -37,9 +37,15 @@ function unitTest {
     if [[ $? -gt 0 ]]; then checksBreaked; fi   
 }
 
+function intergTTtest {     # &"C:\Program Files\Go\bin\go.exe" test -v -tags go_tarantool_ssl_disable -vet=off -count=1 -run ^TestTarantool$ shortlink/internal/adapter/db
+    echo -e "\n>>_TarantoolTest_<<"
+    go test -v -tags go_tarantool_ssl_disable -vet=off -count=1 -run ^TestTarantool$ shortlink/internal/adapter/db
+    if [[ $? -gt 0 ]]; then checksBreaked; fi   
+}
+
 function build {
     echo -e "\n>>_Build_<<"
-    CGO_ENABLED=0 GOOS=linux GOARCH=amd64 go build -ldflags='-w -s -extldflags "-static"' -a -o ./bin/shortlink ./cmd/main.go
+    CGO_ENABLED=0 GOOS=linux GOARCH=amd64 go build -tags go_tarantool_ssl_disable -ldflags='-w -s -extldflags "-static"' -a -o ./bin/shortlink ./cmd/main.go
     if [[ $? -gt 0 ]]; then checksBreaked; fi
 }
 
@@ -176,6 +182,9 @@ if [[ $# -ne 1 ]]; then info; else
     "test")
         unitTest
         ;;
+    "ttTest")
+        intergTTtest
+        ;;
     "build")
         build
         ;;
@@ -246,7 +255,10 @@ if [[ $# -ne 1 ]]; then info; else
         # docker run -d --name SLpg -p 5432:5432 -e POSTGRES_DB=shortlink -e POSTGRES_USER=login -e POSTGRES_PASSWORD=password postgres:16.0-alpine3.18
         # docker run -d --name SLmg -p 27017:27017 -e MONGO_INITDB_DATABASE=shortlink -e MONGO_INITDB_ROOT_USERNAME=login -e MONGO_INITDB_ROOT_PASSWORD=password mongo:7.0.2 
         # docker run -d --name SLrd -p 6378:6379 -e REDIS_ARGS="--requirepass password" redis:7.2.1-alpine3.18
+        # docker run -d --name SLtt -p 3301:3301 -e TARANTOOL_USER_NAME=login -e TARANTOOL_USER_PASSWORD=password tarantool/tarantool:2.10.8-gc64-amd64
 
+        # docker buildx build --platform linux/amd64 --no-cache --build-arg="TNT_VER=2.11.1" --build-arg="NPROC=1" --build-arg="ENABLE_BUNDLED_LIBYAML=ON" --build-arg="LUAJIT_DISABLE_SYSPROF=OFF" --build-arg="GC64=ON" --build-arg="ROCKS_INSTALLER=luarocks" -f ./dockerfiles/alpine_3.15 -t kselnaag/tarantool:2.11.1 . --load
+        # go test -v -tags go_tarantool_ssl_disable -vet=off -count=1 -race -timeout 30s -run ^TestTarantool$ shortlink/internal/adapter/db
         # pprof
         # go tool pprof shortlink http://localhost:8080/debug/pprof/profile
         # ab -n 100000 -c10 http://localhost:8080/

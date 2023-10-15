@@ -7,22 +7,22 @@ import (
 	"github.com/jackc/pgx/v5/pgxpool"
 )
 
-var _ T.IDB = (*DBPostgre)(nil)
+var _ T.IDB = (*DBPostgres)(nil)
 
-type DBPostgre struct {
+type DBPostgres struct {
 	cfg  *T.CfgEnv
 	log  T.ILog
 	conn *pgxpool.Pool
 }
 
-func NewDBPostgre(cfg *T.CfgEnv, log T.ILog) DBPostgre {
-	return DBPostgre{
+func NewDBPostgres(cfg *T.CfgEnv, log T.ILog) DBPostgres {
+	return DBPostgres{
 		cfg: cfg,
 		log: log,
 	}
 }
 
-func (p *DBPostgre) SaveLinkPair(links T.DBlinksDTO) bool {
+func (p *DBPostgres) SaveLinkPair(links T.DBlinksDTO) bool {
 	ctx := context.Background()
 	query := "INSERT INTO shortlink VALUES ($1, $2)"
 	tag, err := p.conn.Exec(ctx, query, links.Short, links.Long)
@@ -34,7 +34,7 @@ func (p *DBPostgre) SaveLinkPair(links T.DBlinksDTO) bool {
 	return true
 }
 
-func (p *DBPostgre) LoadLinkPair(links T.DBlinksDTO) T.DBlinksDTO { // linkshort
+func (p *DBPostgres) LoadLinkPair(links T.DBlinksDTO) T.DBlinksDTO { // linkshort
 	ctx := context.Background()
 	query := "SELECT slink, llink FROM shortlink WHERE slink = $1"
 	var tag1, tag2 string
@@ -48,7 +48,7 @@ func (p *DBPostgre) LoadLinkPair(links T.DBlinksDTO) T.DBlinksDTO { // linkshort
 	}
 }
 
-func (p *DBPostgre) LoadAllLinkPairs() []T.DBlinksDTO {
+func (p *DBPostgres) LoadAllLinkPairs() []T.DBlinksDTO {
 	ctx := context.Background()
 	query := "SELECT slink, llink FROM shortlink"
 	rows, errRows := p.conn.Query(ctx, query)
@@ -69,7 +69,7 @@ func (p *DBPostgre) LoadAllLinkPairs() []T.DBlinksDTO {
 	return res
 }
 
-func (p *DBPostgre) Migration() {
+func (p *DBPostgres) Migration() {
 	ctx := context.Background()
 
 	query := "DROP TABLE IF EXISTS shortlink"
@@ -97,7 +97,7 @@ func (p *DBPostgre) Migration() {
 	}
 }
 
-func (p *DBPostgre) Connect() func(e error) {
+func (p *DBPostgres) Connect() func(e error) {
 	if p.cfg.SL_DB_PORT == "" {
 		p.cfg.SL_DB_PORT = ":5432"
 	}
@@ -113,10 +113,11 @@ func (p *DBPostgre) Connect() func(e error) {
 	}
 	p.Migration()
 	return func(e error) {
-		pgpool.Close()
+		p.conn.Close()
 		if e != nil {
 			p.log.LogError(e, "(DBPostgre).Connect(): postgres db shutdown with error")
 		}
+		p.conn = nil
 		p.log.LogInfo("postgres db disconnected")
 	}
 }
