@@ -9,7 +9,7 @@ import (
 )
 
 func main() {
-	runtime.GOMAXPROCS(1) // GOMAXPROCS=1
+	runtime.GOMAXPROCS(1) // ///////////////// GOMAXPROCS=1
 	// debug.SetGCPercent(100)				// GOGC=100
 	// debug.SetMemoryLimit(2 831 155 200)	// GOMEMLIMIT=2700MiB
 
@@ -19,6 +19,7 @@ func main() {
 	defer func() {
 		if err := recover(); err != nil {
 			myAppStop(err.(error))
+			os.Exit(1)
 		}
 	}()
 

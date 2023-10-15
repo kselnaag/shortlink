@@ -1,7 +1,6 @@
 package app
 
 import (
-	"os"
 	adapterCfg "shortlink/internal/adapter/cfg"
 	adapterDB "shortlink/internal/adapter/db"
 	adapterHTTP "shortlink/internal/adapter/http"
@@ -43,9 +42,9 @@ func (a *App) Start() func(err error) {
 		hsrvShutdown(err)
 		dbShutdown(err)
 		if err != nil {
-			a.log.LogError(err, a.cfg.SL_APP_NAME+" app stoped")
-			os.Exit(1)
+			a.log.LogError(err, a.cfg.SL_APP_NAME+" app stoped with error")
+		} else {
+			a.log.LogInfo(a.cfg.SL_APP_NAME + " app stoped")
 		}
-		a.log.LogInfo(a.cfg.SL_APP_NAME + " app stoped")
 	}
 }
