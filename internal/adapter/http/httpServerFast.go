@@ -26,7 +26,7 @@ type HTTPServerFast struct {
 	cfg  *T.CfgEnv
 }
 
-func NewHTTPServerFast(ctrl T.ICtrlHTTP, log T.ILog, cfg *T.CfgEnv) HTTPServerFast {
+func NewHTTPServerFast(ctrl T.ICtrlHTTP, log T.ILog, cfg *T.CfgEnv) *HTTPServerFast {
 	fiberconf := fiber.Config{
 		Prefork:           false,
 		CaseSensitive:     true,
@@ -37,7 +37,7 @@ func NewHTTPServerFast(ctrl T.ICtrlHTTP, log T.ILog, cfg *T.CfgEnv) HTTPServerFa
 		ServerHeader:      "fiber",
 		AppName:           "shortlink",
 	}
-	return HTTPServerFast{
+	return &HTTPServerFast{
 		ctrl: ctrl,
 		hsrv: fiber.New(fiberconf),
 		fs:   web.StaticFS,
@@ -120,7 +120,8 @@ func (hfs *HTTPServerFast) handlers() {
 		if err != nil {
 			return c.Status(fiber.StatusNotFound).JSON(T.HTTPMessageDTO{IsResp: true, Mode: "404", Body: err.Error()})
 		}
-		return c.Redirect(long)
+		c.Set("Content-Type", "text/html")
+		return c.Redirect(long, fiber.StatusFound)
 	})
 }
 
@@ -153,3 +154,12 @@ func (hfs *HTTPServerFast) Run() func(e error) {
 		}
 	}
 }
+
+/* import "github.com/goccy/go-json"
+
+func main() {
+    app := fiber.New(fiber.Config{
+        JSONEncoder: json.Marshal,
+        JSONDecoder: json.Unmarshal,
+    })
+*/

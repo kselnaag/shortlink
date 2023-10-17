@@ -27,8 +27,8 @@ type HTTPServerNet struct {
 	cfg  *T.CfgEnv
 }
 
-func NewHTTPServerNet(ctrl T.ICtrlHTTP, log T.ILog, cfg *T.CfgEnv) HTTPServerNet {
-	return HTTPServerNet{
+func NewHTTPServerNet(ctrl T.ICtrlHTTP, log T.ILog, cfg *T.CfgEnv) *HTTPServerNet {
+	return &HTTPServerNet{
 		ctrl: ctrl,
 		hsrv: gin.New(),
 		fs:   web.StaticFS,
@@ -43,7 +43,6 @@ func (hns *HTTPServerNet) handlers() {
 	}
 	hns.hsrv.Use(gin.Logger())
 	hns.hsrv.Use(static.Serve("/", NewEmbedFolder(hns.fs, "data", hns.log)))
-
 	/*
 		[GIN-debug] GET    /debug/pprof/             --> github.com/gin-contrib/pprof.RouteRegister.WrapF.func1 (3 handlers)
 		[GIN-debug] GET    /debug/pprof/cmdline      --> github.com/gin-contrib/pprof.RouteRegister.WrapF.func2 (3 handlers)
@@ -138,7 +137,8 @@ func (hns *HTTPServerNet) handlers() {
 			c.JSON(http.StatusNotFound, T.HTTPMessageDTO{IsResp: true, Mode: "404", Body: err.Error()})
 			return
 		}
-		c.Redirect(http.StatusMovedPermanently, long)
+		c.Header("Content-Type", "text/html")
+		c.Redirect(http.StatusFound, long)
 	}) /*
 		hns.hsrv.GET("/", func(c *gin.Context) {
 			defer logpanic(c)

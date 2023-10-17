@@ -49,5 +49,10 @@ func TestModels(t *testing.T) {
 		asrt.True(lp6.IsValid())
 		asrt.Equal("Hello, world !", lp6.Long())
 		asrt.Equal("lf4w7t", lp6.Short())
+
+		lp7 := model.NewLinkPair("http://lib.ru/PROZA/")
+		asrt.True(lp7.IsValid())
+		asrt.Equal("http://lib.ru/PROZA/", lp7.Long())
+		asrt.Equal("8b4s29", lp7.Short())
 	})
 }

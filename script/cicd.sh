@@ -33,7 +33,7 @@ function lint {
 function unitTest {
     echo -e "\n>>_UnitTests_<<"
     set -o pipefail
-    go test -short -vet=off -count=1 -race ./... | { grep -v 'no test files'; true; }
+    go test -short -tags go_tarantool_ssl_disable -vet=off -count=1 -race ./... | { grep -v 'no test files'; true; }
     if [[ $? -gt 0 ]]; then checksBreaked; fi   
 }
 
@@ -153,7 +153,7 @@ function testcov {
     echo -e "\n>>_TestCoverage_<<"
     FTEMP=./script/metrics/coverage.test
     FOUT=./script/metrics/sl.cov
-    go test -short -vet=off -count=1 -coverprofile=$FTEMP ./...
+    go test -short -tags go_tarantool_ssl_disable -vet=off -count=1 -coverprofile=$FTEMP ./...
     go tool cover -func=$FTEMP > $FOUT
     cat $FOUT | grep total | awk '{print "TOTAL:", $3}'
     if [[ $? -gt 0 ]]; then checksBreaked; fi
