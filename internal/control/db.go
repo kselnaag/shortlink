@@ -11,8 +11,8 @@ type CtrlDB struct {
 	db T.IDB
 }
 
-func NewCtrlDB(db T.IDB) CtrlDB {
-	return CtrlDB{
+func NewCtrlDB(db T.IDB) *CtrlDB {
+	return &CtrlDB{
 		db: db,
 	}
 }

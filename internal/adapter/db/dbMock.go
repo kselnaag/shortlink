@@ -13,11 +13,11 @@ type DBMock struct {
 	db  *sync.Map
 }
 
-func NewDBMock(cfg *T.CfgEnv, log T.ILog) DBMock {
+func NewDBMock(cfg *T.CfgEnv, log T.ILog) *DBMock {
 	dbmock := sync.Map{}
 	dbmock.Store("5clp60", "http://lib.ru")
 	dbmock.Store("dhiu79", "http://google.ru")
-	return DBMock{
+	return &DBMock{
 		log: log,
 		cfg: cfg,
 		db:  &dbmock,

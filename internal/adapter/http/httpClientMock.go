@@ -12,12 +12,12 @@ type HTTPClientMock struct {
 	hcli *sync.Map
 }
 
-func NewHTTPClientMock() HTTPClientMock {
+func NewHTTPClientMock() *HTTPClientMock {
 	mockhcli := sync.Map{}
 	mockhcli.Store("http://lib.ru", struct{}{})
 	mockhcli.Store("http://lib.ru/PROZA/", struct{}{})
 	mockhcli.Store("http://google.ru", struct{}{})
-	return HTTPClientMock{
+	return &HTTPClientMock{
 		hcli: &mockhcli,
 	}
 }

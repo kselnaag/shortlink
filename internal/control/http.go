@@ -3,6 +3,7 @@ package control
 import (
 	"encoding/json"
 	"errors"
+	"fmt"
 	"regexp"
 	T "shortlink/internal/apptype"
 	"strings"
@@ -15,9 +16,9 @@ type CtrlHTTP struct {
 	ishashfunc func(s string) bool
 }
 
-func NewCtrlHTTP(servSL T.ISvcShortLink) CtrlHTTP {
+func NewCtrlHTTP(servSL T.ISvcShortLink) *CtrlHTTP {
 	isHash := regexp.MustCompile(`^[a-z0-9]{6}$`).MatchString
-	return CtrlHTTP{
+	return &CtrlHTTP{
 		servSL:     servSL,
 		ishashfunc: isHash,
 	}
@@ -61,8 +62,10 @@ func (ctrl *CtrlHTTP) Save(body []byte) (string, error) {
 	if err := json.Unmarshal(body, &req); (err != nil) || (req.IsResp) || (req.Body == "") {
 		return "", errors.New(string(body))
 	}
-	lp := ctrl.servSL.SetLinkPairFromLinkLong(string(body))
+	lp := ctrl.servSL.SetLinkPairFromLinkLong(req.Body)
 	if !lp.IsValid() {
+		fmt.Println("<<TEST 2>>")
+		fmt.Println(lp)
 		return "", errors.New(string(body))
 	}
 	return lp.Short(), nil

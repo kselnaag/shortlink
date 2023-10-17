@@ -15,8 +15,8 @@ type DBRedis struct {
 	conn *redis.Client
 }
 
-func NewDBRedis(cfg *T.CfgEnv, log T.ILog) DBRedis {
-	return DBRedis{
+func NewDBRedis(cfg *T.CfgEnv, log T.ILog) *DBRedis {
+	return &DBRedis{
 		cfg: cfg,
 		log: log,
 	}

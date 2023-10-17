@@ -20,7 +20,7 @@ func TestPostgresDB(t *testing.T) {
 		if testing.Short() {
 			t.Skip("skipping _dbPostgre_ tests in short mode")
 		}
-		cfg := T.CfgEnv{
+		cfg := &T.CfgEnv{
 			SL_APP_NAME:  "shortlink",
 			SL_LOG_LEVEL: "trace",
 			SL_HTTP_IP:   "localhost",
@@ -32,8 +32,8 @@ func TestPostgresDB(t *testing.T) {
 			SL_DB_PASS:   "password",
 			SL_DB_DBNAME: "shortlink",
 		}
-		log := adapterLog.NewLogFprintf(&cfg)
-		pg := adapterDB.NewDBPostgres(&cfg, &log)
+		log := adapterLog.NewLogFprintf(cfg)
+		pg := adapterDB.NewDBPostgres(cfg, log)
 		dbShutdown := pg.Connect()
 
 		links := T.DBlinksDTO{Short: "abcd", Long: "efjh"}
@@ -61,7 +61,7 @@ func TestMongoDB(t *testing.T) {
 		if testing.Short() {
 			t.Skip("skipping _dbMongo_ tests in short mode")
 		}
-		cfg := T.CfgEnv{
+		cfg := &T.CfgEnv{
 			SL_APP_NAME:  "shortlink",
 			SL_LOG_LEVEL: "trace",
 			SL_HTTP_IP:   "localhost",
@@ -73,8 +73,8 @@ func TestMongoDB(t *testing.T) {
 			SL_DB_PASS:   "password",
 			SL_DB_DBNAME: "shortlink",
 		}
-		log := adapterLog.NewLogFprintf(&cfg)
-		mg := adapterDB.NewDBMongo(&cfg, &log)
+		log := adapterLog.NewLogFprintf(cfg)
+		mg := adapterDB.NewDBMongo(cfg, log)
 		dbShutdown := mg.Connect()
 
 		links := T.DBlinksDTO{Short: "abcd", Long: "efjh"}
@@ -102,7 +102,7 @@ func TestRedis(t *testing.T) {
 		if testing.Short() {
 			t.Skip("skipping _dbRedis_ tests in short mode")
 		}
-		cfg := T.CfgEnv{
+		cfg := &T.CfgEnv{
 			SL_APP_NAME:  "shortlink",
 			SL_LOG_LEVEL: "trace",
 			SL_HTTP_IP:   "localhost",
@@ -114,8 +114,8 @@ func TestRedis(t *testing.T) {
 			SL_DB_PASS:   "password",
 			SL_DB_DBNAME: "shortlink",
 		}
-		log := adapterLog.NewLogFprintf(&cfg)
-		rd := adapterDB.NewDBRedis(&cfg, &log)
+		log := adapterLog.NewLogFprintf(cfg)
+		rd := adapterDB.NewDBRedis(cfg, log)
 		dbShutdown := rd.Connect()
 
 		links := T.DBlinksDTO{Short: "abcd", Long: "efjh"}
@@ -143,7 +143,7 @@ func TestTarantool(t *testing.T) {
 		if testing.Short() {
 			t.Skip("skipping _dbTarantool_ tests in short mode")
 		}
-		cfg := T.CfgEnv{
+		cfg := &T.CfgEnv{
 			SL_APP_NAME:  "shortlink",
 			SL_LOG_LEVEL: "trace",
 			SL_HTTP_IP:   "localhost",
@@ -155,8 +155,8 @@ func TestTarantool(t *testing.T) {
 			SL_DB_PASS:   "password",
 			SL_DB_DBNAME: "shortlink",
 		}
-		log := adapterLog.NewLogFprintf(&cfg)
-		tt := adapterDB.NewDBTarantool(&cfg, &log)
+		log := adapterLog.NewLogFprintf(cfg)
+		tt := adapterDB.NewDBTarantool(cfg, log)
 		dbShutdown := tt.Connect()
 
 		links := T.DBlinksDTO{Short: "abcd", Long: "efjh"}

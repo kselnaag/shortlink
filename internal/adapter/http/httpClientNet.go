@@ -12,13 +12,13 @@ type HTTPClientNet struct {
 	hcli *http.Client
 }
 
-func NewHTTPClientNet() HTTPClientNet {
+func NewHTTPClientNet() *HTTPClientNet {
 	transport := &http.Transport{
 		MaxIdleConns:       10,
 		IdleConnTimeout:    10 * time.Second,
 		DisableCompression: true,
 	}
-	return HTTPClientNet{
+	return &HTTPClientNet{
 		hcli: &http.Client{Transport: transport},
 	}
 }

@@ -16,8 +16,8 @@ type SvcShortLink struct {
 	log  T.ILog
 }
 
-func NewSvcShortLink(ctrl T.ICtrlDB, hcli T.IHTTPClient, log T.ILog) SvcShortLink {
-	return SvcShortLink{
+func NewSvcShortLink(ctrl T.ICtrlDB, hcli T.IHTTPClient, log T.ILog) *SvcShortLink {
+	return &SvcShortLink{
 		ctrl: ctrl,
 		hcli: hcli,
 		log:  log,
@@ -91,10 +91,3 @@ func (ssl *SvcShortLink) IsLinkLongHTTPValid(linklong string) bool {
 	ssl.log.LogDebug("IsLinkLongHttpValid(): http client GET is not OK: %d", resp)
 	return false
 }
-
-/*
-+check if long link is valid
-+get the short link if you have a long link
-+get the long link if you have a short link
-+get ALL link pairs presented in db
-*/

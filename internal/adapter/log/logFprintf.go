@@ -29,7 +29,7 @@ type LogFprintf struct {
 	svc    string
 }
 
-func NewLogFprintf(cfg *T.CfgEnv) LogFprintf {
+func NewLogFprintf(cfg *T.CfgEnv) *LogFprintf {
 	host := cfg.SL_HTTP_IP + cfg.SL_HTTP_PORT
 	svc := cfg.SL_APP_NAME
 	var lvl LogLevel
@@ -51,7 +51,7 @@ func NewLogFprintf(cfg *T.CfgEnv) LogFprintf {
 	default:
 		lvl = Disabled
 	}
-	return LogFprintf{
+	return &LogFprintf{
 		cfg:    cfg,
 		loglvl: lvl,
 		host:   host,

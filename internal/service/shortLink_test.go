@@ -22,18 +22,18 @@ func TestServices(t *testing.T) {
 	}()
 
 	t.Run("ServShortLink", func(t *testing.T) {
-		cfg := T.CfgEnv{
+		cfg := &T.CfgEnv{
 			SL_APP_NAME:  "testSL",
 			SL_HTTP_IP:   "localhost",
 			SL_HTTP_PORT: ":8080",
 			SL_DB_IP:     "localhost",
 			SL_DB_PORT:   ":1313",
 		}
-		log := adapterLog.NewLogFprintf(&cfg)
-		db := adapterDB.NewDBMock(&cfg, &log)
-		ctrlDB := control.NewCtrlDB(&db)
+		log := adapterLog.NewLogFprintf(cfg)
+		db := adapterDB.NewDBMock(cfg, log)
+		ctrlDB := control.NewCtrlDB(db)
 		hcli := adapterHTTP.NewHTTPClientMock()
-		nssl := service.NewSvcShortLink(&ctrlDB, &hcli, &log)
+		nssl := service.NewSvcShortLink(ctrlDB, hcli, log)
 
 		// models.LinkPair{Short: "5clp60", Long: "http://lib.ru"}, models.LinkPair{Short: "8as3rb", Long: "http://lib.ru/abs"}, ("dhiu79", "http://google.ru")
 		asrt.Equal([]model.LinkPair{model.NewLinkPair("http://lib.ru"), model.NewLinkPair("http://google.ru")},

@@ -15,8 +15,8 @@ type DBTarantool struct {
 	conn *tarantool.Connection
 }
 
-func NewDBTarantool(cfg *T.CfgEnv, log T.ILog) DBTarantool {
-	return DBTarantool{
+func NewDBTarantool(cfg *T.CfgEnv, log T.ILog) *DBTarantool {
+	return &DBTarantool{
 		cfg: cfg,
 		log: log,
 	}

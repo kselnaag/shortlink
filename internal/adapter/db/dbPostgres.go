@@ -15,8 +15,8 @@ type DBPostgres struct {
 	conn *pgxpool.Pool
 }
 
-func NewDBPostgres(cfg *T.CfgEnv, log T.ILog) DBPostgres {
-	return DBPostgres{
+func NewDBPostgres(cfg *T.CfgEnv, log T.ILog) *DBPostgres {
+	return &DBPostgres{
 		cfg: cfg,
 		log: log,
 	}

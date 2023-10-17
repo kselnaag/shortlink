@@ -16,7 +16,7 @@ type LogZero struct {
 	logger zerolog.Logger
 }
 
-func NewLogZero(cfg *T.CfgEnv) LogZero {
+func NewLogZero(cfg *T.CfgEnv) *LogZero {
 	host := cfg.SL_HTTP_IP + cfg.SL_HTTP_PORT
 	service := cfg.SL_APP_NAME
 	zerolog.TimeFieldFormat = time.RFC3339Nano
@@ -48,7 +48,7 @@ func NewLogZero(cfg *T.CfgEnv) LogZero {
 	newlogger := zerolog.New(os.Stderr).Level(lvl).With().
 		Timestamp().Str("H", host).Str("S", service).
 		Logger()
-	return LogZero{
+	return &LogZero{
 		cfg:    cfg,
 		logger: newlogger,
 	}

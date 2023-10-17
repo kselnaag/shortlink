@@ -13,8 +13,8 @@ type HTTPClientFast struct {
 	hcli *fasthttp.Client
 }
 
-func NewHTTPClientFast() HTTPClientFast {
-	return HTTPClientFast{
+func NewHTTPClientFast() *HTTPClientFast {
+	return &HTTPClientFast{
 		hcli: &fasthttp.Client{
 			ReadTimeout:         10 * time.Second,
 			WriteTimeout:        10 * time.Second,

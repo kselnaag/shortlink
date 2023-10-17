@@ -29,7 +29,7 @@ type LogSlog struct {
 	ctx    context.Context
 }
 
-func NewLogSlog(cfg *T.CfgEnv) LogSlog {
+func NewLogSlog(cfg *T.CfgEnv) *LogSlog {
 	ctx := context.Background()
 	host := cfg.SL_HTTP_IP + cfg.SL_HTTP_PORT
 	svc := cfg.SL_APP_NAME
@@ -89,7 +89,7 @@ func NewLogSlog(cfg *T.CfgEnv) LogSlog {
 	default:
 		logLevel.Set(LevelDisabled)
 	}
-	return LogSlog{
+	return &LogSlog{
 		ctx:    ctx,
 		cfg:    cfg,
 		logger: logger,

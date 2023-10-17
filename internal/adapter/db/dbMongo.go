@@ -20,8 +20,8 @@ type DBMongo struct {
 	conn *mongo.Client
 }
 
-func NewDBMongo(cfg *T.CfgEnv, log T.ILog) DBMongo {
-	return DBMongo{
+func NewDBMongo(cfg *T.CfgEnv, log T.ILog) *DBMongo {
+	return &DBMongo{
 		cfg: cfg,
 		log: log,
 	}
