@@ -12,8 +12,8 @@ import (
 	"github.com/joho/godotenv"
 )
 
-func NewCfgEnv(cfgname string) T.CfgEnv {
-	cfg := T.CfgEnv{ // default env
+func NewCfgEnv(cfgname string) *T.CfgEnv {
+	cfg := &T.CfgEnv{ // default env
 		SL_APP_NAME:  "shortlink",
 		SL_LOG_MODE:  "fprintf",
 		SL_LOG_LEVEL: "info",
@@ -27,24 +27,30 @@ func NewCfgEnv(cfgname string) T.CfgEnv {
 		SL_DB_PASS:   "password",
 		SL_DB_DBNAME: "shortlink",
 	}
-	log := adapterLog.NewLogFprintf(&cfg)
+	log := adapterLog.NewLogFprintf(cfg)
+	exec, err := os.Executable() // LoadExecutablePath
+	if err != nil {
+		log.LogError(err, "CfgEnv: os.Executable(): executable path not found")
+	}
+	filename := filepath.Join(filepath.Dir(exec), cfgname)
+	log.LogDebug("CfgEnv exec path: %s", exec)
+	NewCfgEnvFile(filename, cfg, log)
+	return cfg
+}
+
+func NewCfgEnvFile(filename string, cfg *T.CfgEnv, log T.ILog) {
 	if ip, err := ipFromInterfaces(); err != nil {
 		log.LogError(err, "ipFromInterfaces(): can not get IP interface")
 	} else {
 		cfg.SL_HTTP_IP = ip
+		log.LogDebug("(CfgEnv).ipFromInterfaces(): %s", ip)
 	}
-	exec, err := os.Executable() // LoadExecutablePath
-	if err != nil {
-		log.LogError(err, "os.Executable(): executable path not found")
-	}
-	filename := filepath.Join(filepath.Dir(exec), cfgname)
 	if err := godotenv.Load(filename); err == nil { // LoadConfFromFileToEnv
-		log.LogInfo("Load config from file: ./%s", cfgname)
+		log.LogInfo("CfgEnv load config from file: %s", filename)
 	}
-	if err := env.Parse(&cfg); err != nil { // LoadConfFromEnvToStruct
-		log.LogError(err, "env.Parse(): env vars parsing failed, use default config")
+	if err := env.Parse(cfg); err != nil { // LoadConfFromEnvToStruct
+		log.LogWarn("env.Parse(): env vars parsing failed, use default config")
 	}
-	return cfg
 }
 
 func ipFromInterfaces() (string, error) {
