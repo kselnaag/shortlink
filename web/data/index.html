@@ -55,7 +55,7 @@
                 }).then((response) => response.json()
                 ).then((result) => {
                     console.log("Success:", result);
-                    if (result.Mode == "200") {
+                    if (result.Mode == "201") {
                         short.value = result.Body
                     } else {
                         short.value = "not found"
@@ -78,7 +78,7 @@
                 }).then((response) => response.json()
                 ).then((result) => {
                     console.log("Success:", result);
-                    if (result.Mode == "200") {
+                    if (result.Mode == "206") {
                         short.value = result.Body
                     } else {
                         short.value = "not found"
@@ -99,7 +99,7 @@
                 }).then((response) => response.json()
                 ).then((result) => {
                     console.log("Success:", result);
-                    if (result.Mode == "200") {
+                    if (result.Mode == "206") {
                         long.value = result.Body
                     } else {
                         long.value = "not found"
