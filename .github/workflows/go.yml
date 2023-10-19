@@ -28,10 +28,10 @@ jobs:
           args: --config=./config/.golangci.yaml
                 
     - name: UnitTests
-      run: go test -short -vet=off -count=1 -race ./...
+      run: go test -short -tags go_tarantool_ssl_disable -vet=off -count=1 -race ./...
 
     - name: Build
-      run: go build -o ./bin/shortlink ./cmd/main.go
+      run: go build -tags go_tarantool_ssl_disable -o ./bin/shortlink ./cmd/main.go
 
     - name: StartServer
       run: ./bin/shortlink &

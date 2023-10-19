@@ -1,0 +1,28 @@
+services:
+  db:
+    image: tarantool/tarantool:2.10.8-gc64-amd64
+    container_name: SLtt
+    ports:
+      - 3301:3301
+    environment:
+       - TARANTOOL_USER_NAME=login
+       - TARANTOOL_USER_PASSWORD=password
+    healthcheck:
+      test: nc -z db 3301
+      interval: 3s
+      timeout: 3s
+      retries: 30
+  srv:
+    image: kselnaag/shortlink
+    container_name: SLsrv
+    user: appuser
+    ports:
+      - "8080:8080"
+    env_file:
+      - ../config/shortlink.env
+    environment:
+      - SL_DB_IP=db
+      - SL_DB_MODE=tarantool
+    depends_on:
+      db:
+        condition: service_healthy

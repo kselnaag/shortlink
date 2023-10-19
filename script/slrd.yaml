@@ -1,0 +1,27 @@
+services:
+  db:
+    image: redis:7.2.1-alpine3.18
+    container_name: SLrd
+    ports:
+      - 6379:6379
+    environment:
+       - REDIS_ARGS="--requirepass password"
+    healthcheck:
+      test: nc -z db 6379
+      interval: 3s
+      timeout: 3s
+      retries: 30
+  srv:
+    image: kselnaag/shortlink
+    container_name: SLsrv
+    user: appuser
+    ports:
+      - "8080:8080"
+    env_file:
+      - ../config/shortlink.env
+    environment:
+      - SL_DB_IP=db
+      - SL_DB_MODE=redis
+    depends_on:
+      db:
+        condition: service_healthy

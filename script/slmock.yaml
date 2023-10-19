@@ -1,0 +1,9 @@
+services:
+  srv:
+    image: kselnaag/shortlink
+    container_name: SLsrv
+    user: appuser
+    ports:
+      - "8080:8080"
+    env_file:
+      - ../config/shortlink.env    

@@ -1,0 +1,29 @@
+services:
+  db:
+    image: postgres:16.0-alpine3.18
+    container_name: SLpg
+    ports:
+      - 5432:5432
+    environment:
+       - POSTGRES_DB=shortlink
+       - POSTGRES_USER=login
+       - POSTGRES_PASSWORD=password
+    healthcheck:
+      test: nc -z db 5432
+      interval: 3s
+      timeout: 3s
+      retries: 30
+  srv:
+    image: kselnaag/shortlink
+    container_name: SLsrv
+    user: appuser
+    ports:
+      - "8080:8080"
+    env_file:
+      - ../config/shortlink.env
+    environment:
+      - SL_DB_IP=db
+      - SL_DB_MODE=postgres
+    depends_on:
+      db:
+        condition: service_healthy

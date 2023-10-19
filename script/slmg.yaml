@@ -1,0 +1,23 @@
+services:
+  db:
+    image: mongo:7.0.2
+    container_name: SLmg
+    ports:
+      - 27017:27017
+    environment:
+       - MONGO_INITDB_DATABASE=shortlink
+       - MONGO_INITDB_ROOT_USERNAME=login
+       - MONGO_INITDB_ROOT_PASSWORD=password
+  srv:
+    image: kselnaag/shortlink
+    container_name: SLsrv
+    user: appuser
+    ports:
+      - "8080:8080"
+    env_file:
+      - ../config/shortlink.env
+    environment:
+      - SL_DB_IP=db
+      - SL_DB_MODE=mongodb
+    depends_on:
+      - db

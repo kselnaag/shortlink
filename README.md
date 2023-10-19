@@ -84,8 +84,8 @@ We choose Monolith as system arch pattern and Rich Domain Model as software arch
   - golangci-lint v1.51.2
   - curl v7.68.0
   - apache benchmark v2.3 (apache2-utils)
-  - docker v24.0.6 + docker-compose v1.25.0
-  - minikube
+  - docker v24.0.6 + docker-compose v2.21.0
+  - minikube v1.31.2
 
 ## **📊 Metrics**
 
@@ -113,46 +113,48 @@ We choose Monolith as system arch pattern and Rich Domain Model as software arch
   - kselnaag/go-complexity-analysis (fork)
 
 ```
-kselnaag:shortlink$ ./script/cicd.sh
+kselnaag:~/shortlink$ ./script/cicd.sh
 
-CI/CD COMMANDS: style lint test build run start check check-no-lint 
-                docker-gobuilder docker-build docker-run docker-up compose-up
+CI/CD COMMANDS: style lint test build run start check check-no-lint
+                itest-tt itest-rd itest-pg itest-mg
+                docker-gobuilder docker-build docker-run docker-up
+                compose-app compose-pg compose-rd compose-mg compose-tt
                 metrics metrics-graph
 EXAMLPE:        ./script/cicd.sh build
 
-kselnaag:shortlink$ ./script/cicd.sh metrics
+kselnaag:~/shortlink$ ./script/cicd.sh metrics
 
 >>_TestCoverage_<<
 ?       shortlink/cmd                   [no test files]
 ?       shortlink/internal              [no test files]
-?       shortlink/internal/adapter/cfg  [no test files]
-ok      shortlink/internal/adapter/db   0.026s  coverage: 35.4% of statements
+ok      shortlink/internal/adapter/cfg  0.027s  coverage: 53.8% of statements
+ok      shortlink/internal/adapter/db   0.021s  coverage: 0.0% of statements
 ?       shortlink/internal/apptype      [no test files]
 ?       shortlink/internal/control      [no test files]
 ?       shortlink/web                   [no test files]
-ok      shortlink/internal/adapter/http 0.094s  coverage: 38.6% of statements
-ok      shortlink/internal/adapter/log  0.022s  coverage: 77.0% of statements
-ok      shortlink/internal/model        0.031s  coverage: 100.0% of statements
-ok      shortlink/internal/service      0.030s  coverage: 69.8% of statements
-TOTAL: 64.2%
+ok      shortlink/internal/adapter/http 0.072s  coverage: 61.7% of statements
+ok      shortlink/internal/adapter/log  0.038s  coverage: 77.0% of statements
+ok      shortlink/internal/model        0.030s  coverage: 100.0% of statements
+ok      shortlink/internal/service      0.047s  coverage: 69.8% of statements
+TOTAL: 37.4%
 
 >>_LinesOfCode_<<
   Language   | Files | Lines | Blank lines | Comments | Code lines
-  Golang     |    33 |  1698 |         205 |       52 |       1441
-  Bash       |     1 |   294 |          32 |        6 |        256
+  Golang     |    33 |  2500 |         273 |       43 |       2184
+  Bash       |     1 |   418 |          48 |        9 |        361
 
 >>_CyclomaticComplexity_<<
-Average: 2.26
+Average: 2.57
 
 >>_CognitiveComplexity_<<
-Average: 1.38
+Average: 1.9
 
 >>_ComplexityMetrics_<<
-TOTAL LoC: 1138
-TOTAL cycloAvg: 2.31034
-TOTAL halstVolAvg: 323.898
-TOTAL halstDiffAvg: 18.3464
-TOTAL maintAvg: 64.5287
+TOTAL LoC: 1842
+TOTAL cycloAvg: 2.63478
+TOTAL halstVolAvg: 433.671
+TOTAL halstDiffAvg: 23.4211
+TOTAL maintAvg: 61.113
 
 >>_Successfull_<<
 ```
@@ -161,7 +163,7 @@ Control-flow graph (for `http://localhost:8080/`)
 
 <img width="100%" title="Control-flow graph" alt="#CONTROLFLOW" src="./asset/controlFlow.png"/>
 
-More details in: ./script/metrics/
+More details in: `./script/metrics/`
 
 ## **⚙️ HowTo**
 <img style="margin-right: 0px;" align="right" width="30%" title="CI/CD workflow" alt="#CICD" src="./asset/cicd.png"/>
@@ -169,8 +171,13 @@ More details in: ./script/metrics/
 - check if `docker` and `docker-compose` has been installed and works
 - clone the project `git clone https://github.com/kselnaag/shortlink`
 - dive into a folder `cd shortlink`
-- run everything with `./script/cicd.sh compose-up`
+- build all with `./script/cicd.sh docker-build` 
+- check if `kselnaag/shortlink` built correctly: `docker images`
+- run everything with `./script/cicd.sh compose-app` (mock DB)
+- if you want to use some DBs pick "compose-pg" or "compose-mg" or "compose-rd" or "compose-tt"
 - go to `http://localhost:8080` in your browser and try it
+
+All CI/CD scripts and configs in `./script/`
 
 ## **🦋 The beauty is like this and nothing more**
 
