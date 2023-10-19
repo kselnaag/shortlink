@@ -25,10 +25,11 @@ RUN git clone https://github.com/kselnaag/shortlink \
 FROM scratch
 
 COPY --from=gobuilder /go/shortlink/bin/shortlink /shortlink
+COPY --from=gobuilder /etc/passwd /etc/passwd
 EXPOSE 8080/tcp
-USER appuser:appuser
+USER $USER:$USER
 ENTRYPOINT ["/shortlink"]
 
 # docker buildx build --platform linux/amd64 --no-cache -f ./script/shortlink.dock -t kselnaag/shortlink . --load (--build-arg COMHASH=2639ae4fa)
-# docker run -it --user 10001 -p 8080:8080/tcp kselnaag/shortlink:latest
+# docker run -d --rm --user appuser --name SLsrv -p 8080:8080/tcp kselnaag/shortlink
 # CGO_ENABLED=0 GOOS=linux GOARCH=amd64 go build -ldflags='-w -s -extldflags "-static"' -a -o /go/bin/hello .

@@ -22,6 +22,16 @@ func NewDBRedis(cfg *T.CfgEnv, log T.ILog) *DBRedis {
 	}
 }
 
+func (r *DBRedis) DelLinkPair(links T.DBlinksDTO) bool {
+	ctx := context.Background()
+	if err := r.conn.Del(ctx, links.Short).Err(); err != nil {
+		r.log.LogError(err, "(DBRedis).DelLinkPair(): redis db Del() error")
+		return false
+	}
+	r.log.LogDebug("(DBRedis).DelLinkPair(): %s", links.Short)
+	return true
+}
+
 func (r *DBRedis) SaveLinkPair(links T.DBlinksDTO) bool {
 	ctx := context.Background()
 	if err := r.conn.Set(ctx, links.Short, links.Long, 0).Err(); err != nil {
@@ -76,7 +86,7 @@ func (r *DBRedis) Migration() {
 
 func (r *DBRedis) Connect() func(e error) {
 	if r.cfg.SL_DB_PORT == "" {
-		r.cfg.SL_DB_PORT = ":6378"
+		r.cfg.SL_DB_PORT = ":6379"
 	}
 	// rdURI := "redis://default:password@localhost:6379/db-number?protocol=3"
 	rdURI := "redis://" + "default" + ":" + r.cfg.SL_DB_PASS + "@" + r.cfg.SL_DB_IP + r.cfg.SL_DB_PORT + "/0?protocol=3"

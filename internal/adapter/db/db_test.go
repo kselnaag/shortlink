@@ -124,8 +124,10 @@ func TestRedis(t *testing.T) {
 		asrt.Equal(T.DBlinksDTO{Short: "5clp60", Long: "http://lib.ru"}, links1)
 		links2 := rd.LoadLinkPair(T.DBlinksDTO{Short: "abcd", Long: ""})
 		asrt.Equal(T.DBlinksDTO{Short: "abcd", Long: "efjh"}, links2)
+		asrt.True(rd.DelLinkPair(T.DBlinksDTO{Short: "5clp60", Long: ""}))
+		asrt.True(rd.DelLinkPair(T.DBlinksDTO{Short: "dhiu79", Long: ""}))
 		links3 := rd.LoadAllLinkPairs()
-		asrt.Equal([]T.DBlinksDTO{{Short: "abcd", Long: "efjh"}, {Short: "dhiu79", Long: "http://google.ru"}, {Short: "5clp60", Long: "http://lib.ru"}}, links3)
+		asrt.Equal([]T.DBlinksDTO{{Short: "abcd", Long: "efjh"}}, links3)
 
 		rd.Migration()
 		dbShutdown(nil)
