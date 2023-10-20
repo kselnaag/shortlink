@@ -136,7 +136,7 @@ ok      shortlink/internal/adapter/http 0.072s  coverage: 61.7% of statements
 ok      shortlink/internal/adapter/log  0.038s  coverage: 77.0% of statements
 ok      shortlink/internal/model        0.030s  coverage: 100.0% of statements
 ok      shortlink/internal/service      0.047s  coverage: 69.8% of statements
-TOTAL: 37.4%
+TOTAL: 72.5%
 
 >>_LinesOfCode_<<
   Language   | Files | Lines | Blank lines | Comments | Code lines
@@ -171,13 +171,15 @@ More details in: `./script/metrics/`
 - check if `docker` and `docker-compose` has been installed and works
 - clone the project `git clone https://github.com/kselnaag/shortlink`
 - dive into a folder `cd shortlink`
-- build all with `./script/cicd.sh docker-build` 
+- build all localy with `./script/cicd.sh docker-build` 
 - check if `kselnaag/shortlink` built correctly: `docker images`
 - run everything with `./script/cicd.sh compose-app` (mock DB)
 - if you want to use some DBs pick "compose-pg" or "compose-mg" or "compose-rd" or "compose-tt"
 - go to `http://localhost:8080` in your browser and try it
 
-All CI/CD scripts and configs in `./script/`
+In case of additional flexibility request use `./config/shortlink.env` and change YAML configs in `./script/`
+
+Kube deploy in `./script/kube/`
 
 ## **🦋 The beauty is like this and nothing more**
 
