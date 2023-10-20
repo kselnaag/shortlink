@@ -18,7 +18,7 @@ type LogZero struct {
 
 func NewLogZero(cfg *T.CfgEnv) *LogZero {
 	host := cfg.SL_HTTP_IP + cfg.SL_HTTP_PORT
-	service := cfg.SL_APP_NAME
+	service := cfg.SL_APP_NAME + cfg.SL_APP_PROTOS
 	zerolog.TimeFieldFormat = time.RFC3339Nano
 	zerolog.TimestampFieldName = "T"
 	zerolog.LevelFieldName = "L"

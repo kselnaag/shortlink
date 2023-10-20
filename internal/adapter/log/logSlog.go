@@ -32,7 +32,7 @@ type LogSlog struct {
 func NewLogSlog(cfg *T.CfgEnv) *LogSlog {
 	ctx := context.Background()
 	host := cfg.SL_HTTP_IP + cfg.SL_HTTP_PORT
-	svc := cfg.SL_APP_NAME
+	svc := cfg.SL_APP_NAME + cfg.SL_APP_PROTOS
 	replace := func(groups []string, a slog.Attr) slog.Attr {
 		if a.Key == slog.LevelKey {
 			a.Key = "L"

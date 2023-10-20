@@ -31,7 +31,7 @@ type LogFprintf struct {
 
 func NewLogFprintf(cfg *T.CfgEnv) *LogFprintf {
 	host := cfg.SL_HTTP_IP + cfg.SL_HTTP_PORT
-	svc := cfg.SL_APP_NAME
+	svc := cfg.SL_APP_NAME + cfg.SL_APP_PROTOS
 	var lvl LogLevel
 	switch cfg.SL_LOG_LEVEL {
 	case T.LevelTraceValue:
