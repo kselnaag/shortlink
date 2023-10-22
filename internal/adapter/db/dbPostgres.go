@@ -40,7 +40,7 @@ func (p *DBPostgres) LoadLinkPair(links T.DBlinksDTO) T.DBlinksDTO { // linkshor
 	var tag1, tag2 string
 	err := p.conn.QueryRow(ctx, query, links.Short).Scan(&tag1, &tag2)
 	if err != nil {
-		p.log.LogError(err, "(DBPostgre).LoadLinkPair(): SELECT error")
+		p.log.LogDebug("(DBPostgre).LoadLinkPair(): SELECT error: %s", err.Error())
 		return T.DBlinksDTO{}
 	} else {
 		p.log.LogDebug("(DBPostgre).LoadLinkPair(): %s, %s", tag1, tag2)

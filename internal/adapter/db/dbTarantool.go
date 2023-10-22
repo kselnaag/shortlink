@@ -39,7 +39,7 @@ func (t *DBTarantool) LoadLinkPair(links T.DBlinksDTO) T.DBlinksDTO { // linksho
 	req := tarantool.NewCallRequest("box.execute").Args([]interface{}{query})
 	resp, err := t.conn.Do(req).Get()
 	if err != nil {
-		t.log.LogError(err, "(DBTarantool).LoadLinkPair(): tarantool db <<box.execute>> SELECT error")
+		t.log.LogDebug("(DBTarantool).LoadLinkPair(): tarantool db <<box.execute>> SELECT error: %s", err.Error())
 		return T.DBlinksDTO{}
 	} else {
 		r := resp.Data[0].(map[interface{}]interface{})["rows"].([]interface{})[0]

@@ -46,7 +46,7 @@ func (r *DBRedis) LoadLinkPair(links T.DBlinksDTO) T.DBlinksDTO { // linkshort
 	ctx := context.Background()
 	val, err := r.conn.Get(ctx, links.Short).Result()
 	if err != nil {
-		r.log.LogError(err, "(DBRedis).LoadLinkPair(): redis db Get() error")
+		r.log.LogDebug("(DBRedis).LoadLinkPair(): redis db Get() error: %s", err.Error())
 		return T.DBlinksDTO{}
 	}
 	r.log.LogDebug("(DBRedis).LoadLinkPair(): %s", val)

@@ -3,7 +3,6 @@ package control
 import (
 	"encoding/json"
 	"errors"
-	"fmt"
 	"regexp"
 	T "shortlink/internal/apptype"
 	"strings"
@@ -64,8 +63,6 @@ func (ctrl *CtrlHTTP) Save(body []byte) (string, error) {
 	}
 	lp := ctrl.servSL.SetLinkPairFromLinkLong(req.Body)
 	if !lp.IsValid() {
-		fmt.Println("<<TEST 2>>")
-		fmt.Println(lp)
 		return "", errors.New(string(body))
 	}
 	return lp.Short(), nil

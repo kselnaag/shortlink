@@ -32,7 +32,7 @@ func (m *DBMongo) SaveLinkPair(links T.DBlinksDTO) bool {
 	ctxPing, cancelPing := context.WithTimeout(ctx, 5*time.Second)
 	defer cancelPing()
 	if err := m.conn.Ping(ctxPing, readpref.Primary()); err != nil {
-		m.log.LogError(err, "(DBMongo).Migration(): unable to Ping()")
+		m.log.LogError(err, "(DBMongo).SaveLinkPair(): unable to Ping()")
 		return false
 	}
 
@@ -62,7 +62,7 @@ func (m *DBMongo) LoadLinkPair(links T.DBlinksDTO) T.DBlinksDTO { // linkshort
 	}
 	coll := m.conn.Database(m.cfg.SL_DB_DBNAME).Collection(m.cfg.SL_DB_DBNAME)
 	if err := coll.FindOne(ctx, bson.D{{Key: "slink", Value: links.Short}}).Decode(&res); err != nil {
-		m.log.LogError(err, "(DBMongo).LoadLinkPair(): unable to FindOne()")
+		m.log.LogDebug("(DBMongo).LoadLinkPair(): unable to FindOne(): %s", err.Error())
 		return T.DBlinksDTO{}
 	}
 	m.log.LogDebug("(DBMongo).LoadLinkPair(): FindOne() %s", res)
