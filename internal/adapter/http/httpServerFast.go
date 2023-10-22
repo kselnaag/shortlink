@@ -137,6 +137,11 @@ func (hfs *HTTPServerFast) Engine() *fiber.App {
 func (hfs *HTTPServerFast) Run() func(e error) {
 	hfs.handlers()
 	go func() {
+		defer func() {
+			if err := recover(); err != nil {
+				hfs.log.LogPanic(err.(error), "HTTPServerFast panic")
+			}
+		}()
 		if err := hfs.hsrv.Listen(hfs.cfg.SL_HTTP_PORT); err != nil {
 			hfs.log.LogError(err, "Run(): fasthttp server process error (closed)")
 			hfs.appClose()

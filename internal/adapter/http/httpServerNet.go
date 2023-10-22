@@ -173,6 +173,11 @@ func (hns *HTTPServerNet) Run() func(e error) {
 		ReadHeaderTimeout: 10 * time.Second,
 	}
 	go func() {
+		defer func() {
+			if err := recover(); err != nil {
+				hns.log.LogPanic(err.(error), "HTTPServerNet panic")
+			}
+		}()
 		err := srv.ListenAndServe()
 		if (err != nil) && (err != http.ErrServerClosed) {
 			hns.log.LogError(err, "Run(): net/http server process error (closed)")
