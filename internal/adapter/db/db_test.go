@@ -45,7 +45,6 @@ func TestPostgresDB(t *testing.T) {
 		links3 := pg.LoadAllLinkPairs()
 		asrt.Equal([]T.DBlinksDTO{{Short: "5clp60", Long: "http://lib.ru"}, {Short: "dhiu79", Long: "http://google.ru"}, {Short: "abcd", Long: "efjh"}}, links3)
 
-		pg.Migration()
 		dbShutdown(nil)
 	})
 }
@@ -86,7 +85,6 @@ func TestMongoDB(t *testing.T) {
 		links3 := mg.LoadAllLinkPairs()
 		asrt.Equal([]T.DBlinksDTO{{Short: "5clp60", Long: "http://lib.ru"}, {Short: "dhiu79", Long: "http://google.ru"}, {Short: "abcd", Long: "efjh"}}, links3)
 
-		mg.Migration()
 		dbShutdown(nil)
 	})
 }
@@ -129,7 +127,6 @@ func TestRedis(t *testing.T) {
 		links3 := rd.LoadAllLinkPairs()
 		asrt.Equal([]T.DBlinksDTO{{Short: "abcd", Long: "efjh"}}, links3)
 
-		rd.Migration()
 		dbShutdown(nil)
 	})
 }
@@ -141,7 +138,7 @@ func TestTarantool(t *testing.T) {
 		asrt.Nil(err)
 	}()
 
-	t.Run("dbTarantool", func(t *testing.T) { // # &"C:\Program Files\Go\bin\go.exe" test -v -tags go_tarantool_ssl_disable -vet=off -count=1 -run ^TestTarantool$ shortlink/internal/adapter/db
+	t.Run("dbTarantool", func(t *testing.T) { // # &"C:\Program Files\Go\bin\go.exe" test -v -tags go_tarantool_ssl_disable -tags go_tarantool_msgpack_v5 -vet=off -count=1 -run ^TestTarantool$ shortlink/internal/adapter/db
 		if testing.Short() {
 			t.Skip("skipping _dbTarantool_ tests in short mode")
 		}
@@ -161,16 +158,18 @@ func TestTarantool(t *testing.T) {
 		tt := adapterDB.NewDBTarantool(cfg, log)
 		dbShutdown := tt.Connect()
 
-		links := T.DBlinksDTO{Short: "abcd", Long: "efjh"}
-		asrt.True(tt.SaveLinkPair(links))
 		links1 := tt.LoadLinkPair(T.DBlinksDTO{Short: "5clp60", Long: ""})
 		asrt.Equal(T.DBlinksDTO{Short: "5clp60", Long: "http://lib.ru"}, links1)
+
+		links := T.DBlinksDTO{Short: "abcd", Long: "efjh"}
+		asrt.True(tt.SaveLinkPair(links))
+
 		links2 := tt.LoadLinkPair(T.DBlinksDTO{Short: "abcd", Long: ""})
 		asrt.Equal(T.DBlinksDTO{Short: "abcd", Long: "efjh"}, links2)
+
 		links3 := tt.LoadAllLinkPairs()
 		asrt.Equal([]T.DBlinksDTO{{Short: "5clp60", Long: "http://lib.ru"}, {Short: "abcd", Long: "efjh"}, {Short: "dhiu79", Long: "http://google.ru"}}, links3)
 
-		tt.Migration()
 		dbShutdown(nil)
 	})
 }
