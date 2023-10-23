@@ -1,0 +1,22 @@
+save:
+  request:
+    url: ${baseUrl}/save
+    method: POST
+    headers: {}
+    body: |-
+      {
+        "Body": "http://lib.ru/PROZA/",
+        "IsResp": false,
+        "Mode": "save"
+      }
+  response:
+    status:
+      code: 201
+      message: Created
+    headers: {}
+    body: |-
+      {
+        "Body": "8b4s29",
+        "IsResp": true,
+        "Mode": "201"
+      }

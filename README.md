@@ -55,7 +55,7 @@ We choose Monolith as system arch pattern and Rich Domain Model as software arch
 - standart go project layout (more or less)
 - pre-commit hooks and github actions (CI) + docker-compose (CD) + minikube (prod🙃)
 - integration tests and unit tests with mocks
-- e2e tests in ThunderClient
+- e2e tests in PLY
 - HTTPfast(fiber) or HTTPnet(gin) server adapters
 - logZero, logSlog or logFprintf logger adapters
 - postgreSQL, redis, mongoDB or tarantool db adapters
@@ -83,6 +83,7 @@ We choose Monolith as system arch pattern and Rich Domain Model as software arch
   - golang v1.21
   - golangci-lint v1.51.2
   - curl v7.68.0
+  - ply v3.2.14 (vscode extension)
   - apache benchmark v2.3 (apache2-utils)
   - docker v24.0.6 + docker-compose v2.21.0
   - minikube v1.31.2
@@ -117,7 +118,7 @@ kselnaag:~/shortlink$ ./script/cicd.sh
 
 CI/CD COMMANDS: style lint test build run start check check-no-lint
                 itest-tt itest-rd itest-pg itest-mg
-                docker-gobuilder docker-build docker-run docker-up
+                docker-gobuilder docker-build docker-up docker-stop
                 compose-app compose-pg compose-rd compose-mg compose-tt
                 metrics metrics-graph
 EXAMLPE:        ./script/cicd.sh build

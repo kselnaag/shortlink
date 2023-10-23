@@ -1,0 +1,4 @@
+webUI:
+  url: ${baseUrl}/
+  method: GET
+  headers: {}

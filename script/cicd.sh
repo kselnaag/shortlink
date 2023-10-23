@@ -7,7 +7,7 @@ function info {
     echo -e "\n
 CI/CD COMMANDS: style lint test build run start check check-no-lint
                 itest-tt itest-rd itest-pg itest-mg
-                docker-gobuilder docker-build docker-run docker-up
+                docker-gobuilder docker-build docker-up docker-stop
                 compose-app compose-pg compose-rd compose-mg compose-tt
                 metrics metrics-graph
 EXAMLPE:        ./script/cicd.sh build
@@ -35,32 +35,27 @@ function lint {
 function unitTest {
     echo -e "\n>>_UnitTests_<<"
     set -o pipefail
-    go test -short -tags go_tarantool_ssl_disable -vet=off -count=1 -race ./... | { grep -v 'no test files'; true; }
-    if [[ $? -gt 0 ]]; then checksBreaked; fi   
+    go test -short -tags go_tarantool_ssl_disable -vet=off -count=1 -race ./... | { grep -v 'no test files'; true; }  
 }
 
 function intergTTtest {     # &"C:\Program Files\Go\bin\go.exe" test -v -tags go_tarantool_ssl_disable -vet=off -count=1 -run ^TestTarantool$ shortlink/internal/adapter/db
     echo -e "\n>>_TarantoolTest_<<"
-    go test -v -tags go_tarantool_ssl_disable -vet=off -count=1 -run ^TestTarantool$ shortlink/internal/adapter/db
-    if [[ $? -gt 0 ]]; then checksBreaked; fi   
+    go test -v -tags go_tarantool_ssl_disable -vet=off -count=1 -run ^TestTarantool$ shortlink/internal/adapter/db  
 }
 
 function intergRDtest {     # &"C:\Program Files\Go\bin\go.exe" test -v -tags go_tarantool_ssl_disable -vet=off -count=1 -run ^TestRedis$ shortlink/internal/adapter/db
     echo -e "\n>>_RedisTest_<<"
-    go test -v -tags go_tarantool_ssl_disable -vet=off -count=1 -run ^TestRedis$ shortlink/internal/adapter/db
-    if [[ $? -gt 0 ]]; then checksBreaked; fi   
+    go test -v -tags go_tarantool_ssl_disable -vet=off -count=1 -run ^TestRedis$ shortlink/internal/adapter/db 
 }
 
 function intergMGtest {     # &"C:\Program Files\Go\bin\go.exe" test -v -tags go_tarantool_ssl_disable -vet=off -count=1 -run ^TestMongoDB$ shortlink/internal/adapter/db
     echo -e "\n>>_MongoTest_<<"
-    go test -v -tags go_tarantool_ssl_disable -vet=off -count=1 -run ^TestMongoDB$ shortlink/internal/adapter/db
-    if [[ $? -gt 0 ]]; then checksBreaked; fi   
+    go test -v -tags go_tarantool_ssl_disable -vet=off -count=1 -run ^TestMongoDB$ shortlink/internal/adapter/db 
 }
 
 function intergPGtest {     # &"C:\Program Files\Go\bin\go.exe" test -v -tags go_tarantool_ssl_disable -vet=off -count=1 -run ^TestPostgresDB$ shortlink/internal/adapter/db
     echo -e "\n>>_PostgresTest_<<"
-    go test -v -tags go_tarantool_ssl_disable -vet=off -count=1 -run ^TestPostgresDB$ shortlink/internal/adapter/db
-    if [[ $? -gt 0 ]]; then checksBreaked; fi  
+    go test -v -tags go_tarantool_ssl_disable -vet=off -count=1 -run ^TestPostgresDB$ shortlink/internal/adapter/db 
 }
 
 function build {
@@ -107,21 +102,9 @@ function app-containe {
     if [[ $? -gt 0 ]]; then checksBreaked; fi
 }
 
-function container-run {
-    echo -e "\n>>_DockerAppRun_<<"
-    docker run -it --name SLsrv --user 10001 -p 8080:8080/tcp kselnaag/shortlink
-    if [[ $? -gt 0 ]]; then checksBreaked; fi
-}
-
 function container-up {
     echo -e "\n>>_DockerAppUp_<<"
     docker run -d --rm --name SLsrv --user 10001 -p 8080:8080/tcp kselnaag/shortlink
-    if [[ $? -gt 0 ]]; then checksBreaked; fi
-}
-
-function container-start {
-    echo -e "\n>>_DockerAppStart_<<"
-    docker start SLsrv
     if [[ $? -gt 0 ]]; then checksBreaked; fi
 }
 
@@ -137,12 +120,6 @@ function ttdb-up {
     if [[ $? -gt 0 ]]; then checksBreaked; fi
 }
 
-function ttdb-start {
-    echo -e "\n>>_DockerTarantoolStart_<<"
-    docker start SLtt
-    if [[ $? -gt 0 ]]; then checksBreaked; fi
-}
-
 function ttdb-stop {
     echo -e "\n>>_DockerTarantoolStop_<<"
     docker stop SLtt
@@ -152,12 +129,6 @@ function ttdb-stop {
 function pgdb-up {
     echo -e "\n>>_DockerPostgresUp_<<"
     docker run -d --rm --name SLpg -p 5432:5432 -e POSTGRES_DB=shortlink -e POSTGRES_USER=login -e POSTGRES_PASSWORD=password postgres:16.0-alpine3.18
-    if [[ $? -gt 0 ]]; then checksBreaked; fi
-}
-
-function pgdb-start {
-    echo -e "\n>>_DockerPostgresStart_<<"
-    docker start SLpg
     if [[ $? -gt 0 ]]; then checksBreaked; fi
 }
 
@@ -173,12 +144,6 @@ function mgdb-up {
     if [[ $? -gt 0 ]]; then checksBreaked; fi
 }
 
-function mgdb-start {
-    echo -e "\n>>_DockerMongodbStart_<<"
-    docker start SLmg
-    if [[ $? -gt 0 ]]; then checksBreaked; fi
-}
-
 function mgdb-stop {
     echo -e "\n>>_DockerMongodbStop_<<"
     docker stop SLmg
@@ -188,12 +153,6 @@ function mgdb-stop {
 function rddb-up {
     echo -e "\n>>_DockerRedisUp_<<"
    docker run -d --rm --name SLrd -p 6379:6379 -e REDIS_ARGS="--requirepass password" redis:7.2.1-alpine3.18
-    if [[ $? -gt 0 ]]; then checksBreaked; fi
-}
-
-function rddb-start {
-    echo -e "\n>>_DockerRedisStart_<<"
-    docker start SLrd
     if [[ $? -gt 0 ]]; then checksBreaked; fi
 }
 
@@ -358,11 +317,11 @@ if [[ $# -ne 1 ]]; then info; else
     "docker-build")
         app-containe
         ;;
-    "docker-run")
-        container-run
-        ;;
     "docker-up")
         container-up
+        ;;
+    "container-stop")
+        container-stop
         ;;
     "compose-app")
         compose-app

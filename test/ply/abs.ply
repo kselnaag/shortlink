@@ -1,0 +1,4 @@
+abs:
+  url: ${baseUrl}/check/abs
+  method: GET
+  headers: {}

@@ -1,0 +1,4 @@
+testsLocation: "./test/ply/"
+resultFollowsRelativePath: true
+valuesFiles:
+  test/ply/values/global.json: true

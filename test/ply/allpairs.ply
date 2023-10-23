@@ -1,0 +1,4 @@
+allpairs:
+  url: ${baseUrl}/check/allpairs
+  method: GET
+  headers: {}

@@ -1,0 +1,26 @@
+long:
+  request:
+    url: ${baseUrl}/long
+    method: POST
+    headers: {}
+    body: |-
+      {
+        "Body": "http://lib.ru/PROZA/",
+        "IsResp": false,
+        "Mode": "long"
+      }
+  response:
+    status:
+      code: 206
+      message: Partial Content
+    headers:
+      cache-control: no-cache
+      connection: close
+      content-length: '44'
+      content-type: application/json; charset=utf-8
+    body: |-
+      {
+        "Body": "8b4s29",
+        "IsResp": true,
+        "Mode": "206"
+      }

@@ -1,0 +1,16 @@
+ping:
+  request:
+    url: ${baseUrl}/check/ping
+    method: GET
+    headers: {}
+  response:
+    status:
+      code: 200
+      message: OK
+    headers: {}
+    body: |-
+      {
+        "Body": "pong",
+        "IsResp": true,
+        "Mode": "check"
+      }

@@ -1,0 +1,5 @@
+long:
+  url: ${baseUrl}/long
+  method: POST
+  headers: {}
+  body: "{\r\n  \"Body\": \"http://lib.ru/PROZA/\",\r\n  \"IsResp\": false,\r\n  \"Mode\": \"long\"\r\n}"

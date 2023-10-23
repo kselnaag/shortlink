@@ -1,0 +1,20 @@
+allpairs:
+  request:
+    url: ${baseUrl}/check/allpairs
+    method: GET
+    headers: {}
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      cache-control: no-cache
+      connection: close
+      content-length: '115'
+      content-type: application/json; charset=utf-8
+    body: |-
+      {
+        "Body": "5clp60: http://lib.ru; 8b4s29: http://lib.ru/PROZA/; dhiu79: http://google.ru",
+        "IsResp": true,
+        "Mode": "200"
+      }

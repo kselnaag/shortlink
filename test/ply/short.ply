@@ -1,0 +1,5 @@
+short:
+  url: ${baseUrl}/short
+  method: POST
+  headers: {}
+  body: "{\r\n  \"Body\": \"8b4s29\",\r\n  \"IsResp\": false,\r\n  \"Mode\": \"short\"\r\n}"

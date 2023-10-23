@@ -1,0 +1,4 @@
+ping:
+  url: ${baseUrl}/check/ping
+  method: GET
+  headers: {}
