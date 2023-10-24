@@ -1,0 +1,12 @@
+redirect:
+  request:
+    url: ${baseUrl}/r/5clp60
+    method: GET
+    headers: {}
+  response:
+    status:
+      code: 200
+      message: OK
+    headers: {}
+    body: |-
+      ${~[.\s\S]*}

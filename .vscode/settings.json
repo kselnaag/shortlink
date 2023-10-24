@@ -1,6 +1,7 @@
 {
     "files.associations": {
-        "plyconfig.json": "jsonc"
+        "plyconfig.json": "jsonc",
+        "**/test/ply/values/global.json": "jsonc"
     },
     "diffEditor.codeLens": true
 }
