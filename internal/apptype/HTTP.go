@@ -1,7 +1,7 @@
 package types
 
 type IHTTPClient interface {
-	Get(link string) (int, error)
+	Get(link string) error
 }
 
 type IHTTPServer interface {

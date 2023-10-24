@@ -22,7 +22,7 @@ func NewApp() *App {
 	log := createLogger(cfg)
 	db := createDatabase(cfg, log)
 	ctrlDB := control.NewCtrlDB(db)
-	hcli := adapterHTTP.NewHTTPClientNet()
+	hcli := adapterHTTP.NewHTTPClientNet(log)
 	svcsl := service.NewSvcShortLink(ctrlDB, hcli, log)
 	ctrlHTTP := control.NewCtrlHTTP(svcsl)
 	hsrv := createHTTPServer(ctrlHTTP, log, cfg)

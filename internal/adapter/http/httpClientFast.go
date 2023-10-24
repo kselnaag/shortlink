@@ -1,6 +1,7 @@
 package adapterHTTP
 
 import (
+	"errors"
 	T "shortlink/internal/apptype"
 	"time"
 
@@ -11,9 +12,10 @@ var _ T.IHTTPClient = (*HTTPClientFast)(nil)
 
 type HTTPClientFast struct {
 	hcli *fasthttp.Client
+	log  T.ILog
 }
 
-func NewHTTPClientFast() *HTTPClientFast {
+func NewHTTPClientFast(log T.ILog) *HTTPClientFast {
 	return &HTTPClientFast{
 		hcli: &fasthttp.Client{
 			ReadTimeout:         10 * time.Second,
@@ -21,13 +23,21 @@ func NewHTTPClientFast() *HTTPClientFast {
 			MaxIdleConnDuration: 10 * time.Second,
 			MaxConnDuration:     10 * time.Second,
 		},
+		log: log,
 	}
 }
 
-func (h HTTPClientFast) Get(link string) (int, error) {
-	code, _, err := h.hcli.Get(nil, link)
-	if err != nil {
-		return 0, err
+func (h HTTPClientFast) Get(link string) error {
+	if code, _, err := h.hcli.Get(nil, link); err != nil {
+		h.log.LogError(err, "(HTTPClientFast).Get() http error ")
+		return err
+	} else {
+		if code < 500 {
+			return nil
+		} else {
+			err := errors.New("(HTTPClientFast).Get(): Link is not available")
+			h.log.LogError(err, "(HTTPClientFast).Get() http error ")
+			return err
+		}
 	}
-	return code, nil
 }

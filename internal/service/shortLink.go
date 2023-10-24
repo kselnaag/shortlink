@@ -1,7 +1,6 @@
 package service
 
 import (
-	"net/http"
 	"shortlink/internal/model"
 	"sort"
 
@@ -80,14 +79,9 @@ func (ssl *SvcShortLink) SetLinkPairFromLinkLong(linklong string) model.LinkPair
 }
 
 func (ssl *SvcShortLink) IsLinkLongHTTPValid(linklong string) bool {
-	resp, err := ssl.hcli.Get(linklong)
-	if err != nil {
+	if err := ssl.hcli.Get(linklong); err != nil {
 		ssl.log.LogDebug("IsLinkLongHttpValid(): http client GET error: %s", err.Error())
 		return false
 	}
-	if resp == http.StatusOK {
-		return true
-	}
-	ssl.log.LogDebug("IsLinkLongHttpValid(): http client GET is not OK: %d", resp)
-	return false
+	return true
 }
