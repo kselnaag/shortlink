@@ -1,7 +1,6 @@
 package adapterDB
 
 import (
-	"errors"
 	T "shortlink/internal/apptype"
 
 	"github.com/tarantool/go-tarantool/v2"
@@ -48,7 +47,7 @@ func (t *DBTarantool) LoadLinkPair(links T.DBlinksDTO) T.DBlinksDTO { // linksho
 	} else {
 		t.log.LogDebug("(DBTarantool).LoadLinkPair(): SELECT %v", resp)
 		if len(resp) != 1 {
-			t.log.LogError(errors.New("Num of rows != 1"), "(DBTarantool).LoadLinkPair(): ")
+			t.log.LogDebug("(DBTarantool).LoadLinkPair(): Num of rows != 1")
 			return T.DBlinksDTO{}
 		}
 		return T.DBlinksDTO{Short: resp[0].SLINK, Long: resp[0].LLINK}
