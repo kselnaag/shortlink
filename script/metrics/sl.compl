@@ -32,22 +32,108 @@ cycloAvg= 1 11 7
 halstVolAvg= 80.194625 561.362376 7
 halstDiffAvg= 7.071429 49.500000 7
 maintAvg= 72 509 7
-# shortlink/internal/apptype
-locSum= 0
-cycloAvg= 0 0 0
-halstVolAvg= 0.0 0.0 0
-halstDiffAvg= 0.0 0.0 0
-maintAvg= 0 0 0
 # shortlink/web
 locSum= 0
 cycloAvg= 0 0 0
 halstVolAvg= 0.0 0.0 0
 halstDiffAvg= 0.0 0.0 0
 maintAvg= 0 0 0
+# shortlink/internal/model_test
+internal/model/linkPair_test.go:10:1: func TestModels (lines of code=49)
+internal/model/linkPair_test.go:10:1: func TestModels (cyclomatic complexity=1)
+internal/model/linkPair_test.go:10:1: func TestModels (Halstead complexity: volume=1347.530, difficulty=38.038)
+internal/model/linkPair_test.go:10:1: func TestModels (maintainability index=41)
+locSum= 49
+cycloAvg= 1 1 1
+halstVolAvg= 1347.530363 1347.530363 1
+halstDiffAvg= 38.038462 38.038462 1
+maintAvg= 41 41 1
+# shortlink/internal/apptype
+locSum= 0
+cycloAvg= 0 0 0
+halstVolAvg= 0.0 0.0 0
+halstDiffAvg= 0.0 0.0 0
+maintAvg= 0 0 0
+# shortlink/internal/service
+internal/service/shortLink.go:18:1: func NewSvcShortLink (lines of code=7)
+internal/service/shortLink.go:18:1: func NewSvcShortLink (cyclomatic complexity=1)
+internal/service/shortLink.go:18:1: func NewSvcShortLink (Halstead complexity: volume=58.810, difficulty=6.125)
+internal/service/shortLink.go:18:1: func NewSvcShortLink (maintainability index=69)
+internal/service/shortLink.go:26:1: func GetAllLinkPairs (lines of code=13)
+internal/service/shortLink.go:26:1: func GetAllLinkPairs (cyclomatic complexity=3)
+internal/service/shortLink.go:26:1: func GetAllLinkPairs (Halstead complexity: volume=276.905, difficulty=20.000)
+internal/service/shortLink.go:26:1: func GetAllLinkPairs (maintainability index=58)
+internal/service/shortLink.go:40:1: func GetLinkLongFromLinkShort (lines of code=8)
+internal/service/shortLink.go:40:1: func GetLinkLongFromLinkShort (cyclomatic complexity=2)
+internal/service/shortLink.go:40:1: func GetLinkLongFromLinkShort (Halstead complexity: volume=116.758, difficulty=12.250)
+internal/service/shortLink.go:40:1: func GetLinkLongFromLinkShort (maintainability index=65)
+internal/service/shortLink.go:49:1: func GetLinkShortFromLinkLong (lines of code=9)
+internal/service/shortLink.go:49:1: func GetLinkShortFromLinkLong (cyclomatic complexity=2)
+internal/service/shortLink.go:49:1: func GetLinkShortFromLinkLong (Halstead complexity: volume=158.123, difficulty=14.400)
+internal/service/shortLink.go:49:1: func GetLinkShortFromLinkLong (maintainability index=63)
+internal/service/shortLink.go:59:1: func SetLinkPairFromLinkLong (lines of code=21)
+internal/service/shortLink.go:59:1: func SetLinkPairFromLinkLong (cyclomatic complexity=5)
+internal/service/shortLink.go:59:1: func SetLinkPairFromLinkLong (Halstead complexity: volume=370.166, difficulty=28.750)
+internal/service/shortLink.go:59:1: func SetLinkPairFromLinkLong (maintainability index=52)
+internal/service/shortLink.go:81:1: func IsLinkLongHTTPValid (lines of code=7)
+internal/service/shortLink.go:81:1: func IsLinkLongHTTPValid (cyclomatic complexity=2)
+internal/service/shortLink.go:81:1: func IsLinkLongHTTPValid (Halstead complexity: volume=125.336, difficulty=14.000)
+internal/service/shortLink.go:81:1: func IsLinkLongHTTPValid (maintainability index=66)
+locSum= 65
+cycloAvg= 2 15 6
+halstVolAvg= 184.349804 1106.098825 6
+halstDiffAvg= 15.920833 95.525000 6
+maintAvg= 62 373 6
+# shortlink/internal/control
+internal/control/db.go:14:1: func NewCtrlDB (lines of code=5)
+internal/control/db.go:14:1: func NewCtrlDB (cyclomatic complexity=1)
+internal/control/db.go:14:1: func NewCtrlDB (Halstead complexity: volume=34.869, difficulty=5.250)
+internal/control/db.go:14:1: func NewCtrlDB (maintainability index=73)
+internal/control/db.go:20:1: func SaveLinkPair (lines of code=3)
+internal/control/db.go:20:1: func SaveLinkPair (cyclomatic complexity=1)
+internal/control/db.go:20:1: func SaveLinkPair (Halstead complexity: volume=85.110, difficulty=8.250)
+internal/control/db.go:20:1: func SaveLinkPair (maintainability index=75)
+internal/control/db.go:24:1: func LoadLinkPair (lines of code=4)
+internal/control/db.go:24:1: func LoadLinkPair (cyclomatic complexity=1)
+internal/control/db.go:24:1: func LoadLinkPair (Halstead complexity: volume=108.418, difficulty=8.750)
+internal/control/db.go:24:1: func LoadLinkPair (maintainability index=72)
+internal/control/db.go:29:1: func LoadAllLinkPairs (lines of code=8)
+internal/control/db.go:29:1: func LoadAllLinkPairs (cyclomatic complexity=2)
+internal/control/db.go:29:1: func LoadAllLinkPairs (Halstead complexity: volume=160.540, difficulty=12.857)
+internal/control/db.go:29:1: func LoadAllLinkPairs (maintainability index=64)
+internal/control/http.go:18:1: func NewCtrlHTTP (lines of code=7)
+internal/control/http.go:18:1: func NewCtrlHTTP (cyclomatic complexity=1)
+internal/control/http.go:18:1: func NewCtrlHTTP (Halstead complexity: volume=84.000, difficulty=9.000)
+internal/control/http.go:18:1: func NewCtrlHTTP (maintainability index=67)
+internal/control/http.go:26:1: func AllPairs (lines of code=8)
+internal/control/http.go:26:1: func AllPairs (cyclomatic complexity=2)
+internal/control/http.go:26:1: func AllPairs (Halstead complexity: volume=195.042, difficulty=16.714)
+internal/control/http.go:26:1: func AllPairs (maintainability index=63)
+internal/control/http.go:35:1: func Long (lines of code=11)
+internal/control/http.go:35:1: func Long (cyclomatic complexity=5)
+internal/control/http.go:35:1: func Long (Halstead complexity: volume=345.000, difficulty=36.833)
+internal/control/http.go:35:1: func Long (maintainability index=58)
+internal/control/http.go:47:1: func Short (lines of code=11)
+internal/control/http.go:47:1: func Short (cyclomatic complexity=5)
+internal/control/http.go:47:1: func Short (Halstead complexity: volume=355.000, difficulty=36.833)
+internal/control/http.go:47:1: func Short (maintainability index=58)
+internal/control/http.go:59:1: func Save (lines of code=11)
+internal/control/http.go:59:1: func Save (cyclomatic complexity=5)
+internal/control/http.go:59:1: func Save (Halstead complexity: volume=345.000, difficulty=36.833)
+internal/control/http.go:59:1: func Save (maintainability index=58)
+internal/control/http.go:71:1: func Hash (lines of code=9)
+internal/control/http.go:71:1: func Hash (cyclomatic complexity=3)
+internal/control/http.go:71:1: func Hash (Halstead complexity: volume=144.430, difficulty=16.875)
+internal/control/http.go:71:1: func Hash (maintainability index=63)
+locSum= 77
+cycloAvg= 2 26 10
+halstVolAvg= 185.740837 1857.408372 10
+halstDiffAvg= 18.819643 188.196429 10
+maintAvg= 65 651 10
 # shortlink/internal/adapter/log
 internal/adapter/log/logFprintf.go:32:1: func NewLogFprintf (lines of code=29)
 internal/adapter/log/logFprintf.go:32:1: func NewLogFprintf (cyclomatic complexity=9)
-internal/adapter/log/logFprintf.go:32:1: func NewLogFprintf (Halstead complexity: volume=452.364, difficulty=27.500)
+internal/adapter/log/logFprintf.go:32:1: func NewLogFprintf (Halstead complexity: volume=471.465, difficulty=29.467)
 internal/adapter/log/logFprintf.go:32:1: func NewLogFprintf (maintainability index=48)
 internal/adapter/log/logFprintf.go:62:1: func logMessage (lines of code=4)
 internal/adapter/log/logFprintf.go:62:1: func logMessage (cyclomatic complexity=1)
@@ -83,7 +169,7 @@ internal/adapter/log/logFprintf.go:103:1: func LogPanic (Halstead complexity: vo
 internal/adapter/log/logFprintf.go:103:1: func LogPanic (maintainability index=69)
 internal/adapter/log/logSlog.go:32:1: func NewLogSlog (lines of code=66)
 internal/adapter/log/logSlog.go:32:1: func NewLogSlog (cyclomatic complexity=21)
-internal/adapter/log/logSlog.go:32:1: func NewLogSlog (Halstead complexity: volume=1853.312, difficulty=86.400)
+internal/adapter/log/logSlog.go:32:1: func NewLogSlog (Halstead complexity: volume=1877.613, difficulty=89.100)
 internal/adapter/log/logSlog.go:32:1: func NewLogSlog (maintainability index=34)
 internal/adapter/log/logSlog.go:99:1: func LogTrace (lines of code=3)
 internal/adapter/log/logSlog.go:99:1: func LogTrace (cyclomatic complexity=1)
@@ -115,7 +201,7 @@ internal/adapter/log/logSlog.go:123:1: func LogPanic (Halstead complexity: volum
 internal/adapter/log/logSlog.go:123:1: func LogPanic (maintainability index=75)
 internal/adapter/log/logZero.go:19:1: func NewLogZero (lines of code=37)
 internal/adapter/log/logZero.go:19:1: func NewLogZero (cyclomatic complexity=9)
-internal/adapter/log/logZero.go:19:1: func NewLogZero (Halstead complexity: volume=788.788, difficulty=55.385)
+internal/adapter/log/logZero.go:19:1: func NewLogZero (Halstead complexity: volume=809.771, difficulty=58.423)
 internal/adapter/log/logZero.go:19:1: func NewLogZero (maintainability index=44)
 internal/adapter/log/logZero.go:56:1: func blankerr (lines of code=3)
 internal/adapter/log/logZero.go:56:1: func blankerr (cyclomatic complexity=1)
@@ -151,113 +237,27 @@ internal/adapter/log/logZero.go:84:1: func LogPanic (Halstead complexity: volume
 internal/adapter/log/logZero.go:84:1: func LogPanic (maintainability index=76)
 locSum= 216
 cycloAvg= 2 69 26
-halstVolAvg= 194.311964 5052.111069 26
-halstDiffAvg= 12.219738 317.713187 26
+halstVolAvg= 196.788288 5116.495494 26
+halstDiffAvg= 12.516089 325.418315 26
 maintAvg= 70 1826 26
 # shortlink/internal/adapter/cfg
-internal/adapter/cfg/cfgEnv.go:15:1: func NewCfgEnv (lines of code=25)
+internal/adapter/cfg/cfgEnv.go:15:1: func NewCfgEnv (lines of code=26)
 internal/adapter/cfg/cfgEnv.go:15:1: func NewCfgEnv (cyclomatic complexity=2)
-internal/adapter/cfg/cfgEnv.go:15:1: func NewCfgEnv (Halstead complexity: volume=515.513, difficulty=28.632)
-internal/adapter/cfg/cfgEnv.go:15:1: func NewCfgEnv (maintainability index=50)
-internal/adapter/cfg/cfgEnv.go:41:1: func NewCfgEnvFile (lines of code=14)
-internal/adapter/cfg/cfgEnv.go:41:1: func NewCfgEnvFile (cyclomatic complexity=4)
-internal/adapter/cfg/cfgEnv.go:41:1: func NewCfgEnvFile (Halstead complexity: volume=299.320, difficulty=23.000)
-internal/adapter/cfg/cfgEnv.go:41:1: func NewCfgEnvFile (maintainability index=57)
-internal/adapter/cfg/cfgEnv.go:56:1: func ipFromInterfaces (lines of code=15)
-internal/adapter/cfg/cfgEnv.go:56:1: func ipFromInterfaces (cyclomatic complexity=6)
-internal/adapter/cfg/cfgEnv.go:56:1: func ipFromInterfaces (Halstead complexity: volume=348.063, difficulty=31.250)
-internal/adapter/cfg/cfgEnv.go:56:1: func ipFromInterfaces (maintainability index=55)
-locSum= 54
+internal/adapter/cfg/cfgEnv.go:15:1: func NewCfgEnv (Halstead complexity: volume=537.666, difficulty=28.875)
+internal/adapter/cfg/cfgEnv.go:15:1: func NewCfgEnv (maintainability index=49)
+internal/adapter/cfg/cfgEnv.go:42:1: func NewCfgEnvFile (lines of code=14)
+internal/adapter/cfg/cfgEnv.go:42:1: func NewCfgEnvFile (cyclomatic complexity=4)
+internal/adapter/cfg/cfgEnv.go:42:1: func NewCfgEnvFile (Halstead complexity: volume=299.320, difficulty=23.000)
+internal/adapter/cfg/cfgEnv.go:42:1: func NewCfgEnvFile (maintainability index=57)
+internal/adapter/cfg/cfgEnv.go:57:1: func ipFromInterfaces (lines of code=15)
+internal/adapter/cfg/cfgEnv.go:57:1: func ipFromInterfaces (cyclomatic complexity=6)
+internal/adapter/cfg/cfgEnv.go:57:1: func ipFromInterfaces (Halstead complexity: volume=348.063, difficulty=31.250)
+internal/adapter/cfg/cfgEnv.go:57:1: func ipFromInterfaces (maintainability index=55)
+locSum= 55
 cycloAvg= 4 12 3
-halstVolAvg= 387.632120 1162.896361 3
-halstDiffAvg= 27.627193 82.881579 3
-maintAvg= 54 162 3
-# shortlink/internal/control
-internal/control/db.go:14:1: func NewCtrlDB (lines of code=5)
-internal/control/db.go:14:1: func NewCtrlDB (cyclomatic complexity=1)
-internal/control/db.go:14:1: func NewCtrlDB (Halstead complexity: volume=34.869, difficulty=5.250)
-internal/control/db.go:14:1: func NewCtrlDB (maintainability index=73)
-internal/control/db.go:20:1: func SaveLinkPair (lines of code=3)
-internal/control/db.go:20:1: func SaveLinkPair (cyclomatic complexity=1)
-internal/control/db.go:20:1: func SaveLinkPair (Halstead complexity: volume=85.110, difficulty=8.250)
-internal/control/db.go:20:1: func SaveLinkPair (maintainability index=75)
-internal/control/db.go:24:1: func LoadLinkPair (lines of code=4)
-internal/control/db.go:24:1: func LoadLinkPair (cyclomatic complexity=1)
-internal/control/db.go:24:1: func LoadLinkPair (Halstead complexity: volume=108.418, difficulty=8.750)
-internal/control/db.go:24:1: func LoadLinkPair (maintainability index=72)
-internal/control/db.go:29:1: func LoadAllLinkPairs (lines of code=8)
-internal/control/db.go:29:1: func LoadAllLinkPairs (cyclomatic complexity=2)
-internal/control/db.go:29:1: func LoadAllLinkPairs (Halstead complexity: volume=160.540, difficulty=12.857)
-internal/control/db.go:29:1: func LoadAllLinkPairs (maintainability index=64)
-internal/control/http.go:19:1: func NewCtrlHTTP (lines of code=7)
-internal/control/http.go:19:1: func NewCtrlHTTP (cyclomatic complexity=1)
-internal/control/http.go:19:1: func NewCtrlHTTP (Halstead complexity: volume=84.000, difficulty=9.000)
-internal/control/http.go:19:1: func NewCtrlHTTP (maintainability index=67)
-internal/control/http.go:27:1: func AllPairs (lines of code=8)
-internal/control/http.go:27:1: func AllPairs (cyclomatic complexity=2)
-internal/control/http.go:27:1: func AllPairs (Halstead complexity: volume=195.042, difficulty=16.714)
-internal/control/http.go:27:1: func AllPairs (maintainability index=63)
-internal/control/http.go:36:1: func Long (lines of code=11)
-internal/control/http.go:36:1: func Long (cyclomatic complexity=5)
-internal/control/http.go:36:1: func Long (Halstead complexity: volume=345.000, difficulty=36.833)
-internal/control/http.go:36:1: func Long (maintainability index=58)
-internal/control/http.go:48:1: func Short (lines of code=11)
-internal/control/http.go:48:1: func Short (cyclomatic complexity=5)
-internal/control/http.go:48:1: func Short (Halstead complexity: volume=355.000, difficulty=36.833)
-internal/control/http.go:48:1: func Short (maintainability index=58)
-internal/control/http.go:60:1: func Save (lines of code=13)
-internal/control/http.go:60:1: func Save (cyclomatic complexity=5)
-internal/control/http.go:60:1: func Save (Halstead complexity: volume=394.955, difficulty=38.000)
-internal/control/http.go:60:1: func Save (maintainability index=56)
-internal/control/http.go:74:1: func Hash (lines of code=9)
-internal/control/http.go:74:1: func Hash (cyclomatic complexity=3)
-internal/control/http.go:74:1: func Hash (Halstead complexity: volume=144.430, difficulty=16.875)
-internal/control/http.go:74:1: func Hash (maintainability index=63)
-locSum= 79
-cycloAvg= 2 26 10
-halstVolAvg= 190.736316 1907.363165 10
-halstDiffAvg= 18.936310 189.363095 10
-maintAvg= 64 649 10
-# shortlink/internal/service
-internal/service/shortLink.go:19:1: func NewSvcShortLink (lines of code=7)
-internal/service/shortLink.go:19:1: func NewSvcShortLink (cyclomatic complexity=1)
-internal/service/shortLink.go:19:1: func NewSvcShortLink (Halstead complexity: volume=58.810, difficulty=6.125)
-internal/service/shortLink.go:19:1: func NewSvcShortLink (maintainability index=69)
-internal/service/shortLink.go:27:1: func GetAllLinkPairs (lines of code=13)
-internal/service/shortLink.go:27:1: func GetAllLinkPairs (cyclomatic complexity=3)
-internal/service/shortLink.go:27:1: func GetAllLinkPairs (Halstead complexity: volume=276.905, difficulty=20.000)
-internal/service/shortLink.go:27:1: func GetAllLinkPairs (maintainability index=58)
-internal/service/shortLink.go:41:1: func GetLinkLongFromLinkShort (lines of code=8)
-internal/service/shortLink.go:41:1: func GetLinkLongFromLinkShort (cyclomatic complexity=2)
-internal/service/shortLink.go:41:1: func GetLinkLongFromLinkShort (Halstead complexity: volume=116.758, difficulty=12.250)
-internal/service/shortLink.go:41:1: func GetLinkLongFromLinkShort (maintainability index=65)
-internal/service/shortLink.go:50:1: func GetLinkShortFromLinkLong (lines of code=9)
-internal/service/shortLink.go:50:1: func GetLinkShortFromLinkLong (cyclomatic complexity=2)
-internal/service/shortLink.go:50:1: func GetLinkShortFromLinkLong (Halstead complexity: volume=158.123, difficulty=14.400)
-internal/service/shortLink.go:50:1: func GetLinkShortFromLinkLong (maintainability index=63)
-internal/service/shortLink.go:60:1: func SetLinkPairFromLinkLong (lines of code=21)
-internal/service/shortLink.go:60:1: func SetLinkPairFromLinkLong (cyclomatic complexity=5)
-internal/service/shortLink.go:60:1: func SetLinkPairFromLinkLong (Halstead complexity: volume=370.166, difficulty=28.750)
-internal/service/shortLink.go:60:1: func SetLinkPairFromLinkLong (maintainability index=52)
-internal/service/shortLink.go:82:1: func IsLinkLongHTTPValid (lines of code=12)
-internal/service/shortLink.go:82:1: func IsLinkLongHTTPValid (cyclomatic complexity=3)
-internal/service/shortLink.go:82:1: func IsLinkLongHTTPValid (Halstead complexity: volume=204.330, difficulty=19.000)
-internal/service/shortLink.go:82:1: func IsLinkLongHTTPValid (maintainability index=59)
-locSum= 70
-cycloAvg= 2 16 6
-halstVolAvg= 197.515430 1185.092583 6
-halstDiffAvg= 16.754167 100.525000 6
-maintAvg= 61 366 6
-# shortlink/internal/adapter/cfg_test
-internal/adapter/cfg/cfgEnv_test.go:15:1: func TestCfgEnv (lines of code=48)
-internal/adapter/cfg/cfgEnv_test.go:15:1: func TestCfgEnv (cyclomatic complexity=2)
-internal/adapter/cfg/cfgEnv_test.go:15:1: func TestCfgEnv (Halstead complexity: volume=1008.953, difficulty=33.333)
-internal/adapter/cfg/cfgEnv_test.go:15:1: func TestCfgEnv (maintainability index=42)
-locSum= 48
-cycloAvg= 2 2 1
-halstVolAvg= 1008.952633 1008.952633 1
-halstDiffAvg= 33.333333 33.333333 1
-maintAvg= 42 42 1
+halstVolAvg= 395.016658 1185.049974 3
+halstDiffAvg= 27.708333 83.125000 3
+maintAvg= 53 161 3
 # shortlink/internal/adapter/log_test
 internal/adapter/log/log_test.go:12:1: func TestLog (lines of code=49)
 internal/adapter/log/log_test.go:12:1: func TestLog (cyclomatic complexity=1)
@@ -268,16 +268,84 @@ cycloAvg= 1 1 1
 halstVolAvg= 1276.533542 1276.533542 1
 halstDiffAvg= 54.687500 54.687500 1
 maintAvg= 41 41 1
-# shortlink/internal/model_test
-internal/model/linkPair_test.go:10:1: func TestModels (lines of code=49)
-internal/model/linkPair_test.go:10:1: func TestModels (cyclomatic complexity=1)
-internal/model/linkPair_test.go:10:1: func TestModels (Halstead complexity: volume=1347.530, difficulty=38.038)
-internal/model/linkPair_test.go:10:1: func TestModels (maintainability index=41)
-locSum= 49
-cycloAvg= 1 1 1
-halstVolAvg= 1347.530363 1347.530363 1
-halstDiffAvg= 38.038462 38.038462 1
-maintAvg= 41 41 1
+# shortlink/internal/adapter/http
+internal/adapter/http/httpClientFast.go:18:1: func NewHTTPClientFast (lines of code=11)
+internal/adapter/http/httpClientFast.go:18:1: func NewHTTPClientFast (cyclomatic complexity=1)
+internal/adapter/http/httpClientFast.go:18:1: func NewHTTPClientFast (Halstead complexity: volume=177.199, difficulty=19.833)
+internal/adapter/http/httpClientFast.go:18:1: func NewHTTPClientFast (maintainability index=61)
+internal/adapter/http/httpClientFast.go:30:1: func Get (lines of code=14)
+internal/adapter/http/httpClientFast.go:30:1: func Get (cyclomatic complexity=3)
+internal/adapter/http/httpClientFast.go:30:1: func Get (Halstead complexity: volume=243.003, difficulty=18.000)
+internal/adapter/http/httpClientFast.go:30:1: func Get (maintainability index=57)
+internal/adapter/http/httpClientMock.go:16:1: func NewHTTPClientMock (lines of code=10)
+internal/adapter/http/httpClientMock.go:16:1: func NewHTTPClientMock (cyclomatic complexity=1)
+internal/adapter/http/httpClientMock.go:16:1: func NewHTTPClientMock (Halstead complexity: volume=145.947, difficulty=11.000)
+internal/adapter/http/httpClientMock.go:16:1: func NewHTTPClientMock (maintainability index=62)
+internal/adapter/http/httpClientMock.go:27:1: func Get (lines of code=7)
+internal/adapter/http/httpClientMock.go:27:1: func Get (cyclomatic complexity=2)
+internal/adapter/http/httpClientMock.go:27:1: func Get (Halstead complexity: volume=100.078, difficulty=7.800)
+internal/adapter/http/httpClientMock.go:27:1: func Get (maintainability index=67)
+internal/adapter/http/httpClientNet.go:17:1: func NewHTTPClientNet (lines of code=11)
+internal/adapter/http/httpClientNet.go:17:1: func NewHTTPClientNet (cyclomatic complexity=1)
+internal/adapter/http/httpClientNet.go:17:1: func NewHTTPClientNet (Halstead complexity: volume=171.895, difficulty=16.625)
+internal/adapter/http/httpClientNet.go:17:1: func NewHTTPClientNet (maintainability index=61)
+internal/adapter/http/httpClientNet.go:29:1: func Get (lines of code=15)
+internal/adapter/http/httpClientNet.go:29:1: func Get (cyclomatic complexity=3)
+internal/adapter/http/httpClientNet.go:29:1: func Get (Halstead complexity: volume=271.029, difficulty=25.714)
+internal/adapter/http/httpClientNet.go:29:1: func Get (maintainability index=56)
+internal/adapter/http/httpServerFast.go:29:1: func NewHTTPServerFast (lines of code=19)
+internal/adapter/http/httpServerFast.go:29:1: func NewHTTPServerFast (cyclomatic complexity=1)
+internal/adapter/http/httpServerFast.go:29:1: func NewHTTPServerFast (Halstead complexity: volume=305.026, difficulty=21.000)
+internal/adapter/http/httpServerFast.go:29:1: func NewHTTPServerFast (maintainability index=54)
+internal/adapter/http/httpServerFast.go:49:1: func handlers (lines of code=78)
+internal/adapter/http/httpServerFast.go:49:1: func handlers (cyclomatic complexity=6)
+internal/adapter/http/httpServerFast.go:49:1: func handlers (Halstead complexity: volume=3509.848, difficulty=99.485)
+internal/adapter/http/httpServerFast.go:49:1: func handlers (maintainability index=33)
+internal/adapter/http/httpServerFast.go:128:1: func appClose (lines of code=4)
+internal/adapter/http/httpServerFast.go:128:1: func appClose (cyclomatic complexity=1)
+internal/adapter/http/httpServerFast.go:128:1: func appClose (Halstead complexity: volume=48.432, difficulty=4.000)
+internal/adapter/http/httpServerFast.go:128:1: func appClose (maintainability index=74)
+internal/adapter/http/httpServerFast.go:133:1: func Engine (lines of code=3)
+internal/adapter/http/httpServerFast.go:133:1: func Engine (cyclomatic complexity=1)
+internal/adapter/http/httpServerFast.go:133:1: func Engine (Halstead complexity: volume=22.459, difficulty=3.000)
+internal/adapter/http/httpServerFast.go:133:1: func Engine (maintainability index=79)
+internal/adapter/http/httpServerFast.go:137:1: func Run (lines of code=25)
+internal/adapter/http/httpServerFast.go:137:1: func Run (cyclomatic complexity=5)
+internal/adapter/http/httpServerFast.go:137:1: func Run (Halstead complexity: volume=561.528, difficulty=40.600)
+internal/adapter/http/httpServerFast.go:137:1: func Run (maintainability index=49)
+internal/adapter/http/httpServerNet.go:30:1: func NewHTTPServerNet (lines of code=9)
+internal/adapter/http/httpServerNet.go:30:1: func NewHTTPServerNet (cyclomatic complexity=1)
+internal/adapter/http/httpServerNet.go:30:1: func NewHTTPServerNet (Halstead complexity: volume=106.274, difficulty=11.375)
+internal/adapter/http/httpServerNet.go:30:1: func NewHTTPServerNet (maintainability index=64)
+internal/adapter/http/httpServerNet.go:40:1: func handlers (lines of code=118)
+internal/adapter/http/httpServerNet.go:40:1: func handlers (cyclomatic complexity=9)
+internal/adapter/http/httpServerNet.go:40:1: func handlers (Halstead complexity: volume=3740.011, difficulty=100.389)
+internal/adapter/http/httpServerNet.go:40:1: func handlers (maintainability index=28)
+internal/adapter/http/httpServerNet.go:159:1: func appClose (lines of code=4)
+internal/adapter/http/httpServerNet.go:159:1: func appClose (cyclomatic complexity=1)
+internal/adapter/http/httpServerNet.go:159:1: func appClose (Halstead complexity: volume=48.432, difficulty=4.000)
+internal/adapter/http/httpServerNet.go:159:1: func appClose (maintainability index=74)
+internal/adapter/http/httpServerNet.go:164:1: func Engine (lines of code=3)
+internal/adapter/http/httpServerNet.go:164:1: func Engine (cyclomatic complexity=1)
+internal/adapter/http/httpServerNet.go:164:1: func Engine (Halstead complexity: volume=22.459, difficulty=3.000)
+internal/adapter/http/httpServerNet.go:164:1: func Engine (maintainability index=79)
+internal/adapter/http/httpServerNet.go:168:1: func Run (lines of code=34)
+internal/adapter/http/httpServerNet.go:168:1: func Run (cyclomatic complexity=7)
+internal/adapter/http/httpServerNet.go:168:1: func Run (Halstead complexity: volume=845.968, difficulty=54.286)
+internal/adapter/http/httpServerNet.go:168:1: func Run (maintainability index=45)
+internal/adapter/http/httpServerNet.go:207:1: func NewEmbedFolder (lines of code=9)
+internal/adapter/http/httpServerNet.go:207:1: func NewEmbedFolder (cyclomatic complexity=2)
+internal/adapter/http/httpServerNet.go:207:1: func NewEmbedFolder (Halstead complexity: volume=140.230, difficulty=11.429)
+internal/adapter/http/httpServerNet.go:207:1: func NewEmbedFolder (maintainability index=63)
+internal/adapter/http/httpServerNet.go:217:1: func Exists (lines of code=13)
+internal/adapter/http/httpServerNet.go:217:1: func Exists (cyclomatic complexity=3)
+internal/adapter/http/httpServerNet.go:217:1: func Exists (Halstead complexity: volume=242.899, difficulty=14.875)
+internal/adapter/http/httpServerNet.go:217:1: func Exists (maintainability index=58)
+locSum= 387
+cycloAvg= 2 49 18
+halstVolAvg= 594.595420 10702.717558 18
+halstDiffAvg= 25.911727 466.411088 18
+maintAvg= 59 1064 18
 # shortlink/internal/adapter/db
 internal/adapter/db/dbMock.go:16:1: func NewDBMock (lines of code=10)
 internal/adapter/db/dbMock.go:16:1: func NewDBMock (cyclomatic complexity=1)
@@ -309,7 +377,7 @@ internal/adapter/db/dbMongo.go:30:1: func SaveLinkPair (Halstead complexity: vol
 internal/adapter/db/dbMongo.go:30:1: func SaveLinkPair (maintainability index=52)
 internal/adapter/db/dbMongo.go:49:1: func LoadLinkPair (lines of code=22)
 internal/adapter/db/dbMongo.go:49:1: func LoadLinkPair (cyclomatic complexity=3)
-internal/adapter/db/dbMongo.go:49:1: func LoadLinkPair (Halstead complexity: volume=687.982, difficulty=49.786)
+internal/adapter/db/dbMongo.go:49:1: func LoadLinkPair (Halstead complexity: volume=702.690, difficulty=51.000)
 internal/adapter/db/dbMongo.go:49:1: func LoadLinkPair (maintainability index=50)
 internal/adapter/db/dbMongo.go:72:1: func LoadAllLinkPairs (lines of code=30)
 internal/adapter/db/dbMongo.go:72:1: func LoadAllLinkPairs (cyclomatic complexity=5)
@@ -333,7 +401,7 @@ internal/adapter/db/dbPostgres.go:25:1: func SaveLinkPair (Halstead complexity: 
 internal/adapter/db/dbPostgres.go:25:1: func SaveLinkPair (maintainability index=60)
 internal/adapter/db/dbPostgres.go:37:1: func LoadLinkPair (lines of code=13)
 internal/adapter/db/dbPostgres.go:37:1: func LoadLinkPair (cyclomatic complexity=2)
-internal/adapter/db/dbPostgres.go:37:1: func LoadLinkPair (Halstead complexity: volume=351.555, difficulty=26.136)
+internal/adapter/db/dbPostgres.go:37:1: func LoadLinkPair (Halstead complexity: volume=361.895, difficulty=26.136)
 internal/adapter/db/dbPostgres.go:37:1: func LoadLinkPair (maintainability index=57)
 internal/adapter/db/dbPostgres.go:51:1: func LoadAllLinkPairs (lines of code=20)
 internal/adapter/db/dbPostgres.go:51:1: func LoadAllLinkPairs (cyclomatic complexity=4)
@@ -361,7 +429,7 @@ internal/adapter/db/dbRedis.go:35:1: func SaveLinkPair (Halstead complexity: vol
 internal/adapter/db/dbRedis.go:35:1: func SaveLinkPair (maintainability index=62)
 internal/adapter/db/dbRedis.go:45:1: func LoadLinkPair (lines of code=10)
 internal/adapter/db/dbRedis.go:45:1: func LoadLinkPair (cyclomatic complexity=2)
-internal/adapter/db/dbRedis.go:45:1: func LoadLinkPair (Halstead complexity: volume=262.331, difficulty=23.571)
+internal/adapter/db/dbRedis.go:45:1: func LoadLinkPair (Halstead complexity: volume=272.047, difficulty=23.571)
 internal/adapter/db/dbRedis.go:45:1: func LoadLinkPair (maintainability index=60)
 internal/adapter/db/dbRedis.go:56:1: func LoadAllLinkPairs (lines of code=17)
 internal/adapter/db/dbRedis.go:56:1: func LoadAllLinkPairs (cyclomatic complexity=4)
@@ -375,139 +443,71 @@ internal/adapter/db/dbRedis.go:87:1: func Connect (lines of code=33)
 internal/adapter/db/dbRedis.go:87:1: func Connect (cyclomatic complexity=6)
 internal/adapter/db/dbRedis.go:87:1: func Connect (Halstead complexity: volume=917.771, difficulty=40.800)
 internal/adapter/db/dbRedis.go:87:1: func Connect (maintainability index=45)
-internal/adapter/db/dbTarantool.go:18:1: func NewDBTarantool (lines of code=6)
-internal/adapter/db/dbTarantool.go:18:1: func NewDBTarantool (cyclomatic complexity=1)
-internal/adapter/db/dbTarantool.go:18:1: func NewDBTarantool (Halstead complexity: volume=46.507, difficulty=5.833)
-internal/adapter/db/dbTarantool.go:18:1: func NewDBTarantool (maintainability index=71)
-internal/adapter/db/dbTarantool.go:25:1: func SaveLinkPair (lines of code=11)
-internal/adapter/db/dbTarantool.go:25:1: func SaveLinkPair (cyclomatic complexity=2)
-internal/adapter/db/dbTarantool.go:25:1: func SaveLinkPair (Halstead complexity: volume=312.567, difficulty=24.300)
-internal/adapter/db/dbTarantool.go:25:1: func SaveLinkPair (maintainability index=59)
-internal/adapter/db/dbTarantool.go:37:1: func LoadLinkPair (lines of code=21)
-internal/adapter/db/dbTarantool.go:37:1: func LoadLinkPair (cyclomatic complexity=4)
-internal/adapter/db/dbTarantool.go:37:1: func LoadLinkPair (Halstead complexity: volume=645.692, difficulty=28.275)
-internal/adapter/db/dbTarantool.go:37:1: func LoadLinkPair (maintainability index=50)
-internal/adapter/db/dbTarantool.go:59:1: func LoadAllLinkPairs (lines of code=28)
-internal/adapter/db/dbTarantool.go:59:1: func LoadAllLinkPairs (cyclomatic complexity=6)
-internal/adapter/db/dbTarantool.go:59:1: func LoadAllLinkPairs (Halstead complexity: volume=787.440, difficulty=32.000)
-internal/adapter/db/dbTarantool.go:59:1: func LoadAllLinkPairs (maintainability index=47)
-internal/adapter/db/dbTarantool.go:88:1: func Migration (lines of code=27)
-internal/adapter/db/dbTarantool.go:88:1: func Migration (cyclomatic complexity=5)
-internal/adapter/db/dbTarantool.go:88:1: func Migration (Halstead complexity: volume=873.717, difficulty=39.200)
-internal/adapter/db/dbTarantool.go:88:1: func Migration (maintainability index=47)
-internal/adapter/db/dbTarantool.go:116:1: func Connect (lines of code=26)
-internal/adapter/db/dbTarantool.go:116:1: func Connect (cyclomatic complexity=5)
-internal/adapter/db/dbTarantool.go:116:1: func Connect (Halstead complexity: volume=657.863, difficulty=45.000)
-internal/adapter/db/dbTarantool.go:116:1: func Connect (maintainability index=48)
-locSum= 498
-cycloAvg= 3 92 30
-halstVolAvg= 445.274032 13358.220956 30
-halstDiffAvg= 27.978915 839.367437 30
-maintAvg= 56 1708 30
+internal/adapter/db/dbTarantool.go:22:1: func NewDBTarantool (lines of code=6)
+internal/adapter/db/dbTarantool.go:22:1: func NewDBTarantool (cyclomatic complexity=1)
+internal/adapter/db/dbTarantool.go:22:1: func NewDBTarantool (Halstead complexity: volume=46.507, difficulty=5.833)
+internal/adapter/db/dbTarantool.go:22:1: func NewDBTarantool (maintainability index=71)
+internal/adapter/db/dbTarantool.go:29:1: func SaveLinkPair (lines of code=11)
+internal/adapter/db/dbTarantool.go:29:1: func SaveLinkPair (cyclomatic complexity=2)
+internal/adapter/db/dbTarantool.go:29:1: func SaveLinkPair (Halstead complexity: volume=277.442, difficulty=22.667)
+internal/adapter/db/dbTarantool.go:29:1: func SaveLinkPair (maintainability index=59)
+internal/adapter/db/dbTarantool.go:41:1: func LoadLinkPair (lines of code=15)
+internal/adapter/db/dbTarantool.go:41:1: func LoadLinkPair (cyclomatic complexity=3)
+internal/adapter/db/dbTarantool.go:41:1: func LoadLinkPair (Halstead complexity: volume=457.686, difficulty=28.000)
+internal/adapter/db/dbTarantool.go:41:1: func LoadLinkPair (maintainability index=55)
+internal/adapter/db/dbTarantool.go:57:1: func LoadAllLinkPairs (lines of code=16)
+internal/adapter/db/dbTarantool.go:57:1: func LoadAllLinkPairs (cyclomatic complexity=3)
+internal/adapter/db/dbTarantool.go:57:1: func LoadAllLinkPairs (Halstead complexity: volume=469.511, difficulty=35.769)
+internal/adapter/db/dbTarantool.go:57:1: func LoadAllLinkPairs (maintainability index=54)
+internal/adapter/db/dbTarantool.go:74:1: func Migration (lines of code=33)
+internal/adapter/db/dbTarantool.go:74:1: func Migration (cyclomatic complexity=5)
+internal/adapter/db/dbTarantool.go:74:1: func Migration (Halstead complexity: volume=825.815, difficulty=35.625)
+internal/adapter/db/dbTarantool.go:74:1: func Migration (maintainability index=45)
+internal/adapter/db/dbTarantool.go:108:1: func Connect (lines of code=26)
+internal/adapter/db/dbTarantool.go:108:1: func Connect (cyclomatic complexity=5)
+internal/adapter/db/dbTarantool.go:108:1: func Connect (Halstead complexity: volume=657.863, difficulty=45.000)
+internal/adapter/db/dbTarantool.go:108:1: func Connect (maintainability index=48)
+locSum= 486
+cycloAvg= 2 88 30
+halstVolAvg= 426.800726 12804.021774 30
+halstDiffAvg= 27.962254 838.867621 30
+maintAvg= 57 1718 30
+# shortlink/internal/adapter/cfg_test
+internal/adapter/cfg/cfgEnv_test.go:15:1: func TestCfgEnv (lines of code=48)
+internal/adapter/cfg/cfgEnv_test.go:15:1: func TestCfgEnv (cyclomatic complexity=2)
+internal/adapter/cfg/cfgEnv_test.go:15:1: func TestCfgEnv (Halstead complexity: volume=1008.953, difficulty=33.333)
+internal/adapter/cfg/cfgEnv_test.go:15:1: func TestCfgEnv (maintainability index=42)
+locSum= 48
+cycloAvg= 2 2 1
+halstVolAvg= 1008.952633 1008.952633 1
+halstDiffAvg= 33.333333 33.333333 1
+maintAvg= 42 42 1
 # shortlink/internal/adapter/db_test
-internal/adapter/db/db_test.go:12:1: func TestPostgresDB (lines of code=40)
+internal/adapter/db/db_test.go:12:1: func TestPostgresDB (lines of code=39)
 internal/adapter/db/db_test.go:12:1: func TestPostgresDB (cyclomatic complexity=2)
-internal/adapter/db/db_test.go:12:1: func TestPostgresDB (Halstead complexity: volume=1260.698, difficulty=49.704)
+internal/adapter/db/db_test.go:12:1: func TestPostgresDB (Halstead complexity: volume=1238.115, difficulty=47.778)
 internal/adapter/db/db_test.go:12:1: func TestPostgresDB (maintainability index=43)
-internal/adapter/db/db_test.go:53:1: func TestMongoDB (lines of code=40)
-internal/adapter/db/db_test.go:53:1: func TestMongoDB (cyclomatic complexity=2)
-internal/adapter/db/db_test.go:53:1: func TestMongoDB (Halstead complexity: volume=1260.698, difficulty=49.704)
-internal/adapter/db/db_test.go:53:1: func TestMongoDB (maintainability index=43)
-internal/adapter/db/db_test.go:94:1: func TestRedis (lines of code=42)
-internal/adapter/db/db_test.go:94:1: func TestRedis (cyclomatic complexity=2)
-internal/adapter/db/db_test.go:94:1: func TestRedis (Halstead complexity: volume=1359.094, difficulty=56.250)
-internal/adapter/db/db_test.go:94:1: func TestRedis (maintainability index=42)
-internal/adapter/db/db_test.go:137:1: func TestTarantool (lines of code=40)
-internal/adapter/db/db_test.go:137:1: func TestTarantool (cyclomatic complexity=2)
-internal/adapter/db/db_test.go:137:1: func TestTarantool (Halstead complexity: volume=1260.698, difficulty=49.704)
-internal/adapter/db/db_test.go:137:1: func TestTarantool (maintainability index=43)
-locSum= 162
+internal/adapter/db/db_test.go:52:1: func TestMongoDB (lines of code=39)
+internal/adapter/db/db_test.go:52:1: func TestMongoDB (cyclomatic complexity=2)
+internal/adapter/db/db_test.go:52:1: func TestMongoDB (Halstead complexity: volume=1238.115, difficulty=47.778)
+internal/adapter/db/db_test.go:52:1: func TestMongoDB (maintainability index=43)
+internal/adapter/db/db_test.go:92:1: func TestRedis (lines of code=41)
+internal/adapter/db/db_test.go:92:1: func TestRedis (cyclomatic complexity=2)
+internal/adapter/db/db_test.go:92:1: func TestRedis (Halstead complexity: volume=1336.184, difficulty=54.154)
+internal/adapter/db/db_test.go:92:1: func TestRedis (maintainability index=42)
+internal/adapter/db/db_test.go:134:1: func TestTarantool (lines of code=42)
+internal/adapter/db/db_test.go:134:1: func TestTarantool (cyclomatic complexity=2)
+internal/adapter/db/db_test.go:134:1: func TestTarantool (Halstead complexity: volume=1238.115, difficulty=47.778)
+internal/adapter/db/db_test.go:134:1: func TestTarantool (maintainability index=42)
+locSum= 161
 cycloAvg= 2 8 4
-halstVolAvg= 1285.297148 5141.188592 4
-halstDiffAvg= 51.340278 205.361111 4
-maintAvg= 42 171 4
-# shortlink/internal/adapter/http
-internal/adapter/http/httpClientFast.go:16:1: func NewHTTPClientFast (lines of code=10)
-internal/adapter/http/httpClientFast.go:16:1: func NewHTTPClientFast (cyclomatic complexity=1)
-internal/adapter/http/httpClientFast.go:16:1: func NewHTTPClientFast (Halstead complexity: volume=161.421, difficulty=21.250)
-internal/adapter/http/httpClientFast.go:16:1: func NewHTTPClientFast (maintainability index=62)
-internal/adapter/http/httpClientFast.go:27:1: func Get (lines of code=7)
-internal/adapter/http/httpClientFast.go:27:1: func Get (cyclomatic complexity=2)
-internal/adapter/http/httpClientFast.go:27:1: func Get (Halstead complexity: volume=104.000, difficulty=7.500)
-internal/adapter/http/httpClientFast.go:27:1: func Get (maintainability index=67)
-internal/adapter/http/httpClientMock.go:15:1: func NewHTTPClientMock (lines of code=9)
-internal/adapter/http/httpClientMock.go:15:1: func NewHTTPClientMock (cyclomatic complexity=1)
-internal/adapter/http/httpClientMock.go:15:1: func NewHTTPClientMock (Halstead complexity: volume=130.799, difficulty=10.800)
-internal/adapter/http/httpClientMock.go:15:1: func NewHTTPClientMock (maintainability index=64)
-internal/adapter/http/httpClientMock.go:25:1: func Get (lines of code=7)
-internal/adapter/http/httpClientMock.go:25:1: func Get (cyclomatic complexity=2)
-internal/adapter/http/httpClientMock.go:25:1: func Get (Halstead complexity: volume=104.248, difficulty=8.750)
-internal/adapter/http/httpClientMock.go:25:1: func Get (maintainability index=67)
-internal/adapter/http/httpClientNet.go:15:1: func NewHTTPClientNet (lines of code=10)
-internal/adapter/http/httpClientNet.go:15:1: func NewHTTPClientNet (cyclomatic complexity=1)
-internal/adapter/http/httpClientNet.go:15:1: func NewHTTPClientNet (Halstead complexity: volume=156.080, difficulty=15.833)
-internal/adapter/http/httpClientNet.go:15:1: func NewHTTPClientNet (maintainability index=62)
-internal/adapter/http/httpClientNet.go:26:1: func Get (lines of code=9)
-internal/adapter/http/httpClientNet.go:26:1: func Get (cyclomatic complexity=2)
-internal/adapter/http/httpClientNet.go:26:1: func Get (Halstead complexity: volume=138.302, difficulty=13.500)
-internal/adapter/http/httpClientNet.go:26:1: func Get (maintainability index=63)
-internal/adapter/http/httpServerFast.go:29:1: func NewHTTPServerFast (lines of code=19)
-internal/adapter/http/httpServerFast.go:29:1: func NewHTTPServerFast (cyclomatic complexity=1)
-internal/adapter/http/httpServerFast.go:29:1: func NewHTTPServerFast (Halstead complexity: volume=305.026, difficulty=21.000)
-internal/adapter/http/httpServerFast.go:29:1: func NewHTTPServerFast (maintainability index=54)
-internal/adapter/http/httpServerFast.go:49:1: func handlers (lines of code=78)
-internal/adapter/http/httpServerFast.go:49:1: func handlers (cyclomatic complexity=6)
-internal/adapter/http/httpServerFast.go:49:1: func handlers (Halstead complexity: volume=3509.848, difficulty=99.485)
-internal/adapter/http/httpServerFast.go:49:1: func handlers (maintainability index=33)
-internal/adapter/http/httpServerFast.go:128:1: func appClose (lines of code=4)
-internal/adapter/http/httpServerFast.go:128:1: func appClose (cyclomatic complexity=1)
-internal/adapter/http/httpServerFast.go:128:1: func appClose (Halstead complexity: volume=48.432, difficulty=4.000)
-internal/adapter/http/httpServerFast.go:128:1: func appClose (maintainability index=74)
-internal/adapter/http/httpServerFast.go:133:1: func Engine (lines of code=3)
-internal/adapter/http/httpServerFast.go:133:1: func Engine (cyclomatic complexity=1)
-internal/adapter/http/httpServerFast.go:133:1: func Engine (Halstead complexity: volume=22.459, difficulty=3.000)
-internal/adapter/http/httpServerFast.go:133:1: func Engine (maintainability index=79)
-internal/adapter/http/httpServerFast.go:137:1: func Run (lines of code=20)
-internal/adapter/http/httpServerFast.go:137:1: func Run (cyclomatic complexity=4)
-internal/adapter/http/httpServerFast.go:137:1: func Run (Halstead complexity: volume=432.434, difficulty=33.333)
-internal/adapter/http/httpServerFast.go:137:1: func Run (maintainability index=52)
-internal/adapter/http/httpServerNet.go:30:1: func NewHTTPServerNet (lines of code=9)
-internal/adapter/http/httpServerNet.go:30:1: func NewHTTPServerNet (cyclomatic complexity=1)
-internal/adapter/http/httpServerNet.go:30:1: func NewHTTPServerNet (Halstead complexity: volume=106.274, difficulty=11.375)
-internal/adapter/http/httpServerNet.go:30:1: func NewHTTPServerNet (maintainability index=64)
-internal/adapter/http/httpServerNet.go:40:1: func handlers (lines of code=118)
-internal/adapter/http/httpServerNet.go:40:1: func handlers (cyclomatic complexity=9)
-internal/adapter/http/httpServerNet.go:40:1: func handlers (Halstead complexity: volume=3740.011, difficulty=100.389)
-internal/adapter/http/httpServerNet.go:40:1: func handlers (maintainability index=28)
-internal/adapter/http/httpServerNet.go:159:1: func appClose (lines of code=4)
-internal/adapter/http/httpServerNet.go:159:1: func appClose (cyclomatic complexity=1)
-internal/adapter/http/httpServerNet.go:159:1: func appClose (Halstead complexity: volume=48.432, difficulty=4.000)
-internal/adapter/http/httpServerNet.go:159:1: func appClose (maintainability index=74)
-internal/adapter/http/httpServerNet.go:164:1: func Engine (lines of code=3)
-internal/adapter/http/httpServerNet.go:164:1: func Engine (cyclomatic complexity=1)
-internal/adapter/http/httpServerNet.go:164:1: func Engine (Halstead complexity: volume=22.459, difficulty=3.000)
-internal/adapter/http/httpServerNet.go:164:1: func Engine (maintainability index=79)
-internal/adapter/http/httpServerNet.go:168:1: func Run (lines of code=29)
-internal/adapter/http/httpServerNet.go:168:1: func Run (cyclomatic complexity=6)
-internal/adapter/http/httpServerNet.go:168:1: func Run (Halstead complexity: volume=709.053, difficulty=48.231)
-internal/adapter/http/httpServerNet.go:168:1: func Run (maintainability index=47)
-internal/adapter/http/httpServerNet.go:202:1: func NewEmbedFolder (lines of code=9)
-internal/adapter/http/httpServerNet.go:202:1: func NewEmbedFolder (cyclomatic complexity=2)
-internal/adapter/http/httpServerNet.go:202:1: func NewEmbedFolder (Halstead complexity: volume=140.230, difficulty=11.429)
-internal/adapter/http/httpServerNet.go:202:1: func NewEmbedFolder (maintainability index=63)
-internal/adapter/http/httpServerNet.go:212:1: func Exists (lines of code=13)
-internal/adapter/http/httpServerNet.go:212:1: func Exists (cyclomatic complexity=3)
-internal/adapter/http/httpServerNet.go:212:1: func Exists (Halstead complexity: volume=242.899, difficulty=14.875)
-internal/adapter/http/httpServerNet.go:212:1: func Exists (maintainability index=58)
-locSum= 361
-cycloAvg= 2 45 18
-halstVolAvg= 562.355931 10122.406767 18
-halstDiffAvg= 23.986122 431.750190 18
-maintAvg= 60 1090 18
+halstVolAvg= 1262.632301 5050.529206 4
+halstDiffAvg= 49.371795 197.487179 4
+maintAvg= 42 170 4
 # shortlink/internal
 internal/app.go:20:1: func NewApp (lines of code=16)
 internal/app.go:20:1: func NewApp (cyclomatic complexity=1)
-internal/app.go:20:1: func NewApp (Halstead complexity: volume=338.575, difficulty=20.923)
+internal/app.go:20:1: func NewApp (Halstead complexity: volume=343.482, difficulty=21.577)
 internal/app.go:20:1: func NewApp (maintainability index=55)
 internal/app.go:37:1: func Start (lines of code=14)
 internal/app.go:37:1: func Start (cyclomatic complexity=2)
@@ -527,28 +527,28 @@ internal/app.go:78:1: func createHTTPServer (Halstead complexity: volume=104.000
 internal/app.go:78:1: func createHTTPServer (maintainability index=65)
 locSum= 62
 cycloAvg= 3 16 5
-halstVolAvg= 214.454009 1072.270047 5
-halstDiffAvg= 18.634615 93.173077 5
+halstVolAvg= 215.435388 1077.176938 5
+halstDiffAvg= 18.765385 93.826923 5
 maintAvg= 59 297 5
 # shortlink/internal/service_test
 internal/service/shortLink_test.go:17:1: func TestServices (lines of code=41)
 internal/service/shortLink_test.go:17:1: func TestServices (cyclomatic complexity=1)
-internal/service/shortLink_test.go:17:1: func TestServices (Halstead complexity: volume=1080.000, difficulty=58.357)
+internal/service/shortLink_test.go:17:1: func TestServices (Halstead complexity: volume=1086.000, difficulty=59.381)
 internal/service/shortLink_test.go:17:1: func TestServices (maintainability index=43)
 locSum= 41
 cycloAvg= 1 1 1
-halstVolAvg= 1080.000000 1080.000000 1
-halstDiffAvg= 58.357143 58.357143 1
+halstVolAvg= 1086.000000 1086.000000 1
+halstDiffAvg= 59.380952 59.380952 1
 maintAvg= 43 43 1
 # shortlink/internal/adapter/http_test
 internal/adapter/http/httpServer_test.go:18:1: func TestHTTPServer (lines of code=96)
 internal/adapter/http/httpServer_test.go:18:1: func TestHTTPServer (cyclomatic complexity=1)
-internal/adapter/http/httpServer_test.go:18:1: func TestHTTPServer (Halstead complexity: volume=5260.430, difficulty=158.777)
+internal/adapter/http/httpServer_test.go:18:1: func TestHTTPServer (Halstead complexity: volume=5274.291, difficulty=160.372)
 internal/adapter/http/httpServer_test.go:18:1: func TestHTTPServer (maintainability index=30)
 locSum= 96
 cycloAvg= 1 1 1
-halstVolAvg= 5260.429639 5260.429639 1
-halstDiffAvg= 158.776596 158.776596 1
+halstVolAvg= 5274.291114 5274.291114 1
+halstDiffAvg= 160.372340 160.372340 1
 maintAvg= 30 30 1
 # shortlink/cmd
 cmd/main.go:11:1: func main (lines of code=21)

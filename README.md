@@ -55,7 +55,7 @@ We choose Monolith as system arch pattern and Rich Domain Model as software arch
 - standart go project layout (more or less)
 - pre-commit hooks and github actions (CI) + docker-compose (CD) + minikube (prod🙃)
 - integration tests and unit tests with mocks
-- e2e tests in PLY
+- e2e tests with PLY
 - HTTPfast(fiber) or HTTPnet(gin) server adapters
 - logZero, logSlog or logFprintf logger adapters
 - postgreSQL, redis, mongoDB or tarantool db adapters
@@ -113,6 +113,26 @@ We choose Monolith as system arch pattern and Rich Domain Model as software arch
   - uudashr/gocognit
   - kselnaag/go-complexity-analysis (fork)
 
+More details in: `./script/metrics/`
+
+## **⚙️ HowTo**
+<img style="margin-right: 0px;" align="right" width="30%" title="CI/CD workflow" alt="#CICD" src="./asset/cicd.png"/>
+
+- check if `docker` and `docker-compose` has been installed and works
+- clone the project `git clone https://github.com/kselnaag/shortlink`
+- dive into a folder `cd shortlink`
+- build all localy with `./script/cicd.sh docker-build` 
+- check if `kselnaag/shortlink` built correctly: `docker images`
+- run everything with `./script/cicd.sh compose-app` (mock DB)
+- if you want to use some DBs pick "compose-pg" or "compose-mg" or "compose-rd" or "compose-tt"
+- go to `http://localhost:8080` in your browser and try it
+
+In case of additional flexibility situation change YAML configs in `./script/` guided by `./config/shortlink.env`
+
+Kube deploy in `./script/kube/`
+
+## **🦋 The beauty is like this and nothing more**
+
 ```
 kselnaag:~/shortlink$ ./script/cicd.sh
 
@@ -128,62 +148,45 @@ kselnaag:~/shortlink$ ./script/cicd.sh metrics
 >>_TestCoverage_<<
 ?       shortlink/cmd                   [no test files]
 ?       shortlink/internal              [no test files]
-ok      shortlink/internal/adapter/cfg  0.027s  coverage: 53.8% of statements
-ok      shortlink/internal/adapter/db   0.021s  coverage: 0.0% of statements
+ok      shortlink/internal/adapter/cfg  0.043s  coverage: 53.8% of statements
+ok      shortlink/internal/adapter/db   0.024s  coverage: 0.0% of statements
 ?       shortlink/internal/apptype      [no test files]
 ?       shortlink/internal/control      [no test files]
 ?       shortlink/web                   [no test files]
-ok      shortlink/internal/adapter/http 0.072s  coverage: 61.7% of statements
-ok      shortlink/internal/adapter/log  0.038s  coverage: 77.0% of statements
-ok      shortlink/internal/model        0.030s  coverage: 100.0% of statements
-ok      shortlink/internal/service      0.047s  coverage: 69.8% of statements
-TOTAL: 72.5%
+ok      shortlink/internal/adapter/http 0.063s  coverage: 58.5% of statements
+ok      shortlink/internal/adapter/log  0.020s  coverage: 77.0% of statements
+ok      shortlink/internal/model        0.017s  coverage: 100.0% of statements
+ok      shortlink/internal/service      0.039s  coverage: 71.8% of statements
+TOTAL: 72.2%
 
 >>_LinesOfCode_<<
   Language   | Files | Lines | Blank lines | Comments | Code lines
-  Golang     |    33 |  2500 |         273 |       43 |       2184
-  Bash       |     1 |   418 |          48 |        9 |        361
+  Golang     |    33 |  2515 |         279 |       43 |       2193
+  Bash       |     1 |   362 |          40 |        3 |        319
 
 >>_CyclomaticComplexity_<<
 Average: 2.57
 
 >>_CognitiveComplexity_<<
-Average: 1.9
+Average: 1.94
 
 >>_ComplexityMetrics_<<
-TOTAL LoC: 1842
-TOTAL cycloAvg: 2.63478
-TOTAL halstVolAvg: 433.671
-TOTAL halstDiffAvg: 23.4211
-TOTAL maintAvg: 61.113
+TOTAL LoC: 1849
+TOTAL cycloAvg: 2.62609
+TOTAL halstVolAvg: 432.956
+TOTAL halstDiffAvg: 23.6937
+TOTAL maintAvg: 61.0348
 
 >>_Successfull_<<
 ```
 
 Control-flow graph (for `http://localhost:8080/`)
-
 <img width="100%" title="Control-flow graph" alt="#CONTROLFLOW" src="./asset/controlFlow.png"/>
-
-More details in: `./script/metrics/`
-
-## **⚙️ HowTo**
-<img style="margin-right: 0px;" align="right" width="30%" title="CI/CD workflow" alt="#CICD" src="./asset/cicd.png"/>
-
-- check if `docker` and `docker-compose` has been installed and works
-- clone the project `git clone https://github.com/kselnaag/shortlink`
-- dive into a folder `cd shortlink`
-- build all localy with `./script/cicd.sh docker-build` 
-- check if `kselnaag/shortlink` built correctly: `docker images`
-- run everything with `./script/cicd.sh compose-app` (mock DB)
-- if you want to use some DBs pick "compose-pg" or "compose-mg" or "compose-rd" or "compose-tt"
-- go to `http://localhost:8080` in your browser and try it
-
-In case of additional flexibility request use `./config/shortlink.env` and change YAML configs in `./script/`
-
-Kube deploy in `./script/kube/`
-
-## **🦋 The beauty is like this and nothing more**
-
+<img width="100%" title="console_app" alt="#APP" src="./asset/console_app.png"/>
+<img width="100%" title="console_rd" alt="#RD" src="./asset/console_rd.png"/>
+<img width="100%" title="web" alt="#WEB" src="./asset/web.png"/>
+Notice: http only !
+ 
 ----
 ### **🔗 LINKS**
 | [gin](https://github.com/gin-gonic/gin "https://github.com/gin-gonic/gin")
