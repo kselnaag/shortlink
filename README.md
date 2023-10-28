@@ -141,7 +141,7 @@ CI/CD COMMANDS: style lint test build run start check check-no-lint
                 docker-gobuilder docker-build docker-up docker-stop
                 compose-app compose-pg compose-rd compose-mg compose-tt
                 metrics metrics-graph
-                
+
 EXAMLPE:        ./script/cicd.sh build
 ```
 
@@ -163,7 +163,7 @@ ok      shortlink/internal/service      1.114s
 >>_Build_<<
 
 >>_AppStart_<<
-{"L":"info","T":"2023-10-28T19:21:40.706547797+03:00","H":"localhost:8080","S":"shortlink:http","M":"CfgEnv load config from file: /mnt/e/MCTH/ucheba/progr/go/myGOproj/shortlink/bin/shortlink.env","E":""}
+{"L":"info","T":"2023-10-28T19:21:40.706547797+03:00","H":"localhost:8080","S":"shortlink:http","M":"CfgEnv load config from file: /mnt/e/shortlink/bin/shortlink.env","E":""}
 {"L":"info","T":"2023-10-28T19:21:40.706738205+03:00","H":"192.168.49.1:8080","S":"shortlink:http","M":"mock db connected","E":""}
 {"L":"info","T":"2023-10-28T19:21:40.706915386+03:00","H":"192.168.49.1:8080","S":"shortlink:http","M":"net/http server opened","E":""}
 {"L":"info","T":"2023-10-28T19:21:40.706925122+03:00","H":"192.168.49.1:8080","S":"shortlink:http","M":"shortlink app started","E":""}
@@ -221,7 +221,6 @@ Control-flow graph (for `http://localhost:8080/`)
 <img width="100%" title="console_app" alt="#APP" src="./asset/console_app.png"/>
 <img width="100%" title="console_rd" alt="#RD" src="./asset/console_rd.png"/>
 <img width="100%" title="web" alt="#WEB" src="./asset/web.png"/>
-Notice: http only !
  
 ----
 ### **🔗 LINKS**
