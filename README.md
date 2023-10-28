@@ -141,8 +141,44 @@ CI/CD COMMANDS: style lint test build run start check check-no-lint
                 docker-gobuilder docker-build docker-up docker-stop
                 compose-app compose-pg compose-rd compose-mg compose-tt
                 metrics metrics-graph
+                
 EXAMLPE:        ./script/cicd.sh build
+```
 
+```
+kselnaag:~/shortlink$ ./script/cicd.sh check
+
+>>_StyleChecking_<<
+
+>>_Linting_<<
+
+>>_UnitTests_<<
+ok      shortlink/internal/adapter/cfg  1.116s
+ok      shortlink/internal/adapter/db   1.127s
+ok      shortlink/internal/adapter/http 1.170s
+ok      shortlink/internal/adapter/log  1.087s
+ok      shortlink/internal/model        1.077s
+ok      shortlink/internal/service      1.114s
+
+>>_Build_<<
+
+>>_AppStart_<<
+{"L":"info","T":"2023-10-28T19:21:40.706547797+03:00","H":"localhost:8080","S":"shortlink:http","M":"CfgEnv load config from file: /mnt/e/MCTH/ucheba/progr/go/myGOproj/shortlink/bin/shortlink.env","E":""}
+{"L":"info","T":"2023-10-28T19:21:40.706738205+03:00","H":"192.168.49.1:8080","S":"shortlink:http","M":"mock db connected","E":""}
+{"L":"info","T":"2023-10-28T19:21:40.706915386+03:00","H":"192.168.49.1:8080","S":"shortlink:http","M":"net/http server opened","E":""}
+{"L":"info","T":"2023-10-28T19:21:40.706925122+03:00","H":"192.168.49.1:8080","S":"shortlink:http","M":"shortlink app started","E":""}
+
+>>_HealthCheck_<<
+
+>>_AppClose_<<
+{"L":"info","T":"2023-10-28T19:21:41.980603163+03:00","H":"192.168.49.1:8080","S":"shortlink:http","M":"net/http server closed","E":""}
+{"L":"info","T":"2023-10-28T19:21:41.980706141+03:00","H":"192.168.49.1:8080","S":"shortlink:http","M":"mock db disconnected","E":""}
+{"L":"info","T":"2023-10-28T19:21:41.980712531+03:00","H":"192.168.49.1:8080","S":"shortlink:http","M":"shortlink app stoped","E":""}
+
+>>_Successfull_<<
+```
+
+```
 kselnaag:~/shortlink$ ./script/cicd.sh metrics
 
 >>_TestCoverage_<<

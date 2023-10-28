@@ -10,6 +10,7 @@ CI/CD COMMANDS: style lint test build run start check check-no-lint
                 docker-gobuilder docker-build docker-up docker-stop
                 compose-app compose-pg compose-rd compose-mg compose-tt
                 metrics metrics-graph
+
 EXAMLPE:        ./script/cicd.sh build
 \n"
     exit 0
@@ -347,11 +348,6 @@ if [[ $# -ne 1 ]]; then info; else
         cycl
         cogn        
         complex
-        ;;    
-    "dock") # experiments
-        complex
-        # go tool pprof shortlink http://localhost:8080/debug/pprof/profile
-        # ab -n 100000 -c10 http://localhost:8080/
         ;;
     *)
         info
