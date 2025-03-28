@@ -53,5 +53,4 @@ func TestServices(t *testing.T) {
 		asrt.Equal([]model.LinkPair{model.NewLinkPair("http://lib.ru"), model.NewLinkPair("http://lib.ru/PROZA/"), model.NewLinkPair("http://google.ru")},
 			nssl.GetAllLinkPairs())
 	})
-
 }

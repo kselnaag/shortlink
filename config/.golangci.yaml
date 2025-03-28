@@ -1,169 +1,150 @@
-run:
-  concurrency: 1
-  timeout: 30m
-  issues-exit-code: 1
-  tests: true
-  skip-dirs-use-default: true
-  modules-download-mode: readonly
-  allow-parallel-runners: false
-  go: ""
+version: "2"
 linters:
-  disable-all: true
-  fast: false
+  default: all
   enable:
-    - errcheck
-    - gosimple
-    - govet
-    - ineffassign
-    - staticcheck
-    - unused	
     - asasalint
     - asciicheck
     - bidichk
     - bodyclose
+    - canonicalheader
+    - containedctx
     - contextcheck
+    - copyloopvar
+    #- cyclop
+    - decorder
+    #- depguard
+    - dogsled
+    #- dupl
+    - dupword
     - durationcheck
+    - err113
+    - errcheck
+    - errchkjson
+    - errname
     - errorlint
-    - exportloopref
+    - exhaustive
+    #- exhaustruct
+    - exptostd
+    - fatcontext
+    #- forbidigo
+    - forcetypeassert
+    #- funlen
+    - ginkgolinter
+    - gocheckcompilerdirectives
+    #- gochecknoglobals
+    - gochecknoinits
+    - gochecksumtype
+    - gocognit
+    - goconst
     - gocritic
-    - gofmt
-    - goimports
+    #- gocyclo
+    #- godot
+    - godox
+    - goheader
+    - gomoddirectives
+    - gomodguard
+    - goprintffuncname
     - gosec
+    - gosmopolitan
+    - govet
+    - grouper
+    - iface
+    - importas
+    - inamedparam
+    - ineffassign
+    - interfacebloat
+    #- intrange
+    #- ireturn
+    #- lll
+    - loggercheck
+    #- maintidx
+    - makezero
+    - mirror
     - misspell
+    #- mnd
+    - musttag
     - nakedret
+    - nestif
     - nilerr
+    - nilnesserr
     - nilnil
+    #- nlreturn
+    - noctx
     - nolintlint
+    #- nonamedreturns
+    - nosprintfhostport
+    #- paralleltest
+    - perfsprint
     - prealloc
     - predeclared
     - promlinter
+    - protogetter
     - reassign
-    - revive
+    - recvcheck
+    #- revive
+    - rowserrcheck
+    - sloglint
+    - spancheck
     - sqlclosecheck
+    - staticcheck
+    - tagalign
     - tagliatelle
-    - tenv
     - testableexamples
+    - testifylint
+    - testpackage
     - thelper
     - tparallel
     - unconvert
     - unparam
+    - unused
     - usestdlibvars
-  # disable:
-  #   - containedctx
-  #   - cyclop
-  #   - deadcode
-  #   - decorder
-  #   - depguard
-  #   - dogsled
-  #   - dupl
-  #   - dupword
-  #   - errchkjson
-  #   - errname
-  #   - execinquery
-  #   - exhaustive
-  #   - exhaustruct
-  #   - forbidigo
-  #   - forcetypeassert
-  #   - funlen
-  #   - gci
-  #   - ginkgolinter
-  #   - gocheckcompilerdirectives
-  #   - gochecknoglobals
-  #   - gochecknoinits
-  #   - gocognit
-  #   - goconst
-  #   - gocyclo
-  #   - godot
-  #   - godox
-  #   - goerr113
-  #   - gofumpt
-  #   - goheader
-  #   - golint
-  #   - gomnd
-  #   - gomodguard
-  #   - gomoddirectives
-  #   - goprintffuncname
-  #   - grouper
-  #   - ifshort
-  #   - importas
-  #   - interfacebloat
-  #   - interfacer
-  #   - ireturn
-  #   - lll
-  #   - loggercheck
-  #   - maintidx
-  #   - makezero
-  #   - maligned
-  #   - musttag
-  #   - nestif
-  #   - nlreturn
-  #   - noctx
-  #   - nonamedreturns
-  #   - nosnakecase
-  #   - nosprintfhostport
-  #   - paralleltest
-  #   - rowserrcheck
-  #   - scopelint
-  #   - structcheck
-  #   - stylecheck
-  #   - testpackage
-  #   - varcheck
-  #   - varnamelen
-  #   - wastedassign
-  #   - whitespace
-  #   - wrapcheck
-  #   - wsl
-linters-settings:
-    gocritic:
-      enabled-tags:
-        - diagnostic
-        - experimental
-        - opinionated
-        - performance
-        - style
-      disabled-checks:
-        - hugeParam
-        - rangeExprCopy
-        - rangeValCopy
-        - commentedOutCode
-    errcheck:
-      check-type-assertions: true
-      check-blank: true
-      exclude-functions:
-        - io/ioutil.ReadFile
-        - io.Copy(*bytes.Buffer)
-        - io.Copy(os.Stdout)
-    govet:
-      disable:
-        - fieldalignment
-    nakedret:
-      max-func-lines: 0
-    tagliatelle:
-      case:
-        rules:
-          json: snake
-          yaml: snake
-          xml: camel
-          bson: camel
-          avro: snake
-          mapstructure: kebab
-    revive:
-      rules:
-        - name: var-naming
-          disabled: true
-output:
-  #format: line-number:lint.txt
-  print-issued-lines: true
-  print-linter-name: true
-  uniq-by-line: false
-  path-prefix: ""
-  sort-results: true
+    - usetesting
+    #- varnamelen
+    - wastedassign
+    - whitespace
+    - wrapcheck
+    #- wsl
+    - zerologlint
+  disable:
+    - cyclop
+    - depguard
+    - dupl
+    - exhaustruct
+    - intrange
+    - ireturn
+    - forbidigo
+    - funlen
+    - gochecknoglobals
+    - gocyclo
+    - godot
+    - lll
+    - maintidx
+    - mnd
+    - nlreturn
+    - nonamedreturns
+    - paralleltest
+    - revive
+    - varnamelen
+    - wsl
+  settings:
+    cyclop:
+      max-complexity: 20
+    nestif:
+      min-complexity: 10
+  # exclusions:
+#formatters:
+#  enable:
+#    - gofmt
 issues:
-  exclude-rules:
-  - path: /
-    linters:
-    - typecheck
   max-issues-per-linter: 0
   max-same-issues: 0
-  new: false
-  fix: false
+# output:
+run:
+  concurrency: 1
+  timeout: 30m
+  issues-exit-code: 1
+  relative-path-mode: gomod
+  modules-download-mode: readonly
+  allow-parallel-runners: false
+  tests: true
+# severity:

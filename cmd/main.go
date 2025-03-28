@@ -18,7 +18,8 @@ func main() {
 
 	defer func() {
 		if err := recover(); err != nil {
-			myAppStop(err.(error))
+			err1, _ := err.(error)
+			myAppStop(err1)
 			os.Exit(1)
 		}
 	}()

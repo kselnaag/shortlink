@@ -2,7 +2,7 @@ package control
 
 import (
 	"encoding/json"
-	"errors"
+	"fmt"
 	"regexp"
 	T "shortlink/internal/apptype"
 	"strings"
@@ -35,11 +35,11 @@ func (ctrl *CtrlHTTP) AllPairs() (string, error) {
 func (ctrl *CtrlHTTP) Long(body []byte) (string, error) {
 	req := T.HTTPMessageDTO{}
 	if err := json.Unmarshal(body, &req); (err != nil) || (req.IsResp) || (req.Body == "") {
-		return "", errors.New(string(body))
+		return "", fmt.Errorf("%w: %w: %s", T.ErrHTTPCtrl, T.ErrJSONUNMarshal, string(body))
 	}
 	lp := ctrl.servSL.GetLinkShortFromLinkLong(req.Body)
 	if !lp.IsValid() {
-		return "", errors.New(string(body))
+		return "", fmt.Errorf("%w: %w: %s", T.ErrHTTPCtrl, T.ErrStructNotValid, string(body))
 	}
 	return lp.Short(), nil
 }
@@ -47,11 +47,11 @@ func (ctrl *CtrlHTTP) Long(body []byte) (string, error) {
 func (ctrl *CtrlHTTP) Short(body []byte) (string, error) {
 	req := T.HTTPMessageDTO{}
 	if err := json.Unmarshal(body, &req); (err != nil) || (req.IsResp) || (!ctrl.ishashfunc(req.Body)) {
-		return "", errors.New(string(body))
+		return "", fmt.Errorf("%w: %w: %s", T.ErrHTTPCtrl, T.ErrJSONUNMarshal, string(body))
 	}
 	lp := ctrl.servSL.GetLinkLongFromLinkShort(req.Body)
 	if !lp.IsValid() {
-		return "", errors.New(string(body))
+		return "", fmt.Errorf("%w: %w: %s", T.ErrHTTPCtrl, T.ErrStructNotValid, string(body))
 	}
 	return lp.Long(), nil
 }
@@ -59,11 +59,11 @@ func (ctrl *CtrlHTTP) Short(body []byte) (string, error) {
 func (ctrl *CtrlHTTP) Save(body []byte) (string, error) {
 	req := T.HTTPMessageDTO{}
 	if err := json.Unmarshal(body, &req); (err != nil) || (req.IsResp) || (req.Body == "") {
-		return "", errors.New(string(body))
+		return "", fmt.Errorf("%w: %w: %s", T.ErrHTTPCtrl, T.ErrJSONUNMarshal, string(body))
 	}
 	lp := ctrl.servSL.SetLinkPairFromLinkLong(req.Body)
 	if !lp.IsValid() {
-		return "", errors.New(string(body))
+		return "", fmt.Errorf("%w: %w: %s", T.ErrHTTPCtrl, T.ErrStructNotValid, string(body))
 	}
 	return lp.Short(), nil
 }
@@ -75,5 +75,5 @@ func (ctrl *CtrlHTTP) Hash(hash string) (string, error) {
 			return lp.Long(), nil
 		}
 	}
-	return "", errors.New(hash)
+	return "", fmt.Errorf("%w: %w: %s", T.ErrHTTPCtrl, T.ErrHashCorrect, hash)
 }

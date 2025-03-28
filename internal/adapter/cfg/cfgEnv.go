@@ -1,6 +1,8 @@
 package adapterCfg
 
 import (
+	"errors"
+	"fmt"
 	"net"
 	"os"
 	"path/filepath"
@@ -10,6 +12,11 @@ import (
 
 	"github.com/caarlos0/env"
 	"github.com/joho/godotenv"
+)
+
+var (
+	ErrCfgEnv    = errors.New("CfgEnv error")
+	ErrIPAddress = errors.New("IPaddress fail")
 )
 
 func NewCfgEnv(cfgname string) *T.CfgEnv {
@@ -57,7 +64,7 @@ func NewCfgEnvFile(filename string, cfg *T.CfgEnv, log T.ILog) {
 func ipFromInterfaces() (string, error) {
 	addr, err := net.InterfaceAddrs()
 	if err != nil {
-		return "", err
+		return "", fmt.Errorf("%w: %w: %w", ErrCfgEnv, ErrIPAddress, err)
 	}
 	strarr := []string{}
 	for _, addr := range addr {

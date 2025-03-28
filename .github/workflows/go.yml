@@ -11,20 +11,20 @@ jobs:
   build:
     runs-on: ubuntu-22.04
     steps:
-    - uses: actions/checkout@v3
+    - uses: actions/checkout@v4
 
     - name: Set up Go
-      uses: actions/setup-go@v3
+      uses: actions/setup-go@v5
       with:
-          go-version: 1.21
+          go-version: 1.24
 
     - name: StyleChecker
       run: go fmt ./...
         
     - name: Linter
-      uses: golangci/golangci-lint-action@v3
+      uses: golangci/golangci-lint-action@v7
       with:
-          version: v1.51.2
+          version: v2.0.1
           args: --config=./config/.golangci.yaml
                 
     - name: UnitTests

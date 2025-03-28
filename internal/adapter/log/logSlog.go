@@ -26,17 +26,15 @@ const (
 type LogSlog struct {
 	cfg    *T.CfgEnv
 	logger *slog.Logger
-	ctx    context.Context
 }
 
 func NewLogSlog(cfg *T.CfgEnv) *LogSlog {
-	ctx := context.Background()
 	host := cfg.SL_HTTP_IP + cfg.SL_HTTP_PORT
 	svc := cfg.SL_APP_NAME + cfg.SL_APP_PROTOS
 	replace := func(groups []string, a slog.Attr) slog.Attr {
 		if a.Key == slog.LevelKey {
 			a.Key = "L"
-			level := a.Value.Any().(slog.Level)
+			level, _ := a.Value.Any().(slog.Level)
 			switch {
 			case level <= LevelTrace:
 				a.Value = slog.StringValue(T.LevelTraceValue)
@@ -90,14 +88,14 @@ func NewLogSlog(cfg *T.CfgEnv) *LogSlog {
 		logLevel.Set(LevelDisabled)
 	}
 	return &LogSlog{
-		ctx:    ctx,
 		cfg:    cfg,
 		logger: logger,
 	}
 }
 
 func (l *LogSlog) LogTrace(format string, v ...any) {
-	l.logger.Log(l.ctx, LevelTrace, fmt.Sprintf(format, v...), "E", "")
+	ctx := context.Background()
+	l.logger.Log(ctx, LevelTrace, fmt.Sprintf(format, v...), "E", "")
 }
 
 func (l *LogSlog) LogDebug(format string, v ...any) {
@@ -117,9 +115,11 @@ func (l *LogSlog) LogError(err error, format string, v ...any) {
 }
 
 func (l *LogSlog) LogFatal(err error, format string, v ...any) {
-	l.logger.Log(l.ctx, LevelFatal, fmt.Sprintf(format, v...), "E", err.Error())
+	ctx := context.Background()
+	l.logger.Log(ctx, LevelFatal, fmt.Sprintf(format, v...), "E", err.Error())
 }
 
 func (l *LogSlog) LogPanic(err error, format string, v ...any) {
-	l.logger.Log(l.ctx, LevelPanic, fmt.Sprintf(format, v...), "E", err.Error())
+	ctx := context.Background()
+	l.logger.Log(ctx, LevelPanic, fmt.Sprintf(format, v...), "E", err.Error())
 }

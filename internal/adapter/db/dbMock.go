@@ -34,13 +34,16 @@ func (m *DBMock) LoadLinkPair(links T.DBlinksDTO) T.DBlinksDTO {
 	if !ok {
 		return T.DBlinksDTO{}
 	}
-	return T.DBlinksDTO{Short: links.Short, Long: linklong.(string)}
+	linklongS, _ := linklong.(string)
+	return T.DBlinksDTO{Short: links.Short, Long: linklongS}
 }
 
 func (m *DBMock) LoadAllLinkPairs() []T.DBlinksDTO {
 	res := make([]T.DBlinksDTO, 0, 8)
 	m.db.Range(func(key, value any) bool {
-		res = append(res, T.DBlinksDTO{Short: key.(string), Long: value.(string)})
+		keyS, _ := key.(string)
+		valS, _ := value.(string)
+		res = append(res, T.DBlinksDTO{Short: keyS, Long: valS})
 		return true
 	})
 	return res

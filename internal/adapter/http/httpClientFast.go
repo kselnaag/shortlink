@@ -1,7 +1,7 @@
 package adapterHTTP
 
 import (
-	"errors"
+	"fmt"
 	T "shortlink/internal/apptype"
 	"time"
 
@@ -29,14 +29,15 @@ func NewHTTPClientFast(log T.ILog) *HTTPClientFast {
 
 func (h HTTPClientFast) Get(link string) error {
 	if code, _, err := h.hcli.Get(nil, link); err != nil {
-		h.log.LogError(err, "(HTTPClientFast).Get() http error ")
+		err = fmt.Errorf("%w: %w: %w", T.ErrHTTPClientFast, T.ErrGetMethod, err)
+		h.log.LogError(err, "(HTTPClientFast).Get() http get method error")
 		return err
 	} else {
 		if code < 500 {
 			return nil
 		} else {
-			err := errors.New("(HTTPClientFast).Get(): Link is not available")
-			h.log.LogError(err, "(HTTPClientFast).Get() http error ")
+			err := fmt.Errorf("%w: %w", T.ErrHTTPClientFast, T.ErrLinkNotAval)
+			h.log.LogError(err, "(HTTPClientFast).Get() link is not available ")
 			return err
 		}
 	}

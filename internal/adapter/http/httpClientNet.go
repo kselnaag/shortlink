@@ -1,7 +1,7 @@
 package adapterHTTP
 
 import (
-	"errors"
+	"fmt"
 	"net/http"
 	T "shortlink/internal/apptype"
 	"time"
@@ -27,16 +27,19 @@ func NewHTTPClientNet(log T.ILog) *HTTPClientNet {
 }
 
 func (h HTTPClientNet) Get(link string) error {
-	if resp, err := h.hcli.Get(link); err != nil {
-		h.log.LogError(err, "(HTTPClientNet).Get() http error ")
+	if resp, err := h.hcli.Get(link); err != nil { //nolint:noctx // do it simple
+		err = fmt.Errorf("%w: %w: %w", T.ErrHTTPClientNet, T.ErrGetMethod, err)
+		h.log.LogError(err, "(HTTPClientNet).Get() http get method error")
 		return err
 	} else {
-		defer resp.Body.Close()
+		defer func() {
+			_ = resp.Body.Close()
+		}()
 		if resp.StatusCode < 500 {
 			return nil
 		} else {
-			err := errors.New("(HTTPClientNet).Get(): Link is not available")
-			h.log.LogError(err, "(HTTPClientNet).Get() http error ")
+			err := fmt.Errorf("%w: %w", T.ErrHTTPClientNet, T.ErrLinkNotAval)
+			h.log.LogError(err, "(HTTPClientNet).Get(): link is not available")
 			return err
 		}
 	}

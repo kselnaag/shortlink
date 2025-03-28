@@ -74,14 +74,14 @@ We choose Monolith as system arch pattern and Rich Domain Model as software arch
   - valyala/fasthttp v1.45.0
   - gofiber/fiber v2.42.0
   - stretchr/testify v1.8.2
-  - gavv/httpexpect v2.15.0
+  - gavv/httpexpect v2.17.0
   - jackc/pgx v5.4.3
   - mongodb/mongo-go-driver v1.12.1
   - redis/go-redis v9.2.1
   - tarantool/go-tarantool v2.0.0
 - `Tools`
-  - golang v1.21
-  - golangci-lint v1.51.2
+  - golang v1.24
+  - golangci-lint v2.0.1
   - curl v7.68.0
   - ply v3.2.14 (vscode extension)
   - apache benchmark v2.3 (apache2-utils)

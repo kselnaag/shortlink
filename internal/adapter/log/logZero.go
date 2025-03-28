@@ -54,7 +54,7 @@ func NewLogZero(cfg *T.CfgEnv) *LogZero {
 	}
 }
 func blankerr() error {
-	return errors.New("")
+	return errors.New("") //nolint:err113 // stub
 }
 
 func (l *LogZero) LogTrace(format string, v ...any) {

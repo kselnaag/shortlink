@@ -38,7 +38,7 @@ func TestHTTPServer(t *testing.T) {
 		svcsl := service.NewSvcShortLink(ctrlDB, hcli, log)
 		ctrlHTTP := control.NewCtrlHTTP(svcsl)
 		hsrv := adapterHTTP.NewHTTPServerNet(ctrlHTTP, log, cfg)
-		_ = hsrv.Run()
+		hsrvClose := hsrv.Run()
 		he := httpexpect.WithConfig(httpexpect.Config{
 			Client: &http.Client{
 				Transport: httpexpect.NewBinder(hsrv.Engine()),
@@ -46,25 +46,28 @@ func TestHTTPServer(t *testing.T) {
 			},
 			Reporter: httpexpect.NewAssertReporter(t),
 		})
-		he.GET("/").Expect().Status(http.StatusOK).ContentType("text/html", "utf-8")
-		he.GET("/check/ping").Expect().Status(http.StatusOK).ContentType("application/json", "utf-8").
+
+		he.GET("/").Expect().Status(http.StatusOK).HasContentType("text/html", "utf-8")
+		he.GET("/check/ping").Expect().Status(http.StatusOK).HasContentType("application/json", "utf-8").
 			JSON().Object().HasValue("IsResp", true).HasValue("Mode", "check").HasValue("Body", "pong")
-		he.GET("/check/abs").Expect().Status(http.StatusNotFound).ContentType("application/json", "utf-8").
+		he.GET("/check/abs").Expect().Status(http.StatusNotFound).HasContentType("application/json", "utf-8").
 			JSON().Object().HasValue("IsResp", true).HasValue("Mode", "check").HasValue("Body", "404 Not Found")
 		asrt.Panics(func() { he.GET("/check/panic").Expect().Status(http.StatusInternalServerError) }, "HTTP Handle not panic")
 
 		he.POST("/save").WithJSON(T.HTTPMessageDTO{IsResp: false, Mode: "save", Body: "http://lib.ru/PROZA/"}).Expect().
-			Status(http.StatusCreated).ContentType("application/json", "utf-8").
+			Status(http.StatusCreated).HasContentType("application/json", "utf-8").
 			JSON().Object().HasValue("IsResp", true).HasValue("Mode", "201").HasValue("Body", "8b4s29")
 		he.POST("/short").WithJSON(T.HTTPMessageDTO{IsResp: false, Mode: "short", Body: "8b4s29"}).Expect().
-			Status(http.StatusPartialContent).ContentType("application/json", "utf-8").
+			Status(http.StatusPartialContent).HasContentType("application/json", "utf-8").
 			JSON().Object().HasValue("IsResp", true).HasValue("Mode", "206").HasValue("Body", "http://lib.ru/PROZA/")
 		he.POST("/long").WithJSON(T.HTTPMessageDTO{IsResp: false, Mode: "long", Body: "http://lib.ru/PROZA/"}).Expect().
-			Status(http.StatusPartialContent).ContentType("application/json", "utf-8").
+			Status(http.StatusPartialContent).HasContentType("application/json", "utf-8").
 			JSON().Object().HasValue("IsResp", true).HasValue("Mode", "206").HasValue("Body", "8b4s29")
-		he.GET("/check/allpairs").Expect().Status(http.StatusOK).ContentType("application/json", "utf-8").
+		he.GET("/check/allpairs").Expect().Status(http.StatusOK).HasContentType("application/json", "utf-8").
 			JSON().Object().HasValue("IsResp", true).HasValue("Mode", "200").HasValue("Body", "5clp60: http://lib.ru; 8b4s29: http://lib.ru/PROZA/; dhiu79: http://google.ru")
-		// he.GET("/r/8b4s29").Expect().Status(http.StatusFound).ContentType("text/html", "utf-8")
+		// he.GET("/r/8b4s29").Expect().Status(http.StatusFound).HasContentType("text/html", "utf-8")
+
+		hsrvClose(nil)
 	})
 
 	t.Run("HTTPFast", func(t *testing.T) {
@@ -82,7 +85,7 @@ func TestHTTPServer(t *testing.T) {
 		svcsl := service.NewSvcShortLink(ctrlDB, hcli, log)
 		ctrlHTTP := control.NewCtrlHTTP(svcsl)
 		hsrv := adapterHTTP.NewHTTPServerFast(ctrlHTTP, log, cfg)
-		_ = hsrv.Run()
+		hsrvClose := hsrv.Run()
 		he := httpexpect.WithConfig(httpexpect.Config{
 			Client: &http.Client{
 				Transport: httpexpect.NewFastBinder(hsrv.Engine().Handler()),
@@ -90,24 +93,26 @@ func TestHTTPServer(t *testing.T) {
 			},
 			Reporter: httpexpect.NewAssertReporter(t),
 		})
-		he.GET("/").Expect().Status(http.StatusOK).ContentType("text/html", "")
-		he.GET("/check/ping").Expect().Status(http.StatusOK).ContentType("application/json", "").
+		he.GET("/").Expect().Status(http.StatusOK).HasContentType("text/html", "")
+		he.GET("/check/ping").Expect().Status(http.StatusOK).HasContentType("application/json", "").
 			JSON().Object().HasValue("IsResp", true).HasValue("Mode", "check").HasValue("Body", "pong")
-		he.GET("/check/abs").Expect().Status(http.StatusNotFound).ContentType("application/json", "").
+		he.GET("/check/abs").Expect().Status(http.StatusNotFound).HasContentType("application/json", "").
 			JSON().Object().HasValue("IsResp", true).HasValue("Mode", "check").HasValue("Body", "404 Not Found")
 		he.GET("/check/panic").Expect().Status(http.StatusInternalServerError)
 
 		he.POST("/save").WithJSON(T.HTTPMessageDTO{IsResp: false, Mode: "save", Body: "http://lib.ru/PROZA/"}).Expect().
-			Status(http.StatusCreated).ContentType("application/json", "").
+			Status(http.StatusCreated).HasContentType("application/json", "").
 			JSON().Object().HasValue("IsResp", true).HasValue("Mode", "201").HasValue("Body", "8b4s29")
 		he.POST("/short").WithJSON(T.HTTPMessageDTO{IsResp: false, Mode: "short", Body: "8b4s29"}).Expect().
-			Status(http.StatusPartialContent).ContentType("application/json", "").
+			Status(http.StatusPartialContent).HasContentType("application/json", "").
 			JSON().Object().HasValue("IsResp", true).HasValue("Mode", "206").HasValue("Body", "http://lib.ru/PROZA/")
 		he.POST("/long").WithJSON(T.HTTPMessageDTO{IsResp: false, Mode: "long", Body: "http://lib.ru/PROZA/"}).Expect().
-			Status(http.StatusPartialContent).ContentType("application/json", "").
+			Status(http.StatusPartialContent).HasContentType("application/json", "").
 			JSON().Object().HasValue("IsResp", true).HasValue("Mode", "206").HasValue("Body", "8b4s29")
-		he.GET("/check/allpairs").Expect().Status(http.StatusOK).ContentType("application/json", "").
+		he.GET("/check/allpairs").Expect().Status(http.StatusOK).HasContentType("application/json", "").
 			JSON().Object().HasValue("IsResp", true).HasValue("Mode", "200").HasValue("Body", "5clp60: http://lib.ru; 8b4s29: http://lib.ru/PROZA/; dhiu79: http://google.ru")
 		// he.GET("/r/8b4s29").Expect().Status(http.StatusFound).ContentType("text/html", "utf-8")
+
+		hsrvClose(nil)
 	})
 }

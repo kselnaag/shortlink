@@ -1,7 +1,7 @@
 package adapterLog_test
 
 import (
-	"errors"
+	"fmt"
 	adapterLog "shortlink/internal/adapter/log"
 	T "shortlink/internal/apptype"
 	"testing"
@@ -26,35 +26,38 @@ func TestLog(t *testing.T) {
 	}
 
 	t.Run("LogZero", func(t *testing.T) {
+		err := fmt.Errorf("%w", T.ErrTestLog)
 		log := adapterLog.NewLogZero(&cfg)
 		log.LogTrace("Hello, TRACE")
 		log.LogDebug("Hello, DEBUG")
 		log.LogInfo("Hello, INFO")
 		log.LogWarn("Hello, WARN")
-		log.LogError(errors.New("test_error"), "Hello,error")
-		log.LogFatal(errors.New("fatal_error"), "Hello,fatal")
-		log.LogPanic(errors.New("panic_error"), "Hello,PANIC")
+		log.LogError(err, "Hello,error")
+		log.LogFatal(err, "Hello,fatal")
+		log.LogPanic(err, "Hello,PANIC")
 	})
 
 	t.Run("LogFprintf", func(t *testing.T) {
+		err := fmt.Errorf("%w", T.ErrTestLog)
 		log := adapterLog.NewLogFprintf(&cfg)
 		log.LogTrace("Hello, TRACE")
 		log.LogDebug("Hello, DEBUG")
 		log.LogInfo("Hello, INFO")
 		log.LogWarn("Hello, WARN")
-		log.LogError(errors.New("test_error"), "Hello,error")
-		log.LogFatal(errors.New("fatal_error"), "Hello,fatal")
-		log.LogPanic(errors.New("panic_error"), "Hello,panic")
+		log.LogError(err, "Hello,error")
+		log.LogFatal(err, "Hello,fatal")
+		log.LogPanic(err, "Hello,panic")
 	})
 
 	t.Run("LogSlog", func(t *testing.T) {
+		err := fmt.Errorf("%w", T.ErrTestLog)
 		log := adapterLog.NewLogSlog(&cfg)
 		log.LogTrace("Hello, TRACE")
 		log.LogDebug("Hello, DEBUG")
 		log.LogInfo("Hello, INFO")
 		log.LogWarn("Hello, WARN")
-		log.LogError(errors.New("test_error"), "Hello,error")
-		log.LogFatal(errors.New("fatal_error"), "Hello,fatal")
-		log.LogPanic(errors.New("panic_error"), "Hello,panic")
+		log.LogError(err, "Hello,error")
+		log.LogFatal(err, "Hello,fatal")
+		log.LogPanic(err, "Hello,panic")
 	})
 }

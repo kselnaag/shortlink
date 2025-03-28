@@ -139,7 +139,8 @@ func (hfs *HTTPServerFast) Run() func(e error) {
 	go func() {
 		defer func() {
 			if err := recover(); err != nil {
-				hfs.log.LogPanic(err.(error), "HTTPServerFast panic")
+				err1, _ := err.(error)
+				hfs.log.LogPanic(err1, "HTTPServerFast panic")
 			}
 		}()
 		if err := hfs.hsrv.Listen(hfs.cfg.SL_HTTP_PORT); err != nil {

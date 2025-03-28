@@ -1,7 +1,7 @@
 package adapterHTTP
 
 import (
-	"errors"
+	"fmt"
 	T "shortlink/internal/apptype"
 	"sync"
 )
@@ -27,7 +27,9 @@ func NewHTTPClientMock(log T.ILog) *HTTPClientMock {
 func (h *HTTPClientMock) Get(link string) error {
 	_, ok := h.hcli.Load(link)
 	if !ok {
-		return errors.New("(HTTPClientMockt).Get(): Link is not available")
+		err := fmt.Errorf("%w: %w", T.ErrHTTPClientMock, T.ErrLinkNotAval)
+		h.log.LogError(err, "(HTTPClientMock).Get() link is not available ")
+		return err
 	}
 	return nil
 }

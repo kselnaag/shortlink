@@ -3,6 +3,7 @@ package adapterHTTP
 import (
 	"context"
 	"embed"
+	"errors"
 	"io"
 	"io/fs"
 	"net/http"
@@ -175,15 +176,16 @@ func (hns *HTTPServerNet) Run() func(e error) {
 	go func() {
 		defer func() {
 			if err := recover(); err != nil {
-				hns.log.LogPanic(err.(error), "HTTPServerNet panic")
+				err1, _ := err.(error)
+				hns.log.LogPanic(err1, "HTTPServerNet panic")
 			}
 		}()
 		err := srv.ListenAndServe()
-		if (err != nil) && (err != http.ErrServerClosed) {
+		if (err != nil) && (!errors.Is(err, http.ErrServerClosed)) {
 			hns.log.LogError(err, "Run(): net/http server process error (closed)")
 			hns.appClose()
 		}
-		if err == http.ErrServerClosed {
+		if errors.Is(err, http.ErrServerClosed) {
 			hns.log.LogInfo("net/http server closed")
 		}
 	}()

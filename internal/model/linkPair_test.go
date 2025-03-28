@@ -17,18 +17,18 @@ func TestModels(t *testing.T) {
 	t.Run("LinkPair", func(t *testing.T) {
 		lp := model.LinkPair{}
 		asrt.False(lp.IsValid())
-		asrt.Equal("", lp.Long())
-		asrt.Equal("", lp.Short())
+		asrt.Empty(lp.Long())
+		asrt.Empty(lp.Short())
 
 		lp1 := model.NewLinkPair("")
 		asrt.False(lp1.IsValid())
-		asrt.Equal("", lp1.Long())
-		asrt.Equal("", lp1.Short())
+		asrt.Empty(lp1.Long())
+		asrt.Empty(lp1.Short())
 
 		lp2 := model.NewLinkPair("  ")
 		asrt.False(lp2.IsValid())
-		asrt.Equal("", lp2.Long())
-		asrt.Equal("", lp2.Short())
+		asrt.Empty(lp2.Long())
+		asrt.Empty(lp2.Short())
 
 		lp3 := model.NewLinkPair("abc")
 		asrt.True(lp3.IsValid())

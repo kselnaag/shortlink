@@ -3,9 +3,9 @@ package types
 import "shortlink/internal/model"
 
 type HTTPMessageDTO struct {
-	IsResp bool
-	Mode   string
-	Body   string
+	IsResp bool   `json:"IsResp"` //nolint:tagliatelle // wrong json camel
+	Mode   string `json:"Mode"`   //nolint:tagliatelle
+	Body   string `json:"Body"`   //nolint:tagliatelle
 }
 
 type ICtrlHTTP interface {

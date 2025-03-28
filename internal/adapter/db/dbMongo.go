@@ -56,7 +56,7 @@ func (m *DBMongo) LoadLinkPair(links T.DBlinksDTO) T.DBlinksDTO { // linkshort
 	}
 
 	var res struct {
-		ID    primitive.ObjectID `bson:"_id"` //nolint:tagliatelle // mongodb internal label
+		ID    primitive.ObjectID `bson:"_id"`
 		Slink string             `bson:"slink"`
 		Llink string             `bson:"llink"`
 	}
@@ -84,9 +84,11 @@ func (m *DBMongo) LoadAllLinkPairs() []T.DBlinksDTO {
 	if err != nil {
 		m.log.LogError(err, "(DBMongo).LoadAllLinkPairs(): unable to Find()")
 	}
-	defer cur.Close(ctx)
+	defer func() {
+		_ = cur.Close(ctx)
+	}()
 	var cursRes struct {
-		ID    primitive.ObjectID `bson:"_id"` //nolint:tagliatelle // mongodb internal label
+		ID    primitive.ObjectID `bson:"_id"`
 		Slink string             `bson:"slink"`
 		Llink string             `bson:"llink"`
 	}
