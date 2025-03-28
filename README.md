@@ -80,7 +80,7 @@ We choose Monolith as system arch pattern and Rich Domain Model as software arch
   - redis/go-redis v9.2.1
   - tarantool/go-tarantool v2.0.0
 - `Tools`
-  - golang v1.24
+  - golang v1.21
   - golangci-lint v2.0.1
   - curl v7.68.0
   - ply v3.2.14 (vscode extension)
